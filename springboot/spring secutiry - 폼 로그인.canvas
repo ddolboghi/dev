@@ -1,0 +1,32 @@
+{
+	"nodes":[
+		{"id":"dd6dcf7c1708eab6","type":"text","text":"HTTP 요청","x":-460,"y":-300,"width":250,"height":60},
+		{"id":"09fe0ce942d426b8","type":"text","text":"AuthenticationFilter","x":-140,"y":-300,"width":250,"height":60},
+		{"id":"e2163529c47badd9","type":"text","text":"AuthenticationManager\n(interface)","x":180,"y":-300,"width":250,"height":60},
+		{"id":"9587774542299112","type":"text","text":"UsernamePasswordAuthenticationToken","x":-140,"y":-440,"width":250,"height":60},
+		{"id":"3a40b2b371beea20","type":"text","text":"ProviderManager","x":180,"y":-160,"width":250,"height":60},
+		{"id":"fc8fbd431838e599","type":"text","text":"UserDetailService","x":522,"y":-160,"width":250,"height":60},
+		{"id":"5f2d0d35153f7806","type":"text","text":"","x":544,"y":-317,"width":250,"height":60},
+		{"id":"310a03a43a523202","x":535,"y":-308,"width":250,"height":60,"type":"text","text":""},
+		{"id":"c333b2122335e1ea","x":522,"y":-300,"width":250,"height":60,"type":"text","text":"AuthenticationProvider(s)"},
+		{"id":"40fcc3345b12be41","x":522,"y":-40,"width":250,"height":60,"type":"text","text":"UserDetails\n(interface)"},
+		{"id":"eb6f179e4b239fae","x":180,"y":-40,"width":250,"height":60,"type":"text","text":"User"},
+		{"id":"d5722f572b598260","x":-265,"y":-160,"width":280,"height":220,"type":"text","text":"SecurityContextHolder"},
+		{"id":"3ff9e727844a430e","x":-250,"y":-100,"width":250,"height":140,"type":"text","text":"SecutiryContext"},
+		{"id":"4c0fba5c378deb5f","x":-230,"y":-40,"width":210,"height":60,"type":"text","text":"Authentication"}
+	],
+	"edges":[
+		{"id":"99ea525a561bb3f0","fromNode":"09fe0ce942d426b8","fromSide":"top","toNode":"9587774542299112","toSide":"bottom","label":"2"},
+		{"id":"367624acbaa16a22","fromNode":"dd6dcf7c1708eab6","fromSide":"right","toNode":"09fe0ce942d426b8","toSide":"left","label":"1"},
+		{"id":"858b2a8be4b7e4a4","fromNode":"09fe0ce942d426b8","fromSide":"right","toNode":"e2163529c47badd9","toSide":"left","label":"3"},
+		{"id":"d9deaedfffab92bb","fromNode":"3a40b2b371beea20","fromSide":"top","toNode":"e2163529c47badd9","toSide":"bottom","label":"구현"},
+		{"id":"022ababd448dfa9f","fromNode":"e2163529c47badd9","fromSide":"right","toNode":"c333b2122335e1ea","toSide":"left","label":"4"},
+		{"id":"b2bf2d60286d1727","fromNode":"c333b2122335e1ea","fromSide":"bottom","toNode":"fc8fbd431838e599","toSide":"top","label":"5"},
+		{"id":"85b6bebef8ac3096","fromNode":"fc8fbd431838e599","fromSide":"bottom","toNode":"40fcc3345b12be41","toSide":"top","toEnd":"none","label":"6"},
+		{"id":"696df703387ac041","fromNode":"eb6f179e4b239fae","fromSide":"right","toNode":"40fcc3345b12be41","toSide":"left","label":"구현"},
+		{"id":"d8da0a69b99f0a79","fromNode":"fc8fbd431838e599","fromSide":"right","toNode":"5f2d0d35153f7806","toSide":"right","label":"7"},
+		{"id":"3962da09cfe8c115","fromNode":"c333b2122335e1ea","fromSide":"top","toNode":"e2163529c47badd9","toSide":"top","label":"8"},
+		{"id":"880f90f977aae60b","fromNode":"e2163529c47badd9","fromSide":"bottom","toNode":"09fe0ce942d426b8","toSide":"bottom","label":"9"},
+		{"id":"db22b79cacd453ca","fromNode":"09fe0ce942d426b8","fromSide":"bottom","toNode":"d5722f572b598260","toSide":"top","label":"10"}
+	]
+}

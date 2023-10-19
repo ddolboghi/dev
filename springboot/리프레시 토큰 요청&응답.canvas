@@ -1,0 +1,37 @@
+{
+	"nodes":[
+		{"id":"3a0e2618ce346da2","x":300,"y":-50,"width":140,"height":440,"type":"group","label":"서버"},
+		{"id":"fab498d5db26157d","x":-145,"y":-50,"width":125,"height":440,"type":"group","label":"클라이언트"},
+		{"id":"e2927a823c07fcde","x":640,"y":0,"width":125,"height":345,"type":"group","label":"데이터베이스"},
+		{"id":"64110b9fe73a239c","x":-125,"y":-30,"width":85,"height":50,"type":"text","text":""},
+		{"id":"a0c68419d413125d","type":"text","text":"","x":-125,"y":20,"width":85,"height":50},
+		{"id":"d808931ed21b79ec","type":"text","text":"","x":-125,"y":70,"width":85,"height":50},
+		{"id":"074da6f77932f95a","type":"text","text":"","x":-125,"y":120,"width":85,"height":50},
+		{"id":"1f1bd0f173ebee7e","type":"text","text":"","x":-125,"y":170,"width":85,"height":50},
+		{"id":"818428329979c2a0","type":"text","text":"","x":-125,"y":220,"width":85,"height":50},
+		{"id":"efa60a0570e36d94","type":"text","text":"","x":-125,"y":270,"width":85,"height":50},
+		{"id":"bb957bfe0fb17cd6","type":"text","text":"","x":-125,"y":320,"width":85,"height":50},
+		{"id":"4f23b4b0216c7641","type":"text","text":"","x":320,"y":120,"width":85,"height":50},
+		{"id":"d249798d23bf3b8b","type":"text","text":"","x":320,"y":170,"width":85,"height":50},
+		{"id":"e24b05cab92a7240","type":"text","text":"","x":320,"y":220,"width":85,"height":50},
+		{"id":"383218ab50176819","type":"text","text":"","x":320,"y":270,"width":85,"height":50},
+		{"id":"fe9676ee20daf8cb","type":"text","text":"","x":320,"y":320,"width":85,"height":50},
+		{"id":"130e3dd568134381","type":"text","text":"","x":320,"y":-30,"width":85,"height":50},
+		{"id":"0420d93e7102bc2e","type":"text","text":"","x":320,"y":20,"width":85,"height":50},
+		{"id":"4f52a8c502d7d492","type":"text","text":"","x":320,"y":70,"width":85,"height":50},
+		{"id":"24025d00425f9d1c","type":"text","text":"","x":660,"y":20,"width":85,"height":50},
+		{"id":"6d48691249379815","type":"text","text":"","x":660,"y":270,"width":85,"height":50}
+	],
+	"edges":[
+		{"id":"fad498350715e4e4","fromNode":"0420d93e7102bc2e","fromSide":"right","toNode":"24025d00425f9d1c","toSide":"left","label":"3. 리프레시토큰 저장"},
+		{"id":"9ca65e57255c8e6a","fromNode":"383218ab50176819","fromSide":"right","toNode":"6d48691249379815","toSide":"left","label":"9. 리프레시토큰 조회&\n유효성검사"},
+		{"id":"00dc798aa0ed00d3","fromNode":"64110b9fe73a239c","fromSide":"right","toNode":"130e3dd568134381","toSide":"left","label":"1. 인증 요청"},
+		{"id":"7dd8b1f67f13ad96","fromNode":"d808931ed21b79ec","fromSide":"right","toNode":"4f52a8c502d7d492","toSide":"left","label":"4. 요청"},
+		{"id":"4e867d5d7297fca8","fromNode":"0420d93e7102bc2e","fromSide":"left","toNode":"a0c68419d413125d","toSide":"right","label":"2. 액세스토큰&리프레시토큰 응답"},
+		{"id":"0e3e8b56a8467198","fromNode":"4f23b4b0216c7641","fromSide":"left","toNode":"074da6f77932f95a","toSide":"right","label":"5. 토큰 유효성 검사&응답"},
+		{"id":"4650f3afe5f66000","fromNode":"1f1bd0f173ebee7e","fromSide":"right","toNode":"d249798d23bf3b8b","toSide":"left","label":"6. 만료된 액세스토큰과 함께 요청"},
+		{"id":"c41e67887cb1c3a8","fromNode":"e24b05cab92a7240","fromSide":"left","toNode":"818428329979c2a0","toSide":"right","label":"7. 토큰 만료 응답"},
+		{"id":"9eb90d96dccdc0a6","fromNode":"efa60a0570e36d94","fromSide":"right","toNode":"383218ab50176819","toSide":"left","label":"8. 리프레시토큰과 함께 \n액세스토큰 발급 요청"},
+		{"id":"8adb537b7bcf873a","fromNode":"fe9676ee20daf8cb","fromSide":"left","toNode":"bb957bfe0fb17cd6","toSide":"right","label":"10. 새로운 액세스토큰 응답"}
+	]
+}

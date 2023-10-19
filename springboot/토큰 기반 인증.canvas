@@ -1,0 +1,20 @@
+{
+	"nodes":[
+		{"id":"623340e1f3da4170","type":"group","x":-340,"y":-160,"width":200,"height":280,"label":"클라이언트"},
+		{"id":"01aa94674686abfa","type":"group","x":80,"y":-160,"width":200,"height":280,"label":"서버"},
+		{"id":"a39be9fe69bcc8e2","type":"text","text":"","x":-320,"y":-140,"width":160,"height":60},
+		{"id":"c77163b17e2666dc","type":"text","text":"3. 토큰 저장","x":-320,"y":-80,"width":160,"height":60},
+		{"id":"7c1b484e80a5de67","type":"text","text":"","x":-320,"y":-20,"width":160,"height":60},
+		{"id":"a82a57b0718f0b5a","type":"text","text":"","x":-320,"y":40,"width":160,"height":60},
+		{"id":"6eb6e05941b277a4","type":"text","text":"","x":100,"y":-140,"width":160,"height":60},
+		{"id":"9ff91220fe81c9fb","type":"text","text":"","x":100,"y":-80,"width":160,"height":60},
+		{"id":"81d7eba930426ca0","type":"text","text":"5. 토큰 검증","x":100,"y":-20,"width":160,"height":60},
+		{"id":"274a62bb27ced643","type":"text","text":"","x":100,"y":40,"width":160,"height":60}
+	],
+	"edges":[
+		{"id":"3f2052556bb769e0","fromNode":"a39be9fe69bcc8e2","fromSide":"right","toNode":"6eb6e05941b277a4","toSide":"left","label":"1. 로그인 요청"},
+		{"id":"48919b57cbb8dc6d","fromNode":"9ff91220fe81c9fb","fromSide":"left","toNode":"c77163b17e2666dc","toSide":"right","label":"2. 토큰 생성 후 응답"},
+		{"id":"1b1e4415d0236081","fromNode":"7c1b484e80a5de67","fromSide":"right","toNode":"81d7eba930426ca0","toSide":"left","label":"4. 토큰 정보와 함께 요청"},
+		{"id":"84442ac2b18a3b4f","fromNode":"274a62bb27ced643","fromSide":"left","toNode":"a82a57b0718f0b5a","toSide":"right","label":"6. 응답"}
+	]
+}
