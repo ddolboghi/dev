@@ -1,15 +1,30 @@
+---
+sticker: emoji//1f4a1
+---
 #### 여러 개의 개념을 한번에 묶지 말고 개념을 쪼개서 하나씩 나눠서 이해하자
+
+[GitHub에서 PR로 코드리뷰 하는 법](https://joyful-development.tistory.com/m/14)
+# 클래스 내부 선언 순서 컨벤션
+1. Static Variable : `public -> protected -> private`
+2. Member Variable : `public -> protected -> private`
+3. Constructor
+4. Static Method
+5. Other Method : 기능 및 역할별로 분류하여 기능을 구현하는 그룹별로 작성
+6. Standard Method : toString, equals, hashcode 와 같은 메소드
+7. Getter / Setter : 클래스의 가장 하단 부분에 위치
+
 # intellij 단축키
-|기능|단축키|
-|:---|:---|
-|줄 복사|ctrl + D|
-|전체 파일에서 찾기|ctrl + shift + F|
-|현재 파일에서 바꾸기|ctrl + R|
-|전체 파일에서 바꾸기|ctrl + shift + R|
-|빌드 도구(maven, gradle) 새로고침|ctrl + shift + o|
-|자동으로 테스트 클래스 생성|클래스 이름에 커서 위치 > alt + Enter > Create Test|
-|`System.out.println();`|`sout` + ctrl + space|
-|`System.out.printf();`|`so` + ctrl + space|
+| 기능                              | 단축키                                              |
+|:--------------------------------- |:--------------------------------------------------- |
+| 줄 복사                           | ctrl + D                                            |
+| 전체 파일에서 찾기                | ctrl + shift + F                                    |
+| 현재 파일에서 바꾸기              | ctrl + R                                            |
+| 전체 파일에서 바꾸기              | ctrl + shift + R                                    |
+| 빌드 도구(maven, gradle) 새로고침 | ctrl + shift + o                                    |
+| 자동으로 테스트 클래스 생성       | 클래스 이름에 커서 위치 > alt + Enter > Create Test |
+| `System.out.println();`           | `sout` + ctrl + space                               |
+| `System.out.printf();`            | `so` + ctrl + space                                 |
+| 안쓰는 `import` 정리|ctrl + alt + o                                                     |
 # eclipse 프로젝트를 intellij로 가져오기
 1. 일단 intellij에서 eclipse 프로젝트를 불러온다.
 2. File > Project structure > Modules > +버튼 클릭 > Import Module 클릭 후 import할 프로젝트 선택
@@ -36,6 +51,13 @@ Continuous Delivery(지속적인 배포)
 3. 레포지토리 이름 입력하고 commit, push까지 진행
 4. github에 들어가면 레포지토리 생성되있음
 
+# predicate
+- 인수로 값을 받아 true나 false를 반환하는 함수
+```java
+public interface Predicate<T> {
+	boolean test(T t);
+}
+```
 # java streams
 [streams 총정리](https://futurecreator.github.io/2018/08/26/java-8-streams/)
 # 인증(authentication)과 인가(authorization)
