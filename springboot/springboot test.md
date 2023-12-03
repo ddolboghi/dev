@@ -1,3 +1,5 @@
+# H2 데이터베이스 사용시 테스트
+- H2 데이터베이스는 파일 기반의 데이터베이스이므로 테스트하려면 로컬 서버 실행을 중지해야한다. 
 # given-when-then 패턴
 given : 테스트 실행 준비; 데이터 생성
 when : 테스트 진행; 데이터 저장
@@ -114,10 +116,10 @@ class TestControllerTest {
 	}
 }
 ```
-@SpringBootTest
+`@SpringBootTest`
 - @SpringBootApplication이 있는 메인 애플리케이션 클래스를 찾고 그 클래스에 포함된 빈을 찾은 다음, 테스트용 애플리케이션에 컨텍스트를 만듬
 
-@AutoConfigureMockMvc
+`@AutoConfigureMockMvc`
 - MockMvc를 생성하고 자동으로 구성
 - MockMvc는 애플리케이션을 서버에 배포하지 않고도 테스트용 MVC환경을 만들어 요청, 전송, 응답 기능을 제공하는 유틸리티 클래스로, 컨트롤러를 테스트할때 사용됨
 

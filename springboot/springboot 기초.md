@@ -63,6 +63,22 @@ build.gradle에 필요한 기능을 간편하게 추가할 수 있음
 # 자동 구성
 * 스프링 부트는 내가 구성하지 않은 부분을 자동으로 구성해주기 때문에 추후 이 부분을 확인할 상황이 옴
 * 스프링 부트의 자동 설정 : 서버 시작 시 External Libraries의 모듈마다 있는 spring.factories의 구성 후보들에서 파일에 설정된 클래스는 모두 불러오고, 이후에는 프로젝트에서 사용할 것들만 자동으로 구성해 등록. 즉 빈이 자동으로 등록되고 구성됨
+# 스프링부트 프로젝트 구조
+프로젝트 폴더
+│  build.gradle : 프로젝트에 필요한 의존성, 플러그인 작성
+│  settings.gradle : 빌드할 프로젝트의 정보 설정
+└─src
+    ├─main : 프로젝트 실행에 필요한 소스 코드나 리소스 파일이 있음
+    │  ├─java
+    │      └─패키지
+    │          └─프로젝트명Application.java: 프로그램 시작을 담당하는 파일
+    │  └─resources
+    │      └─static : 정적 파일 저장(css, js, 이미지)
+    │      └─templates: HTML 템플릿 파일 저장
+    │      └─application.yml(.properties) : 프로젝트의 환경 설정, 데이터베이스 설정
+    └─test : 프로젝트의 소스 코드를 테스트할 코드나 리소스 파일이 있음
+        ├─java
+        └─resources
 # @SpringBootApplication
 스프링 부트 사용에 필요한 기본 설정해줌
 ```java
@@ -78,7 +94,7 @@ public class SpringBootDeveloperApplication {
     }  
 }
 ```
-SpringApplication.run(애플리케이션의 메인 클래스.class, 커맨드 라인의 인) : 애플리케이션 실행
+SpringApplication.run(애플리케이션의 메인 클래스.class, 커맨드 라인의 인자) : 애플리케이션 실행
 
 ```java
 //SpringBootApplication.java
@@ -147,7 +163,7 @@ public @interface Controller {
 ```
 @Controller에 @Component가 있으므로 @RestController는 @SpringBootApplication의 @ComponentScan을 통해 빈으로 등록될 수 있음
 
-# spring boot 3 구조
+# 레이어 아키텍처
 ## 프레젠테이션 계층-Controller
 - HTTP요청을 받아서 비즈니스 계층으로 전송
 - 비즈니스 계층의 응답을 클라이언트로 전송
@@ -220,28 +236,112 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 4. ViewResolver에서 템플릿 엔진으로 HTML을 만들거나 JSON, XML등의 데이터 생성
 5. 생성된 HTML 또는 데이터를 응답으로 반환
 
-# 프로젝트의 디렉터리 구성
-프로젝트 폴더
-│  build.gradle : 빌드 설정(의존성 추가, 플러그인 추가 등)
-│  settings.gradle : 빌드할 프로젝트의 정보 설정
-└─src
-    ├─main : 프로젝트 실행에 필요한 소스 코드나 리소스 파일이 있음
-    │  ├─java
-    │  │  └─me
-    │  │      └─siwoli
-    │  │          │  Main.java
-    │  │          │  
-    │  │          └─springbootdeveloper
-    │  │                  SpringBootDeveloperApplication.java
-    │  │                  TestController.java 
-    │  │                  TestService.java
-    │  │                  Member.java
-    │  │                  MemberRepository.java
-    │  │                  
-    │  └─resources
-    │      └─static : 정적 파일(css, js)
-    │      └─templates : view 관련 파일(html등)
-    │      └─application.yml : ==스프링 부트 설정== 
-    └─test : 프로젝트의 소스 코드를 테스트할 코드나 리소스 파일이 있음
-        ├─java
-        └─resources
+# build.gradle
+## dependencies
+- implementation: 해당 라이브러리 설치. 라이브러리가 변경되도 이 라이브러리와 연관된 모든 모듈들을 컴파일하지 않고 직접 관련이 있는 모듈만 컴파일하므로 rebuild 속도가 빠름
+- developmentOnly: 개발환경에서만 적용되는 설정. 운영환경에 배포되는 jar, war에는 developmentOnly로 설치된 라이브러리는 제외됨
+- runtimeOnly: 해당 라이브러리가 런타임시에만 필요한 경우
+- compileOnly: 해당 라이브러리가 컴파일 단계에서만 필요한 경우
+- annotationProcessor: 컴파일 단계에서 애너테이션을 분석하고 처리하기 위해 사용
+
+### 스프링부트 도구 설치
+```gradle
+dependencies {  
+    ...
+    //서버 자동 재시작을 위한 라이브러리
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'  
+
+	//lombok
+    implementation 'org.projectlombok:lombok'  
+    annotationProcessor 'org.projectlombok:lombok'  
+    //lombok의 test 환경  
+    //testImplementation('org.projectlombok:lombok')  
+    //testAnnotationProcessor('org.projectlombok:lombok')
+}
+```
+- intellij 서버 자동 재시작 설정: file > settings > build,execution,deployment > compiler > build project automatically 체크
+- application.properties에 서버 자동 재시작 설정(선택)
+```properties
+spring.devtools.restart.enabled=true  
+spring.devtools.livereload.enabled=true
+```
+# lombok
+## `@RequiredArgsConstructor`
+- 클래스의 `final`인스턴스 변수를 받는 생성자가 자동 생성됨
+- ==의존성 주입 시 사용됨==
+```java
+@RequiredArgsConstructor 
+@Getter  
+public class HelloLombok { 
+	private final String hello; 
+	private final int lombok; 
+	
+	public static void main(String[] args) { 
+		HelloLombok helloLombok = new HelloLombok("헬로", 5);
+		System.out.println(helloLombok.getHello());
+		System.out.println(helloLombok.getLombok()); 
+	} 
+}
+```
+아래처럼 생성자를 직접 작성한 경우와 동일함
+```java
+@Getter 
+public class HelloLombok { 
+	private final String hello; 
+	private final int lombok; 
+	
+	public HelloLombok(String hello, int lombok) { 
+		this.hello hello; 
+		this.lombok = lombok; 
+	}
+	
+	public static void main(String[] args) { 
+			HelloLombok helloLombok = new HelloLombok("헬로", 5);
+			System.out.println(helloLombok.getHello());
+			System.out.println(helloLombok.getLombok()); 
+	} 
+}
+```
+# 컨트롤러
+## URL 매핑
+- GET 요청: `@GetMapping("<URL>")`
+- POST 요청: `@PostMapping("<URL>")`
+- 단순 값 보낼때: 메서드에 `@Responsebody`붙이고 `return 메서드 반환 타입 값`
+- 템플릿 보낼때: `return "템플릿 이름"`
+- 리다이렉트`return "redirect:<URL>"`: 완전히 새로운 URL로 요청됨
+- 포워드`return "forword:<URL>"`: 기존 요청 값들이 유지된 상태로 URL 전환
+## 값이 변하는 URL 매핑
+```java
+@GetMapping(value = "/question/detail/{id}")  
+public String detail(Model model, @PathVariable("id") Integer id) {  
+    return "question_detail";  
+}
+```
+- 매핑 애너테이션에서 사용한 {값}과 `@PathVariable("값")`이 같아야함 
+## URL prefix
+- 메서드의 매핑 애너테이션에 중복되는 URL 프리픽스가 있는 경우 클래스에 `@RequestMapping(<중복 URL>)`을 추가하고 메서드에 있는 건 생략할 수 있음
+- 프리픽스한 컨트롤러는 항상 해당 URL 프리픽스로 시작해야한다는 규칙이 생김 
+## HTTP 요청 파라미터 받기
+`@RequestParam`: HttpServletRequest의 getParameter와 동일한 기능
+### 기본 사용법
+`@RequestParam("가져올 데이터의 이름") [데이터 타입] [변수]`
+- HTTP 파라미터 이름이 `변수` 이름과 같으면 @RequestParam의 value 생략 가능
+- **템플릿에서 보낸 파라미터 이름: html태그의 name 속성 값**
+- HTTP 파라미터가 String, int, Integer 등의 단순 타입이면 @RequestParam 생략 가능
+- `@RequestParam Map<...> ...`: Map에 key=파라미터, value=파라미터 값 저장됨
+- 동일한 이름의 파라미터 값이 2개 이상이면 MultiValueMap 사용
+### 필수 파라미터 지정
+`@RequestParam(required=[true/false])`: 파라미터에 필수 여부 지정
+- false일때 요청 파라미터에 값이 없으면 null 저장되므로 int 대신 Integer 사용해야함
+### 파라미터 기본값 설정
+`@RequestParam(defaultValue=[기본값])`: 요펑 파라미터 값이 없으면 기본값 지정됨
+- required=false일때 defaultValue 지정하면 int 타입 사용가능
+### 검증 Form 적용
+- `th:object=${Form 객체}`가 있는 템플릿을 요청하는 메서드의 매개변수는 Form객체여야함
+> [!NOTE]
+> Form객체 처럼 매개변수로 바인딩한 객체는 Model 객체로 전달하지 않아도 템플릿에서 사용 가능함
+
+# 서비스
+- 비즈니스 로직 처리
+- 서비스는 컨트롤러와 레포리토리의 중간자로서 엔티티 객체와 DTO객체를 서로 변환해 양방향에 전달하는 역할
+- 스프링 부트는 `@Service`(`import org.springframework.stereotype.Service`)가 붙은 클래스를 서비스로 인식함

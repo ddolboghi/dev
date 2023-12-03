@@ -2,6 +2,9 @@
 - CSRF공격 방어, 세션 고정(session fixation)공격 방어, 요청 헤더를 보안 처리해줌
 - 필터 기반으로 동작
 - 세션 기반 인증 사용 : 사용자마다 사용자의 정보를 담은 세션을 생성하고 저장해서 인증
+> [!NOTE]
+> Authenticate: 로그인
+> Authorize: 인증된 사용자가 어떤 것을 할 수 있는지(권한)
 # SecurityFilterChain
 SecurityContext : 접근 주체와 인증에 대한 정보를 담고 있는 객체
 
@@ -31,15 +34,78 @@ SecurityContext : 접근 주체와 인증에 대한 정보를 담고 있는 객�
 인증 성공 여부에 따라 성공하면 AuthenticationSuccessHandler, 실패하면 AuthenticationFailureHandler를 실행
 [폼 로그인 인증 절차 다이어그램](obsidian://open?vault=Obsidian%20Vault&file=spring%20secutiry%20-%20%ED%8F%BC%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.canvas)
 # spring boot에서 인증, 인가 기능 구현
-## 1. 의존성 추가
+## 의존성 추가
 ```gradle
 implementation 'org.springframework.boot:spring-boot-starter-security'  
 //thymeleaf에서 spring security를 사용하기 위한 의존성 추가  
 implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'  
 testImplementation 'org.springframework.security:spring-security-test'
 ```
-## 2. User 엔티티 만들기
--  엔티티는 ==UserDetails인터페이스를 상속함==
+
+## 시큐리티 설정 파일 작성하기
+```java
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    @Bean  
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {  
+        http  
+                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests  
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll());  
+        return http.build();  
+    }  
+}
+```
+- `@Configuration`: 스프링의 환경설정 파일임을 의미하는 애너테이션
+- `@EnableWebSecurity`: 모든 요청 URL이 스프링 시큐리티의 제어를 받도록 만드는 애너테이션
+- 스프링 시큐리티의 세부 설정은 SecurityFilterChain 빈을 생성하여 설정
+- `invalidateHttpSession(true)` : 로그아웃 이후에 세션을 전체 삭제할지 여부 설정
+# CSRF(cross site request forgery) 오류 해결
+- 스프링 시큐리티가 CSRF 토큰 값을 세션을 통해 발생하고 웹 페이지에서는 폼 전송시에 해당 토큰을 함께 전송해 실제 웹 페이지에서 작성된 데이터가 전달되는지 검증
+- H2 콘솔은 CSRF 토큰을 발행하는 기능이 없어 403오류 발생
+  --> 스프링 시큐리티가 CSRF 처리시 H2 콘솔은 예외로 처리하도록 시큐리티 설정 파일 수정해야함
+```java
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    @Bean  
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {  
+        http  
+		        ...
+                
+                .csrf((csrf) -> csrf  
+        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")));
+        
+        return http.build();  
+    }  
+}
+```
+# clickjacking 공격 오류 해결
+- H2 콘솔의 화면은 frame구조로 작성됨
+- 스프링 시큐리티는 사이트의 콘텐츠가 다른 사이트에 포함되지 않도록 하기 위해 `X-Frame-Options`를 사용해 clickjacking 공격 방지
+- `X-Frame-Options`의 헤더 값을 SAMEORIGIN으로 설정하면 frame에 포함된 페이지가 페이지를 제공하는 사이트와 동일한 경우에는 계속 사용 가능
+```java
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    @Bean  
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {  
+        http 
+		        ...
+		        
+                .headers((headers) -> headers  
+                        .addHeaderWriter(new XFrameOptionsHeaderWriter(  
+                                XFrameOptionsMode.SAMEORIGIN  
+                        )));  
+        return http.build();  
+    }  
+}
+```
+
+# 회원가입 기능 구현
+## 1. 회원 정보를 위한 엔티티 생성
+- 엔티티는 ==UserDetails인터페이스==를 상속하거나 기본적인 엔티티의 형태로 생
+- 필수 엔티티 속성: username, password, email
 
 |UserDetails의 메서드|반환 타입| |
 |---|---|---|
@@ -51,127 +117,73 @@ testImplementation 'org.springframework.security:spring-security-test'
 |`isCredentialsNonExpired()`|boolean|비밀번호가 만료되었는지 확인하는 메서드. 만료 안되었으면 true반환|
 |`isEnabled()`|`boolean`|계정이 사용 가능한지 확인하는 메서드. 사용가능하면 true반환|
 
-## 3. 리포지터리 만들기
+## 2. 레포지터리와 서비스
+### 레포지터리
 ```java
-public interface UserRepository extends JpaRepository<User, Long> {  
-    Optional<User> findByEmail(String email);//email로 사용자 정보를 가져옴  
+public interface UserRepository extends JpaRepository<SiteUser, Long> {  
 }
 ```
-
-## 4. 서비스 메서드 코드 작성하기
+### 비밀번호 암호화
+- `BCryptPasswordEncoder`로 암호화해 저장
+- PasswordEncoder 빈을 등록해서 `BCryptPasswordEncoder`사용하면 나중에 암호화 방식이 바껴도 수정하기 쉬움
+- SecurityConfig에서 PasswordEncoder 빈 등록하기
 ```java
-@RequiredArgsConstructor  
-@Service
-//스프링 시큐리티에서 사용자 정보를 가져오는 인터페이스
-public class UserDetailService implements UserDetailsService {  
-    private final UserRepository userRepository;  
-	
-	//사용자 이름(email)으로 사용자의 정보를 가져오는 메서드
-    @Override  
-    public User loadUserByUsername(String email) {  
-        return userRepository.findByEmail(email)  
-                .orElseThrow(() -> new IllegalArgumentException((email)));  
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    ...
+    
+    @Bean  
+    PasswordEncoder passwordEncoder() {  
+        return new BCryptPasswordEncoder();  
     }  
 }
 ```
-`UserDetailsService` : 스프링 시큐리티에서 사용자의 정보를 가져오는 인터페이스
 
-## 5. 시큐리티 설정 파일 WebSecurityConfig.java 작성하기
-`invalidateHttpSession(true)` : 로그아웃 이후에 세션을 전체 삭제할지 여부 설정
-
-## 6. 회원가입 구현하기
-### 1. 서비스 메서드 코드 작성하기
+### 서비스
 ```java
 @RequiredArgsConstructor  
 @Service  
 public class UserService {  
     private final UserRepository userRepository;  
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;  
+    private final PasswordEncoder passwordEncoder;  
   
-    //AddUserRequestDTO 객체를 인수로 받아서 DB에 저장하는 메서드  
-    public Long save(AddUserRequest dto) {  
-        return userRepository.save(User.builder()  
-                .email(dto.getEmail())  
-                .password(bCryptPasswordEncoder.encode(dto.getPassword()))  
-                .build()).getId();  
+    public SiteUser create(String username, String email, String password) {  
+        SiteUser user = new SiteUser();  
+        user.setUsername(username);  
+        user.setEmail(email);  
+        user.setPassword(passwordEncoder.encode(password));  
+        this.userRepository.save(user);  
+        return user;  
     }  
 }
 ```
 
-### 2. 컨트롤러 작성하기
+## 3. 회원가입 폼
 ```java
-@RequiredArgsConstructor  
-@Controller  
-public class UserApiController {  
-    private final UserService userService;  
-      
-    @PostMapping("/user")  
-    public String signup(AddUserRequest request) {  
-        userService.save(request);//회원가입 메서드 호출  
-        return "redirect:/login";//회원가입이 완료된 이후에 로그인 페이지로 이동  
-    }  
-}
-```
-`"redirect:URL명"` : 해당 URL로 *강제로* 이동
-
-### 3. 뷰 컨트롤러 구현하기
-```java 
-@Controller  
-public class UserViewController {  
-    @GetMapping("/login")  
-    public String login() {  
-        return "login";  
-    }  
+@Getter  
+@Setter  
+public class UserCreateForm {  
+    @Size(min = 3, max = 25)  
+    @NotEmpty(message = "아이디는 필수항목입니다.")  
+    private String username;  
   
-    @GetMapping("/signup")  
-    public String signup() {  
-        return "signup";  
-    }  
+    @NotEmpty(message = "비밀번호는 필수항목입니다.")  
+    private String password;  
+  
+    @NotEmpty(message = "비밀번호 확인은 필수항목입니다.")  
+    private String passwordCheck;  
+  
+    @NotEmpty(message = "이메일은 필수항목입니다.")  
+    @Email  
+    private String email;  
 }
 ```
 
-### 4. 뷰 작성하기
-```html
-<!DOCTYPE html>  
-<html xmlns:th="http://www.thymeleaf.org">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>로그인</title>  
-</head>  
-<body>  
-    <div>        <form th:action="@{/login}" method="POST">  
-            <div>                <label>Email address</label>  
-                <input type="email" name="username">  
-            </div>            <div>                <label>Password</label>  
-                <input type="password" name="password">  
-            </div>            <button type="submit">로그인</button>  
-        </form>  
-        <button type="button" onclick="location.href='/signup'">회원가입</button>  
-    </div></body>  
-</html>
-```
+## 4. 회원가입 컨트롤러
 
-```html
-<!DOCTYPE html>  
-<html xmlns:th="http://www.thymeleaf.org">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>회원 가입</title>  
-</head>  
-<body>  
-    <div>        <form th:action="@{/user}" method="POST">  
-            <div>                <label>Email address</label>  
-                <input type="email" name="email">  
-            </div>            <div>                <label>Password</label>  
-                <input type="password" name="password">  
-            </div>  
-            <button type="submit">Submit</button>  
-        </form>    </div></body>  
-</html>
-```
 
-## 7. 로그아웃 구현하기
-### 1. 컨트롤러에 로그아웃 메서드 추가하기
-```java
+## 5. 회원가입 템플릿
 
-```
+## 6. 중복 회원가입 처리
+
