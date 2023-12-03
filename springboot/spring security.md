@@ -181,9 +181,248 @@ public class UserCreateForm {
 ```
 
 ## 4. 회원가입 컨트롤러
+```java
+@RequiredArgsConstructor  
+@Controller  
+@RequestMapping("/user")  
+public class UserController {  
+    private final UserService userService;  
+      
+    @GetMapping("/signup")  
+    public String signup(UserCreateForm userCreateForm) {  
+        return "signup_form";  
+    }  
+  
+    @PostMapping("/signup")  
+    public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {  
+        if (bindingResult.hasErrors()) {  
+            return "signup_form";  
+        }  
+  
+        if (!userCreateForm.getPassword().equals(userCreateForm.getPasswordCheck())) {  
+            bindingResult.rejectValue("passwordCheck", "passwordInCorrect","비밀번호가 일치하지 않습니다.");  
+            return "signup_form";  
+        }  
+        try {  
+            userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword());  
+        } catch (DataIntegrityViolationException e) {  
+            e.printStackTrace();  
+            bindingResult.reject("signupFailed", "이미 등록된 회원입니다.");  
+            return "signup_form";  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+            bindingResult.reject("signupFailed", e.getMessage());  
+        }  
+  
+        return "redirect:/";  
+    }  
+}
+```
+1. 먼저 GET요청에는 회원가입 템플릿을 보냄
+2. 회원가입 템플릿에 입력한 데이터를 UserCreateForm으로 보내고 검증
+3. try-catch로 중복 회원가입 처리하고 userService로 회원 데이터 저장
+4. 메인페이지로 리다이렉트
 
+- `bindingResult.rejectValue(오류 발생한 필드, 오류코드, 오류메시지)`
+- `bindingResult.reject(오류코드, 오류메시지):` 특정 필드의 오류가 아닌 일반적인 오류를 등록할때 사용
 
 ## 5. 회원가입 템플릿
+```java
+<html lang="ko"  
+      xmlns:th="http://www.thymeleaf.org"  
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  
+      layout:decorate="~{layout}">  
+<div layout:fragment="content">  
+    <div>
+	    <div>            
+		    <h4>회원가입</h4>  
+        </div>    
+    </div>    
+	<form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">  
+	    <div th:replace="~{form_errors :: formErrorsFragment}"></div>  
+		<div>            
+			<label for="username">아이디</label>  
+			<input type="text" th:field="*{username}">  
+		</div>       
+		<div>            
+			<label for="password">비밀번호</label>  
+	        <input type="password" th:field="*{password}">  
+	    </div>        
+	    <div>            
+		    <label for="password-check">비밀번호 확인</label>  
+	        <input type="password" th:field="*{passwordCheck}">  
+	    </div>        
+		<div>
+			<label for="email">이메일</label>  
+	        <input type="email" th:field="*{email}">  
+	    </div>
+	    <button type="submit">회원가입</button>  
+    </form>
+</div>  
+</html>
+```
+- th:object로 userCreateForm객체를 생성
 
-## 6. 중복 회원가입 처리
+# 로그인/로그아웃 기능 구현
+## 1. SecurityFilterChain에 로그인 URL 등록
+```java
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    @Bean  
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {  
+        http  
+		        ...
+                .formLogin((formLogin) -> formLogin  
+                        .loginPage("/user/login")  
+                        .defaultSuccessUrl("/"));  
+        return http.build();
+```
+
+## 2. 컨트롤러
+```java
+@RequiredArgsConstructor  
+@Controller  
+@RequestMapping("/user")  
+public class UserController {  
+    ...
+  
+    @GetMapping("/login")  
+    public String login() {  
+        return "login_form";  
+    }  
+}
+```
+- GET방식의 로그인 메서드 추가
+- 실제 로그인을 진행하는 POST방식의 메서드는 스프링 시큐리티가 대신 처리하므로 직접 구현할 필요 없음
+
+## 3. 템플릿
+```html
+<html lang="ko"  
+      xmlns:th="http://www.thymeleaf.org"  
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  
+      layout:decorate="~{layout}">  
+<div layout:fragment="content">  
+    <form th:action="@{/user/login}" method="post">  
+        <div th:if="${param.error}">  
+            <div class="err">아이디 또는 비밀번호를 확인해주세요.</div>  
+        </div>        
+        <div>            
+	        <label for="username">아이디</label>  
+            <input type="text" name="username" id="username">  
+        </div>        
+        <div>            
+	        <label for="password">비밀번호</label>  
+            <input type="password" name="password" id="password">  
+        </div>        
+        <button type="submit">로그인</button>  
+    </form>
+</div>  
+</html>
+```
+- 로그인 실패시 리다이렉트되는 페이지의 파라미터로 error가 전달됨
+- `th:if="${param.error}"`: 파라미터로 error가 전달되면(로그인이 실패하면)
+
+## 4. 레포지토리
+- 사용자 이름으로 사용자를 찾는 메서드 추가
+```java
+public interface UserRepository extends JpaRepository<SiteUser, Long> {  
+    Optional<SiteUser> findByUsername(String username);  
+}
+```
+
+## 5. UserRole
+- 인증 후에 사용자에게 부여할 권한 필요
+- enum을 이용해 권한 목록 작성
+```java
+@Getter  
+public enum UserRole {  
+    ADMIN("ROLE_ADMIN"),  
+    USER("ROLE_USER");  
+  
+    private final String value;  
+  
+    UserRole(String value) {  
+        this.value = value;  
+    }  
+}
+```
+
+## 6. UserDetailService의 구현 서비스 작성
+- 회원가입으로 데이터베이스에 저장된 회원 정보를 조회하는 기능 필요
+```java
+@RequiredArgsConstructor  
+@Service  
+public class UserSecurityService implements UserDetailsService {  
+    private final UserRepository userRepository;  
+    private final String ADMIN_NAME = "admin";  
+  
+    @Override  
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {  
+        Optional<SiteUser> _siteUser = this.userRepository.findByUsername(username);  
+        if (_siteUser.isEmpty()) {  
+            throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");  
+        }  
+        SiteUser siteUser = _siteUser.get();  
+        List<GrantedAuthority> authorities = new ArrayList<>();  
+        authorities.add(grantAuthority(username));  
+        return new User(siteUser.getUsername(), siteUser.getPassword(), authorities);  
+    }  
+  
+    private SimpleGrantedAuthority grantAuthority(String username) {  
+        if (ADMIN_NAME.equals(username)) {  
+            return new SimpleGrantedAuthority(UserRole.ADMIN.getValue());  
+        }  
+        return new SimpleGrantedAuthority(UserRole.USER.getValue());  
+    }  
+}
+```
+- 스프링 시큐리티가 제공하는 UserDetailService인터페이스는 `loadUserByUsername`메서드를 구현하도록 강제함
+- 사용자명, 비밀번호, 권한을 입력으로 스프링 시큐리티의 User객체를 생성해 리턴
+- 스프링 시큐리티는 `loadUserByUsername`메서드에 의해 리턴된 User객체의 비밀번호가 화면으로부터 입력 받은 비밀번호와 일치하는지 검사하는 로직을 내부적으로 가지고 있음
+
+## 7. SecurityConfig에 AuthenticationManager 빈 생성하기
+```java
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+	@Bean  
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {  
+        return authenticationConfiguration.getAuthenticationManager();  
+    }  
+}
+```
+- AuthenticationManager는 스프링 시큐리티의 인증을 담당함
+- AuthenticationManager는 사용자 인증시 UserDetailService를 구현한 서비스 클래스와 PasswordEncoder클래스 사용함
+
+## 8. 로그아웃 구현
+```java
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    @Bean  
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {  
+        http  
+                ...
+                .formLogin((formLogin) -> formLogin  
+                        .loginPage("/user/login")  
+                        .defaultSuccessUrl("/"))  
+                .logout((logout) -> logout  
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))  
+                        .logoutSuccessUrl("/")  
+                        .invalidateHttpSession(true));  
+        return http.build();  
+    }  
+}
+```
+- SecurityFilterChain의 http 체인메서드로 logout추가
+- `invalidateHttpSession(true)`: 로그아웃시 생성된 사용자 세션 삭제
+
+## 9. 템플릿에 컨트롤러의 로그인 링크 추가
+```html
+<li>  
+    <a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>  
+    <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>  
+</li>
+```
 

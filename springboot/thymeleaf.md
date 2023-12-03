@@ -82,6 +82,9 @@ public class ExampleController {
 	- loop.odd: 루프의 홀수번째 순서인 경우 true
 	- loop.even: 루프의 짝수번째 순서인 경우 true
 	- loop.current: 현재 대입된 객체 = 개별 객체
+- `sec:authorize`: 로그인 여부를 알려주는 속성
+	- `sec:authorize="isAnonymous()"`: 로그인되지 않은 경우에만 해당 html요소 표시
+	- `sec:authorize="isAuthenticated()"`: 로그인된 경우에만 해당 html요소 표시
 
 ### form태그의 CSRF 방지
 
