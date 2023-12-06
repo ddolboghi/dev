@@ -355,6 +355,46 @@ public String list(Model model, @RequestParam(value = "page", defaultValue = "0"
 ### 파라미터 기본값 설정
 `@RequestParam(defaultValue=[기본값])`: 요펑 파라미터 값이 없으면 기본값 지정됨
 - required=false일때 defaultValue 지정하면 int 타입 사용가능
+## DTO 활용하기
+> [!DTO vs VO]
+> - DTO(Data Transfer Object): 다른 레이어 간의 데이터 교환에 사용되는 데이터 컨테이너. 이때 레이어는 애플리케이션 내부 레이어 또는 인프라 관점에서의 레이어일 수도 있음
+> - VO(Value Object): 데이터 그 자체로 의미가 있는 객체, 읽기전용으로 만들어 데이터의 신뢰성 유지해야함
+- 요청으로 전달된 값이 정해져있고 개수가 많을때 DTO활용
+- POST, PUT 컨트롤러 메서드의 매개변수로 DTO객체 넘겨줌
+- `@RequestBody`: HTTP의 Body 내용을 해당 어노테이션이 지정된 객체에 매핑
+- `@RestController`를 사용하지 않는 컨트롤러에서 메서드로 DTO객체를 반환하려면 메서드에 `@ResponseBody`를 붙여야함
+```java
+@RestController
+@RequestMapping("/api")
+public class PostController {
+	...
+	
+	PutMapping(value = "/member" ) 
+	public MemberDto postMemberDto(@RequestBody MemberDto memberDto) {
+		return memberDto;
+	}
+}
+```
+## `ResponseEntity`활용하기
+- `RequestEntity`와 `ResponseEntity`는 `HttpEntity`를 상속받아 구현한 클래스
+- `ResponseEntity`는 서버에 들어온 요청에 대해 응답 데이터를 구성할 수 있게 해줌(응답 코드 변경, Header, Body 구성 등)
+- REST 컨트롤러 메서드의 리턴타입에 적용
+- 해당 메서드의 리턴 값은 JSON임(REST 컨트롤러 애너테이션을 적용했기 때문)
+```java
+@RestController
+@RequestMapping("/api")
+public class PostController {
+	...
+	
+	PutMapping(value = "/member" ) 
+	public ResponseEntity<MemberDto> postMemberDto(@RequestBody MemberDto memberDto) {
+		return ResponseEntity
+		.status(HpptStatus.ACCEPTED)
+		.body(memberDto);
+	}
+}
+```
+
 ## 검증 Form 적용
 [[springboot validation]]
 - `th:object=${Form 객체}`가 있는 템플릿을 요청하는 메서드의 매개변수는 Form객체여야함
