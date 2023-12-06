@@ -426,3 +426,100 @@ public class SecurityConfig {
 </li>
 ```
 
+# 글쓴이 추가하기
+1. 글쓴이(사용자)가 있어야하는 엔티티에 `@ManyToOne`으로 사용자 클래스 속성 추가
+```java
+@Getter  
+@Setter 
+@Entity  
+public class Answer {  
+  
+    ...
+    
+    @ManyToOne  
+    private SiteUser author;  
+}
+```
+
+2. 사용자 서비스 클래스에 사용자 조회 메서드 추가
+```java
+@RequiredArgsConstructor  
+@Service  
+public class UserService {  
+	...
+  
+    public SiteUser getUser(String username) {  
+        Optional<SiteUser> siteUser = this.userRepository.findByUsername(username);  
+        if (siteUser.isEmpty()) {  
+            throw new DataNotFoundException("siteuser not found");  
+        }  
+        return siteUser.get();  
+    }  
+}
+```
+
+3. 사용자가 데이터를 생성하는 행위가 있는 다른 서비스의 메서드에서 해당 사용자를 저장하도록 수정
+```java
+@RequiredArgsConstructor  
+@Service  
+public class AnswerService {  
+    private final AnswerRepository answerRepository;  
+  
+    public void create(Question question, String content, SiteUser siteUser) {  
+        Answer answer = new Answer();  
+        answer.setContent(content);  
+        answer.setCreateDate(LocalDateTime.now());  
+        answer.setQuestion(question);  
+        answer.setAuthor(siteUser);  
+        this.answerRepository.save(answer);  
+    }  
+}
+```
+
+4. 컨트롤러에서 사용자 생성 요청(create 등) 메서드에 매개변수로 Principal 객체 지정
+```java
+@RequestMapping("/answer")  
+@RequiredArgsConstructor  
+@Controller  
+public class AnswerController {  
+    private final QuestionService questionService;  
+    private final AnswerService answerService;
+    private final UserService userService;
+
+	@PreAuthorize("isAuthenticated()")
+    @PostMapping("/create/{id}")  
+	public String createAnswer(  
+        Model model,  
+        @PathVariable("id") Integer id,  
+        @Valid AnswerForm answerForm,  
+        BindingResult bindingResult,  
+        Principal principal) {  
+	    Question question = this.questionService.getQuestion(id);  
+	    SiteUser siteUser = this.userService.getUser(principal.getName());  
+	  
+	    if (bindingResult.hasErrors()) {  
+	        model.addAttribute("question", question);  
+	        return "question_detail";  
+	    }  
+	    this.answerService.create(question, answerForm.getContent(), siteUser);  
+	    return String.format("redirect:/question/detail/%d", id);  
+	}
+}
+```
+## Principal 객체
+- 스프링 시큐리티가 제공하는 Principal 객체는 현재 로그인한 사용자에 대한 정보를 가짐
+- ==Prinripal객체는 로그인을 해야만 생성되므로 로그아웃 상태에서 Principal객체는 null임==
+- `Principal객체.getName()`: 현재 로그인한 사용자의 사용자명(사용자ID) 리턴
+## `@PreAuthorize("isAuthenticated()")`
+- 로그인이 필요한 컨트롤러의 메서드에 붙임
+- 로그아웃 상태에서 해당 메서드가 호출되면 로그인 페이지로 이동됨
+- SecurityConfig 클래스에 ==`@EnableMethodSecurity(prePostEnabled = true)`==를 붙여 `@PreAuthorize`가 동작할 수 있도록해야함
+- 로그인하지 않은 상태에서 `@PreAuthorize`가 붙은 컨트롤러 메서드(요청)이 실행되면 로그인 페이지로 이동하고, 로그인하면 스프링 시큐리티에 의해 다시 해당 메서드를 실행하기위한 페이지로 리다이렉트된다.
+```java
+@Configuration  
+@EnableWebSecurity  
+@EnableMethodSecurity(prePostEnabled = true)  
+public class SecurityConfig {
+	...
+}
+```

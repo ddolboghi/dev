@@ -85,6 +85,10 @@ public class ExampleController {
 - `sec:authorize`: 로그인 여부를 알려주는 속성
 	- `sec:authorize="isAnonymous()"`: 로그인되지 않은 경우에만 해당 html요소 표시
 	- `sec:authorize="isAuthenticated()"`: 로그인된 경우에만 해당 html요소 표시
+- `#authentication`: 스프링 시큐리티의 Authentication 인터페이스에 접근함
+	- Authentication은 Principal과 Serializable 인터페이스를 상속함
+	- `#authentication.getName()`: `Principal 객체.getName()`과 같은 값 리턴
+- `th:data-uri`: 자바스크립트에서 클릭 이벤트 발생시 `this.dataset.uri`와 같이 사용해 그 값을 얻을 수 있음
 
 ### form태그의 CSRF 방지
 

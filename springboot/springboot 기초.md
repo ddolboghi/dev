@@ -119,12 +119,12 @@ public @interface SpringBootApplication {
 ## @ComponentScan 
 : @Component를 가진 클래스들을 찾아 빈으로 등록함. @Component를 감싸는 annotation들도 포함.
 
-|@Component wrapper annotation| |
-|---|---|
-|@Configuration|설정 파일 등록|
-|@Repository|ORM 매핑
-|@Controller, @RestController|라우터
-|@Service|비즈니스 로직|
+| @Component wrapper annotation |                |
+| ----------------------------- | -------------- |
+| @Configuration                | 설정 파일 등록 |
+| @Controller, @RestController  | 라우터         |
+|@Service| 비즈니스 로직               |
+| @Repository                   | ORM 매핑       |
 
 ## @EnableAutoConfiguration
 : 스프링 부트 서버가 실행될때 스프링 부트의 메타 파일을 읽고 정의된 설정들을 자동으로 구성함. @EnableAutoConfiguration을 사용할때 spring.factories의 클래스들이 모두 자동 설정됨. 즉 *자동 설정으로 등록되는 빈을 읽고 등록함*
@@ -267,7 +267,7 @@ spring.devtools.livereload.enabled=true
 ```
 # lombok
 ## `@RequiredArgsConstructor`
-- 클래스의 `final`인스턴스 변수를 받는 생성자가 자동 생성됨
+- 클래스의 `final`인스턴스 변수를 받는 생성자 메서드가 자동 생성됨
 - ==의존성 주입 시 사용됨==
 ```java
 @RequiredArgsConstructor 
@@ -310,7 +310,15 @@ public class HelloLombok {
 - 템플릿 보낼때: `return "템플릿 이름"`
 - 리다이렉트`return "redirect:<URL>"`: 완전히 새로운 URL로 요청됨
 - 포워드`return "forword:<URL>"`: 기존 요청 값들이 유지된 상태로 URL 전환
-## 값이 변하는 URL 매핑
+## URL prefix
+- 메서드의 매핑 애너테이션에 중복되는 URL 프리픽스가 있는 경우 **클래스에 `@RequestMapping(<중복 URL>)`을 추가**하고 메서드에 있는 건 생략할 수 있음
+- 프리픽스한 컨트롤러 클래스는 항상 해당 URL 프리픽스로 시작해야함
+## `@PathVariable`
+- URL에 값을 담아 전달되는 요청 처리할때 사용
+- mapping애너테이션의 URL에 `{}`로 전달되는 값 명시해야함 
+- 메서드의 매개변수에 사용
+- URL에 지정한 변수 명과 `@PathVariable`이 적용된 매개변수 명은 동일해야함
+- 변수 명과 매개변수 명을 동일하게 맞추기 어렵다면 `@PathVariable(value=변수 명)`으로 지정해야함
 ```java
 @GetMapping(value = "/question/detail/{id}")  
 public String detail(Model model, @PathVariable("id") Integer id) {  
@@ -318,16 +326,27 @@ public String detail(Model model, @PathVariable("id") Integer id) {
 }
 ```
 - 매핑 애너테이션에서 사용한 {값}과 `@PathVariable("값")`이 같아야함 
-## URL prefix
-- 메서드의 매핑 애너테이션에 중복되는 URL 프리픽스가 있는 경우 클래스에 `@RequestMapping(<중복 URL>)`을 추가하고 메서드에 있는 건 생략할 수 있음
-- 프리픽스한 컨트롤러는 항상 해당 URL 프리픽스로 시작해야한다는 규칙이 생김 
-## HTTP 요청 파라미터 받기
-`@RequestParam`: HttpServletRequest의 getParameter와 동일한 기능
+ 
+## `@RequestParam`
+- URI에서 '?'의 우측에 **쿼리스트링**으로 전달된 값 받기(``/...?키=값&키=값...``)
+- mapping애너테이션의 URL에는 쿼리스트링 작성 안함
+- **쿼리스트링의 키는 변수의 이름이 됨**
+- 메서드의 매개변수에 사용
+- HttpServletRequest의 getParameter와 동일한 기능
 ### 기본 사용법
 `@RequestParam("가져올 데이터의 이름") [데이터 타입] [변수]`
+```java
+@GetMapping("/list")  
+public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {  
+    Page<Question> paging = this.questionService.getList(page);  
+    model.addAttribute("paging", paging);  
+    return "question_list";  
+}
+```
 - HTTP 파라미터 이름이 `변수` 이름과 같으면 @RequestParam의 value 생략 가능
 - **템플릿에서 보낸 파라미터 이름: html태그의 name 속성 값**
 - HTTP 파라미터가 String, int, Integer 등의 단순 타입이면 @RequestParam 생략 가능
+### 쿼리스트링에 어떤 값이 들어올지 모를때
 - `@RequestParam Map<...> ...`: Map에 key=파라미터, value=파라미터 값 저장됨
 - 동일한 이름의 파라미터 값이 2개 이상이면 MultiValueMap 사용
 ### 필수 파라미터 지정
@@ -336,7 +355,8 @@ public String detail(Model model, @PathVariable("id") Integer id) {
 ### 파라미터 기본값 설정
 `@RequestParam(defaultValue=[기본값])`: 요펑 파라미터 값이 없으면 기본값 지정됨
 - required=false일때 defaultValue 지정하면 int 타입 사용가능
-### 검증 Form 적용
+## 검증 Form 적용
+[[springboot validation]]
 - `th:object=${Form 객체}`가 있는 템플릿을 요청하는 메서드의 매개변수는 Form객체여야함
 > [!NOTE]
 > Form객체 처럼 매개변수로 바인딩한 객체는 Model 객체로 전달하지 않아도 템플릿에서 사용 가능함

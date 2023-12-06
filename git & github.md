@@ -29,7 +29,7 @@ sticker: lucide//github
 - **Docs** : 문서를 수정한 경우
 - **Style** : 코드 포맷 변경, 세미콜론 누락, 코드 수정이 없는경우
 - **Refactor** : 코드 리펙토링
-- **Test** : 테스트 코드. 리펙토링 테스트 코드를 추가했을 때
+- **Test** : 테스트 코드 작성, 리팩토링, 오류 수정
 - **Chore** : 빌드 업무 수정, 패키지 매니저 수정
 - **Design** : CSS 등 사용자가 UI 디자인을 변경했을 때
 - **Rename** : 파일명이나 폴더명을 수정하거나 옮기는 경우
@@ -53,6 +53,11 @@ refactor 예:
 - **Comment** : 필요한 주석 추가 및 변경
 [참고1](https://velog.io/@msung99/Git-Commit-Message-Convension)
 [참고2](https://overcome-the-limits.tistory.com/entry/%ED%98%91%EC%97%85-%ED%98%91%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-git-%EC%BB%A4%EB%B0%8B%EC%BB%A8%EB%B2%A4%EC%85%98-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)
+
+# 작업 브랜치 생성하기
+```
+git checkout -b ddolboghi
+```
 # git 브랜치 전략
 ---
 ## git flow

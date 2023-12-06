@@ -11,3 +11,4 @@ sticker: lucide//leaf
 [[JWT]]
 [[thymeleaf]]
 [[페이징]]
+[[수정과 삭제]]
