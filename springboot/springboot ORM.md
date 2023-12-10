@@ -185,6 +185,18 @@ public class Member {
 | columnDefinition | 컬럼 속성 정의. default값 줄 수 있음 |           |      
 | length           | 컬럼의 길이 설정                     |           |    
 - `columnDefinition = "TEXT"`: 컬럼의 글자 수를 제한할 수 없는 경우
+
+---
+## `@JoinColumn`
+[참고1](https://ksh-coding.tistory.com/105#%E2%9C%85%202-2-1.%20OneToOne%20%2F%20ManyToOne%20%3A%20Source%20Entity(Table)%EC%97%90%20FK%20%EC%9C%84%EC%B9%98-1)
+[참고2](https://hyeon9mak.github.io/omit-join-column-when-using-many-to-one/)
+정리하기
+
+---
+## `cascade`
+[참고](https://data-make.tistory.com/668)
+정리하기
+
 ---
 # Repository
 - 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들을 사용하기 위한 **인터페이스**
