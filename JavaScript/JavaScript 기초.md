@@ -60,7 +60,7 @@ console.log(`number: ${number}`);
 - 화살표 좌측에는 함수의 매개변수
 - 화살표 우측에는 코드 블록
 - 무조건 익명함수로만 사용 가능
-- 메서드나 생성자 함수로 사용 불가
+- 클래스의 메서드나 생성자로 사용 불가
 - 코드 블록 내부에서 바로 return하는 경우에는 블록과 return 생략 가능
 ```js
 const diff = (a, b) => a-b;
@@ -68,5 +68,39 @@ console.log(diff(3,2));
 ```
 
 **화살표 함수의 this 바인딩**
-- 화살표 함수에는 this라는 변수 자체가 존재하지 않기 때문에 그 상위 환경에서의 this 참조
-[화살표 함수 this](https://velog.io/@padoling/JavaScript-%ED%99%94%EC%82%B4%ED%91%9C-%ED%95%A8%EC%88%98%EC%99%80-this-%EB%B0%94%EC%9D%B8%EB%94%A9)
+- 화살표 함수에는 this라는 변수 자체가 존재하지 않기 때문에 화살표 함수가 선언될 시점의 상위 스코프의 this로 바인딩됨
+
+```js
+const cat = {
+  name: 'meow';
+  callName: () => console.log(this.name);
+}
+
+cat.callName();	// undefined
+```
+- 이 경우, `callName` 메소드의 `this`는 자신을 호출한 객체 `cat`이 아니라 함수 선언 시점의 상위 스코프인 전역객체를 가리킴
+- 일반 함수를 메서드로 호출해도 자신을 호출한 객체를 가리키므로 일반 함수를 사용해도 됨
+
+```js
+const button = document.getElementById('myButton');
+
+button.addEventListener('click', () => {
+  console.log(this);	// Window
+  this.innerHTML = 'clicked';
+});
+
+button.addEventListener('click', function() {
+   console.log(this);	// button 엘리먼트
+   this.innerHTML = 'clicked';
+});
+```
+- `addEventListener`의 콜백함수는 this에 해당 이벤트리스너가 호출된 엘리먼트가 바인딩되도록 정의되있음. 즉, this가 button을 가리킴
+- `addEventListener`안에 화살표 함수를 사용하면 기존 this의 바인딩 값이 사라지고 상위 스코프가 바인딩됨
+
+일반 함수의 this 바인딩
+- 함수를 호출했을때 그 함수 내부의 this는 지정되지 않음
+- this가 지정되지 않은 경우,  this는 자동으로 전역 객체를 가리킴
+- 함수 내부의 this는 전역 객체가 됨
+
+---
+# 객체
