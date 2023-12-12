@@ -79,7 +79,7 @@ const cat = {
 cat.callName();	// undefined
 ```
 - 이 경우, `callName` 메소드의 `this`는 자신을 호출한 객체 `cat`이 아니라 함수 선언 시점의 상위 스코프인 전역객체를 가리킴
-- 일반 함수를 메서드로 호출해도 자신을 호출한 객체를 가리키므로 일반 함수를 사용해도 됨
+- 일반 함수를 메서드로 호출해야 자신을 호출한 객체인 `cat`을 가리킴
 
 ```js
 const button = document.getElementById('myButton');
@@ -104,3 +104,226 @@ button.addEventListener('click', function() {
 
 ---
 # 객체
+```javascript
+const dog = {
+    name: '시월이',
+    age: 2,
+    '습관': '뛰기'
+};
+
+console.log(dog);
+console.log(dog.습관);
+```
+- `객체.entries`: `[[키, 값], [키, 값], [키, 값]]`형태의 배열로 변환
+- `객체.keys`: 키들만 모아서 배열로 변환
+- `객체.values`: 값들만 모아서 배열로 변환
+## 함수에서 객체를 파라미터로 받기
+### 템플릿 리터럴 이용하는 방법
+```javascript
+function print(dog) {
+    const text = `${dog.name}, ${dog.age}살`
+    console.log(text);
+}
+```
+### 객체 비구조화 할당(=객체 구조 분해)
+```javascript
+function print(dog) {
+    const {name, age} = dog; //객체에서 값들을 추출해 새로운 상수로 선언
+    const text = `${name}, ${age}살`
+    console.log(text);
+}
+```
+
+```js
+function print({name, age}) {
+    const text = `${name}, ${age}살`
+    console.log(text);
+}
+```
+## 객체 안에 있는 함수
+- 객체 안의 함수를 호출할때는 `객체.함수 정의한 속성명()`으로 괄호 반드시 붙여야함
+- 화살표 함수를 사용하면 this는 함수를 호출한 객체가 아닌 전역 객체를 가리키므로 일반함수를 사용해야 속한 객체를 가리킬 수 있음
+```js
+const dog = {
+    name: '시월이',
+    age: 2,
+    say: function() {
+        console.log(this.name);
+    }
+};
+
+dog.say();
+```
+## Getter & Setter
+```js
+const dog = {
+    name: '시월이',
+    age: 2,
+    say: function() {
+        console.log(this.name);
+    },
+    get getAge() {
+        return this.age;
+    },
+    set setAge(age) {
+        this.age = age;
+    }
+};
+
+console.log(dog.getAge); // 2
+dog.setAge = 10;
+console.log(dog.getAge); // 10
+```
+- Getter: `get`키워드 사용, js가 함수로 취급하지 않아 속성처럼 사용해야함
+- Setter: `set`키워드 사용, Getter와 마찬가지로 속성처럼 사용하며 값 지정
+## 객체 생성자
+- 함수를 통해 새로운 객체를 만들고 그 안에 넣고 싶은 값이나 함수들을 구현
+- 객체 생성 함수 이름은 **대문자**로 시작
+- `new`키워드로 객체 생성(자바랑 유사)
+```js
+function Animal(type, name, sound) {
+    this.type = type;
+    this.name = name;
+    this.sound = sound;
+    this.say = function() {
+        console.log(this.sound);
+    };
+}
+
+const dog = new Animal('시바견', '시월이', '멍멍');
+
+dog.say();
+```
+
+---
+# 프로토타입
+- 같은 객체 생성자 함수를 사용하는 경우, 특정 함수 또는 값을 재사용
+- `객체생성자함수명.protorype.[원하는 키] = 함수 또는 값`
+- ES6에서 class 문법이 추가되기 전에 class를 구현하기 위해 사용함
+# 클래스
+```js
+class Animal {
+    constructor(type, name, sound) {
+        this.type = type;
+        this.name = name;
+        this.sound = sound;
+    }
+    say() {
+        console.log(this.sound);
+    }
+}
+
+const dog = new Animal('시바견', '시월이', '멍ㅁ어');
+
+dog.say();
+```
+- 메서드: 클래스 내부에 선언한 함수 e.g. say()
+- 메서드는 자동으로 프로토타입으로 등록됨
+## 상속
+- `하위클래스 extends 상위클래스`
+- 하위클래스의 `constructor()`에는 하위클래스에서 사용할 속성을 지정
+- `super()`로 상위 클래스의 생성자를 모두 가져와야함
+- `super()`안에 `constructor()`에 지정한 속성이 있어야함
+- 상위클래스의 일부 속성만 하위클래스에서 지정하려면 `super()`로 가져온 일부 속성에 값을 지정하면 상위 클래스의 속성 값이 아닌 지정된 값으로 가져오게됨
+```js
+class Dog extends Animal {
+    constructor(name, sound) {
+        super('개', name, sound);
+    }
+}
+
+const dog2 = new Dog('백기', '왈');
+
+dog2.say();
+```
+
+---
+# 배열
+- `배열.length`: 배열의 길이
+- `배열[index]`: index에 해당하는 배열의 원소
+- `배열.push(값)`: 배열에 값 추가
+```js
+const arr = [1,2,3,'4'];
+console.log(arr[0]); // 1
+console.log(arr[arr.length-1]); // 4
+
+const objectArr = [{name:'a'}, {name:'b'}];
+console.log(objectArr[0]); // {name: 'a'}
+```
+## 배열 내장 함수
+- 파라미터로 전달된 콜백 함수는 동기식 콜백(synchronous callbacks)임
+
+| 함수                             | 설명                                                                                                                 |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `.forEach(콜백 함수)`            | 배열의 각 원소 반복                                                                                                  |
+| `.map(콜백 함수)`                | - 배열 안의 각 원소를 변환할때 사용<br> - 파라미터로 원소에 변화를 주는 함수를 사용해야함                            |
+| `.indexOf(원소)`                 | - 해당 원소의 인덱스 반환<br> - 객체나 배열이 아닌 원소만 가능                                                       |
+| `.findIndex(콜백 함수)`          | - 조건을 반환하는 콜백 함수를 넘겨줘야함<br>- 조건에 맞는 원소의 인덱스 반환<br>- 객체나 배열이 원소일때도 활용 가능 |
+| `.find(콜백 함수)`               | - 조건을 반환하는 콜백 함수를 넘겨줘야함<br>- 조건에 맞는 원소 자체를 반환                                           |
+| `.filter(콜백 함수)`             | - 조건을 반환하는 콜백 함수를 넘겨줘야함<br>- 조건에 **true**인 원소들을 추출해 새로운 배열을 만들어 반환            |
+| `.splice(startIndex, 지울 개수)` | - 배열에서 특정 항목 제거<br>- 원본 배열이 변경됨                                                                    |
+| `.slice(startIndex, endIndex)`   | - 배열을 자르고 반환<br>- endIndex-1번째까지 자름<br>- 원본 배열을 건드리지 않고 새로운 배열 생성됨                  |
+| `.shift()`                       | 원본 배열의 첫번째 원소 삭제하고 반환                                                                                |
+| `.pop()`                         | 원본 배열의 마지막 원소 삭제하고 반환                                                                                |
+| `.unshift(원소)`                 | 원본 배열의 맨 앞에 새 원소 추가                                                                                     |
+| `.concat(배열)`                  | - 여러 개의 배열을 하나의 배열로 합친 새로운 배열 반환<br>- 원본 배열에 영향X                                        |
+| `.join(delimiter)`               | - 배열의 원소들을 문자열 형태로 합침<br>- delimiter 지정 안하면 `,`로 구분됨                                         |
+| `.reduce(콜백 함수, 초기값)`|콜백함수에서 사용하는 파라미터:<br>- `accmulator`: 누적 값<br>- `current`: 현재 처리하고 있는 원소<br>- `index`: 현재 처리하고 있는 원소의 인덱스<br>- `array`: 현재 처리하고 있는 배열 자신<br>초기값은 `reduce`함수에서 사용하는 초기값임|
+
+```js
+const arr = [1,2,3,4,5];
+ arr.forEach(e => {
+     console.log(10*e);
+ })
+```
+
+```js
+const arr = [1,2,3,4,5];
+const square = arr.map(e => e * e);
+console.log(square);
+```
+
+```js
+let mean = arr.reduce((acccumulator, current, index, array) => {
+    if (index === array.length-1) {
+        return (acccumulator+current) / array.length;
+    }
+    return acccumulator + current;
+}, 0);
+
+console.log(mean);
+```
+
+---
+# 반복문
+- `continue`: 다음 루프 실행
+- `break`: 반복 종료
+## for - of 문
+- 자바의 for - each와 유사
+- 보통 배열을 반복할때는 for -of보다 배열 내장함수를 많이 사용함
+```js
+const arr = [1,2,3,4,5];
+for (let e of arr) {
+    console.log(e);
+}
+```
+## for - in 문
+- 객체의 key로 객체가 지닌 속성 돌때 사용
+```js
+const dog = {
+    name: '시월이',
+    age: 2,
+    length: 70
+}
+
+for (let key in dog) {
+    console.log(key, dog[key]);
+}
+```
+
+---
+# 콜백 함수
+- 전달 인자로 다른 함수에 전달되는 함수
+- 동기식 콜백(synchronous callbacks): 중간에 비동기 작업 없이 외부 함수 호출 직후에 호출
+- 비동기식 콜백(asynchronous callbacks): 동기 작업이 완료된 후 나중에 호출됨
+[참고](https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%9C%EB%B0%B1-%ED%95%A8%EC%88%98)
