@@ -281,6 +281,7 @@ dog2.say();
 - `배열.length`: 배열의 길이
 - `배열[index]`: index에 해당하는 배열의 원소
 - `배열.push(값)`: 배열에 값 추가
+- `배열.at(-index)`: 파이썬 처럼 음수 인덱싱 가능
 ```js
 const arr = [1,2,3,'4'];
 console.log(arr[0]); // 1
@@ -368,3 +369,7 @@ for (let key in dog) {
 - 동기식 콜백(synchronous callbacks): 중간에 비동기 작업 없이 외부 함수 호출 직후에 호출
 - 비동기식 콜백(asynchronous callbacks): 동기 작업이 완료된 후 나중에 호출됨
 [참고](https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%9C%EB%B0%B1-%ED%95%A8%EC%88%98)
+
+---
+# ES2022
+[참고](https://fe-developers.kakaoent.com/2022/220728-es2022/)
