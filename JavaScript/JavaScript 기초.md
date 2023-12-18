@@ -3,6 +3,7 @@
 > 2. `ctrl + alt + n` 으로 실행
 
 # 변수와 상수
+---
 - 변수: 바뀔수 있는 값, `let` 키워드 사용
 - 상수: 바뀔수 없는 값, `const` 키워드 사용
 - `let`과 `const`는 블록레벨의 스코프를 가지기때문에 다른 블록 범위에서는 변수명이 같아도 됨
@@ -17,15 +18,14 @@ console.log(friend); //null
 console.log(criminal); //undefined
 ```
 
----
 # scope
+---
 - 전역 스코프: 코드의 모든 범위에서 사용 가능
 - 함수 스코프: 함수 안에서만 사용 가능. `var`
 - 블록 스코프: if, for, switch등 특정 블록 내부에서만 사용 가능. `let`, `const`
 
-
----
 # hoisting
+---
 - 자바스크립트 엔진이 코드에서 모든 선언문을 찾아 먼저 실행해 필요한 메모리 공간을 미리 할당하는 것
 - `var`, `function`, `function*`, `class`로 선언한 모든 식별자는 호이스팅되어 먼저 선언됨
 - `var`은 호이스팅되어 undefined로 변수를 초기화해줌
@@ -35,6 +35,7 @@ console.log(criminal); //undefined
 	- `var`대신 `let`, `const`사용하기
 
 ## 함수 정의 방식에 따른 호이스팅
+---
 ```js
 // 1. 함수 선언문
 function add(a, b) {
@@ -55,32 +56,34 @@ const add = new Function('a', 'b', 'return a + b')
 - 함수 선언문은 호이스팅 적용됨
 - 함수 표현식(2,3,4)은 변수에 담겨 변수의 호이스팅 규칙을 따름
 
----
 # 연산자
+---
 - 산술 연산자: `+`, `-`, `*`, `/`, `%`
 	- `+`로 문자열 붙일 수 있음
 - `a++`: 해당 코드를 실행한 후에 1 더함
 - `++a`: 해당 코드를 실행하며 1 더함
 - 대입 연산자: `+=`, `-=`, `*=`, `/=`
 ## 논리 연산자
+---
 - `!`: NOT
 - `&&`: AND
 - `||`: OR
 - 연산 순서: NOT -> AND -> OR
 ## 비교 연산자
+---
 - `===`: 두 값과 타입이 모두 일치하는지 확인
 - `!==`: 두 값과 타입이 모두 불일치하는지 확인
 - `==`: 두 값이 일치하는지만 확인
 - `!=`: 두 값이 불일치하는지만 확인
 - `<`, `>`, `<=`, `>=`
 
----
 # 조건문
+---
 - `if`, `if else`, `else`
 - switch/case문은 자바와 똑같음
 
----
 # 템플릿 리터럴
+---
 - `+`를 사용하지 않고 문자열을 묶는 방법
 - **작은 따옴표가 아니라 역따옴표임을 주의!!**
 ```js
@@ -94,13 +97,14 @@ let number = 10;
 console.log(`number: ${number}`);
 ```
 
----
 # 화살표 함수
+---
 - 화살표 좌측에는 함수의 매개변수
 - 화살표 우측에는 코드 블록
 - 무조건 익명함수로만 사용 가능
 - 클래스의 메서드나 생성자로 사용 불가
 - 코드 블록 내부에서 바로 return하는 경우에는 블록과 return 생략 가능
+- 블록 사용하면 반드시 return문 써야함
 ```js
 const diff = (a, b) => a-b;
 console.log(diff(3,2));
@@ -108,7 +112,6 @@ console.log(diff(3,2));
 
 **화살표 함수의 this 바인딩**
 - 화살표 함수에는 this라는 변수 자체가 존재하지 않기 때문에 화살표 함수가 선언될 시점의 상위 스코프의 this로 바인딩됨
-
 ```js
 const cat = {
   name: 'meow';
@@ -141,8 +144,8 @@ button.addEventListener('click', function() {
 - this가 지정되지 않은 경우,  this는 자동으로 전역 객체를 가리킴
 - 함수 내부의 this는 전역 객체가 됨
 
----
 # 객체
+---
 ```javascript
 const dog = {
     name: '시월이',
@@ -157,7 +160,9 @@ console.log(dog.습관);
 - `객체.keys`: 키들만 모아서 배열로 변환
 - `객체.values`: 값들만 모아서 배열로 변환
 ## 함수에서 객체를 파라미터로 받기
+---
 ### 템플릿 리터럴 이용하는 방법
+---
 ```javascript
 function print(dog) {
     const text = `${dog.name}, ${dog.age}살`
@@ -165,6 +170,7 @@ function print(dog) {
 }
 ```
 ### 객체 비구조화 할당(=객체 구조 분해)
+---
 ```javascript
 function print(dog) {
     const {name, age} = dog; //객체에서 값들을 추출해 새로운 상수로 선언
@@ -180,6 +186,7 @@ function print({name, age}) {
 }
 ```
 ## 객체 안에 있는 함수
+---
 - 객체 안의 함수를 호출할때는 `객체.함수 정의한 속성명()`으로 괄호 반드시 붙여야함
 - 화살표 함수를 사용하면 this는 함수를 호출한 객체가 아닌 전역 객체를 가리키므로 일반함수를 사용해야 속한 객체를 가리킬 수 있음
 ```js
@@ -194,6 +201,7 @@ const dog = {
 dog.say();
 ```
 ## Getter & Setter
+---
 ```js
 const dog = {
     name: '시월이',
@@ -216,6 +224,7 @@ console.log(dog.getAge); // 10
 - Getter: `get`키워드 사용, js가 함수로 취급하지 않아 속성처럼 사용해야함
 - Setter: `set`키워드 사용, Getter와 마찬가지로 속성처럼 사용하며 값 지정
 ## 객체 생성자
+---
 - 함수를 통해 새로운 객체를 만들고 그 안에 넣고 싶은 값이나 함수들을 구현
 - 객체 생성 함수 이름은 **대문자**로 시작
 - `new`키워드로 객체 생성(자바랑 유사)
@@ -234,12 +243,14 @@ const dog = new Animal('시바견', '시월이', '멍멍');
 dog.say();
 ```
 
----
 # 프로토타입
+---
 - 같은 객체 생성자 함수를 사용하는 경우, 특정 함수 또는 값을 재사용
 - `객체생성자함수명.protorype.[원하는 키] = 함수 또는 값`
 - ES6에서 class 문법이 추가되기 전에 class를 구현하기 위해 사용함
+
 # 클래스
+---
 ```js
 class Animal {
     constructor(type, name, sound) {
@@ -259,6 +270,7 @@ dog.say();
 - 메서드: 클래스 내부에 선언한 함수 e.g. say()
 - 메서드는 자동으로 프로토타입으로 등록됨
 ## 상속
+---
 - `하위클래스 extends 상위클래스`
 - 하위클래스의 `constructor()`에는 하위클래스에서 사용할 속성을 지정
 - `super()`로 상위 클래스의 생성자를 모두 가져와야함
@@ -276,8 +288,8 @@ const dog2 = new Dog('백기', '왈');
 dog2.say();
 ```
 
----
 # 배열
+---
 - `배열.length`: 배열의 길이
 - `배열[index]`: index에 해당하는 배열의 원소
 - `배열.push(값)`: 배열에 값 추가
@@ -291,6 +303,7 @@ const objectArr = [{name:'a'}, {name:'b'}];
 console.log(objectArr[0]); // {name: 'a'}
 ```
 ## 배열 내장 함수
+---
 - 파라미터로 전달된 콜백 함수는 동기식 콜백(synchronous callbacks)임
 
 | 함수                             | 설명                                                                                                                                                                                                                                        |
@@ -311,7 +324,8 @@ console.log(objectArr[0]); // {name: 'a'}
 | `.reduce(콜백 함수, 초기값)`     | 콜백함수에서 사용하는 파라미터:<br>- `accmulator`: 누적 값<br>- `current`: 현재 처리하고 있는 원소<br>- `index`: 현재 처리하고 있는 원소의 인덱스<br>- `array`: 현재 처리하고 있는 배열 자신<br>초기값은 `reduce`함수에서 사용하는 초기값임 |
 | `.includes(원소)`|배열에 해당 원소가 포함돼있는지 true/false 반환|
 
-- `.reduce()`는 배열뿐만 아니라 iterator객체에 적용 가능! e.g. rest객체 등
+- `.reduce()`는 배열
+- 뿐만 아니라 iterator객체에 적용 가능! e.g. rest객체 등
 ```js
 const arr = [1,2,3,4,5];
  arr.forEach(e => {
@@ -336,11 +350,12 @@ let mean = arr.reduce((acccumulator, current, index, array) => {
 console.log(mean);
 ```
 
----
 # 반복문
+---
 - `continue`: 다음 루프 실행
 - `break`: 반복 종료
 ## for - of 문
+---
 - 자바의 for - each와 유사
 - 보통 배열을 반복할때는 for -of보다 배열 내장함수를 많이 사용함
 ```js
@@ -350,6 +365,7 @@ for (let e of arr) {
 }
 ```
 ## for - in 문
+---
 - 객체의 key로 객체가 지닌 속성 돌때 사용
 ```js
 const dog = {
@@ -363,13 +379,13 @@ for (let key in dog) {
 }
 ```
 
----
 # 콜백 함수
+---
 - 전달 인자로 다른 함수에 전달되는 함수
 - 동기식 콜백(synchronous callbacks): 중간에 비동기 작업 없이 외부 함수 호출 직후에 호출
 - 비동기식 콜백(asynchronous callbacks): 동기 작업이 완료된 후 나중에 호출됨
 [참고](https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%9C%EB%B0%B1-%ED%95%A8%EC%88%98)
 
----
 # ES2022
+---
 [참고](https://fe-developers.kakaoent.com/2022/220728-es2022/)
