@@ -49,7 +49,7 @@
 # React 프로젝트 생성하기
 ---
 1. 터미널에 `npx create-react-app [프로젝트 폴더명]`입력
-	- [[설치 관련]](프로젝트 생성시 오류 참고)
+	- [[설치 관련#React 프로젝트 생성시 오류]] 참고
 2. `npm start`입력후 http://localhost:3000/ 열리는지 확인
 
 # React 기본 사용법
