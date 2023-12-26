@@ -1,7 +1,6 @@
 # 삼항 연산자
 `조건 ? true일때 : false일때`
 
----
 # Truthy and Falsy
 - Truthy: ture처럼 여기는 값. falsy한 값을 제외한 모든 값
 - Falsy: false처럼 여기는 값. undefined, null, 0, ' ', NaN
@@ -12,7 +11,6 @@ const truthy = !!value;
 console.log(truthy); // false
 ```
 
----
 # 단축 평가 논리 계산법
 ## A && B 
 - A가 truthy한 값이면 결과는 B가 되고, A가 falsy한 값이면 결과는 A가 됨
@@ -45,7 +43,6 @@ const name = getName(namelessDog);
 console.log(name);
 ```
 
----
 # 함수의 파라미터 기본값 지정
 - 파라미터의 기본 값 지정
 - 화살표 함수에서도 사용할 수 있음
@@ -61,7 +58,6 @@ const calculateSqureArea = (d = 1) => d*d;
 console.log(calculateSqureArea())
 ```
 
----
 # 특정 값이 여러 값 중 하나인지 확인할때
 - 배열 내장함수 `includes()`활용하기
 ```js
@@ -71,7 +67,6 @@ console.log(isAnimal('개')); // true
 console.log(isAnimal('노트북')); // false
 ```
 
----
 # 값에 따라 다른 결과물을 반환해야 할때
 - 객체 활용
 ```js
@@ -106,7 +101,6 @@ function makeSound(animal) {
 makeSound('dog');
 ```
 
----
 # 비구조화 할당(구조분해) 문법
 - 객체 안에 있는 값을 추출해서 변수나 상수로 바로 선언할 수 있음
 - 비구조화 할당은 얕은 복사이므로 비구조화 할당후 값을 변경해도 원본값은 변하지 않음
@@ -178,7 +172,6 @@ const extracted = {
 console.log(extracted);
 ```
 
----
 # object-shorthand 문법
 - 객체를 선언할때, 객체의 key와 같은 이름으로 선언된 값이 존재하면 바로 매칭시켜줌
 ```js
@@ -194,7 +187,6 @@ console.log(info.name);
 console.log(info.age);
 ```
 
----
 # spread
 - `...`연산자를 사용해 객체나 배열을 펼침
 - 파이썬의 `*`와 유사함
@@ -217,7 +209,6 @@ const result = sum(...numbers);
 console.log(result);
 ```
 
----
 # rest
 - `...변수명`으로 사용
 - 객체, 배열, 함수의 파라미터에서 사용 가능
