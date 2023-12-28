@@ -42,6 +42,17 @@ function getName(animal) {
 const name = getName(namelessDog);
 console.log(name);
 ```
+## A ?? B
+- A가 null, undefined면 B 리턴하고, 그렇지 않으면 A 리턴
+- falsy 값은 코드에서 의미있는 값일때 `||`연산자 대신 사용
+- 우선순위: `||` > `??` > `? :`
+```js
+const foo = 'adsf' || 'default string';
+console.log(foo); // adsf
+
+const baz = null ?? 42;
+console.log(baz); // 42
+```
 
 # 함수의 파라미터 기본값 지정
 - 파라미터의 기본 값 지정

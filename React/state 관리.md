@@ -471,7 +471,8 @@ function tasksReducer(draft, action) {
 ```
 
 # Context
-- prop drilling: 많은 컴포넌트가 동일한 props를 필요로 하는 경우에 멀리 떨어진 컴포넌트가 포함되는 높이까지 "상태 끌어올리기"를 하면 props 전달이 장황하고 불편해지는 것
+> [!prop drilling]
+> 많은 컴포넌트가 동일한 props를 필요로 하는 경우에 멀리 떨어진 컴포넌트가 포함되는 높이까지 "상태 끌어올리기"를 하면 props 전달이 장황하고 불편해지는 것
 - context는 props 전달의 대체재임
 - context를 사용하면 부모 컴포넌트가 하위 트리의 모든 컴포넌트에게 일부 정보를 제공할수 있고 명시적으로 props를 전달하지 않아도 됨
 - context는 하위 트리가 필요로하는 모든 정보를 전달할 수 있음(e.g. 상태 값, 현재 색상 테마, 현재 로그인한 사용자 등)
