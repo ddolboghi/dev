@@ -1,6 +1,12 @@
 ---
 sticker: emoji//1f9d1-200d-1f4bb
 _links: []
+_filters: []
+_contexts: []
+_sort:
+  field: rank
+  asc: false
+  group: false
 ---
 [[컴퓨터 구조]]
 [[운영체제]]
