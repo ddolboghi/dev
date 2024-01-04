@@ -1,5 +1,5 @@
 # JPA
-- ORM(object-relational mapping)을 이용하면 데이터베이스의 값을 객체처럼 사용할 수 있음
+- ORM(object-relational mapping)을 이용하면 데이터베이스 테이블블을 객체처럼 사용할 수 있음
 - 자바의 표준은 JPA(java persistence API)
 - JPA는 인터페이스므로 이를 구현하는 ORM프레임워크를 선택해야함
 - hibernate : JPA를 구현하는 대표적인 ORM프레임워크. 내부적으로 JDBC API사용
@@ -110,6 +110,10 @@ public class EntityManagerTest {
 ### 지연 로딩(lazy)
 - 쿼리로 요청한 데이터를 한번에 다 가져오지 않고 필요할때 쿼리를 날려 데이터를 가져옴
   <>즉시 로딩(eager) : 조회할때 쿼리를 보내 연관된 모든 데이터를 가져옴
+- 대부분의 비즈니스 로직에서 연관 관계에 있는 객체를 함께 사용한다면 lazy 로딩시 select 쿼리가 2번 발생해 손해임
+- 하지만 **실무에서는 거의 lazy 로딩만 사용함**
+- 왜냐하면 eager 로딩시 예상치 못한 쿼리와 N+1 문제가 발생함
+- 자주 함께 사용하는 연관 관계의 객체들은 lazy 로딩과 함께 JPQL의 fetch join으로 해당 시점에 한 방 쿼리로 가져옴
 - 테스트 코드에서 여러 레포지토리 사용할때 하나의 레포지토리를 사용한 뒤에는 DB세션이 끊겨 **LazyInitializationException** 발생
   --> ==테스트 메서드에 `@Transactional` 붙여 메서드가 종료될때까지 DB세션 유지==
 - 실제 서버에서 JPA 프로그램들을 실행할 때는 DB세션이 종료되지 않음
@@ -198,6 +202,147 @@ public class Member {
 정리하기
 
 ---
+# JPA 연관 관계
+## 단방향 vs 양방향
+- JPA는 객체와 데이터베이스 테이블을 매핑시킴
+- 데이터베이스는 foreign key 하나로 양 쪽 테이블 조인이 가능해 단방향, 양방향 나눌 필요 없음
+- 반대로 객체는 참조용 필드가 있는 객체만 다른 객체를 참조할 수 있음
+- 두 객체 중 하나만 참조용 필드를 가지면 단방향 관계
+- 두 객체 모두가 각각 참조용 필드를 가지면 양방향 관계(엄밀하게는 두 객체가 단방향 참조를 각각 가져서 양방향 관계처럼 사용하고 말하는 것)
+- 비즈니스 로직에서 두 객체 사이의 참조가 필요한지 고민하고 어떤 연관 관계를 결정
+	- `Grammar.getGrammarBook()`처럼 참조가 필요하면 Grammar -> GrammarBook 단방향 참조
+	- `GrammarBook.getGrammar()`처럼 참조가 필요하면 GrammarBook -> Grammar 단방향 참조
+- 무조건 양방향 참조를 하면 하나의 엔티티가 수많은 엔티티와 불필요한 연관 관계를 맺어 복잡해짐
+- 기본적으로 단방향 매핑으로 하고 나중에 역방향으로 객체 탐색이 꼭 필요하다고 느낄 때 추가하기
+## 연관 관계의 주인
+- 양방향 매핑 시 두 객체들 중 연관 관계의 주인을 지정해야함
+- 연관 관계의 주인을 지정하는 것은 두 단방향 관계 중, FK를 비롯한 테이블 레코드를 저장, 수정, 삭제 등의 처리를 할 수 있는게 무엇인지 JPA에게 알려주는 것
+- **연관 관계의 주인이 아니면 조회만 가능함**
+- 연관 관계의 주인이 아닌 객체에서 `mappedBy`속성으로 주인을 지정해야함
+> [!TIP]
+>FK가 있는 곳을 연관 관계의 주인으로 정하면 됨 
+- 연관 관계의 주인을 지정하는 이유: 양방향 연관 관계의 관리 포인트가 두 개면 Grammar의 GrammarBook을 수정하려 할때, Grammar객체에서 `setGrammarBook()`같은 메서드로 수정할지 GrammarBook객체에서 `getGrammar()`같은 메서드로 수정할지 어떤 메서드에서 FK를 수정할지 JPA는 모름. 연관 관계의 주인을 Grammar로 지정하면 Grammar에서 GrammarBook을 수정할때만 FK를 수정하겠다고 JPA한테 알려줄 수 있음
+- 데이터베이스에서는 FK가 있는 테이블을 수정하려면 연관 관계의 주인만 수정하면 되지만, 각각 참조하는 객체 입장에서는 데이터 동기화를 위해 둘 다 수정해줘야 함
+## N : 1 단방향
+```java
+@Entity
+@Getter
+public class Grammar {
+	@Id  
+	@GeneratedValue(strategy = GenerationType.IDENTITY)  
+	private Long id;  
+	  
+	@Column  
+	private String sentence;  
+	  
+	@ManyToOne(optional = false)  
+	private GrammarBook grammarBook;
+}
+```
+```java
+@Getter  
+@Entity  
+@DynamicInsert  
+public class GrammarBook {  
+  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private Long id;  
+  
+    @Column  
+    @ColumnDefault(value = "일반")  
+    private String name;
+}
+```
+- N 쪽인 Grammar에서만 `@ManyToOne` 추가
+- 1 쪽인 GrammarBook은 Grammar객체를 참조하지 않음
+## N : 1 양방향
+```java
+@Getter  
+@Entity  
+public class Grammar {  
+  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private Long id;  
+  
+    @Column  
+    private String sentence;  
+  
+    @ManyToOne(optional = false)  
+    @JoinColumn(name = "GRAMMAR_BOOK_ID")  
+    private GrammarBook grammarBook;  
+}
+```
+```java
+@Getter  
+@Entity  
+@DynamicInsert  
+public class GrammarBook {  
+  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private Long id;  
+  
+    @Column  
+    @ColumnDefault(value = "일반")  
+    private String name;  
+  
+    @OneToMany(mappedBy = "grammarBook", cascade = CascadeType.ALL)  
+    private List<Grammar> grammars;  
+}
+```
+- N 쪽은 그대로
+- 1 쪽에 `@OneToMany`추가하고 `mappedBy`값은 N 쪽에서 `@ManyToOne` 지정한 필드명 똑같이!
+> [!tip]
+> `mappedBy`를 가진 엔티티는 매핑된 엔티티, 즉 연관 관계의 주인을 조회만 할 수 있음
+## 1 : N 단방향 (안쓴다고 생각해라)
+- 데이터베이스는 무조건 N 쪽에서 FK 관리하지만 1 : N은 1쪽에서 N쪽 객체를 조작함
+- 1쪽에서는 FK를 저장할 방법이 없어 조인 및 업데이트 쿼리가 발생함
+- 1 : N 양방향은 공식적으로 존재하지 않지만 구현할 수는 있음
+- **실무에서는 1 : N 거의 쓰지 않지만**, JPA 값 타입을 사용하는 것을 대신하여 사용하는 경우 등 일부 유용한 경우 있음
+```java
+@Getter  
+@Entity  
+public class Grammar {  
+  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private Long id;  
+  
+    @Column  
+    private String sentence;
+}
+```
+```java
+@Getter  
+@Entity  
+@DynamicInsert  
+public class GrammarBook {  
+  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private Long id;  
+  
+    @Column  
+    @ColumnDefault(value = "일반")  
+    private String name;  
+  
+    @OneToMany
+    @JoinColumn(name = "GRAMMAR_ID")  
+    private List<Grammar> grammars;  
+}
+```
+- 새로운 GrammarBook 레코드를 저장할때, GrammarBook은 Grammar테이블의 FK(GRAMMAR_ID)를 저장할 방법이 없기 때문에 조인 및 업데이트 쿼리(`.getGrammars().add(grammar)`)가 발생함
+## 1 : 1
+- 1 : 1 양방향은 똑같이 `@OneToOne` 설정하고 `mappedBy` 설정해서 읽기 전용으로 만들면 됨
+- 1 : 1 단방향은 주 테이블이 FK를 갖는 경우와 대상 테이블이 FK를 갖는 경우가 있음
+	- 주 테이블이 FK를 가지면 주 테이블을 조회할때마다 FK를 이용할 수 있으므로 성능상 이득임
+	- 대상 테이블이 FK를 가지면 후에 대상 테이블: 주 테이블 = N : 1로 바뀔때 유리함
+## N : N (실무 사용 금지)
+- 중간 테이블이 자동생성되 자기도 모르는 복잡한 조인 쿼리가 발생할 수 있음
+- 중간 테이블은 두 테이블의 FK만 저장되지만 다른 정보가 추가되는 경우가 많기 때문에 문제가 될 확률이 높음
+- N : N --> 1 : N, N : 1로 풀고 중간 테이블을 엔티티로 만드는게 추후 변경에도 유연하게 대처할 수 있음
 # Repository
 - 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들을 사용하기 위한 **인터페이스**
 - CRUD를 어떻게 처리할지 정의하는 계층
@@ -213,7 +358,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {}
 - DI에 의해 스프링이 자동으로 레포지토리 객체를 생성하며, 이때 프록시 패턴이 사용됨
 - 레포지토리 객체의 메서드가 실행될때 JPA가 해당 메서드명을 분석해 쿼리를 만들고 실행함
 - `레포지토리.count()`: 해당 레포지토리의 총 데이터 개수 반환
-## 메서드 네이밍 룰
+## JPA 메서드 네이밍 룰
 |키워드|예시|JPQL snippet|
 |---|---|---|
 |And|`findByLastnameAndFirstname`|… where x.lastname = ?1 and x.firstname = ?2|

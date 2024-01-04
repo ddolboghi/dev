@@ -21,7 +21,7 @@ SecurityContext : 접근 주체와 인증에 대한 정보를 담고 있는 객�
 |SessionManagementFilter|인증된 사용자와 관련된 세션 관련 작업 진행. e.g.세션 변조 방지 전략 설정, 유효하지 않은 세션 처리, 세션 생성 전략 설정 등|
 |ExceprionTranslationFilter|요청을 처리하는 중에 발생할 수 있는 예외를 위임하거나 전달|
 |FilterSecurityInterceptor|인가 관련 설정을 하는 접근 결정 관리자. AccessDecisionManager로 권한 부여 처리를 위임해 접근 제어 결정을 쉽게 해줌. 이 과정에서는 이미 사용자가 인증되어 있으므로 유효한 사용자인지도 알 수 있음.
-[SecutiryFilterChain 다이어그램](obsidian://open?vault=Obsidian%20Vault&file=spring%20secutiry%20-%20SecurityFilterChain.canvas)
+![[SecurityFilterChain.png]]
 ## 아이디와 패스워드 기반 폼 로그인 인증 절차
 1. 사용자가 폼에 아이디와 패스워드를 입력하면 HTTPServletRequest에 아이디와 비밀번호 정보가 전달됨. 이때 AuthenticationFilter가 넘어온 아이디와 비밀번호의 유효성 검사를 함
 2. 유효성 검사가 끝나면 실제 구현체인 UsenamePasswordAuthenticationToken을 만들어 넘겨줌

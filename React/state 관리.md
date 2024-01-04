@@ -75,7 +75,7 @@ export default function App() {
 	- 네트워크 응답 성공(컴퓨터 입력): success 상태로 전환
 	- 네트워크 응답 실패(컴퓨터 입력): error 상태와 해당하는 에러 메시지로 전환
 - 상태 흐름을 도식으로 그려보기
-![Form상태 흐름 도식](./form_state_flow.png)
+![Form상태 흐름 도식](form_state_flow.png)
 
 ## 3. `useState`를 사용해 상태를 메모리에 표현
 - 일단은 가능한 모든 상태를 지정하고 리팩토링하기

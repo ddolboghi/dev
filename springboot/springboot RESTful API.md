@@ -74,6 +74,8 @@ HTTP요청 시 @RequestBody가 붙은 객체에 응답 값이 매핑됨
 protected ObjectMapper objectMapper;
 ```
 자바 객체를 JSON데이터로 변환하는 직렬화(serialization) 또는 반대로 JSON데이터를 자바 객체로 변환하는 역직렬화(deserialization)할때 사용
+> [!info]
+> 스프링부트는 객체를 JSON으로 바꿔주는 라이브러리가 내장되있어 자동으로 JSON 형식으로 바꿔주기때문에 필요 없음
 
 # @PathVariable
 `import org.springframework.web.bind.annotation.*;`
