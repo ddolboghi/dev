@@ -140,3 +140,10 @@ class TestControllerTest {
 |500번대|`is5xxServerError()`|
 
 테스트 코드는 controller뿐만아니라 service도 작성하는게 좋음
+
+# Tip
+## `@Rollback`
+- 테스트 코드에서 insert, update, delete한 데이터들을 다시 rollback 시켜줌
+- `value = false` 지정시 rollback 안함(`@Commit`과 같음)
+## `@AutoConfigureTestDatabase`
+[참고](https://0soo.tistory.com/41)

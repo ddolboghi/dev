@@ -5,7 +5,7 @@ sticker: lucide//leaf
 [[springboot 기초]]
 [[springboot RESTful API]]
 [[springboot validation]]
-[[springboot ORM]]
+[[JPA]]
 [[springboot test]]
 [[spring security]]
 [[JWT]]

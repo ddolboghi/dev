@@ -141,11 +141,9 @@ public class Member {
 - Member객체를 JPA가 관리하는 엔티티로 지정해 실제 데이터베이스의 테이블과 매핑시킴
 - name속성으로 name값을 가진 테이블 이름과 매핑
 - name지정안하면 클래스 이름과 같은 테이블 매핑
----
 ### `@NoArgsConstructor(access = AccessLevel.PROTECTED)`
 - protected 기본 생성자(인자가 없음) 생성
 - **엔티티는 반드시 기본 생성자가 있어야함**
----
 ### `@Id`
 - 해당 속성을 테이블의 기본 키(primary key)로 지정
 ### `@GeneratedValue(strategy = GenerationType.[strategy])`
@@ -159,8 +157,6 @@ public class Member {
 |IDENTITY|기본키 생성을 데이터베이스에 위임(=AUTO_INCREMENT)|
 |SEQUENCE|데이터베이스 시퀀스를 사용해서 기본 키를 할당. 오라클에서 주로 사용|
 |TABLE|키 생성 테이블 사용|
-
----
 ### `@Column`
 - 엔티티 클래스의 속성은 `@Column`을 사용하지 않아도 테이블 컬럼으로 인식함
 - ==테이블 컬럼으로 인식하고 싶지 않은 경우에만 `@Transient`사용==
@@ -177,17 +173,17 @@ public class Member {
 | columnDefinition | 컬럼 속성 정의. default값 줄 수 있음 |           |      
 | length           | 컬럼의 길이 설정                     |           |    
 - `columnDefinition = "TEXT"`: 컬럼의 글자 수를 제한할 수 없는 경우
-
----
 ### `@JoinColumn`
 [참고1](https://ksh-coding.tistory.com/105#%E2%9C%85%202-2-1.%20OneToOne%20%2F%20ManyToOne%20%3A%20Source%20Entity(Table)%EC%97%90%20FK%20%EC%9C%84%EC%B9%98-1)
 [참고2](https://hyeon9mak.github.io/omit-join-column-when-using-many-to-one/)
 정리하기
-
----
-### `cascade`
-[참고](https://data-make.tistory.com/668)
-정리하기
+### `CascadeType`
+- `ALL`: 상위 엔티티에서 하위 엔터티로 모든 작업 전파, 아래 모든 작업 포함
+- `PERSIST`: 하위 엔티티까지 영속성 전달 = 상위 엔티티 저장하면 하위 엔티티도 저장
+- `MERGE`: 하위 엔티티까지 병합 수행 = 조회한 후 업데이트
+- `REMOVE`: 상위 엔티티 제거하면 연결된 하위 엔티티까지 제거
+- `REFRESH`: 데이터베이스로부터 인스턴스값 다시 읽어옴(새로 고침) --> 연결된 하위 엔티티까지 인스턴스값 새로고침
+- `DETACH`: 상위 엔티티를 영속성 컨텍스트에서 제거하면 연결된 하위 엔티티까지 제거
 
 ---
 # JPA 연관 관계
@@ -567,7 +563,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
 ## N + 1 문제 해결하기
 [참고](https://cobbybb.tistory.com/18)
 - 연관 관계에서 발생하는 이슈로, 연관 관계가 설정된 엔티티를 조회할 경우 조회된 데이터 개수(N)만큼 연관 관계의 조회 쿼리가 추가로 발생하는 것
-- `FetchType.LAZY`의 lazy 로딩으로 인해 발생되는 경우 fetch join으로 해결
+	- 즉시로딩(eager)은 JPQL로 전달되는 과정에서 N개의 쿼리가 추가로 발생
+	- 지연로딩(lazy)은 연관된 엔티티는 프록시로 캐싱해두고 이 엔티티를 사용할때 추가 쿼리 발생
 - 일반 join: 오직 JPQL에서 조회 주체가 되는 엔티티만 SELECT하여 영속화
 ```java
 @Query("SELECT distinct t FROM Team t join t.members") public List<Team> findAllWithMemberUsingJoin();
@@ -584,11 +581,110 @@ inner join
 		on team0_.id=members1_.team_id
 ```
 Team의 컬럼인 id와 name만 가져옴
+### fetch join
 - fetch join: 조회의 주체 엔티티뿐만 아니라 연관 엔티티도 SELECT하여 모두 영속화
-- FetchType이 lazy인 엔티티를 참조하더라도 이미 영속성 컨텍스트에 들어있기 때문에 따로 쿼리가 실행되지 않은 채로 N+1 문제 해결
-## 정렬
-## 페이징 처리
+- FetchType이 lazy인 엔티티를 참조하더라도 이미 영속성 컨텍스트에 들어있기 때문에 따로 쿼리가 실행되지 않은 채로 N+1 문제 해결​
+- 페이징에 fetch join 적용하면 인메모리에 모든 값을 조회해서 가져와 out of memory 발생할 수 있음
+#### `@Query`만 사용
+```java
+@Query("select gb from GrammarBook gb join fetch gb.grammars where gb.id = :id")  
+Optional<GrammarBook> findById(@Param("id") Long id);
+```
+실행 쿼리:
+```
+select
+        gb1_0.id,
+        g1_0.grammar_book_id,
+        g1_0.id,
+        g1_0.sentence,
+        gb1_0.name 
+    from
+        grammar_book gb1_0 
+    join
+        grammar g1_0 
+            on gb1_0.id=g1_0.grammar_book_id 
+    where
+        gb1_0.id=?
+```
+#### `@EntityGraph` 사용
+- JPQL로만 fetch join할때 하드 코딩 최소화
+- `type = EntityGraph.EntityGraphType.FETCH`: 내부적으로 fetch join 사용, EntityGraph에 명시한 attribute는 eager로 패치하고 나머지는 lazy로 패치
+- `type = EntityGraph.EntityGraphType.LOAD`: 내부적으로 일반 join 사용, 나머지 attribute는 엔티티에 명시한 fetch type이나 기본값으로 패치
+```java
+@EntityGraph(attributePaths = {"grammars"}, type = EntityGraph.EntityGraphType.FETCH)  
+@Query("select gb from GrammarBook gb join gb.grammars where gb.id = :id")  
+Optional<GrammarBook> findById(@Param("id") Long id);
+```
+실행 쿼리:
+```
+select
+        gb1_0.id,
+        g2_0.grammar_book_id,
+        g2_0.id,
+        g2_0.sentence,
+        gb1_0.name 
+    from
+        grammar_book gb1_0 
+    join
+        grammar g1_0 
+            on gb1_0.id=g1_0.grammar_book_id 
+    left join
+        grammar g2_0 
+            on gb1_0.id=g2_0.grammar_book_id 
+    where
+        gb1_0.id=?
+```
+--> 중복 join 발생 --> `@EntityGraph`에서 내부적으로 fetch join하는데 `@Query`에서 또 join하기 때문 --> 엔티티 1개만 조회 목적이므로 `@Query`에서 join 사용 안해도 됨
 
+수정된 코드
+```java
+@EntityGraph(attributePaths = {"grammars"}, type = EntityGraph.EntityGraphType.FETCH)  
+@Query("select gb from GrammarBook gb where gb.id = :id")  
+Optional<GrammarBook> findById(@Param("id") Long id);
+```
+실행 쿼리:
+```
+select
+        gb1_0.id,
+        g1_0.grammar_book_id,
+        g1_0.id,
+        g1_0.sentence,
+        gb1_0.name 
+    from
+        grammar_book gb1_0 
+    left join
+        grammar g1_0 
+            on gb1_0.id=g1_0.grammar_book_id 
+    where
+        gb1_0.id=?
+```
+--> left join된 결과에 대해 where 조건 적용되어 select
+
+> [!TIP] SQL 실행 순서
+> FROM → ON → JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → 
+> ORDER BY 
+> 
+> 연산 논리 순서: ( ) → NOT → AND → OR
+#### 둘 이상의 Collection fetch join(~ToMany) 불가능
+- `~ToMany`에서 컬렉션 join시 fetch join한다면 인메모리에서 모든 값을 다 가져옴
+  --> 컬렉션 join이 2개 이상이면 `MultipleBagFetchException` 발생
+- 엔티티의 `~ToMany` 필드를 Set 자료형으로 바꾸기(마찬가지로 인메모리에서 가져옴)
+- 필드에 `@BatchSize` 명시하기
+	- List 자료구조를 꼭 사용해야할때
+	- 2개 이상의 컬렉션 join & 페이징해야해서 out of memory 방지해야할때
+	- batch size에 fetch join 걸면 안됨(fetch join이 우선시되어 batch size가 무시되기 때문)
+> [!tip] fetch join 적용시 주의점
+> 1. lazy 로딩 기본
+> 2. 페이징 안하면 Set 자료구조로 `MultipleBagFetchException`방지
+> 3. 페이징할때는 `@BatchSize`사용
+## 정렬
+
+## 페이징 처리
+- **fetch join은 `~ToOne`관계에서만 사용**해야 모든 엔티티를 조회하지 않고 limit을 걸어 필요한 데이터만 가져옴
+- `~ToMany`관계에서 collection fetch join하면 Pagination에서 개수 판단하기 힘들어 인메모리에서 조정함 --> **fetch join 사용X**, 조회할 컬렉션 필드에 대해서 `@BatchSize(size=조회할 주체의 개수)`걸어 해결
+	- batch성 로딩 --> size만큼 한번에 가져와 지연로딩 방지
+	- batch size는 최적화된 데이터 사이즈를 알기 힘들어 일반적으로 100~1000 사용, 확실하게 모르면 안좋음
+- `@Fetch(FetchMode.SUBSELECT)`: `@BatchSize`와 같은 기능 but 한번에 **모든** 데이터 가져옴
 # JPA Auditing
 [참고](https://webcoding-start.tistory.com/53)
 `@EnableJpaAuditing`

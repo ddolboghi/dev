@@ -26,7 +26,6 @@
 - 행위는 HTTP메서드로 표현되야함
 - URI는 소문자로 작성
 - 파일의 확장자는 URI에 포함하지 않으며 HTTP에서 제공하는 Accept 헤더 사용하기
----
 # 기능 구현 순서
 1. Service 메서드 작성
 2. 요청에 따라 필요한 경우 엔티티 클래스에 메서드 작성(UPDATE 등)
@@ -34,37 +33,6 @@
 	- 클라이언트 요청으로부터 값을 받을때(CREATE, UPDATE) -> *xxxRequest.java*
 	- 응답으로 데이터베이스의 값을 줘야할때(READ) -> *xxxResponse.java*
 4. Controller 메서드 작성
----
-
-# @Builder
-lombok annotation
-생성자 위에 이걸 명시하면 객체 생성 시 빌더 패턴을 사용하기 위한 코드를 자동 생성해줌
-```java
-//빌더 패턴 사용하지 않을때
-new Article("abc", "def");
-
-//빌더 패턴을 사용할때
-public class Article {
-	...
-	@Builder
-	public Article(String title, String content) {
-		...
-	}
-}
-
-Article.builder()
-	.title("abc")
-	.content("def")
-	.build();
-```
-빌더 패턴으로 객체를 생성하면 어느 필드에 어떤 값이 들어가는지 쉽게 파악할 수 있어 코드의 가독성을 높임
-# @RequiredArgsConstructor
-lombok annotation
-final이나 @NotNull이 붙은 필드로 생성자를 만들어줌
-# ResponseEntity클래스
-`import org.springframework.http.ResponseEntity;`
-???
-
 # @RequestBody
 spring annotation
 HTTP요청 시 @RequestBody가 붙은 객체에 응답 값이 매핑됨
@@ -80,9 +48,4 @@ protected ObjectMapper objectMapper;
 # @PathVariable
 `import org.springframework.web.bind.annotation.*;`
 이게 붙은 변수는 URL에서 { }에 있는 값을 변수에 저장함
-# @Transactional
-매칭한 메서드를 하나의 트랜잭션으로 묶는 역할
-```
-💡트랜잭션은 데이터베이스의 데이터를 바꾸기 위해 묶은 작업 단위
-트랜잭션으로 묶은 작업들은 한 단위로 실행되므로 중간에 실패하면 트랜잭션의 처음 상태로 모두 되돌리면 됨
-```
+

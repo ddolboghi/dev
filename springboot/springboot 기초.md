@@ -377,16 +377,34 @@ public class PostController {
 ```
 ## `ResponseEntity`활용하기
 - `RequestEntity`와 `ResponseEntity`는 `HttpEntity`를 상속받아 구현한 클래스
-- `ResponseEntity`는 서버에 들어온 요청에 대해 응답 데이터를 구성할 수 있게 해줌(응답 코드 변경, Header, Body 구성 등)
+- `ResponseEntity`는 서버로 들어온 요청에 대한 응답을 직접 구성할 수 있게 해줌(HTTP 상태 코드, Header, Body)
 - REST 컨트롤러 메서드의 리턴타입에 적용
 - 해당 메서드의 리턴 값은 JSON임(REST 컨트롤러 애너테이션을 적용했기 때문)
+> [!info] HTTP header vs HTTP body
+> HTTP header: 요청/응답에 대한 요구사항이 담김
+> HTTP body: 요청/응답에 대한 내용
+> HTTP Response Format: HTTP 상태 코드 + header(응답 메시지) + body(응답 데이터)
+
+> [!info] HTTP Status
+> - 1xx: informational
+> - 2xx: successes
+> - 3xx: redirection
+> - 4xx: client error
+> - 5xx: server error
+> - [참고](https://developer.mozilla.org/ko/docs/Web/HTTP/Status)
+
+### 주의사항
+- `ResponseEntity`는 제네릭 타입으로 컴파일 전에 미리 데이터 타입을 명시할 수 있음
+- 제네릭 타입에 와일드 카드를 적용하면 디버깅, 유지보수 어려워짐
+- **요청에 대해 리턴 받는 body가 없을때, 즉 void를 처리할때** 와일드 카드 대신 `Object`로 **데이터 타입 명시**하기
+
 ```java
 @RestController
 @RequestMapping("/api")
 public class PostController {
 	...
 	
-	PutMapping(value = "/member" ) 
+	@PutMapping(value = "/member" ) 
 	public ResponseEntity<MemberDto> postMemberDto(@RequestBody MemberDto memberDto) {
 		return ResponseEntity
 		.status(HpptStatus.ACCEPTED)
@@ -401,7 +419,7 @@ public class PostController {
 > [!NOTE]
 > Form객체 처럼 매개변수로 바인딩한 객체는 Model 객체로 전달하지 않아도 템플릿에서 사용 가능함
 
-# 서비스
+# 서비스층
 - 비즈니스 로직 처리
 - 서비스는 컨트롤러와 레포리토리의 중간자로서 엔티티 객체와 DTO객체를 서로 변환해 양방향에 전달하는 역할
 - 스프링 부트는 `@Service`(`import org.springframework.stereotype.Service`)가 붙은 클래스를 서비스로 인식함
