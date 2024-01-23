@@ -35,11 +35,11 @@ sticker: emoji//1f4a1
 [참고](https://support.kmong.com/hc/ko/articles/14656446751129-QA%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83-%EC%9C%A0%ED%98%95-%ED%8A%B9%EC%A7%95-%EC%97%AD%ED%95%A0-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0)
 
 # CI/CD
-Continuous Integration(지속적인 통합)
+## Continuous Integration(지속적인 통합)
 * 새로운 코드 변경 사항이 정기적으로 빌드 및 테스트되어 저장소에 통합
-Continuous Delivery(지속적인 배포)
-* 변경된 코드가 실제 프로덕션 환경까지 반영되는 것
-# 디렉터리 계층도 작성
+## Continuous Delivery(지속적인 배포)
+* 변경된 코드가 **실제 프로덕션 환경에 반영**되는 것
+# 디렉터리 계층도 얻는 법
 1. CMD창을 연다
 2. 파일 트리를 만들 위치로 이동한다. (예: C:\repository\TEST_PROJECT\src\views)
 3. `tree /F | clip` 명령어를 입력한다.
@@ -50,7 +50,6 @@ Continuous Delivery(지속적인 배포)
 2. 상단 메뉴 > Git > GitHub > Share project on github
 3. 레포지토리 이름 입력하고 commit, push까지 진행
 4. github에 들어가면 레포지토리 생성되있음
-
 # predicate
 - 인수로 값을 받아 true나 false를 반환하는 함수
 ```java
@@ -105,3 +104,18 @@ String name = optional.orElse("anonymous"); // 값이 없다면 "anonymous" 를 
 - `orElseGet()`
 	- 파라미터로 함수형 인터페이스(함수)를 받음
 	- 값이 미리 존재하지 않는 거의 대부분의 경우에 orElseGet을 사용하면 됨
+
+# URI vs URL
+![[Pasted image 20240124003719.png]]
+- URI = 식별자 (e.g. naver.com, https://www.naver.com)
+- URL = 식별자 + 위치 (e.g. https://www.naver.com)
+- URL은 프로토콜과 결합한 형태
+- URI는 그 자체로 이름이 될 수 있음
+
+![[Pasted image 20240124004204.png]]
+- Scheme: 리소스에 접근하는데 사용할 프로토콜
+- Host: 접근할 서버의 호스트 명
+- Path: 접근할 서버의 경로에 대한 상세 정보
+- URL은 특정 서버에 있는 웹문서를 가리킴
+- URN은 웹 문서의 물리적인 위치와 상관없이 웹 문서 자체를 나타냄
+- 개별 자원에 식별자를 부여하면 해당 정보에 대한 URN은 일정하게 유지되며 리소스 위치, 프로토콜, 호스트와 관계없이 위치 파악 가능
