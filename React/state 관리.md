@@ -332,69 +332,57 @@ function MyButton({ count, onClick }) {
 - 상태를 상위 컴포넌트로 올리고 각 하위 컴포넌트의 상태 값을 부모 컴포넌트에 저장하기 --> 하위 컴포넌트가 제거되어도 상위 컴포넌트에 값이 저장되있음
 - 브라우저의 localStorage 이용하기
 
-# Reducer
+# useReducer
 - 컴포넌트에서 여러 이벤트 핸들러에 걸쳐 상태 업데이트가 분산되는 경우 컴포넌트 외부에 모든 상태 업데이트 로직을 담은 단일 함수인 reducer 만들기
 
 ## `useState`에서 `useReducer`로 마이그레이션하기
-### 1. "상태 설정 로직"을 "액션을 디스패치"하는 방식으로 전환하기
-- 액션: 디스패치 함수에 전달하는 객체
-- 액션 객체는 어떤 형태든지 가질수 있지만 관례적으로 type필드를 넣음
-- type필드: **발생한 일을 설명하는 문자열 타입**
-- 각 액션은 사용자 상호작용 하나를 설명해야 함
+### 1. "상태 설정 로직"을 "액션 디스패치" 방식으로 전환하기
+- `action`: `dispatch` 함수에 전달하는 객체로, type값과 기존 state값, 그외 전달 받을 값들을 넣어야함
+	- type필드: **어떤 액션인지 설명하는 문자열**로, 각 액션은 사용자 상호작용 하나를 설명해야 함
 1. 이벤트 핸들러의 상태 setter를 사용하는 상태 설정 로직 삭제하기
-2. 디스패치 함수에 액션 객체 전달하기
+2. `dispatch`함수에 액션 객체 전달하기, **이때 반드시 type 지정해야함**
 ```jsx
-let nextId = 3;
-
 function handleAddTask(text) { 
 	setTasks([
 		...tasks, 
 		{ id: nextId++, text: text, done: false, }, 
 	]); 
 }
-...
+```
 
+```jsx
 //액션 디스패치 방식으로 전환
+const [state, dispatch] = useReducer(reducer, {
+    id: null,
+    text: null
+  }); //초기 
 function handleAddTask(text) {
 	dispatch({
 		type: 'added', 
 		id: nextId++, 
 		text: text, 
+		done: false,
 	}); 
-}
-
-function handleChangeTask(task) {
-	dispatch({
-	  type: "changed",
-	  task: task,
-	});
-}
-  
-function handleDeleteTask(taskId) {
-	dispatch({
-	  type: "deleted",
-	  id: taskId,
-	});
 }
 ```
 ### 2. Reducer함수 작성하기
 - Reducer함수는 **현재 상태**와 **액션 객체** 두가지 인수를 받고 **다음 상태** 반환
 - Reducer에서 반환한 값을 리액트가 상태로 설정함
 - 모든 상태 설정 로직을 Reducer함수로 마이그레이션하기
+- **Reducer함수는 컴포넌트 함수 외부에 작성**하므로 원한다면 다른 파일로 이동할 수 있음
 - 관례적으로 Reducer함수 내부 로직은 **switch문** 사용
 > [!Reducer함수 내부 로직 작성시 주의 사항]
 > - 각 case문이 return으로 끝나야 의도치 않게 다음 case문을 실행하지 않음
 > - 각 type의 case문에 전달된 action은 그 action을 가진 디스패치 함수에 속하기 때문에 다른 디스패치 함수의 action객체의 필드는 사용 못함
 > - Reducer는 렌더링 중에 실행되므로 **순수 함수**로 작성해야함([[React 기초#컴포넌트의 순수성 유지하기]])
-- Reducer함수는 원한다면 다른 파일로 이동할 수 있음
+
 ```jsx
 function yourReducer(state, action) {
 	//리액트에서 설정할 다음 상태 반환
 }
 ```
 - Reducer함수는 배열의 `reduce()`메서드와 동일한 개념임
-	- `reduce()`는 지금까지의 결과와 현재 항목을 받아 다음 결과 반환
-	- Reducer함수는 현재 상태와 액션을 받아 다음 상태 반환
+- `switch`에 `action.type`을 넘겨주고 각 `case`는 지정한 각 `action.type`에 따라 수행할 작업 정의
 ```jsx
 function tasksReducer(tasks, action) {
   switch (action.type) {
@@ -414,7 +402,7 @@ function tasksReducer(tasks, action) {
       return tasks.filter((t) => t.id !== action.id);
     }
     default: {
-      throw Error("Unknown action: " + action.type);//type은 모든 액션에서 가진 공통 속성이므로 default문에서 사용 가능
+      throw new Error("Unknown action: " + action.type);//type은 모든 액션에서 가진 공통 속성이므로 default문에서 사용 가능
     }
   }
 }
@@ -430,7 +418,7 @@ const [tasks, setTasks] = useState(initialTasks);
 //-->
 const [tsaks, dispatch] = useReducer(tasksReducer, initialTasks);
 ```
-- 이벤트 헨들러는 액션을 디스패치해 어떤 일이 발생했는지 지정하며, Reducer함수는 상태가 어떻게 업데이트되는지 결정함함
+- 이벤트 헨들러는 액션을 디스패치해 어떤 일이 발생했는지 지정하며, Reducer함수는 상태가 어떻게 업데이트되는지 결정함
 
 ## `useState`vs `useReducer`
 - 코드 양: 많은 이벤트 핸들러에서 상태를 유사한 방식으로 수정하는 경우, `useReducer`를 사용하면 코드 양을 줄일 수 있음
