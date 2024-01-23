@@ -379,7 +379,7 @@ public class PostController {
 - `RequestEntity`와 `ResponseEntity`는 `HttpEntity`를 상속받아 구현한 클래스
 - `ResponseEntity`는 서버로 들어온 요청에 대한 응답을 직접 구성할 수 있게 해줌(HTTP 상태 코드, Header, Body)
 - REST 컨트롤러 메서드의 리턴타입에 적용
-- 해당 메서드의 리턴 값은 JSON임(REST 컨트롤러 애너테이션을 적용했기 때문)
+- 해당 메서드의 리턴 값은 JSON(REST 컨트롤러 애너테이션을 적용했기 때문)
 > [!info] HTTP header vs HTTP body
 > HTTP header: 요청/응답에 대한 요구사항이 담김
 > HTTP body: 요청/응답에 대한 내용
