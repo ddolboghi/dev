@@ -2,6 +2,10 @@
 > 1. coderunner 확장팩 설치
 > 2. `ctrl + alt + n` 으로 실행
 
+# `parseInt(string, radix)`
+- _@param_ `string` -- 숫자로 변환할 문자열
+- _@param_ `radix` -- 선택사항, string 문자열을 읽을 진법, 2~36의 수
+- _@return_ `int` -- string을 정수로 변환한 값 리턴, string의 첫 글자를 정수로 변경할 수 없으면 NaN(Not a Number)리턴
 # 변수와 상수
 - 변수: 바뀔수 있는 값, `let` 키워드 사용
 - 상수: 바뀔수 없는 값, `const` 키워드 사용

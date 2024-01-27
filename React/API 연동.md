@@ -3,15 +3,6 @@
 ```
 yarn add axios
 ```
-- REST API
-```js
-import axios from 'axios'
-axios.get('/users/1');
-axios.post('/users', {
-	username: 'siwoli',
-	name: 'jjy'
-})
-```
 - `useEffect`에 첫번째 파라미터로 등록하는 함수에는 `async` 사용 불가 -> 내부에 `async`사용하는 새로운 함수 선언
 ```jsx
 function Users() {
@@ -406,3 +397,49 @@ const MyComponent = () => {
 - 로그인된 사용자 정보 같이 다양한 컴포넌트에서 필요한 데이터는 context 사용하면 편함
 [context + 비동기 API 연동 정석](https://codesandbox.io/p/sandbox/api-integrate-gtpcb?file=%2Fsrc%2FUsersContext.js%3A121%2C4)
 [위의 코드 리팩토링]()(https://codesandbox.io/s/api-integrate-c3rli?fontsize=14)
+# Fake API 서버 만들기
+1. 리액트 프로젝트 디렉터리(src밖)에 data.json 파일 작성
+```json
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "리덕스 미들웨어를 배워봅시다",
+      "body": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠."
+    },
+    {
+      "id": 2,
+      "title": "redux-thunk를 사용해봅시다",
+      "body": "redux-thunk를 사용해서 비동기 작업을 처리해봅시다!"
+    },
+    {
+      "id": 3,
+      "title": "redux-saga도 사용해봅시다",
+      "body": "나중엔 redux-saga를 사용해서 비동기 작업을 처리하는 방법도 배워볼 거예요."
+    }
+  ]
+}
+```
+2. 터미널에서 서버 열기(처음 실행하면 json-server 자동으로 설치함)
+```
+npx json-server ./data.json --port 4000
+```
+3. 터미널에 뜨는 로그 보고 API 사용하기
+# CORS와 웹팩 개발서버 Proxy
+- 백엔드에서 프론트 도메인을 허용하기 위해 CORS 허용할 필요없이 웹팩 개발서버에서 제공하는 Proxy 기능 이용하면 됨
+- CRA로 만든 리액트 프로젝트에서는 package.json에 `"proxy"`값만 설정하면 됨
+```json
+  ...
+  },
+  "proxy": "http://localhost:4000"
+}
+```
+--> API 요청시 요청하는 주소의 도메인 생략 가능 --> 현재 페이지의 도메인을 가리키게됨
+e.g. http://localhost:4000/posts --> /posts 로 요청
+
+- 리액트로 만든 서비스의 도메인과 API의 도메인이 다르다면 axios의 글로번 baseURL설정하기
+- 개발환경에서는 프록시 서버쪽으로 요청하고, 프로덕션에서는 실제 API서버로 요청하면 됨
+```js
+//index.js
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/' : 'https://api.velog.io/';
+```

@@ -16,4 +16,5 @@ _sort:
 [[API 연동]]
 [[react-router]]
 [[redux]]
+[[redux middleware]]
 [[서버 & 클라이언트 컴포넌트]]
