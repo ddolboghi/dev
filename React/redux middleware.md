@@ -262,44 +262,7 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: { //동기 액션 처리
-    getPosts(state, action) {
-      return {
-        ...state,
-        posts: reducerUtils.loading(),
-      };
-    },
-    getPostsSuccess(state, action) {
-      return {
-        ...state,
-        posts: reducerUtils.success(action.payload),
-      };
-    },
-    getPostsError(state, action) {
-      return {
-        ...state,
-        posts: reducerUtils.error(action.error),
-      };
-    },
-    getPost(state, action) {
-      return {
-        ...state,
-        post: reducerUtils.loading(),
-      };
-    },
-    getPostSuccess(state, action) {
-      return {
-        ...state,
-        post: reducerUtils.success(action.payload),
-      };
-    },
-    getPostError(state, action) {
-      return {
-        ...state,
-        post: reducerUtils.error(action.error),
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => { //비동기 액션 처리
     builder
       .addCase(fetchPosts.pending, (state, action) => {
@@ -323,14 +286,7 @@ const postsSlice = createSlice({
   },
 });
   
-export const {
-  getPosts,
-  getPostsSuccess,
-  getPostsError,
-  getPost,
-  getPostSuccess,
-  getPostError,
-} = postsSlice.actions;
+export const {} = postsSlice.actions;
 export default postsSlice.reducer;
 ```
 ### 비동기 액션 사용법
@@ -460,3 +416,255 @@ const PostContainer = ({ postId }) => {
 export default PostContainer;
 ```
 # redux-saga
+```
+yarn add redux-saga
+```
+- 사용하는 이유: redux는 무조건 동기적으로 dispatch가 이뤄지고, dispatch를 여러번하면 컴포넌트 파일에서 dispatch 로직을 2번이나 써야해서 불편함 --> redux-saga는 비동기적으로 dispatch 사용(`put`)하고, 내부 메서드를 활용해 사용자의 부주의로 동일한 API를 여러번 요청할 경우 가장 최근 또는 가장 마지막 요청의 응답만 받도록 할 수 있음(`thuttle`, `debounce`)
+- **redux-saga는 redux toolkit에서 제공하지 않아 store에 미들웨어로 등록해야함, 이때 logger는 마지막에 와야함**
+- 액션을 모니터링하고 있다가, 특정 액션이 발생하면 이에 따라 특정 작업을 하는 용도로 사용
+	- 비동기 작업 시 기존 요청 취소
+	- 특정 액션 발생시 다른 액션이 디스패치되게 하거나, js 코드 실행
+	- 웹소켓 사용 시 Channel 기능을 사용해 효율적 코드 관리
+	- API 요청 실패시 재요청 작업
+	- 다양한 까다로운 비동기 작업 처리
+- Generator 문법 사용
+
+## Generator 문법
+- 함수를 작성할때 함수를 특정 구간에 멈춰놓거나, 원할 때 다시 돌아가게 하거나, 결과값을 여러 번 반환할 수도 있음
+- generator함수를 만들때는 `function*` 키워드 사용
+- generator함수를 호출하면 generator 객체가 반환됨
+- `generator함수.next()`를 호출해야 코드 실행되고, `yield` 값을 반환하고 코드 흐름 멈춤
+- 이후 `generator함수.next()`를 다시 호출하면 흐름이 이어서 다시 시작됨
+- `generator함수.next(인자)`를 호출하면 generator함수 내부에서 `인자` 사용 가능
+- generator함수는 한번 사용하고 나면 재사용 불가?
+```js
+function* sumGenerator() {
+    console.log('sumGenerator이 시작됐습니다.');
+    let a = yield;
+    console.log('a값을 받았습니다.');
+    let b = yield;
+    console.log('b값을 받았습니다.');
+    yield a + b;
+}
+
+const sum = sumGenerator();
+sum.next(); //'sumGenerator이 시작됐습니다.' 출력, {value: undefined, done: false}
+sum.next(1); //'a값을 받았습니다.' 출력, {value: undefined, done: false}
+sum.next(2); //'b값을 받았습니다.' 출력, {value: 3, done: false}
+sum.next(); //{value: undefined, done: true}
+```
+
+- redux-saga에서 모니터링이 이뤄지는 원리: 멈추지 않고 돌아가는 함수가 특정 액션 발생을 감지하면 그에 대한 작업을 수행함
+```js
+function* watchGenerator() {
+    console.log("monitoring start");
+    while (true) {
+        const action = yield;
+        if (action.type === true) {
+            console.log('state is true');
+        }
+        if (action.type == false) {
+            console.log('state is false');
+        }
+    }
+}
+
+const watch = watchGenerator();
+
+watch.next(); //'monitoring start' 출력
+watch.next({ type: true }); //'state is true' 출력
+watch.next({ type: false }); //'state is false' 출력
+```
+## redux-saga 사용법 with redux-toolkit
+- redux toolkit이랑 같이 사용하는 방법 참고([공식 문서](https://redux-saga.js.org/docs/introduction/GettingStarted), [티스토리](https://shinejaram.tistory.com/76))
+- 아래 예시의 디렉터리 구조는 자유롭게 변경 가능
+- redux-saga는 특정 액션을 모니터링하다가 해당 액션이 주어지면 이에 대한 generator함수를 실행해 비동기 작업 처리 후 액션을 디스패치함
+
+1. 기존 reducer파일에 작성한 비동기 액션 작업을 지우고 createSlice의 reducers에 saga를 통해 비동기로 실행할 액션 추가(이미 있는 동기 액션은 saga에서 사용만 하면 됨)
+```js
+// modules/posts.js
+import { createSlice } from "@reduxjs/toolkit";
+import { reducerUtils } from "../lib/asyncUtils";
+
+export const goToHome = (navigate) => (dispatch, getState) => {
+  navigate("/");
+};
+  
+const initialState = {
+  posts: reducerUtils.initial(),
+  post: reducerUtils.initial(),
+};
+  
+const postsSlice = createSlice({
+  name: "posts",
+  initialState,
+  reducers: {
+    //thunk 사용 시 필요 없음==========
+    getPosts(state) {
+      return {
+        ...state,
+        posts: reducerUtils.loading(),
+      };
+    },
+    getPostsSuccess(state, action) {
+      return {
+        ...state,
+        posts: reducerUtils.success(action.payload),
+      };
+    },
+    getPostsError(state, action) {
+      return {
+        ...state,
+        posts: reducerUtils.error(action.error),
+      };
+    },
+    getPost(state) {
+      return {
+        ...state,
+        post: reducerUtils.loading(),
+      };
+    },
+    getPostSuccess(state, action) {
+      return {
+        ...state,
+        post: reducerUtils.success(action.payload),
+      };
+    },
+    getPostError(state, action) {
+      return {
+        ...state,
+        post: reducerUtils.error(action.error),
+      };
+    },
+    //thunk 사용 시 필요 없음============
+    clearPost(state) {
+      return {
+        ...state,
+        post: reducerUtils.initial(),
+      };
+    },
+});
+  
+export const {getPosts, getPostsSuccess, getPostsError, getPost, getPostSuccess, getPostError, clearPost} = postsSlice.actions;
+export default postsSlice.reducer;
+```
+
+2. {액션명}Saga.js 파일에 generator 문법으로 재작성하기
+```js
+// modules/postsSaga.js
+import * as postsAPI from "../api/posts";
+import { call, put, takeEvery } from "redux-saga/effects";
+  
+function* fetchPostsSaga() {
+  try {
+    const posts = yield call(postsAPI.getPosts);
+    yield put({ type: "posts/getPostsSuccess", payload: posts });
+  } catch (error) {
+    yield put({ type: "posts/getPostsError", error: true, payload: error });
+  }
+}
+  
+function* fetchPostSaga(action) {
+  try {
+    const post = yield call(postsAPI.getPostById, action.payload);
+    yield put({ type: "posts/getPostSuccess", payload: post });
+  } catch (error) {
+    yiel put({ type: "posts/getPostError", error: true, payload: error });
+  }
+}
+  
+function* postsSaga() {
+  yield takeEvery("posts/getPosts", fetchPostsSaga);
+  yield takeEvery("posts/getPost", fetchPostSaga);
+}
+  
+export default postsSaga;
+```
+
+3. 만들어준 saga들을 한군데 모은 rootSaga.js 작성, sagaMiddleware 생성
+```js
+// modules/rootSaga.js
+import createSagaMiddleware from "redux-saga";
+import { all, call } from "redux-saga/effects";
+import counterSaga from "./counterSaga";
+import postsSaga from "./postsSaga";
+  
+const sagaMiddleware = createSagaMiddleware();
+  
+export function* rootSaga() {
+  yield all([call(counterSaga), call(postsSaga)]);
+}
+  
+export default sagaMiddleware;
+```
+
+4. 리덕스 store에 sagaMiddleware 추가하고 `run(rootSaga)`로 작동시키기
+```js
+// modules/index.js
+import { combineReducers } from "redux";
+import logger from "redux-logger";
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counter";
+import postsReducer from "./posts";
+import sagaMiddleware, { rootSaga } from "./rootSaga";
+  
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  posts: postsReducer,
+});
+  
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware, logger), //sagaMiddleware 추가
+});
+  
+sagaMiddleware.run(rootSaga); //saga 작동
+  
+export default store;
+```
+
+5. 컴포넌트에서 액션 디스패치하기
+```js
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getPost, clearPost, goToHome } from "../modules/posts";
+import Post from "../components/Post";
+import { useNavigate } from "react-router-dom";
+  
+const PostContainer = ({ postId }) => {
+  const loading = useSelector((state) => state.posts.post.loading);
+  const data = useSelector((state) => state.posts.post.data);
+  const error = useSelector((state) => state.posts.post.error);
+  const navigate = useNavigate();
+  
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getPost(postId)); //postId는 fetchPostSaga에서 액션의 페이로드가 되어 postsAPI.getPostById를 호출할때 함께 넘겨짐
+    return () => {
+      dispatch(clearPost());
+    };
+  }, [postId, dispatch]);
+  
+  if (loading) return <div>loading...</div>;
+  if (error) return <div>error!!</div>;
+  
+  return (
+    <>
+      <button onClick={() => dispatch(goToHome(navigate))}>home</button>
+      {data && <Post post={data} />}
+    </>
+  );
+};
+
+export default PostContainer;
+```
+## redux-saga effects
+- `all`: generate함수들이 들어있는 배열을 인자로 받아 병렬로 작동하고, 배열 안의 모든 함수들이 resolve될때까지 기다림
+- `call`: 함수를 실행시킴, 첫번째 필수 인자는 함수, 나머지 선택 인자는 함수에 전달할 값
+- `fork`: 함수를 비동기 실행시킴, 순차적으로 함수가 실행되야하는 API 요청 함수는 call 사용
+- `put`: generator함수 내부에서 특정 액션을 디스패치함-
+- `takeEvery`: 인자로 들어온 모든 액션에 대해 로직 실행
+- `takeLatest`: 기존에 실행 중이던 작업이 있으면 이를 취소하고 가장 마지막으로 실행된 작업만 실행

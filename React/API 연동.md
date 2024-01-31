@@ -399,7 +399,9 @@ const MyComponent = () => {
 [위의 코드 리팩토링]()(https://codesandbox.io/s/api-integrate-c3rli?fontsize=14)
 # Fake API 서버 만들기
 1. 리액트 프로젝트 디렉터리(src밖)에 data.json 파일 작성
+	- data.json에 넣는 데이터들은 json객체들이어야하며, 각 객체의 key값으로 api요청할 수 있음
 ```json
+// .../posts 로 요청
 {
   "posts": [
     {

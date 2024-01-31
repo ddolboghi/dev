@@ -1,8 +1,14 @@
+# 리덕스 사용하는 이유
+- 리덕스는 중앙 집중식 상태 관리 체계임
+- 따라서 같은 상태를 실시간으로 공유하는 컴포넌트들이 있을때, props waterfall 없이 `useSelector`등을 이용하여 동시에 같은 값을 공유할 수 있음
 # 리덕스에서 사용되는 키워드
-## 액션
+## action
 - 상태에 어떤 변화가 필요할때 액션을 발생시킴
 - 액션은 하나의 객체로 표현됨
 - 액션 객체는 `type`필드를 필수적으로 가져야하고, 그 외의 값들은 선택
+	- payload: type이나 status를 제외한 액션의 모든 정보 가짐
+	- error: 액션에 에러 발생시 true가 되고, 이때 payload는 error객체가 되야함
+	- meta: payload의 일부가 될 수 없는 추가적인 정보
 ```js
 {
   type: "TOGGLE_VALUE"
@@ -89,7 +95,7 @@ yarn add react-redux //리덕스를 리액트에 적용하기 위한 라이브�
 - **modules** 디렉터리해 생성해주기
 - redux toolkit의 `createSlice`, `configureStore` 사용
 - redux toolkit은 immutable update를 위해 내부적으로 immer.js 사용함
-## `combineReducers`
+## `combineReducers` from "redux"
 - 리듀서들을 모아서 rootReducer를 만들때 사용
 ```js
 import { combineReducers } from "redux";
@@ -103,7 +109,7 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 ```
-## `configureStore`
+## `configureStore` from "@reduxjs/toolkit"
 - 새로운 store만드는 함수
 ```js
 export const store = configureStore({
@@ -119,43 +125,12 @@ export const store = configureStore({
 - devTools: Redux DevTools 사용 여부, 기본값 true
 - preloadedState: redux store의 초기값(initialState)
 - enhancers: 사용자 정의 미들웨어, 콜백 함수로 설정 시 미들웨어 적용 순서 정의 가능
-## `createSlice`
+## `createSlice` from @reduxjs/toolkit
 - 선언한 slice reducer의 name에 따라 액션 생성자, 액션 타입, 리듀서를 자동 생성해줌(`createAction`, `createReducer`가 내장됨)
 - 액션 타입명은 '**{name}/{slice명}**'으로 생성됨
-	- 아래 코드에서는 'counter/setDiff', 'counter/increase', 'counter/decrease'
+	- 아래 코드에서는 'counter/setDiff', 'counter/increase', 'counter/decrease'가 됨
 - 개별 slice reducer를 외부 dispatch함수에서 사용하려면 반드시 `mySlice.actions`를 export해야함
 됨
-# `useDispatch`
-- 리덕스 store의 dispatch를 함수에서 사용할 수 있게 해주는 훅
-- 각 액션을 디스패지하는 함수들을 만들어야함
-```js
-//...
-import { useSelector, useDispatch } from 'react-redux';
-import { setDiff, increase, decrease } from "../modules/counter";
-  
-function CounterContainer() {
-  const number = useSelector((state) => state.counter.number);
-  const diff = useSelector((state) => state.counter.diff);
-  
-  const dispatch = useDispatch();
-  const onIncrease = () => dispatch(increase());
-  const onDecrease = () => dispatch(decrease());
-  const onSetDiff = (diff) => dispatch(setDiff(diff));
-  
-  return (
-    <Counter
-      number={number}
-      diff={diff}
-      onIncrease={onIncrease}
-      onDecrease={onDecrease}
-      onSetDiff={onSetDiff}
-    />
-  );
-}
-  
-export default CounterContainer;
-```
-useCallback 기억이 안난다면 [[고급 기법#useCallback]]
 ### 파라미터
 - name: 해당 모듈의 이름
 - initialState: 해당 모듈의 초기값
@@ -262,6 +237,39 @@ export default function counter(state = initialState, action) {
 }
 ```
 # 모듈 사용하기
+## `useDispatch` from 'react-redux'
+- 리덕스 store의 dispatch를 함수에서 사용할 수 있게 해주는 훅
+- 각 액션을 디스패지하는 함수들을 만들어야함
+```js
+//...
+import { useSelector, useDispatch } from 'react-redux';
+import { setDiff, increase, decrease } from "../modules/counter";
+  
+function CounterContainer() {
+  const number = useSelector((state) => state.counter.number);
+  const diff = useSelector((state) => state.counter.diff);
+  
+  const dispatch = useDispatch();
+  const onIncrease = () => dispatch(increase());
+  const onDecrease = () => dispatch(decrease());
+  const onSetDiff = (diff) => dispatch(setDiff(diff));
+  
+  return (
+    <Counter
+      number={number}
+      diff={diff}
+      onIncrease={onIncrease}
+      onDecrease={onDecrease}
+      onSetDiff={onSetDiff}
+    />
+  );
+}
+  
+export default CounterContainer;
+```
+useCallback 기억이 안난다면 [[고급 기법#useCallback]]
+## `useSelector` from "react-redux"
+- 리덕스 store에서 state를 조회해 필요한 state만 선택해서 가져오는 함수
 ## 프로젝트에 리덕스 적용하기
 - src디렉터리에 index.js에서 rootReducer를 불러와 `configureStore`로 새로운 `store`를 만들고 `<Provider store={store}>`를 사용해 프로젝트에 적용
 ```js
@@ -313,7 +321,7 @@ function CounterContainer() {
   
 export default CounterContainer;
 ```
-## presentational 컴포넌트에서 사용하기
+## presentational 컴포넌트에서 props로 받기
 - presentational 컴포넌트는 필요한 액션 함수들을 props로 받음
 ```js
 import React from "react";
@@ -372,5 +380,38 @@ const { number, diff } = useSelector(state => ({
   shallowEqual
 );
 ```
-### RTK의 crateSelector 사용하기
-- `createSelector`함수는 메모이제이션을 활용해 인자로 받는 값이 변하지 않으면 메모이제이션된 결과값이 반환
+### redux toolkit(RTK)의 createSelector 사용하기
+[공식 문서](https://redux-toolkit.js.org/api/createSelector)
+[사용방법 참고](https://velog.io/@domandjerry/createSelector-%ED%95%84%ED%84%B0-%EA%B8%B0%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94)
+- `createSelector`함수는 메모이제이션을 활용해 인자로 받는 값이 변하지 않으면 메모이제이션된 결과값이 반환됨
+- 특정 state들을 select해 계산한 값을 사용할 수 있음
+- 컴포넌트에서 `useSelector`로 정의한 셀렉터 이름만 소환하면 됨
+- _@param_ -` inputSelectors`: 첫번째 인자로 셀렉터들을 담은 **배열** 넣음
+	- 배열로 셀렉터를 전달하는 이유는 캐시 관리와 두번째 인자의 함수가 어떤 상태에 의존하고 있는지 명시하기 위함
+- _@param_ - `resultFunc`: 두번째 인자로, `inputSelectors`에 있는 셀렉터들의 결과를 인수로 받아 최종 결과를 계산하는 함수를 넣음
+- _@param_ - `createSelectorOptions?`: 셀렉터마다 추가적인 커스텀을 허용하는 옵션 객체
+```js
+const selectTodosByCategory = createSelector(
+  [
+    // Pass input selectors with typed arguments
+    (state: RootState) => state.todos,
+    (state: RootState, category: string) => category
+  ],
+  // Extracted values are passed to the result function for recalculation
+  (todos, category) => {
+    return todos.filter(t => t.category === category)
+  }
+)
+```
+
+```js
+export const selectAllPosts = (state) => state.posts.posts;
+
+export const selectPostsByUser = createSelector(
+  [
+    selectAllPosts,
+    (_state, userId) => userId
+  ],
+  (posts, userId) => posts.filter(post => post.user === userId)
+);
+```

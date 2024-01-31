@@ -67,11 +67,14 @@ reportWebVitals();
 - index.js에서 `<div id="root"></div>`가 선택되어 이 태그 내부에 컴포넌트가 렌더링됨
 
 ## 컴포넌트
+> [!info] `import React from "react";`
+> React 17 버전부터는 JSX를 변환할 때 'React'를 자동으로 import 하도록 설정되어 있어, 컴포넌트를 만들 때 맨 위에 `import React from "react";`를 작성할 필요가 없음
+> 이것은 JSX Transform라는 기능 덕분임
 - **컴포넌트 이름은 항상 대문자로 시작**
 - 순수 HTML 태그는 항상 소문자로 시작
 - 컴포넌트 렌더링 중에는 prop, state, context 입력만 읽을 수 있고, 이들은 항상 읽기 전용으로 취급해야함
 - 사용자 입력에 응답하여 무언가를 변경하려면 변수 대신 state를 설정해야함
-- 컴포넌트내에서 다른 컴포넌트를 정의하면 매우 느려지고 버그 발생
+- **컴포넌트내에서 다른 컴포넌트를 정의하면 매우 느려지고 버그 발생**
   --> 모든 컴포넌트를 최상위 수준에서 정의하기
 ```jsx
 export default function Gallery() {
