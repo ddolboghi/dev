@@ -15,7 +15,7 @@ _sort:
 [[객체지향의 사실과 오해]]
 [[MVC 패턴]]
 [[springboot]]
-[[JavaScript]]
+[[Javascript]]
 [[React]]
 [[Next.js]]
 [[테스트]]

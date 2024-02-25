@@ -102,9 +102,12 @@ yarn add redux-thunk //기존 redux를 사용할때
 	- payload: thunk 액션 생성자로 전달할 값(e.g. API요청에 함께 전달할 id 같은 값)
 	- thunkAPI: `dispatch()`, `getState()`를 사용할 수 있도록 해주는 객체
 ---
-- `createAsyncThunk`로 생성된 액션 생성자와 `createSlice`의 `reducers`에 정의된 액션 생성자는 같은 이름을 가질 수 없음
-- 일반적으로 비동기 액션 이름에는 'fetch'를 붙임
-- `createSlice`의 reducer에는 동기 액션을 넣고 extraReducers에 비동기 액션을 넣음?
+- `createAsyncThunk`로 생성된 액션 생성함수와 `createSlice`의 `reducers`에 정의된 액션 생성함수는 같은 이름을 가질 수 없음
+- `createSlice`의 `extraReduscers`에는 주로 `createAsyncThunk`와 같이 외부에서 정의된 액션 생성함수를 넣어줌
+
+> [!tip]
+> Content일반적으로 비동기 액션 이름에는 'fetch'를 붙임
+
 ```js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
   
@@ -663,8 +666,9 @@ export default PostContainer;
 ```
 ## redux-saga effects
 - `all`: generate함수들이 들어있는 배열을 인자로 받아 병렬로 작동하고, 배열 안의 모든 함수들이 resolve될때까지 기다림
-- `call`: 함수를 실행시킴, 첫번째 필수 인자는 함수, 나머지 선택 인자는 함수에 전달할 값
-- `fork`: 함수를 비동기 실행시킴, 순차적으로 함수가 실행되야하는 API 요청 함수는 call 사용
-- `put`: generator함수 내부에서 특정 액션을 디스패치함-
-- `takeEvery`: 인자로 들어온 모든 액션에 대해 로직 실행
+- `call`: 함수를 실행시킴, 첫번째 필수 인자는 함수, 나머지 선택 인자는 함수에 전달할 값, blocking effect라서 호출이 종료되기 전까지는 다른 작업(함수) 무시함(동기적)
+- `fork`: 함수를 백그라운드에서 실행시켜 다른 함수 실행 가능(비동기적), 순차적으로 함수가 실행되야하는 API 요청 함수는 call 사용
+- `put`: generator함수 내부에서 특정 액션을 디스패치함
+- `take`: 특정 액션을 한번만 처리하고 이벤트 삭제됨
+- `takeEvery`: 인자로 들어온 모든 액션에 대해 로직 실행(같은 작업이 이미 실행중이더라도 취소하지 않고 새로운 작업으로 실행), 작업이 시작된 순서대로 종료를 보장하지 않음
 - `takeLatest`: 기존에 실행 중이던 작업이 있으면 이를 취소하고 가장 마지막으로 실행된 작업만 실행

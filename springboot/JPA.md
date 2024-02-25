@@ -1,3 +1,4 @@
+[JPA의 사실과 오해](https://developer-ping9.tistory.com/255)
 # 스프링부트에서 JPA 사용 설정
 1. build.gradle > dependencies 추가
 ```gradle
@@ -178,6 +179,7 @@ public class Member {
 [참고2](https://hyeon9mak.github.io/omit-join-column-when-using-many-to-one/)
 정리하기
 ### `CascadeType`
+[CascadeType.ALL에대한 고찰](https://resilient-923.tistory.com/417)
 - `ALL`: 상위 엔티티에서 하위 엔터티로 모든 작업 전파, 아래 모든 작업 포함
 - `PERSIST`: 하위 엔티티까지 영속성 전달 = 상위 엔티티 저장하면 하위 엔티티도 저장
 - `MERGE`: 하위 엔티티까지 병합 수행 = 조회한 후 업데이트
@@ -188,6 +190,7 @@ public class Member {
 ---
 # JPA 연관 관계
 ## 단방향 vs 양방향
+[참고](https://ict-nroo.tistory.com/122)
 - JPA는 객체와 데이터베이스 테이블을 매핑시킴
 - 데이터베이스는 foreign key 하나로 양 쪽 테이블 조인이 가능해 단방향, 양방향 나눌 필요 없음
 - 반대로 객체는 참조용 필드가 있는 객체만 다른 객체를 참조할 수 있음
@@ -197,12 +200,12 @@ public class Member {
 	- `Grammar.getGrammarBook()`처럼 참조가 필요하면 Grammar -> GrammarBook 단방향 참조
 	- `GrammarBook.getGrammar()`처럼 참조가 필요하면 GrammarBook -> Grammar 단방향 참조
 - 무조건 양방향 참조를 하면 하나의 엔티티가 수많은 엔티티와 불필요한 연관 관계를 맺어 복잡해짐
-- 기본적으로 단방향 매핑으로 하고 나중에 역방향으로 객체 탐색이 꼭 필요하다고 느낄 때 추가하기
+- 기본적으로 단방향 매핑으로 하고 나중에 역방향으로 객체 탐색이 꼭 필요하다고 느낄때 추가하기
 ## 연관 관계의 주인
 - 양방향 매핑 시 두 객체들 중 연관 관계의 주인을 지정해야함
 - 연관 관계의 주인을 지정하는 것은 두 단방향 관계 중, FK를 비롯한 테이블 레코드를 저장, 수정, 삭제 등의 처리를 할 수 있는게 무엇인지 JPA에게 알려주는 것
 - **연관 관계의 주인이 아니면 조회만 가능함**
-- 연관 관계의 주인이 아닌 객체에서 `mappedBy`속성으로 주인을 지정해야함
+- 연관 관계의 주인이 아닌 객체에서 `mappedBy`속성으로 주인과 매핑
 > [!TIP]
 >FK가 있는 곳을 연관 관계의 주인으로 정하면 됨 
 - 연관 관계의 주인을 지정하는 이유: 양방향 연관 관계의 관리 포인트가 두 개면 Grammar의 GrammarBook을 수정하려 할때, Grammar객체에서 `setGrammarBook()`같은 메서드로 수정할지 GrammarBook객체에서 `getGrammar()`같은 메서드로 수정할지 어떤 메서드에서 FK를 수정할지 JPA는 모름. 연관 관계의 주인을 Grammar로 지정하면 Grammar에서 GrammarBook을 수정할때만 FK를 수정하겠다고 JPA한테 알려줄 수 있음
@@ -277,14 +280,14 @@ public class GrammarBook {
 }
 ```
 - N 쪽은 그대로
-- 1 쪽에 `@OneToMany`추가하고 `mappedBy`값은 N 쪽에서 `@ManyToOne` 지정한 필드명 똑같이!
+- 1 쪽에 `@OneToMany`추가하고 `mappedBy`값은 `@ManyToOne`를 지정한 필드명 똑같이!
 > [!tip]
 > `mappedBy`를 가진 엔티티는 매핑된 엔티티, 즉 연관 관계의 주인을 조회만 할 수 있음
 ## 1 : N 단방향 (안쓴다고 생각해라)
-- 데이터베이스는 무조건 N 쪽에서 FK 관리하지만 1 : N은 1쪽에서 N쪽 객체를 조작함
+- 데이터베이스는 무조건 N 쪽에서 FK 관리하지만 1 : N 단방향은 1쪽에서 N쪽 객체를 조작함
 - 1쪽에서는 FK를 저장할 방법이 없어 조인 및 업데이트 쿼리가 발생함
-- 1 : N 양방향은 공식적으로 존재하지 않지만 구현할 수는 있음
-- **실무에서는 1 : N 거의 쓰지 않지만**, JPA 값 타입을 사용하는 것을 대신하여 사용하는 경우 등 일부 유용한 경우 있음
+- 1 : N 양방향(1이 연관관계 주인)은 공식적으로 존재하지 않지만 구현할 수는 있음
+  --> **실무에서는 거의 쓰지 않지만**, JPA 값 타입을 사용하는 것을 대신하여 사용하는 경우 등 일부 유용한 경우 있음
 ```java
 @Getter  
 @Entity  
@@ -328,7 +331,7 @@ public class GrammarBook {
 - 중간 테이블은 두 테이블의 FK만 저장되지만 다른 정보가 추가되는 경우가 많기 때문에 문제가 될 확률이 높음
 - N : N --> 1 : N, N : 1로 풀고 중간 테이블을 엔티티로 만드는게 추후 변경에도 유연하게 대처할 수 있음
 # Repository
-- 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들을 사용하기 위한 **인터페이스**
+- 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들을 사용하기 위한 **인터페이스**(DAO)
 - CRUD를 어떻게 처리할지 정의하는 계층
 - 레포지터리명: 엔티티명+Repository
 - JpaRepository 인터페이스를 상속해야함
@@ -524,7 +527,6 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 - 쿼리 작성시 `from()`메서드로 시작해야함 --> QuerydslRepositorySupport를 상속받는 커스텀 클래스 만들어서 `select()`, `selectFrom()`으로 시작하게 작성 가능
 - spring data sort 기능이 정상 동작하지 않음
 - 메서드 체인이 끊김
-- 안쓰는게 나아 보임
 ![[QuerydslRepositorySupport사용법]]
 1. 커스텀 레포지토리에는 QueryDSL을 사용해 작성할 메서드들을 정의함
 2. 기존 엔티티 레포지토리는 JpaRepository와  커스텀 레포지토리를 상속 받음
@@ -538,7 +540,7 @@ public interface ProductRepositoryCustom {
 ```
 
 ```java
-@Componen
+@Component
 public class ProductRepositoryCustomImpl extends QuerydslRepositorySupport implements ProductRepositoryCustom {
 	
 	public ProductRepositoryCustomImpl() {

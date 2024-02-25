@@ -135,7 +135,11 @@ export const store = configureStore({
 - name: 해당 모듈의 이름
 - initialState: 해당 모듈의 초기값
 - reducers: **state**와 **action**을 파라미터로 받는 리듀서 정의, 해당 리듀서의 키값(함수명)으로 액션함수가 자동으로 생성됨
-- extraReducers: 액션이 자동 생성되지 않는 별도의 액션함수가 존재하는 리듀서 정의
+- extraReducers: 이미 다른 곳에서 정의된 액션 생성함수를 지정
+	- 해당 slice의 initialState 값을 외부에서 정의된 액션 생성함수로 변경하고 싶을때 사용
+	- 외부 액션 생성함수를 지정하므로, 새로운 액션 타입을 생성하지 않음
+	- 주로 redux-thunk의 `createAsyncThunk`로 정의된 액션 생성함수를 사용하거나 다른 slice에서 정의된 액션 생성함수를 사용하는 경우 이들을 extraReducers에 추가함
+	- 빌더 패턴으로 switch문과 유사하게 작성해 프로미스의 진행 상태에 따라 개별적으로 리듀서를 실행할 수 있음
 ```js
 import { createSlice } from "@reduxjs/toolkit";
   
@@ -384,7 +388,7 @@ const { number, diff } = useSelector(state => ({
 [공식 문서](https://redux-toolkit.js.org/api/createSelector)
 [사용방법 참고](https://velog.io/@domandjerry/createSelector-%ED%95%84%ED%84%B0-%EA%B8%B0%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94)
 - `createSelector`함수는 메모이제이션을 활용해 인자로 받는 값이 변하지 않으면 메모이제이션된 결과값이 반환됨
-- 특정 state들을 select해 계산한 값을 사용할 수 있음
+- 기존의 `useSelector`는 컴포넌트가 상태를 처리해 컴포넌트가 리렌더링될 수 있지만 `createSelector`는 상태 변경 작업을 리덕스에서 미리 처리해 컴포넌트는 그냥 가져다 쓸 수 있음
 - 컴포넌트에서 `useSelector`로 정의한 셀렉터 이름만 소환하면 됨
 - _@param_ -` inputSelectors`: 첫번째 인자로 셀렉터들을 담은 **배열** 넣음
 	- 배열로 셀렉터를 전달하는 이유는 캐시 관리와 두번째 인자의 함수가 어떤 상태에 의존하고 있는지 명시하기 위함

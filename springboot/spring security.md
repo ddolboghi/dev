@@ -513,7 +513,7 @@ public class AnswerController {
 ## `@PreAuthorize("isAuthenticated()")`
 - 로그인이 필요한 컨트롤러의 메서드에 붙임
 - 로그아웃 상태에서 해당 메서드가 호출되면 로그인 페이지로 이동됨
-- SecurityConfig 클래스에 ==`@EnableMethodSecurity(prePostEnabled = true)`==를 붙여 `@PreAuthorize`가 동작할 수 있도록해야함
+- SecurityConfig 클래스에 ==`@EnableMethodSecurity(prePostEnabled = true(default))`==를 붙여 `@PreAuthorize`가 동작할 수 있도록해야함
 - 로그인하지 않은 상태에서 `@PreAuthorize`가 붙은 컨트롤러 메서드(요청)이 실행되면 로그인 페이지로 이동하고, 로그인하면 스프링 시큐리티에 의해 다시 해당 메서드를 실행하기위한 페이지로 리다이렉트된다.
 ```java
 @Configuration  

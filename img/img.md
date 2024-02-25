@@ -6,7 +6,5 @@ _sort:
   field: rank
   asc: false
   group: false
-sticker: emoji//1f5a5-fe0f
+sticker: lucide//image
 ---
-[[컴퓨터 구조 기본]]
-[[CPU]]

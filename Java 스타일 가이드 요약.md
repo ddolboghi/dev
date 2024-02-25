@@ -1,3 +1,12 @@
+---
+tistoryBlogName: developing-mind
+tistoryTitle: Java 스타일 가이드 요약
+tistoryTags: java, convention
+tistoryVisibility: "3"
+tistoryCategory: "1066158"
+tistoryPostId: "58"
+tistoryPostUrl: https://developing-mind.tistory.com/58
+---
 ## Formatting
 
 ### enum
@@ -121,5 +130,4 @@ public int method(String p1) { ... }
 ```
 
 ### Javadoc 을 어디에 써야하는가
-
 - 모든 public class에 쓰이고, 그 클래스의 public, protected 멤버에 쓰인다. (너무 간단한 경우 제외)

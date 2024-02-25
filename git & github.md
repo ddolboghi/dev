@@ -107,3 +107,92 @@ hotfix브랜치 없음
 - 이슈 추적 시 feature/{issue-number}-{feature-name}
 - release-1.xx
 - hotfix-1.xx
+
+---
+> [!tip] gitignore 적용 안될때
+> git의 캐시 문제 --> 캐시 삭제
+>`git rm -r --cached .`
+>`git add .`
+>`git commit -m "fixed untracked files"`
+# git 명령어
+- 실무에서는 원격 저장소를 클론하는 방식 많이 사용
+- 명령어 하나 입력하고 `git status`로 깃 상태가 어떻게 변하는지 파악하기
+- vscode > source control > GUI graph로 깃 로그를 그래프로 볼 수 있음
+## git revert & reset
+`git revert {commit ID}` : 되돌아가고 싶은 커밋 ID를 입력해서 변경사항을 되돌리고, 되돌린 기록을 커밋으로 남김
+
+|  | 로컬 변경 내용 | staging area |
+| ---- | ---- | ---- |
+| `git reset --soft {commit ID}` | 남아있음 | 남아있음(add되있음) |
+| `git reset --mixed {commit ID}` | 남아있음 | 남아있음(add 안되있음) |
+| `git reset --hard {commit ID}` | 되돌아감 | 없음(add 안되있음) |
+- 현업에서는 원격저장소에 올라가 있는건 `git revert` 사용
+> ⚠ 자신의 커밋 기록이 협업하는 브랜치로 올라간 상태이고, 해당 커밋을 되돌리려면 반드시 reset 대신 revert 를 사용해야 합니다. 
+
+## git branch & merge
+- `git switch`: 오직 브랜치 이동 및 생성을 위한 명령어, git 공식에서 권장
+- `git checkout`: switch의 기능 뿐만아니라 특정 커밋 시점으로 되돌아가는데도 사용
+- fast-forward merge: 주 브랜치의 헤드를 현재 브랜치와 동일한 커밋을 가리키도록 이동시킴
+- 3-way merge: 각 브랜치의 마지막 커밋 2 개와 공통 조상의 마지막 커밋 총 3개의 커밋을 이용
+	1. 내 브랜치 커밋
+	2. 남의 브랜치 커밋
+	3. 두 브랜치의 공통 조상이 되는 커밋
+- squash and merge: merge하는 브랜치의 커밋들을 1개의 커밋으로 합쳐서 타겟 브랜치에 merge
+	- merge된 브랜치의 커밋들이 남지 않아 변경사항을 읽기 수월함
+	- 누가 어떤 커밋을 통해 어떤 라인을 수정했는지 알 수 없음
+## git rebase
+- rebase할 브랜치를 대상 브랜치 뒤에 옮겨 붙임
+- merge와의 차이점: merge는 처음 브랜치가 생성된 커밋 시작 시점이 바뀌지 않지만, rebase는 주 브랜치에 rebase한 브랜치의 시작 시점이 주 브랜치의 최신 커밋 시점으로 이동됨 --> rebase하면 이전 커밋 기록에 주 브랜치 하나만 남음
+> [!Tip]
+> -  rebase를 할때 웬만하면 대상 브랜치는 dev나 main 같은 주요 브랜치가 되어야 합니다.
+> - 회사 정책에따라 merge를 사용하거나, rebase를 사용합니다.
+
+1. 분기된 커밋 시점부터 현재 브랜치까지의 변경사항을 모두 patch로 저장해둠
+2. 대상 브랜치에 변경사항 적용하여 새로운 커밋으로 생성
+3. rebase된 브랜치가 대상 브랜치의 최신 커밋 지점을 가리키도록 이동됨
+
+- rebase된 브랜치의 변경사항들은 dangling상태가 되며, 가비지컬렉션 대상
+### 충돌 시 해결 방법
+1. 충돌한 파일 직접 코드 수정
+2. `git rebase --continue`
+
+rebase 전으로 되돌리고 싶으면 `git rebase --abort`
+
+> [!info]
+> github에 올려진 PR을 merge 또는 rebase 또는 squash and merge를 정합니다.
+> 
+![PR merge](./img/PR_merge_종류.png)
+
+## git reflog
+- HEAD의 업데이트 기록 출력
+- commit , reset , merge , rebase , checkout 등 HEAD의 이동이 필요한 모든 순간이 기
+록되어있고, `git reset {해시값}` 명령을 통해서 해당 시점으로 돌아갈 수 있음
+- `git reflog {브랜치 명}`: 특정 브랜치의 reflog를 볼 수 있음
+
+## git cherry-pick {커밋hash}
+- 원하는 특정 커밋을 선택하여 현재 브랜치에 적용
+
+## git restore
+- `git restore {파일이름 | .}`: 작업 디렉토리에서 파일을 수정했는데 이것을 되돌림
+- `git restore --staged {파일이름 | .}`: staging 영역에 add한 파일을 staging 영역에서 꺼냄. 파일 변경 사항은 그대로
+## git clean
+- `git clean -n`: 삭제될 파일(스테이지 영역에 올라가지 않았고, 작업 디렉토리에 남아있는 새로운 파일) 리스트 출력
+- `git clean -dn`: 폴더도 함께 출력
+- `git clean -f`: 스테이지 영역에 올라가지 않았고, 작업 디렉토리에 남아있는 새로운 파일 삭제
+- `git clean -df`: 폴더도 함께 삭제
+## git fetch
+- 원격 저장소의 현재 브랜치에 대한 커밋을 로컬로 가져오기만 함
+- `git fetch --all`: 원격 저장소의 **모든 브랜치**에 대한 커밋을 가져옴
+## git stash
+- `git stash`: 변경사항들을 잠시 치워두고 새로운 기능을 개발할때 사용
+- 변경사항들이 임시 저장공간에 저장되있다고 생각하면 됨
+- `git stash save {저장할 이름}`: 저장할때 이름 지정
+- `git stash list`: 저장된 stash들의 목록 확인
+- `git stash apply`: 가장 최신의 stash만 가져와서 적용
+- `git stash apply --index {번호}`: 번호에 해당하는 stash를 가져와 적용
+- `git stash clear`: stash된 모든 항목 비움
+# 오픈소스 기여 방법
+1. 오픈소스 레포지토리 fork하기
+2. 로컬에서 작업
+3. 내가 fork한 레포지토리의 브랜치로 push
+4. 원본 레포지토리로 PR

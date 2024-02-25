@@ -7,6 +7,6 @@ _sort:
   asc: false
   group: false
 ---
-[[JavaScript 기초]]
-[[JavaScript 고급 문법]]
+[[Javascript 기초]]
+[[Javascript 고급 문법]]
 [[비동기 처리]]
