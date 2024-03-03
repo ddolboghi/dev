@@ -41,7 +41,7 @@
 
 # React 프로젝트 생성하기
 1. 터미널에 `npx create-react-app [프로젝트 폴더명]`입력
-	- [[설치 관련#React 프로젝트 생성시 오류]] 참고
+	- [[dev/React/설치 관련#React 프로젝트 생성시 오류]] 참고
 2. `npm start`입력후 http://localhost:3000/ 열리는지 확인
 
 # React 기본 사용법
@@ -147,7 +147,16 @@ function Cup() {
 - 하나의 순수한 컴포넌트는 여러 사용자 요청에 대해 서비스 제공 가능
 - 입력이 동일한 컴포넌트는 캐쉬된 컴포넌트를 사용할 수 있음
 - 깊은 컴포넌트 트리를 렌더링하는 도중에 데이터가 변경되면 리액트는 구식 렌더링을 완료하기 전에 렌더링 재시작함. 순수성으로 인해 언제든지 계산을 중단해도 안전하기 때문
-
+### `<Suspense>`
+- `<Suspense>`는 이것의 하위 컴포넌트(children)가 로딩되기 전까지 대체 컴포넌트(fallback)을 보여줍니다.
+- 만약 children이 렌더링 중에 일시정지되면, 서스펜스 경계는 fallback을 렌더링하고 데이터가 준비되면 children으로 돌아옵니다.
+- fallback은 로딩 스피너나 스켈레톤이 될 수 있습니다.
+- fallback이 렌더링 중 일시정지되면, 가장 가까운 부모 서스펜스 경계를 활성화 시킬 것입니다.
+```jsx
+<Suspense fallback={<Loading />}>  
+	<SomeComponent />  
+</Suspense>
+```
 ## JSX 문법
 - JSX는 자바스크립트 코드와 HTML태그의 조합
 - 모든 것을 카멜케이스로 작성해야함(`aria-*`, `data-*`속성은 관행적으로 `-`사용)
@@ -270,6 +279,7 @@ export default function App() {
 ```
 
 ### 자식으로 JSX 전달하기
+[children prop에 대한 고찰](https://velog.io/@2ast/React-children-prop%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0feat.-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94)
 - 컴포넌트 태그 사이에 태그를 중첩할때는 `props.children`사용
 - 부모 컴포넌트는 중첩된 JSX 태그를 `children`prop로 받음
 - `children` prop는 부모 컴포넌트에 의해 임의의 JSX로 채워질 수 있는 빈공간이라고 생각하면됨
@@ -424,5 +434,3 @@ return (
   <ul>{listItems}</ul>
 );
 ```
-
-

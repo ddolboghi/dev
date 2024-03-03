@@ -17,7 +17,7 @@ _sort:
 [[springboot]]
 [[Javascript]]
 [[React]]
-[[Next.js]]
+[[dev/Next.js/Next.js]]
 [[테스트]]
 [[git & github]]
 [[Java 스타일 가이드 요약]]

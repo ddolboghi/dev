@@ -27,7 +27,34 @@ tsc --strictNullChecks {파일명.ts}
 - `--nolmplicitAny`: ts가 타입을 추측할 수 없을때 `any`를 사용하는데, 이런 암묵적인 `any`를 사용한 경우 에러를 발생시킵니다.
 - `--strictNullChecks`: 엄격한 null, undefined 체크를 수행합니다. null이나 undefined를 불가피하게 사용해야한다면, Union타입이나 생략 가능한 인수를 사용해 명시적으로 null이나 undefined를 허용해야 합니다. Non-Null Assertion 기능도 이 옵션이 활성화돼 있을 때 사용할 수 있습니다.
 - `--target`: 컴파일 시 어떤 버전의 ECMAScript로 출력할지 지정
+## 컴파일 속도 높이기
+- tsconfig의 `incrememtal`속성을 활성화하면 변경된 부분만 컴파일하는 증분 컴파일을해 컴파일타임을 줄일 수 있습니다.
+```
+//tsconfig에 추가
+{
+  'compilerOptions': {
+    ...
+    incremental: true
+  }
+}
+```
 
+- vscode에서 타입스크립트 서버를 재실행합니다:
+  ctrl + shift + p > TypeScript: Restart TS server 클릭
+# 실시간으로 타입 검사하기
+- 프로젝트 규모가 커지면 IDE의 타입 에러 체크가 점점 느려집니다. 이때 아래 스크립트를 활용해 실시간으로 에러를 확인할 수 있습니다.
+```
+yarn tsc --noEmit --incrememtal -w
+```
+- `--noEmit`: 자바스크립트로 된 출력 파일을 생성하지 않습니다.
+- `--incrememtal`: 증분 컴파일을 활성화해 컴파일 시간을 단축합니다.
+- `-w`: 파일 변경 사항을 모니터링합니다.
+# 타입 커버리지 확인하기
+- `any`타입을 남발하면 타입스크립트의 장점을 활요하지 못할 수 있습니다.
+- 다음 스크립트로 프로젝트의 타입 커버리지와 `any`타입 변수 위치를 확인할 수 있습니다:
+```
+npx type-coverage --detail
+```
 # 타입 정의하기
 ## any 타입
 - 모든 타입을 허용하는 타입입니다.
@@ -287,8 +314,6 @@ class Point3D extends Point {
 ```ts
 import type {APIProps} from './api'
 ```
-
-# 실제 개발 시 중요한 타입
 ## Enum 타입
 - java의 Enum과 유사
 - `enum`을 대입한 변수에 다른 타입의 값은 대입할 수 없습니다. 
@@ -388,7 +413,6 @@ const getTitleText = (type: PageType) => {
   }
 };
 ```
-# 고급 기능
 ## Optional Chainig
 - 중첩된 객체의 속성이 존재하는가에 관한 조건 분기를 간단히 작성할 수 있습니다.
 - 예를 들어 이때까진 if문으로 `null`이나 `undefined`를 체크하거나, `obj.prop1 && obj.prop1.prop2`같이 체크했습니다.
@@ -522,4 +546,41 @@ const  asyncFunc = async (): Promise<boolean> => {
 npm install --save-dev @types/jquery
 ```
 
-- `.d.ts`라는 확장자를 가진 타입 정의 파일을 직접 작성합니다.
+- 또는 앰비언트 타입 파일을 작성합니다.
+## 앰비언트 타입
+- `.d.ts` 확장자를 가진 파일에서 선언하는 타입이고, 값을 표현할 수 없습니다.
+- 앰비언트 타입 선언은 타입스크립트에게 자바스크립트 코드의 정보를 알려주는 도구입니다. 
+- png 파일 처럼 외부 파일을 모듈로 임포트할때 타입스크립트에서 인식하지 못합니다. 이때 `declare` 키워드로 특정 형식을 모듈로 선언하면 컴파일러에 미리 정보를 제공함으로써 에러를 수정할 수 있습니다.
+```d.ts
+declare module "*.png" {
+  const src: string;
+  export default src;
+}
+```
+
+- `tsconfig.json` 파일의 declaration을 true로 설정하면 타입스크립트 컴파일러는 자동으로 `.d.ts`파일을 생성합니다.
+- 웹뷰를 개발할때 네이티브 앱과의 통신을 위한 인터페이스를 네이티브 앱이 Window 객체에 추가하는 경우, 타입스크립트에서 직접 구현하지 않았더라도 실제 런타임 환경에서 사용할 수 있습니다.
+  앰비언트 타입을 선언해 Window 객체에 해당 속성이 정의되어 있음을 나타낼 수 있습니다.
+### 앰비언트 타입 선언 시 주의점
+- 타입스크립트로 만드는 라이브러리에는 불필요합니다.
+- 서로 다른 라이브러리에서 동일한 이름의 앰비언트 타입 선언을 하면 충돌이 발생합니다.
+- 앱비언트 타입으로 선언된 변수는 명시적인 import나 export가 없이 **모든 파일에서 사용**될 수 있기때문에 코드의 의존성 관계가 명확하지 않아 나중에 변경이 어려울 수 있습니다.
+# 리액트 컴포넌트의 타입
+## 함수 컴포넌트 타입
+- 리액트 v18부터는 `React.VFC`가 삭제되고 `React.FC`에서 `children`이 사라졌기 때문에 `React.FC` 또는 props 타입, 반환 타입을 직접 지정해야합니다.
+- 가장 보편적인 `children`타입은 `ReactNode | undefined`입니다.
+- `ReactNode`는 `ReactElement`와 `boolean`, `number`등 여러 타입을 포함하므로 구체적인 타입이 필요할때는 적합하지 않습니다.
+- `children`에 구체적인 타입이 필요하다면 다른 prop 타입 지정과 동일한 방식으로 지정할 수 있습니다.
+	```ts
+	type exampleProps = {
+	  children: "test1" | "test2" | "test3";
+	};
+	
+	type exampleProps = {
+	  children: string;
+	};
+	
+	type exampleProps = {
+	  children: ReactElement;
+	};
+	```
