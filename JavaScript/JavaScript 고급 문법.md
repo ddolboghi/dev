@@ -264,3 +264,12 @@ function max(...numbers) {
 const result = max(1,2,3,4,10,5,6,7);
 console.log(result);
 ```
+# 옵셔널 체이닝
+- `?.`은 `?.`'앞’의 평가 대상이 `undefined`나 `null`이면 평가를 멈추고 `undefined`를 반환합니다.
+```js
+let user = {}; // 주소 정보가 없는 사용자
+alert(user?.address?.street); // undefined, 에러가 발생하지 않습니다.
+```
+- `?.`앞의 변수는 꼭 선언되어 있어야 합니다.
+- `?.`는 평가대상에 값이 없으면 즉시 평가를 멈추는 단락 평가를 합니다.
+- 함수 호출을 비롯한 `?.` 오른쪽에 있는 부가 동작은 `?.`의 평가가 멈췄을 때 더는 일어나지 않습니다.

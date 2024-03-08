@@ -145,9 +145,8 @@ let strLength: number = (<string>someValue).length;
 
 - 복잡한 캐스팅은 `any`로 변환한 뒤, 원하는 타입으로 변환하는 2단계 과정으로 구현할 수 있습니다.
 - **다른 타입이 넘겨지는 경우, 컴파일 시 ts는 모르므로 에러가 발생하지 않지만 실행 시 에러가 발생할 수 있어 지양하는게 좋습니다.**
-## 타입 alias
-- 같은 타입을 재사용하기 위해 타입 정의에 이름을 붙입니다.
-- `type` 키워드를 사용해서 지정합니다.
+## `type`
+- **같은 타입을 재사용**하기 위해 타입 정의에 이름을 붙일때 사용합니다.
 - 타입 alias명은 **대문자로 시작**합니다.
 - 타입이 같아도 **alias로 지정한 속성명과 다르면 에러가 발생합니다.**
 ### 변수
@@ -191,7 +190,7 @@ const printName = (name: string, formatter: Formatter): void => {
   console.log(formatter(name));
 }
 ```
-## 인터페이스
+## `interface`
 - 타입 alias와 비슷하지만 **같은 이름의 타입을 또 정의해 타입을 확장할 수 있습니다.**
 > [!NOTE] 인터페이스와 타입 alias의 차이
 > 인터페이스는 다른 필드나 메서드가 있음을 전제로 합니다.
@@ -561,13 +560,56 @@ declare module "*.png" {
 - `tsconfig.json` 파일의 declaration을 true로 설정하면 타입스크립트 컴파일러는 자동으로 `.d.ts`파일을 생성합니다.
 - 웹뷰를 개발할때 네이티브 앱과의 통신을 위한 인터페이스를 네이티브 앱이 Window 객체에 추가하는 경우, 타입스크립트에서 직접 구현하지 않았더라도 실제 런타임 환경에서 사용할 수 있습니다.
   앰비언트 타입을 선언해 Window 객체에 해당 속성이 정의되어 있음을 나타낼 수 있습니다.
+
+> [!info] 글로벌 네임스페이스는 `declare global`로 정의하며, 앱 전체에서 사용할 수 있는 타입입니다.
 ### 앰비언트 타입 선언 시 주의점
 - 타입스크립트로 만드는 라이브러리에는 불필요합니다.
 - 서로 다른 라이브러리에서 동일한 이름의 앰비언트 타입 선언을 하면 충돌이 발생합니다.
 - 앱비언트 타입으로 선언된 변수는 명시적인 import나 export가 없이 **모든 파일에서 사용**될 수 있기때문에 코드의 의존성 관계가 명확하지 않아 나중에 변경이 어려울 수 있습니다.
 # 리액트 컴포넌트의 타입
 ## 함수 컴포넌트 타입
-- 리액트 v18부터는 `React.VFC`가 삭제되고 `React.FC`에서 `children`이 사라졌기 때문에 `React.FC` 또는 props 타입, 반환 타입을 직접 지정해야합니다.
+- 리액트 v18부터는 `React.VFC`가 삭제되고 `React.FC`에서 `children`이 사라졌기 때문에 props 타입으로 `React.FC`을 사용하거나, 직접props 타입과 컴포넌트 반환 타입을 지정해야합니다.
+- props 타입과 반환 타입 직접 지정 예시
+	```tsx
+	type Option = Record<string, string>;
+	
+	interface SelectProps {
+	  options: Option;
+	  selectedOption?: string;
+	  onChange?: (selected?: string) => void;
+	}
+	
+	const Select = ({ options, selectedOption, onChange }: SelectProps): JSX.Element => 
+	//...
+	```
+- `Option`타입은 `Record`를 사용해 key와 value의 타입이 모두 string인 객체 타입입니다.
+- `SelectProps`에서 `options` prop에 `Option`타입을 재사용합니다.
+- `onChange`는 selected된 string값이나 undefined를 매개변수로 받고 아무 값도 반환하지 않습니다. 또한 `onChange`는 선택 속성(`?`)이므로 부모 컴포넌트에서 넘겨주지 않아도 해당 컴포넌트를 사용할 수 있습니다.
+
+> [!info] `Record<string, valueType>` == `{[key: string]: string}`
+> `[key: string]`은 사실상 모든 키값을 가질 수 있습니다. 
+> 하지만 넓은 범위의 타입은 해당 타입을 사용하는 함수에 잘못된 타입이 전달될 수 있기 때문에, 가능한 타입을 좁히는게 좋습니다.
+
+```tsx
+interface Fruit {
+  count: number;
+}
+
+interface Param {
+  [key: string]: Fruit; // type Param = Record<string, Fruit>과 동일
+}
+
+const func: (fruits: Param) => void = ({ apple }: Param) => {
+  console.log(apple.count);
+};
+
+// OK.
+func({ apple: { count: 0 } });
+
+// Runtime Error (Cannot read properties of undefined (reading 'count'))
+func({ mango: { count: 0 } });
+```
+## children props 타입 지정
 - 가장 보편적인 `children`타입은 `ReactNode | undefined`입니다.
 - `ReactNode`는 `ReactElement`와 `boolean`, `number`등 여러 타입을 포함하므로 구체적인 타입이 필요할때는 적합하지 않습니다.
 - `children`에 구체적인 타입이 필요하다면 다른 prop 타입 지정과 동일한 방식으로 지정할 수 있습니다.
@@ -584,3 +626,200 @@ declare module "*.png" {
 	  children: ReactElement;
 	};
 	```
+## render 메서드와 함수 컴포넌트의 반환 타입
+![리액트-컴포넌트-타입.png](./리액트-컴포넌트-타입.png)
+
+```ts
+declare namespace React {
+  // ReactElement
+  interface ReactElement<
+    P = any,
+    T extends string | JSXElementConstructor<any> =
+      | string
+      | JSXElementConstructor<any>
+  > {
+    type: T;
+    props: P;
+    key: Key | null;
+  }
+  ...
+}
+```
+### `React.ReactElement`
+- 리액트 컴포넌트를 객체 형태로 저장하기 위한 포맷입니다.
+- 리액트의 트랜스파일러는 JSX문법을 `createElement`메서드 호출문으로 변환하여 리액트 엘리먼트를 생성합니다.
+- `createElement`메서드의 반환 타입은 `ReactElement`를 기반으로 합니다.
+- 리액트에는 여러 개의 `createElement` 오버라이딩 메서드가 존재합니다.
+- `ReactElement`는 JSX의 `createElement`메서드 호출로 생성된 리액트 엘리먼트를 나는 타입입니다.
+- `React.ReactComponentElement`: `React.ReactElement`의 확장 타입?
+### `ReactNode`
+```ts
+
+declare namespace React {
+  ...
+  // ReactNode
+  type ReactText = string | number;
+  type ReactChild = ReactElement | ReactText;
+  type ReactFragment = {} | Iterable<ReactNode>; // ReactNode의 배열 형태
+
+  type ReactNode =
+    | ReactChild
+    | ReactFragment
+    | ReactPortal
+    | boolean
+    | null
+    | undefined;
+  type ComponentType<P = {}> = ComponentClass<P> | FunctionComponent<P>;
+}
+```
+- `ReactElement`외에도 boolean, string, number 등 여러 타입을 포함하고 있습니다.
+- 리액트의 `render`함수가 반환할 수 있는, 즉 컴포넌트가 가질 수 있는 모든 타입입니다.
+> [!info] react의 엘리먼트, `render`함수
+> - 엘리먼트는 리액트 앱의 가장 작은 단위로, 화면에 표시할 내용을 기술하며,  컴포넌트의 구성요소입니다.
+> - React 엘리먼트를 렌더링 하기 위해서는 우선 DOM 엘리먼트를 [`ReactDOM.createRoot()`](https://ko.legacy.reactjs.org/docs/react-dom-client.html#createroot)에 전달한 다음, React 엘리먼트를 `root.render()`에 전달해야 합니다.
+#### children을 포함하는 props 타입 선언
+```ts
+interface MyComponentProps {
+  children?: React.ReactNode;
+  //...
+}
+```
+- children을 어떤 타입으로든 지정하려면 `ReactNode` 타입으로 Children을 선언하면 됩니다.
+- 리액트 내장 타입인 `PropsWithChildren`타입도 `ReactNode`타입으로 children을 선언하고 있습니다.
+```ts
+type PropsWithChildren<P = unknown> = P & {
+  children?: ReactNode | undefined;
+};
+
+interface MyProps {
+  //...
+}
+
+type MyComponentProps = PropsWithChildren<MyProps>;
+```
+### `JSX.Element`
+ ```ts
+ // JSX.Element
+declare global {
+  namespace JSX {
+    interface Element extends React.ReactElement<any, any> {
+      // ...
+    }
+    // ...
+  }
+}
+```
+ - `ReactElement`의 제네릭으로 props와 컴포넌트 자체 타입에 대해 `any`타입을 가지도록 확장하고 있습니다.
+ - `global`네임스페이스에 정의되있어 외부 라이브러리에서 컴포넌트 타입을 재정의할 수 있습니다.
+> [!info] 글로벌 네임스페이스
+> - 변수, 함수, 타입 등의 식별자가 정의되는 전역적인 범위
+> - js, ts에서는 기본적으로 전역 스코프에서 선언된 변수나 함수 등은 글로벌 네임스페이스에 속합니다.
+> - 전역 스코프에서 선언된 식별자는 모든 곳에서 접근할 수 있습니다.
+
+- 리액트 엘리먼트를 prop으로 전달받아 [render props 패턴](https://ko.legacy.reactjs.org/docs/render-props.html)으로 컴포넌트를 구현할때 유용합니다.
+
+> [!info] render props 패턴은 쉽게 말하면 props로 리액트 컴포넌트를 넘겨주는 것입니다.
+
+```tsx
+interface Props {
+  icon: JSX.Element;
+}
+
+const Item = ({ icon }: Props) => {
+  //prop으로 JSX.Element타입의 컴포넌트를 받습니다.
+  const iconSize = icon.props.size;
+  
+  return (<li>{icon}</li>);
+};
+
+//icon prop에는 JSX.Element 타입을 가진 요소만 할당할 수 있습니다.
+const App = () => {
+  return <Item icon={<Icon size={14} />} />
+};
+```
+#### 타입 추론 기능을 활용하려면 `ReactElement` 사용하기
+- `ReactElement`타입의 제네릭에 직접 해당 컴포넌트의 props타입을 명시해주면 타입 추론이 됩니다. (`JSX.Element`의 `any`는 타입추론되지 않습니다.)
+```tsx
+interface IconProps {
+  size: number;
+}
+
+interface Props {
+  //ReactElement의 props타입으로 IconProps를 지정합니다.
+  icon: React.ReactElement<IconProps>;
+}
+
+const Item = ({ icon }: Props) => {
+  //icon prop으로 받은 컴포넌트의 props에 접근하면 props의 목록이 추론됩니다.
+  const iconSize = icon.props.size;
+
+  return <li>{icon}</li>;
+};
+```
+## 기본 HTML 요소 타입 활용하기
+### 기존 HTML 태그의 속성 타입을 활용하여 타입 지정
+- 기존의 HTML 태그를 확장한 컴포넌트를 만들때, 컴포넌트가 기존 HTML의 속성을 지원해야 일관성과 편의성을 모두 챙길 수 있습니다.
+- 기존 HTML 태그의 속성(onClick 등)의 타입으로 컴포넌트의 속성 타입을 지정하는 방법입니다.
+#### `React.DetailedHTMLProps`
+```tsx
+type NativeButtonProps = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+type ButtonProps = {
+  onClick?: NativeButtonProps["onClick"];
+};
+```
+- ButtonProps의 onClick 타입은 실제 HTML button 태그의 onClick 이벤트 핸들러 타입과 동일하게 할당됩니다.
+#### `React.ComponentPropsWithoutRef`
+```tsx
+type NaticeButtonType = React.ComponentPropsWithoutRef<"button">;
+type Buttonprops = {
+  onClick?: NativeButtonType["onClick"];
+}
+```
+#### `React.forwardRef`
+- 함수형 컴포넌트에서는 생성된 인스턴스가 없어 `ref`에 기대한 값이 할당되지 않습니다.
+	```tsx
+	function Button(ref: NativeButtonProps["ref"]) {
+	  const buttonRef = useRef(null);
+	  return <button ref={buttonRef}>버튼</button>
+	}
+
+	const WrappedButton = () => {
+	  const buttonRef = useRef();
+	  return (
+	    <div>
+	      <Button ref={buttonRef} />
+	    </div>
+	  )
+	}
+	```
+
+- 함수형 컴포넌트에서 `useRef`를 사용하여 HTML 태그에 `ref`를 전달하려면 `React.forwardRef<ref타입 정보, props타입 정보>`를 사용해야합니다.
+- 이때 **props 타입 정보로 `ref`속성이 제외된 `React.ComponentPropsWithoutRef<"html태그">`** 를 사용합니다.
+  왜냐하면 `DetailedHTMLProps`같이 `ref`를 포함하는 타입을 지정하면 실제로는 동작하지 않는 `ref`를 받도록 타입이 지정되어 에러가 발생할 수 있기 때문입니다.
+```tsx
+type NativeButtonType = React.ComponentPropsWithoutRef<"button">;
+
+const Button = forwardRef<HTMLButtonElement, NativeButtonType>((props, ref) => {
+  return <button ref={ref} {...props}>버튼</button>
+})
+
+const WrappedButton = () => {
+  const buttonRef = useRef();
+  return (
+    <div>
+	  <Button ref={buttonRef} />
+	</div>
+  )
+}
+```
+
+> [!tip] HTML 속성을 확장하는 props를 설계할때는 `React.ComponentPropsWithoutRef` 타입을 사용하여, `ref`가 실제로 `forwardRef`와 함께 사용될 때만 props로 전달되도록 타입을 정의하는게 안전합니다.
+
+## 리액트 이벤트
+- 리액트 컴포넌트에 등록되는 이벤트 리스너는 브라우저의 고유 이벤트와 완전히 동일하게 동작하지는 않습니다. (e.g. 리액트 이벤트 핸들러는 이벤트 버블링 단계에서 호출됩니다.)
+- 이벤트 캡처 단계에서 이벤트 핸들러를 등록하려면 `onClickCapture` 처럼 일반 이벤트 리스너 이름 뒤에 `Capture`를 붙여야 합니다.
+- 리액트는 브라우저 이벤트를 합성한 합성 이벤트 `SyntheticEvent`를 제공합니다.
