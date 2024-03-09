@@ -228,3 +228,6 @@ String name = optional.orElse("anonymous"); // 값이 없다면 "anonymous" 를 
 - 스프링 부트에서 auto-configuration을 비활성화하는 방법은 무엇인가요?
 # vscode 팁
 - import 단축키: `ctrl + spacebar`
+# 함수명 작성 팁
+- 함수 내부 로직을 의미하는 함수명은 재사용성과 확장성이 낮고, 어떻게 사용하는 건지 알기 어려움
+- **함수가 어떻게 사용되는지에 초점을 맞춰서 이름 지을 것**
