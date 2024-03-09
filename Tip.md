@@ -226,3 +226,5 @@ String name = optional.orElse("anonymous"); // 값이 없다면 "anonymous" 를 
 - 스프링이 주기적으로 의존하는 것은 무엇이며, 어떻게 예방하나요?
 - REST API를 보호하는 방법은?
 - 스프링 부트에서 auto-configuration을 비활성화하는 방법은 무엇인가요?
+# vscode 팁
+- import 단축키: `ctrl + spacebar`
