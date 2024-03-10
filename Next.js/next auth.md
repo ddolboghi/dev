@@ -248,9 +248,8 @@ AUTH_SECRET="secret"
 1. 프로젝트 파일 최상위에 `middleware.ts`를 만듭니다.
 > [!warning] 파일이름을 정확히 `middleware`라고 해야 작동합니다.
 
-2. 다음을 작성합니다. 호출할 미들웨어 경로를 [`matcher`](https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher)안에 적습니다. 
-   특정 정적 파일과 이미지를 제외한 **모든 경로가 미들웨어를 호출**하도록 했습니다.
-   이는 스프링시큐리티의 filterChain에서 인증없이 접근 가능한 경로를 지정하는 것과 비슷합니다.
+2. 다음을 작성합니다. 호출할 미들웨어 경로를 [`matcher`](https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher)안에 적습니다. 이는 스프링시큐리티의 filterChain에서 인증 없이 접근 가능한 경로를 지정하는 것과 비슷합니다.
+	- 특정 정적 파일과 이미지를 제외한 **모든 경로가 미들웨어를 호출**하도록 했습니다.
 ```ts
 import { auth } from "./auth"
 export default auth((req) => {
@@ -258,7 +257,7 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ["/auth/login"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
 
@@ -266,3 +265,9 @@ export const config = {
 > - `matcher`에 private나 public 경로 중 하나를 넣는게 아닙니다. `matcher`는 이를 체크하지 않습니다. **단지 미들웨어를 호출하기 위해 사용됩니다.**
 > - `matcher`로 호출된 미들웨어는 위 `auth(... => ...)`함수를 호출합니다.
 
+# Edge 호환 설정
+- 일부 라이브러리 또는 ORM 패키지가 아직 표준 Web API를 반영하지 않은 경우 auth configuration을 여러 파일로 분할할 수 있습니다. 다음은 데이터베이스 어댑터를 사용하여 이를 수행하는 방법의 예입니다.
+
+NextAuth.js는 두 가지 세션 전략을 지원합니다. 어댑터를 사용하는 경우 세션 데이터를 데이터베이스에 저장하도록 선택할 수 있습니다. 데이터베이스 및 해당 어댑터가 Edge 런타임/인프라와 호환되지 않으면 "데이터베이스" 세션 전략을 사용할 수 없습니다.
+
+대부분의 어댑터는 아직 Edge 런타임과 호환되지 않는 ORM/라이브러리에 의존합니다. 따라서 JWT 세션 전략을 강제로 적용하여 이 문제를 해결할 수 있는 방법은 다음과 같습니다:
