@@ -107,79 +107,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   return { success: "Email sent!" }
 }
 ```
-
 - 로그인 폼과 처리도 같은 방식으로 작성합니다.
-```tsx
-// components/auth/loginForm.tsx
-"use client"
-  
-import * as z from "zod"
-import { CardWrapper } from "./cardWrapper"
-import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
-import { LoginSchema } from "@/schemas"
-import { useForm } from "react-hook-form"
-import { Input } from "../ui/input"
-import { Button } from "../ui/button"
-import FormError from "../formError"
-import FormSuccess from "../formSuccess"
-import { login } from "@/actions/login"
-import { useState, useTransition } from "react"
-  
-export function LoginForm() {
-  const [error, setError] = useState<string | undefined>("")
-  const [success, setSuccess] = useState<string | undefined>("")
-  const [isPending, startTransition] = useTransition() //대기상태인지 여부 설정
-  
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  })
-
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    setError("")
-    setSuccess("")
-  
-    startTransition(() => {
-      login(values).then((data) => {
-        setError(data.error)
-        setSuccess(data.success)
-      })
-    })
-  }
-  return (
-    //...
-  )
-}
-```
-
-```ts
-// actions/login.ts
-"use server"
-  
-import * as z from "zod"
-import { LoginSchema } from "@/schemas"
-  
-export const login = async (values: z.infer<typeof LoginSchema>) => {
-  const validateFields = LoginSchema.safeParse(values)
-  
-  if (!validateFields.success) {
-    return { error: "Invalid fields!" }
-  }
-  
-  return { success: "Email sent!" }
-}
-```
 # database adapter 설정하기
 - Auth.js의 adapter는 사용자, 계정, 세션 등의 데이터를 저장하는데 사용하려는 데이터베이스 또는 백엔드 시스템에 애플리케이션을 연결합니다. 
 - **자체 데이터베이스에 사용자 정보를 유지해야 하거나 특정 플로우를 구현하려는 경우가 아니라면 어댑터는 선택 사항입니다.** 예를 들어 이메일 제공업체는 인증 토큰을 저장할 수 있는 어댑터가 필요합니다.
@@ -229,6 +157,13 @@ model User {
 ```
 npm i bcrypt
 ```
+
+> [!warning] bcryptjs
+> - bcrypt가 에러를 일으키는 경우가 종종있어 bcryptjs 라이브러를 대신 사용할 수 도 있습니다. 사용법은 거의 같습니다.
+> ``` 
+>npm i bcryptjs
+>npm i -D @types/bcryptjs 
+> ```
 
 2. bcrypt는 type을 제공하지 않기때문에 type을 제공하는 라이러리를 설치합니다.
 ```

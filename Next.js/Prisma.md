@@ -5,7 +5,7 @@
 	npm i @prisma/client
 	```
 
-2. `db.ts` 생성하기
+2. `db.ts` 생성하기: 스프링부트의 application.yml과 비슷한 역할입니다.
 	```ts
 	import { PrismaClient } from "@prisma/client"
 	  
