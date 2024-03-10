@@ -228,3 +228,39 @@ export const {
 // route.ts
 export { GET, POST } from "@/auth"
 ```
+
+4. 시크릿 키 작성하기
+	- `.env`파일안에 시크릿키를 작성합니다.
+```env
+AUTH_SECRET="secret"
+```
+
+> [!warning] [missing secret 에러](https://authjs.dev/reference/core/errors#missingsecret)
+
+5. OAuth에서 이용하는 api 확인하기
+- `http://localhost:3000/api/auth/providers`로 접속하면 `auth.ts`에 설정한 provider에 대한 정보가 담긴 json형식의 데터가 화면에 나타납니다.
+```json
+{"github":{"id":"github","name":"GitHub","type":"oauth","signinUrl":"http://localhost:3000/api/auth/signin/github","callbackUrl":"http://localhost:3000/api/auth/callback/github"}}
+```
+# middleware 설정하기
+- middleware는 next-auth의 구성 요소가 아니라 nextjs의 구성 요소입니다.
+
+1. 프로젝트 파일 최상위에 `middleware.ts`를 만듭니다.
+> [!warning] 파일이름을 정확히 `middleware`라고 해야 작동합니다.
+
+2. 다음을 작성합니다.
+```ts
+import { auth } from "./auth"
+export default auth((req) => {
+  // req.auth
+})
+
+// Optionally, don't invoke Middleware on some paths
+// Read more: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+}
+```
+
+> [!tip] `matcher`의 역할
+> - `matcher`는 경로가 private인지 public인지 체크하지 않습니다. 단지 미들웨어를 호출하기 위해 사용됩니다.
