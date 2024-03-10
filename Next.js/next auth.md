@@ -42,7 +42,10 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  password      String?
   accounts      Account[]
 }
 ```
+
+> [!tip] User 모델의 password 필드를 선택 옵션으로 두는 이유는 OAuth 로그인 시 비밀번호를 필요로하지 않기 때문입니다.
 

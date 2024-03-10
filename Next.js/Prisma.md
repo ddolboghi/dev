@@ -50,9 +50,18 @@
 	}
 	```
 
-8. 작성한 모델을 토대로 데이터베이스에 테이블을 만듭니다.
+8. 작성한 모델을 토대로 데이터베이스에 테이블을 만듭니다. 
+> [!tip] 모델을 추가할때마다 실행해야 데이터베이스에 테이블이 생성됩니다. 하지만 아직 서버리스 데이터베이스에 올라간 상태는 아닙니다.
+
 ```
 npx prisma generate
+```
+
+9. 서버리스 데이터베이스에 생성한 테이블 동기화하기
+```
+npx prisma db push
+
+>>>Your database is now in sync with your Prisma schema. Done in 37.11s
 ```
 
 # Prisma 모델 사용하기
