@@ -2,7 +2,7 @@
 - 로그인 후 리다이렉션되는 페이지를 만들어야합니다.
 - [초기 설정](https://next-auth.js.org/configuration/initialization)
 - 리다이렉트 주소: `/api/auth/callback/:provider`
-# [공식문서](https://authjs.dev/?_gl=1*1owi9s4*_gcl_au*Mjk1OTM2NDEwLjE3MTAwNDY5NDA.)
+# [공식문서](https://authjs.dev/guides/upgrade-to-v5)
 
 # 로그인, 회원가입 폼 만들기
 ## zod를 이용한 validation
@@ -177,7 +177,9 @@ import bcrypt from "bcrypt"
 import { db } from "@/lib/db"
 
   const { email, password, name } = validateFields.data
-  const hashedPassword = await bcrypt.hash(password, 10)
+  
+  //암호화
+  const hashedPassword = await bcrypt.hash(password, 10) 
   
   const existingUser = await db.user.findUnique({
     where: {
@@ -198,4 +200,31 @@ import { db } from "@/lib/db"
       password: hashedPassword,
     },
   })
+```
+# next auth 설치 및 설정
+1. next-auth v5 설치하기
+```
+yarn add next-auth@beta
+```
+
+2. 설정 파일 작성하기
+```ts
+// auth.ts
+import NextAuth from "next-auth"
+import GitHub from "next-auth/providers/github"
+  
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
+  providers: [GitHub],
+})
+```
+
+3. API 라우트 작성하기
+	- `app`라우트 안에 `api/auth/[...nextauth]/route.ts`를 생성합니다.
+	- prisma는 edge를 지원하지 않기 때문에 `export const runtime = "edge"`를 삭제합니다.
+```ts
+// route.ts
+export { GET, POST } from "@/auth"
 ```
