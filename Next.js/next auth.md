@@ -6,6 +6,7 @@
 
 # 로그인, 회원가입 폼 만들기
 ## zod를 이용한 validation
+- `index.ts`: `zod`를 이용해 검증 schema를 작성합니다. 
 ```ts
 // lib/index.ts
 import * as z from "zod"
@@ -32,6 +33,7 @@ export const RegisterSchema = z.object({
 })
 ```
 
+- 회원가입 폼 컴포넌트를 작성합니다.
 ```tsx
 // components/auth/registerForm.tsx
 "use client"
@@ -87,6 +89,26 @@ const [error, setError] = useState<string | undefined>("")
 }
 ```
 
+- `register.ts`: 사용자가 입력한 값을 받아 처리하는 곳입니다.
+```ts
+// actions/register.ts
+"use server"
+  
+import * as z from "zod"
+import { RegisterSchema } from "@/schemas"
+  
+export const register = async (values: z.infer<typeof RegisterSchema>) => {
+  const validateFields = RegisterSchema.safeParse(values)
+  
+  if (!validateFields.success) {
+    return { error: "Invalid fields!" }
+  }
+  
+  return { success: "Email sent!" }
+}
+```
+
+- 로그인 폼과 처리도 같은 방식으로 작성합니다.
 ```tsx
 // components/auth/loginForm.tsx
 "use client"
@@ -138,6 +160,24 @@ export function LoginForm() {
   return (
     //...
   )
+}
+```
+
+```ts
+// actions/login.ts
+"use server"
+  
+import * as z from "zod"
+import { LoginSchema } from "@/schemas"
+  
+export const login = async (values: z.infer<typeof LoginSchema>) => {
+  const validateFields = LoginSchema.safeParse(values)
+  
+  if (!validateFields.success) {
+    return { error: "Invalid fields!" }
+  }
+  
+  return { success: "Email sent!" }
 }
 ```
 # database adapter 설정하기
@@ -196,7 +236,31 @@ npm i -D @types/bcrypt
 ```
 
 3. 비밀번호를 암호화합니다.
-```tsx
-//...
-const hashedPassword = await bcrypt.hash(password, 10)
+```ts
+// actions/register.ts
+import bcrypt from "bcrypt"
+import { db } from "@/lib/db"
+
+  const { email, password, name } = validateFields.data
+  const hashedPassword = await bcrypt.hash(password, 10)
+  
+  const existingUser = await db.user.findUnique({
+    where: {
+      email,
+    },
+  })
+  
+  if (existingUser) {
+    return {
+      error: `이미 회원으로 가입되어 있습니다. ${email}로 서비스를 이용해주세요.`,
+    }
+  }
+  
+  await db.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+    },
+  })
 ```
