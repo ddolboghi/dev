@@ -112,7 +112,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 - Auth.js의 adapter는 사용자, 계정, 세션 등의 데이터를 저장하는데 사용하려는 데이터베이스 또는 백엔드 시스템에 애플리케이션을 연결합니다. 
 - **자체 데이터베이스에 사용자 정보를 유지해야 하거나 특정 플로우를 구현하려는 경우가 아니라면 어댑터는 선택 사항입니다.** 예를 들어 이메일 제공업체는 인증 토큰을 저장할 수 있는 어댑터가 필요합니다.
 - 공식 문서 > Getting started > Database Adapters > Official adapters에서 사용하는 서버리스 데이터베이스를 선택합니다.
-- adapter를 사용하는 경우 세션 데이터를 데이터베이스에 저장하도록 선택할 수 있습니다. 데이터베이스 및 해당 adapter가 Edge 런타임/인프라와 호환되지 않으면 "데이터베이스 세션" 전략을 사용할 수 없습니다.
+- nextjs는 두 가지 세션 전략을 제공합니다:
+	- 데이터베이스 세션 전략:  세션 데이터를 데이터베이스에 저장합니다. 데이터베이스 및 해당 adapter가 Edge 런타임/인프라와 호환되지 않으면 사용할 수 없습니다.(eg. Prisma)
+	- JWT 세션 전략: JWT를 이용한 전략
 
 > [!info] [[Prisma]] 기준으로 설명합니다.
 
@@ -279,4 +281,39 @@ import type { NextAuthConfig } from "next-auth"
 export default {
   providers: [GitHub],
 } satisfies NextAuthConfig
+```
+
+2. `auth.ts`를 다음과 같이 작성합니다.
+```ts
+import NextAuth from "next-auth"
+import authConfig from "./auth.config"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { db } from "./lib/db"
+  
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
+  adapter: PrismaAdapter(db),
+  session: { strategy: "jwt" },
+  ...authConfig,
+})
+```
+
+3. `middleware.ts`를 다음과 같이 작성합니다.
+```ts
+import NextAuth from "next-auth"
+import authConfig from "@/auth.config"
+  
+const { auth } = NextAuth(authConfig)
+  
+export default auth((req) => {
+  const isLoggedIn = !!req.auth
+  console.log("ROUTE: ", req.nextUrl.pathname)
+  console.log("IS LOGGEDIN: ", isLoggedIn)
+})
+  
+export const config = {
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+}
 ```
