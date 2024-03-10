@@ -248,19 +248,21 @@ AUTH_SECRET="secret"
 1. 프로젝트 파일 최상위에 `middleware.ts`를 만듭니다.
 > [!warning] 파일이름을 정확히 `middleware`라고 해야 작동합니다.
 
-2. 다음을 작성합니다.
+2. 다음을 작성합니다. 호출할 미들웨어 경로를 [`matcher`](https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher)안에 적습니다. 
+   특정 정적 파일과 이미지를 제외한 **모든 경로가 미들웨어를 호출**하도록 했습니다.
+   이는 스프링시큐리티의 filterChain에서 인증없이 접근 가능한 경로를 지정하는 것과 비슷합니다.
 ```ts
 import { auth } from "./auth"
 export default auth((req) => {
   // req.auth
 })
 
-// Optionally, don't invoke Middleware on some paths
-// Read more: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/auth/login"],
 }
 ```
 
 > [!tip] `matcher`의 역할
-> - `matcher`는 경로가 private인지 public인지 체크하지 않습니다. 단지 미들웨어를 호출하기 위해 사용됩니다.
+> - `matcher`에 private나 public 경로 중 하나를 넣는게 아닙니다. `matcher`는 이를 체크하지 않습니다. **단지 미들웨어를 호출하기 위해 사용됩니다.**
+> - `matcher`로 호출된 미들웨어는 위 `auth(... => ...)`함수를 호출합니다.
+
