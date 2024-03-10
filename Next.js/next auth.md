@@ -309,11 +309,69 @@ const { auth } = NextAuth(authConfig)
   
 export default auth((req) => {
   const isLoggedIn = !!req.auth
-  console.log("ROUTE: ", req.nextUrl.pathname)
-  console.log("IS LOGGEDIN: ", isLoggedIn)
 })
   
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
+# 라우트 지정하기
+- 경우에 따라 접속할 수 있는 라우트를 정해둡니다.
+  이는 스프링시큐리티에서 filterChain으로 URL을 지정하는 것과 비슷합니다.
+```ts
+//routes.ts
+/**
+ * 로그아웃한 유저가 들어갈 수 있는 라우트 지정
+ * public으로 접근할 수 있는 라우트의 배열
+ * 이 라우트들은 authentication을 필요로하지 않음
+ * @type {string[]}
+ * */
+export const publicRoutes = ["/"]
+  
+/**
+ * authentication을 필요로하는 라우트의 배열
+ * 이 라우트들은 로그인한 유저를 /settings로 리다이렉트함
+ * @type {string[]}
+ * */
+export const authRoutes = ["/auth/login", "/auth/register"]
+  
+/**
+ * API authentication 라우트의 고정값(prefix)
+ * 이 prefix로 시작하는 라우트는 API authentication을 위해 사용됨
+ * @type {string}
+ * */
+export const apiAuthPrefix = "/api/auth"
+  
+/**
+ * 로그인후 기본적으로 리다이렉트되는 경로
+ * @type {string}
+ * */
+export const DEFAULT_LOGIN_REDIRECT = "/settings"
+```
+
+- `middleware`에서 접속 가능한 URL을 지정합니다.
+```ts
+//middleware.ts
+import NextAuth from "next-auth"
+import authConfig from "@/auth.config"
+import {
+  apiAuthPrefix,
+  DEFAULT_LOGIN_REDIRECT,
+  authRoutes,
+  publicRoutes,
+} from "./routes"
+  
+const { auth } = NextAuth(authConfig)
+
+export default auth((req) => {
+  const { nextUrl } = req
+  const isLoggedIn = !!req.auth
+  
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+})
+  
+export const config = {
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+}
+```
+- `isApiAuthRoute`: 미들웨어의 작업이 "/api/auth/~"경로에 도달하는 것을 허용하기 위해 상수에 할당합니다.
