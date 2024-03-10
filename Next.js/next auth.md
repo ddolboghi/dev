@@ -321,15 +321,14 @@ export const config = {
 ```ts
 //routes.ts
 /**
- * 로그아웃한 유저가 들어갈 수 있는 라우트 지정
- * public으로 접근할 수 있는 라우트의 배열
+ * 공개적으로 접근할 수 있는, 즉 로그아웃한 유저들도 접근 가능한 라우트들이 담긴 배열
  * 이 라우트들은 authentication을 필요로하지 않음
  * @type {string[]}
  * */
 export const publicRoutes = ["/"]
   
 /**
- * authentication을 필요로하는 라우트의 배열
+ * authentication에 사용되는 라우트들이 담긴 배열
  * 이 라우트들은 로그인한 유저를 /settings로 리다이렉트함
  * @type {string[]}
  * */
@@ -346,7 +345,7 @@ export const apiAuthPrefix = "/api/auth"
  * 로그인후 기본적으로 리다이렉트되는 경로
  * @type {string}
  * */
-export const DEFAULT_LOGIN_REDIRECT = "/settings"
+export const DEFAULT_LOGIN_REDIRECT = "/settings" //나중에 원하는 경로로 지정할 수 있음
 ```
 
 - `middleware`에서 접속 가능한 URL을 지정합니다.
@@ -368,10 +367,16 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth
   
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
 })
   
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
-- `isApiAuthRoute`: 미들웨어의 작업이 "/api/auth/~"경로에 도달하는 것을 허용하기 위해 상수에 할당합니다.
+
+> [!tip] `isApiAuthRoute` 상수 할당
+> 미들웨어의 작업이 "/api/auth/~"경로에 도달하는 것을 허용하기 위해 상수에 할당합니다. 
+> next auth가 제대로 작동하려면 반드시 라우트를 auth함수 내부에 추가해야합니다.
+
+- 
