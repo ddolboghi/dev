@@ -2,3 +2,4 @@
 - 로그인 후 리다이렉션되는 페이지를 만들어야합니다.
 - [초기 설정](https://next-auth.js.org/configuration/initialization)
 - 리다이렉트 주소: `/api/auth/callback/:provider`
+- 
