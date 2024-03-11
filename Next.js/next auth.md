@@ -549,6 +549,7 @@ callbacks: {
   }
 }
 ```
+- 위의 `signIn()`콜백에 의해 반환된 리다이렉트는 인증을 취소하기 때문에 인증 성공 시(로그인 성공 시) 리다이렉트되는 URL이 반환되면 안됩니다.
 ### EmailProvider 사용 시
 - EmailProvider를 사용하는 경우 사용자가 인증 요청을 할 때(로그인할 수 있는 링크가 포함된 이메일을 보내기 전)와 로그인 이메일에서 링크를 활성화한 후 다시 한 번 `signIn()` 콜백이 트리거됩니다.
 - 이메일 계정에는 OAuth 계정과 같은 방식으로 프로필이 없습니다. 
@@ -556,4 +557,29 @@ callbacks: {
   사용자가 로그인 링크를 클릭한 후 콜백이 호출되면 이 속성은 존재하지 않습니다.
 - 차단 목록에 있는 주소나 도메인으로 이메일을 보내지 않으려면(또는 허용 목록에 있는 이메일 주소에 대해서만 명시적으로 이메일을 생성하려면) `verificationRequest` 속성을 확인할 수 있습니다.
 ### CredentialsProvider 사용 시
-- CredentialsProvider 사용 시 자격 증명 공급자를 사용할 때  개체는 권한 부여 콜백에서 반환된 응답이고 프로필 개체는 HTTP POST 제출의 원시 본문입니다.
+- CredentialsProvider 사용 시 `user`객체는 `authorize` 콜백에서 반환된 응답이고, `profile`객체는 HTTP POST 제출의 body입니다.
+
+> [!info] 데이터베이스 사용 유무에 따른 `user`객체의 형태 
+> 데이터베이스와 Auth.js를 함께 사용하는 경우
+> - 사용자가 이전에 로그인한 적이 있는 경우 데이터베이스의 `user`객체(사용자 ID 포함)가 됩니다.
+> - 이전에 로그인한 적이 없는 경우 간단한 prototype `user`객체(e.g. 이름, 이메일, 이미지)가 됩니다.
+>   
+> 데이터베이스 없이 Auth.js를 사용하는 경우
+> - `user` 객체는 항상 프로필에서 추출된 정보가 포함된 prototype `user`객체가 됩니다.
+## `redirect()` callback
+- redirect 콜백은 사용자가 콜백 URL로 리다이렉트될때마다 호출됩니다.
+- 사이트 URL과 같은 URL만 허용됩니다.
+- redirect 콜백은 동일한 흐름에서 여러번 호출될 수 있습니다.
+- `middleware.ts`에서 경우에따른 리다이렉트를 잘 지정했다면 redirect 콜백을 많이 사용할 일이 없습니다. 
+```ts
+callbacks: {
+  async redirect({ url, baseUrl }) {
+    // Allows relative callback URLs
+    if (url.startsWith("/")) return `${baseUrl}${url}`
+    // Allows callback URLs on the same origin
+    else if (new URL(url).origin === baseUrl) return url
+    return baseUrl
+  }
+}
+```
+## `session()` callback
