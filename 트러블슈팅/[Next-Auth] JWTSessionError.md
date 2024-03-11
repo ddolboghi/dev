@@ -1,4 +1,4 @@
-next-auth 공식문서의 팁대로 `jwt()` 콜백이 처음 호출될때 필드를 저장하려고 다음과 같이 코드를 작성했습니다. 
+`jwt()` 콜백이 호출될때 필드를 저장하려고 다음과 같이 코드를 작성했더니 `JWTSessionError`가 발생했습니다. 
 ```ts
 // auth.js
 import NextAuth from "next-auth"
@@ -20,9 +20,7 @@ export const {
       return session
     },
     async jwt({ token, user, account, profile, session, trigger }) {
-      if (user || account || profile || session || trigger) {
-        token.customField = "1q2w3e4r"
-      }
+      token.customField = "1q2w3e4r"
       return token
     },
   },
@@ -32,7 +30,6 @@ export const {
 })
 ```
 
-callbacks의 jwt 콜백을 지정하는 부분에서 JWTSessionError가 발생했습니다. 
 ```
 [auth][error] JWTSessionError: Read more at https://errors.authjs.dev#jwtsessionerror
 [auth][cause]: ReferenceError: sessionStorage is not defined
@@ -46,5 +43,6 @@ callbacks의 jwt 콜백을 지정하는 부분에서 JWTSessionError가 발생�
 ```
 
 에러 로그를 잘보면 sessionStorage가 정의되지 않아 참조할 수 없다고 합니다.  
-코드를 다시 보니
+
+코드를 다시 보니 session.user.customField에 값을 할당하기 전에 if 문에서  `sessionStorage.user`를 참조하고 있었습니다. 애초에 sessionStorage를 정의한 적이 없으므로 원래 코드인 `session.user`로 수정했더니 정상작동했습니다.
 
