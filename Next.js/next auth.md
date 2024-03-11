@@ -509,13 +509,51 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
 > [!tip] `actions/login.ts`에서 수행되는 작업들은 `callbacks`에 똑같이 작성할 수 있습니다.
 # [callbacks](https://authjs.dev/guides/basics/callbacks)
-- `callbacks`는 어떤 작업이 수행될때 일어나는 일을 제어할 수 있는 함수들입니다.
+- `callbacks`는 어떤 작업(로그인, 리다이렉트 등)이 수행될때 일어나는 일을 제어할 수 있는 함수들입니다.
 - `callbacks`는 데이터베이스 없이 액세스 제어를 구현하고 외부 데이터베이스나 API와 통합할 수 있어 JWT를 사용할때 매우 강력합니다.
 
 > [!tip]
 > JWT를 사용할 때 액세스 토큰이나 사용자 ID와 같은 데이터를 브라우저에 전달하려면 `jwt` 콜백이 호출될 때 토큰의 데이터를 유지한 다음 `session` 콜백에서 브라우저에 데이터를 전달할 수 있습니다.
 
-- `auth.ts`의 `NextAuth`객체에 `callbacks` 배열을 넘겨줄 수 있습니다.
+- `auth.ts`의 `NextAuth`객체에 `callbacks`객체를 넘겨줄 수 있습니다.
 ```ts
-
+// auth.ts
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
+  callbacks: {
+    //핸들러 지정
+  },
+  adapter: PrismaAdapter(db),
+  session: { strategy: "jwt" },
+  ...authConfig,
+})
 ```
+
+## `signIn()` callback
+```ts
+callbacks: {
+  async signIn({ user, account, profile, email, credentials }) {
+    const isAllowedToSignIn = true
+    if (isAllowedToSignIn) {
+      return true
+    } else {
+      //에러 메시지를 보여주기 위해 false 반환
+      return false
+      //또는 리다이렉트할 URL 반환
+      // return '/unauthorized'
+    }
+  }
+}
+```
+### EmailProvider 사용 시
+- EmailProvider를 사용하는 경우 사용자가 인증 요청을 할 때(로그인할 수 있는 링크가 포함된 이메일을 보내기 전)와 로그인 이메일에서 링크를 활성화한 후 다시 한 번 `signIn()` 콜백이 트리거됩니다.
+- 이메일 계정에는 OAuth 계정과 같은 방식으로 프로필이 없습니다. 
+- 이메일 로그인 중 첫 번째 호출 시 verification 요청 흐름에서 트리거되고 있음을 나타내기 위해 `email` 객체에 `verificationRequest: true` 속성이 포함됩니다. 
+  사용자가 로그인 링크를 클릭한 후 콜백이 호출되면 이 속성은 존재하지 않습니다.
+- 차단 목록에 있는 주소나 도메인으로 이메일을 보내지 않으려면(또는 허용 목록에 있는 이메일 주소에 대해서만 명시적으로 이메일을 생성하려면) `verificationRequest` 속성을 확인할 수 있습니다.
+### CredentialsProvider 사용 시
+- CredentialsProvider 사용 시 자격 증명 공급자를 사용할 때  개체는 권한 부여 콜백에서 반환된 응답이고 프로필 개체는 HTTP POST 제출의 원시 본문입니다.
