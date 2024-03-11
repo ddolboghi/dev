@@ -508,7 +508,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 - 한 번 로그인한 후 다시 로그인 페이지나 회원가입 페이지로 가려하면 `middleware.ts`에서 정의한 경우(if문)에 따라 지정된 라우트로 리다이렉트됩니다.
 
 > [!tip] `actions/login.ts`에서 수행되는 작업들은 `callbacks`에 똑같이 작성할 수 있습니다.
-# [callbacks](https://authjs.dev/guides/basics/callbacks)
+# callbacks
 - `callbacks`는 어떤 작업(로그인, 리다이렉트 등)이 수행될때 일어나는 일을 제어할 수 있는 함수들입니다.
 - `callbacks`는 데이터베이스 없이 액세스 제어를 구현하고 외부 데이터베이스나 API와 통합할 수 있어 JWT를 사용할때 매우 강력합니다.
 
@@ -597,3 +597,28 @@ callbacks: {
   }
 }
 ```
+
+> [!tip]
+> JWT를 사용할때 `jwt()`콜백은 `session()`콜백 전에 호출되므로, JWT에 추가한 어떤 것이든 session 콜백에서 즉시 사용할 수 있습니다.
+
+> [!warning]
+> - 데이터베이스 세션을 사용할때도 session 객체는 서버에 저장되지 않습니다. 세션 토큰, 사용자, 만료 시간 등이 세션 테이블에 저장됩니다.
+> - 세션 데이터를 서버 측에서 유지해야 하는 경우 세션에 대해 반환된 accessToken을 키로 사용하고 `session()` 콜백에서 데이터베이스에 연결하여 액세스할 수 있습니다. 세션 accessToken 값은 rotate하지 않으며 세션이 유효한 한 유효합니다???
+> - 데이터베이스 세션 대신 JWT를 사용한다면, 토큰에 저장된 User ID나 unique key를 사용해야합니다.
+> - JWT를 사용할 때는 세션 용 액세스 토큰이 생성되지 않으므로 로그인 시 직접 키를 생성해야 합니다.
+## `jwt()` callback
+- `jwt()` 콜백은 반드시 `token`을 반환해야 합니다.
+- 로그인 시 `token`은 다음과 같이 구성됩니다:
+	```
+	{
+	  token: {
+	    name: '시월이',
+	    email: 'siwoli@example.com',
+	    picture: null,
+	    sub: 'cltl4vlvp00006t5j7ub0a113',
+	    iat: 1710140570,
+	    exp: 1712732570,
+	    jti: '660d7b86-4693-4865-8041-9418e1e9fa16'
+	  }
+	}
+	```
