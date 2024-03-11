@@ -642,26 +642,28 @@ callbacks: {
 > -> 실제로 시도해봤지만 데이터가 추가되지 않았습니다.
 
 ## token에 추가한 데이터의 타입 지정
-```ts
-declare module "next-auth" {
+- token에 새로 추가된 데이터의 타입은 직접 지정해줘야 합니다.
+- User 모델에 `enum`타입인 `role`을 새로 만들었고, token에 `role`을 추가했을때 다음과 같이 타입을 지정했습니다.
 
-  interface User {
-
-    role: string
-
-  }
-
+```prisma
+// schema.prisma
+enum UserRole {
+  ADMIN
+  USER
 }
+```
 
-  
-
-declare module "next-auth/jwt" {
-
-  interface JWT {
-
-    role?: string
-
+```ts
+// auth.ts
+declare module "next-auth" {
+  interface User {
+    role: string
   }
-
+}
+  
+declare module "next-auth/jwt" {
+  interface JWT {
+    role?: string
+  }
 }
 ```
