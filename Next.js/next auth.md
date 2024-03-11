@@ -583,3 +583,17 @@ callbacks: {
 }
 ```
 ## `session()` callback
+- session 콜백은 session이 확인될때마다 호출됩니다.
+- 보안을 위해 기본적으로 토큰의 하위 집합만 반환됩니다.
+- `jwt()` 콜백을 통해 토큰에 추가한 내용을 사용하려면 session 콜백에 명시적으로 전달해야 클라이언트(e.g. `getSession()`, `useSession()`, `/api/auth/session`)가 사용할 수 있습니다.
+- 데이터베이스 세션을 사용할때는 `User` 객체가 인자로 전달됩니다.
+- 세션에 JWT를 사용할때는 JWT payload가 전달됩니다.
+```ts
+callbacks: {
+  async session({ session, token, user }) {
+    // Send properties to the client, like an access_token from a provider.
+    session.accessToken = token.accessToken
+    return session
+  }
+}
+```
