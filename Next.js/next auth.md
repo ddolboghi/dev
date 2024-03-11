@@ -435,3 +435,22 @@ export default {
   ],
 } satisfies NextAuthConfig
 ```
+
+```ts
+import NextAuth from "next-auth"
+import authConfig from "./auth.config"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { db } from "./lib/db"
+  
+export const {
+  handlers: { GET, POST },
+  //서버 컴포넌트나 서버 액션에서 사용 가능
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
+  adapter: PrismaAdapter(db),
+  session: { strategy: "jwt" },
+  ...authConfig,
+})
+```
