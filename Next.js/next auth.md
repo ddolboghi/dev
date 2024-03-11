@@ -315,7 +315,7 @@ export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
-# 라우트 지정하기
+# middleware로 라우트 지정하기
 - 로그인 여부에 따라 접속할 수 있는 라우트를 정해둡니다.
 ```ts
 //routes.ts
@@ -400,4 +400,5 @@ export const config = {
 
 > [!tip] `middleware`에서 `Response.redirect(new URL())`을 사용할때 
 > `URL`생성자 안에 `nextUrl`을 추가해야 절대 경로를 만들어 지정한 경로로 이동할 수 있습니다.
-
+# 로그인
+- `provider`에 `Credentials`를 추가합니다.
