@@ -435,8 +435,10 @@ export default {
   ],
 } satisfies NextAuthConfig
 ```
+- 비밀번호가 없어도 작업을 중지하는 이유는, 외부 API를 이용해 로그인하는 사용자들은 비밀번호가 없기때문에
 
 ```ts
+// auth.ts
 import NextAuth from "next-auth"
 import authConfig from "./auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter"
@@ -454,3 +456,44 @@ export const {
   ...authConfig,
 })
 ```
+
+```ts
+// actions/login.ts
+"use server"
+  
+import * as z from "zod"
+import { LoginSchema } from "@/schemas"
+import { signIn } from "@/auth" // auth.ts
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
+import { AuthError } from "next-auth"
+  
+export const login = async (values: z.infer<typeof LoginSchema>) => {
+  const validateFields = LoginSchema.safeParse(values)
+  
+  if (!validateFields.success) {
+    return { error: "잘못된 입력입니다." }
+  }
+  
+  const { email, password } = validateFields.data
+  
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: DEFAULT_LOGIN_REDIRECT,
+    })
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "회원이 아닙니다." }
+        default:
+          return { error: "잘못된 요청입니다." }
+      }
+    }
+    throw error
+  }
+}
+```
+- `throw error`되면 `redirectTo`로 지정한 라우트로 리다이렉트되지 않습니다.
+- 로그인 페이지에서 잘못된 이메일이나 비밀번호를 입력하면
