@@ -374,9 +374,13 @@ export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
+- `nextUrl`: 기본 URL입니다.(e.g. localhost:3000)
 
 > [!tip] `isApiAuthRoute` 상수 할당
 > 미들웨어의 작업이 "/api/auth/~"경로에 도달하는 것을 허용하기 위해 상수에 할당합니다. 
 > next auth가 제대로 작동하려면 반드시 라우트를 auth함수 내부에 추가해야합니다.
 
-- 
+> [!tip] `middleware`에서 `Response.redirect(new URL())`을 사용할때 
+> `URL`생성자 안에 `nextUrl`을 추가해야 절대 경로를 만들어 지정한 경로로 이동할 수 있습니다.
+
+2:37:31
