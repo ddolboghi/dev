@@ -641,5 +641,27 @@ callbacks: {
 > 
 > -> 실제로 시도해봤지만 데이터가 추가되지 않았습니다.
 
+## token에 추가한 데이터의 타입 지정
+```ts
+declare module "next-auth" {
 
+  interface User {
 
+    role: string
+
+  }
+
+}
+
+  
+
+declare module "next-auth/jwt" {
+
+  interface JWT {
+
+    role?: string
+
+  }
+
+}
+```
