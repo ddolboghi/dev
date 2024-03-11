@@ -44,5 +44,6 @@ export const {
 
 에러 로그를 잘보면 sessionStorage가 정의되지 않아 참조할 수 없다고 합니다.  
 
-코드를 다시 보니 session.user.customField에 값을 할당하기 전에 if 문에서  `sessionStorage.user`를 참조하고 있었습니다. 애초에 sessionStorage를 정의한 적이 없으므로 원래 코드인 `session.user`로 수정했더니 정상작동했습니다.
+코드를 다시 보니 session.user.customField에 값을 할당하기 전 if 문에서  `sessionStorage.user`를 참조하고 있었습니다. 
+애초에 sessionStorage를 정의한 적이 없으므로 원래 코드인 `session.user`로 수정했더니 정상작동했습니다.
 

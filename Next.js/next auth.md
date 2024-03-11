@@ -625,9 +625,9 @@ callbacks: {
 	}
 	```
 	- `jwt({ token })`의 `token`은 `session({ token })`의 `token`과 완전히 동일합니다.
-	- `sub`는 데이터베이스에 저장된 로우의 id 값입니다.
+	- `sub`는 **데이터베이스 세션**에 저장된 데이터의 id 값입니다.
 	- `user` , `profile`, `isNewUser`는 provider와 데이터베이스 사용 여부에 따라 달라집니다.
-	- `user`, `account`, `profile`, `isNewUser`는 jwt 콜백이 처음 호출될 때(**로그인 중일때**)만 전달됩니다. 이후 호출에서는 `token`만 사용할 수 있습니다.
+	- `user`, `account`, `profile`, `isNewUser`는 jwt 콜백이 처음 호출될 때(로그인 중일때)만 전달됩니다. **이후 호출에서는 `token`만 사용할 수 있습니다.**
 
 - JWT 세션을 사용하고 있다면, `/api/auth/signin`, `/api/auth/session`로 요청하거나 `getSession()`, `getServerSession()`, `useSession()`를 호출할때 `jwt()` 콜백을 호출합니다. 데이터베이스 세션 사용 시 호출되지 않습니다.
 - 토큰 만료 시간은 세션이 활성화될때마다 연장됩니다. 
@@ -638,6 +638,8 @@ callbacks: {
 > 2. 매개 변수가 존재하면(true) 콜백이 처음으로 호출되고 있음을 의미합니다.(즉, 사용자가 로그인 중입니다.)
 > 3. 이때 JWT의 `access_token`과 같은 데이터를 추가합니다. 
 > 4. 이후 `jwt()`를 호출하면 `token` 값만 있고 나머지는 `undefined`입니다.
+> 
+> -> 실제로 시도해봤지만 데이터가 추가되지 않았습니다.
 
 
 
