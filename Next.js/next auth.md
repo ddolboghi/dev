@@ -316,8 +316,7 @@ export const config = {
 }
 ```
 # 라우트 지정하기
-- 경우에 따라 접속할 수 있는 라우트를 정해둡니다.
-  이는 스프링시큐리티에서 filterChain으로 URL을 지정하는 것과 비슷합니다.
+- 로그인 여부에 따라 접속할 수 있는 라우트를 정해둡니다.
 ```ts
 //routes.ts
 /**
@@ -365,9 +364,27 @@ const { auth } = NextAuth(authConfig)
 export default auth((req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
-  
+
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  
+  if (isApiAuthRoute) {
+    return null
+  }
+  
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+    }
+    return null
+  }
+  
+  if (!isLoggedIn && !isPublicRoute) {
+    return Response.redirect(new URL("/auth/login", nextUrl))
+  }
+  
+  return null
 })
   
 export const config = {
@@ -375,6 +392,7 @@ export const config = {
 }
 ```
 - `nextUrl`: 기본 URL입니다.(e.g. localhost:3000)
+- `null`을 반환하는 것은 해당 라우트로 접속할 경우 아무 작업도 하지 않는 것을 의미합니다.
 
 > [!tip] `isApiAuthRoute` 상수 할당
 > 미들웨어의 작업이 "/api/auth/~"경로에 도달하는 것을 허용하기 위해 상수에 할당합니다. 
@@ -383,4 +401,3 @@ export const config = {
 > [!tip] `middleware`에서 `Response.redirect(new URL())`을 사용할때 
 > `URL`생성자 안에 `nextUrl`을 추가해야 절대 경로를 만들어 지정한 경로로 이동할 수 있습니다.
 
-2:37:31
