@@ -401,4 +401,6 @@ export const config = {
 > [!tip] `middleware`에서 `Response.redirect(new URL())`을 사용할때 
 > `URL`생성자 안에 `nextUrl`을 추가해야 절대 경로를 만들어 지정한 경로로 이동할 수 있습니다.
 # 로그인
-- `provider`에 `Credentials`를 추가합니다.
+- 모든 사용자가 서버액션으로 만들어둔 `login.ts`를 이용해 로그인하지는 않습니다. `/api/auth/`를 통해 로그인하는 사용자들도 있습니다. 
+- 로그인을 시도하는 모든 사용자가 앱에서 요구하는 올바른 정보를 줬는지 체크하려면 `provider`에 `Credentials`를 추가하여 LoginSchema를 체크해야합니다.
+- 외부 계정을 이용해 로그인하는 사용자들은 비밀번호를 갖지 않기 때문에 인증 작업을 중지합니다.
