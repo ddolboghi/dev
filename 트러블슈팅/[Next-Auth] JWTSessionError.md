@@ -45,5 +45,6 @@ callbacks의 jwt 콜백을 지정하는 부분에서 JWTSessionError가 발생�
 [auth][details]: {}
 ```
 
-[에러 로그에 있는 사이트](https://authjs.dev/reference/core/errors/#jwtsessionerror)를 들어가보니
-> Auth.js가 JWT 기반 세션(`strategy: "jwt"`)을 디코딩하거나 인코딩할 수 없는 경우 발생합니다.
+에러 로그를 잘보면 sessionStorage가 정의되지 않아 참조할 수 없다고 합니다.  
+코드를 다시 보니
+
