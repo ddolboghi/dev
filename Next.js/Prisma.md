@@ -94,7 +94,7 @@ npx prisma db push
 - neon에서 BRANCH > Tables에 들어가면 만들어둔 모델이 테이블로 생성된 걸 확인할 수 있습니다.
 ![[prisma-table.png]]
 # Prisma에 저장된 데이터 보는 법
-- localhost:5555가 열리며 P
+- 다음 명령을 실행하면 localhost:5555가 열리며 Prisma에 저장된 데이터를 볼 수 있습니다.
 ```
 npx prisma studio
 ```
