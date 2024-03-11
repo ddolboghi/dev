@@ -224,6 +224,7 @@ export const {
   providers: [GitHub],
 })
 ```
+- `auth`: 인증 요청에 대한 처리를 담당하는 객체입니다. `middleware`에서 `auth`를 사용하여 사용자가 인증 요청 시 로그인 여부에 따라 이동할 수 있는 라우트를 지정합니다. 
 
 3. API 라우트 작성하기
 	- `app`라우트 안에 `api/auth/[...nextauth]/route.ts`를 생성합니다.
@@ -264,6 +265,7 @@ export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
+- `auth()` 안에서는 
 
 > [!tip] `matcher`의 역할
 > - `matcher`에 private나 public 경로 중 하나를 넣는게 아닙니다. `matcher`는 이를 체크하지 않습니다. **단지 미들웨어를 호출하기 위해 사용됩니다.**
@@ -403,7 +405,6 @@ export const config = {
 # 로그인
 - 모든 사용자가 서버액션으로 만들어둔 `login.ts`를 이용해 로그인하지는 않습니다. `/api/auth/`를 통해 로그인하는 사용자들도 있습니다. 
 - 로그인을 시도하는 모든 사용자가 앱에서 요구하는 올바른 정보를 줬는지 체크하려면 `provider`에 `Credentials`를 추가하여 LoginSchema를 체크해야합니다.
-- 외부 계정을 이용해 로그인하는 사용자들은 비밀번호를 갖지 않기 때문에 인증 작업을 중지합니다.
 ```ts
 // auth.config.ts
 import type { NextAuthConfig } from "next-auth"
@@ -435,7 +436,7 @@ export default {
   ],
 } satisfies NextAuthConfig
 ```
-- 비밀번호가 없어도 작업을 중지하는 이유는, 외부 API를 이용해 로그인하는 사용자들은 비밀번호가 없기때문에
+- 비밀번호가 없어도 작업을 중지하는 이유는, 외부 API를 이용해 로그인하는 사용자들은 비밀번호가 없기 때문에 일반적인 로그인 폼(비밀번호가 필요한)을 사용하여 로그인할 수 없도록 하기 위함입니다.
 
 ```ts
 // auth.ts
@@ -495,5 +496,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   }
 }
 ```
-- `throw error`되면 `redirectTo`로 지정한 라우트로 리다이렉트되지 않습니다.
-- 로그인 페이지에서 잘못된 이메일이나 비밀번호를 입력하면
+- 로그인 페이지에서 잘못된 이메일이나 비밀번호를 입력하면 `AuthError`가 발생하고, 이를 catch문에서 잡아 처리합니다.
+- `AuthError`에 속하지 않는 에러가 발생하면 `throw`하고, `redirectTo`로 지정한 라우트로 리다이렉트되지 않습니다.
+- 한 번 로그인한 후 다시 로그인 페이지나 회원가입 페이지로 가려하면 `middleware.ts`에서 정의한 경우(if문)에 따라 지정된 라우트로 자동 이동됩니다.  
