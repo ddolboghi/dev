@@ -277,7 +277,7 @@ export const config = {
 
 1. `auth.ts`와 같은 위치에 `auth.config.ts`를 만들고 다음을 적습니다.
 ```ts
-// aut
+// auth.config.ts
 import GitHub from "next-auth/providers/github"
 import type { NextAuthConfig } from "next-auth"
   
@@ -288,6 +288,7 @@ export default {
 
 2. `auth.ts`를 다음과 같이 작성합니다.
 ```ts
+// auth.ts
 import NextAuth from "next-auth"
 import authConfig from "./auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter"
@@ -302,9 +303,13 @@ export const {
   ...authConfig,
 })
 ```
+- `NextAuth`를 spread하여 얻을 수 있는 객체에는 `auth`, `signIn`, `signOut`등이 있습니다. 이들은 **서버 컴포넌트**나 **서버 액션**에서만 사용할 수 있습니다.
+
+> [!tip] 로그인/로그아웃을 완전히 클라이언트 컴포넌트에서만 할 수도 있습니다.
 
 3. `middleware.ts`를 다음과 같이 작성합니다.
 ```ts
+// middleware.ts
 import NextAuth from "next-auth"
 import authConfig from "@/auth.config"
   
@@ -500,4 +505,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 ```
 - 로그인 페이지에서 잘못된 이메일이나 비밀번호를 입력하면 `AuthError`가 발생하고, 이를 catch문에서 잡아 처리합니다.
 - `AuthError`에 속하지 않는 에러가 발생하면 `throw`하고, `redirectTo`로 지정한 라우트로 리다이렉트되지 않습니다.
-- 한 번 로그인한 후 다시 로그인 페이지나 회원가입 페이지로 가려하면 `middleware.ts`에서 정의한 경우(if문)에 따라 지정된 라우트로 리다이렉트됩니다.  
+- 한 번 로그인한 후 다시 로그인 페이지나 회원가입 페이지로 가려하면 `middleware.ts`에서 정의한 경우(if문)에 따라 지정된 라우트로 리다이렉트됩니다. 
+# callbacks
+- `auth.ts`의 `NextAuth`객체에 `callbacks` 배열을 넘겨줄 수 있습니다.
