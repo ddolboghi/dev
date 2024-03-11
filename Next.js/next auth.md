@@ -256,6 +256,7 @@ AUTH_SECRET="secret"
 2. 다음을 작성합니다. 호출할 미들웨어 경로를 [`matcher`](https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher)안에 적습니다. 이는 스프링시큐리티의 filterChain에서 인증 없이 접근 가능한 경로를 지정하는 것과 비슷합니다.
 	- 특정 정적 파일과 이미지를 제외한 **모든 경로가 미들웨어를 호출**하도록 했습니다.
 ```ts
+// middleware.ts
 import { auth } from "./auth"
 export default auth((req) => {
   // req.auth
@@ -265,18 +266,18 @@ export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
-- `auth()` 안에서는 
+- `auth()` 안에서는 인증 요청 시 사용자의 인증 완료 여부에따라 라우팅될 페이지를 정의합니다. 
 
 > [!tip] `matcher`의 역할
 > - `matcher`에 private나 public 경로 중 하나를 넣는게 아닙니다. `matcher`는 이를 체크하지 않습니다. **단지 미들웨어를 호출하기 위해 사용됩니다.**
 > - `matcher`로 호출된 미들웨어는 위 `auth(... => ...)`함수를 호출합니다.
-
-# Edge 호환 설정
+## Edge 호환 설정
 - 일부 라이브러리 또는 ORM 패키지가 아직 표준 Web API를 반영하지 않은 경우 auth configuration을 여러 파일로 분할할 수 있습니다. 
 - Prisma에서 Edge 호환을 설정하는 방법은 다음과 같습니다:
 
 1. `auth.ts`와 같은 위치에 `auth.config.ts`를 만들고 다음을 적습니다.
 ```ts
+// aut
 import GitHub from "next-auth/providers/github"
 import type { NextAuthConfig } from "next-auth"
   
@@ -317,8 +318,10 @@ export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
+- **`auth.config.ts`가 기본 제공되는 `auth`의 내부 동작을 대체합니다.**
 # middleware로 라우트 지정하기
-- 로그인 여부에 따라 접속할 수 있는 라우트를 정해둡니다.
+- `middleware`에는 수많은 경우에 대해 리다이렉트되는 라우트를 지정하거나 다른 작업을 수행할 수 있습니다.
+- 아래는 로그인 여부에 따라 접속할 수 있는 라우트들입니다.
 ```ts
 //routes.ts
 /**
@@ -394,7 +397,7 @@ export const config = {
 }
 ```
 - `nextUrl`: 기본 URL입니다.(e.g. localhost:3000)
-- `null`을 반환하는 것은 해당 라우트로 접속할 경우 아무 작업도 하지 않는 것을 의미합니다.
+- `null`을 반환하는 것은 해당 라우트로 접속할 경우 아무 작업도 하지 않는 것을 의미합니다. 
 
 > [!tip] `isApiAuthRoute` 상수 할당
 > 미들웨어의 작업이 "/api/auth/~"경로에 도달하는 것을 허용하기 위해 상수에 할당합니다. 
@@ -447,7 +450,6 @@ import { db } from "./lib/db"
   
 export const {
   handlers: { GET, POST },
-  //서버 컴포넌트나 서버 액션에서 사용 가능
   auth,
   signIn,
   signOut,
@@ -498,4 +500,4 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 ```
 - 로그인 페이지에서 잘못된 이메일이나 비밀번호를 입력하면 `AuthError`가 발생하고, 이를 catch문에서 잡아 처리합니다.
 - `AuthError`에 속하지 않는 에러가 발생하면 `throw`하고, `redirectTo`로 지정한 라우트로 리다이렉트되지 않습니다.
-- 한 번 로그인한 후 다시 로그인 페이지나 회원가입 페이지로 가려하면 `middleware.ts`에서 정의한 경우(if문)에 따라 지정된 라우트로 자동 이동됩니다.  
+- 한 번 로그인한 후 다시 로그인 페이지나 회원가입 페이지로 가려하면 `middleware.ts`에서 정의한 경우(if문)에 따라 지정된 라우트로 리다이렉트됩니다.  
