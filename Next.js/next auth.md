@@ -404,3 +404,34 @@ export const config = {
 - 모든 사용자가 서버액션으로 만들어둔 `login.ts`를 이용해 로그인하지는 않습니다. `/api/auth/`를 통해 로그인하는 사용자들도 있습니다. 
 - 로그인을 시도하는 모든 사용자가 앱에서 요구하는 올바른 정보를 줬는지 체크하려면 `provider`에 `Credentials`를 추가하여 LoginSchema를 체크해야합니다.
 - 외부 계정을 이용해 로그인하는 사용자들은 비밀번호를 갖지 않기 때문에 인증 작업을 중지합니다.
+```ts
+// auth.config.ts
+import type { NextAuthConfig } from "next-auth"
+import Credentials from "next-auth/providers/credentials"
+import { LoginSchema } from "@/schemas"
+import { getUserByEmail } from "@/data/user"
+import bcrypt from "bcryptjs"
+  
+export default {
+  providers: [
+    Credentials({
+      async authorize(credentials, request) {
+        const validateFields = LoginSchema.safeParse(credentials)
+  
+        if (validateFields.success) {
+          const { email, password } = validateFields.data
+  
+          const user = await getUserByEmail(email)
+          if (!user || !user.password) return null //회원이 아니거나 비밀번호가 없으면 작업 중지
+  
+          const passwordsMatch = await bcrypt.compare(password, user.password)
+  
+          if (passwordsMatch) return user
+        }
+  
+        return null
+      },
+    }),
+  ],
+} satisfies NextAuthConfig
+```
