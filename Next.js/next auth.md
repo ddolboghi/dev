@@ -680,10 +680,59 @@ declare module "next-auth/jwt" {
 ```
 
 # OAuth
-- Github, Google
-- 오직 클라이언트 컴포넌트에서 OAuth를 수행하기 위해 다음 코드가 필요합니다.
+- Github, Google OAuth를 사용합니다.
+1. `auth.config.ts`의 providers에 Google, Github provider를 추가해줍니다.
+```ts
+import GitHub from "next-auth/providers/github"
+import Google from "next-auth/providers/google"
+//...
+providers: [
+	Google({
+	  clientId: process.env.GOOGLE_CLIENT_ID,
+	  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+	}),
+	GitHub({
+	  clientId: process.env.GITHUB_CLIENT_ID,
+	  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+	}),
+	//...
+```
+
+2. `.env`에 발급받은 CLIENT_ID, CLIENT_SECRET를 작성합니다.
+
+3. `signIn()`에 provider의 id값을 넘겨주고, `callbackUrl`을 지정해줍니다. 이 방식은 서버 컴포넌트에서 진행했던 `Credential` 작업과 다르게 클라이언트 컴포넌트에서 할 수 있습니다.
 ```tsx
+"use client"
 import { signIn } from 'next-auth/react'
+//...
+function Social() {
+  const onClick = (provider: "google" | "github") => {
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+    })
+  }
+  
+  return (
+    <div className="flex items-center w-full gap-x-2">
+      <Button
+        size="lg"
+        className="w-full"
+        variant="outline"
+        onClick={() => onClick("google")}
+      >
+        <FcGoogle className="h-5 w-5" />
+      </Button>
+      <Button
+        size="lg"
+        className="w-full"
+        variant="outline"
+        onClick={() => onClick("github")}
+      >
+        <FaGithub className="h-5 w-5" />
+      </Button>
+    </div>
+  )
+}
 ```
 ## OAuthAccountNotLinked: Another account already exists with the same e-mail address.
 - **로그인하려는 유저의 이메일**과 **동일한 이메일이 DB에 존재할때** next-auth가 보안 상 이미 존재하는 계정을 새로 로그인하는 계정과 동기화하지 않으려고 하기 때문에 발생하는 오류입니다.
@@ -701,9 +750,11 @@ providers: [
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
 ```
-
-하지만 이는 신뢰할만한 provider가 아닌 이상 보안에 좋지 않고, 유저의 선택 없이 자동으로 동기화합니다.
-
-ssg.com에서는 여러 계정으로 로그인 시 해당 계정이 각각 만들어지고, 유저가 직접 계정 연결을 할 수 있습니다. **하지만 ssg.com에서도 이미 회원인 이메일과 동일한 계정으로 로그인하려고 하면 이미 존재하는 회원이라고 안내합니다.**
-
-그러므로 **계정 자동 동기화보다는 로그인을 막고, 계정 동기화 권한을 유저에게 주는게 바람직합니다.**
+- 자동 동기화는 신뢰할만한 provider가 아닌 이상 보안에 좋지 않고, 유저의 선택 없이 자동으로 동기화합니다.
+- 계정 자동 동기화보다는 로그인을 막고, 계정 동기화 권한을 유저에게 주는게 바람직합니다.
+#  Events
+- 이벤트는 응답을 반환하지 않는 비동기 함수이며, 로그/리포팅 또는 사이드이펙트를 처리하는 데 유용합니다.
+- 디버깅 또는 로그를 위해 아래 이벤트 중 하나에 대한 핸들러를 지정할 수 있습니다.
+> [!NOTE]
+> - 인증 API의 실행은 이벤트 핸들러의 `await`에 의해 차단됩니다. 
+> - 이벤트 핸들러가 부담스러운 작업을 시작하는 경우, 해당 작업에 대한 promise를 차단해서는 안 됩니다.
