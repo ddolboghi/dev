@@ -685,3 +685,25 @@ declare module "next-auth/jwt" {
 ```tsx
 import { signIn } from 'next-auth/react'
 ```
+## OAuthAccountNotLinked: Another account already exists with the same e-mail address.
+- **로그인하려는 유저의 이메일**과 **동일한 이메일이 DB에 존재할때** next-auth가 보안 상 이미 존재하는 계정을 새로 로그인하는 계정과 동기화하지 않으려고 하기 때문에 발생하는 오류입니다.
+- 하나의 계정으로 자동 동기화하려면, provider에 `allowDangerousEmailAccountLinking: true`를 추가하면 됩니다.
+
+```tsx
+providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
+    }),
+    GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+```
+
+하지만 이는 신뢰할만한 provider가 아닌 이상 보안에 좋지 않고, 유저의 선택 없이 자동으로 동기화합니다.
+
+ssg.com에서는 여러 계정으로 로그인 시 해당 계정이 각각 만들어지고, 유저가 직접 계정 연결을 할 수 있습니다. **하지만 ssg.com에서도 이미 회원인 이메일과 동일한 계정으로 로그인하려고 하면 이미 존재하는 회원이라고 안내합니다.**
+
+그러므로 **계정 자동 동기화보다는 로그인을 막고, 계정 동기화 권한을 유저에게 주는게 바람직합니다.**
