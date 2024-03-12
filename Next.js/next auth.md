@@ -412,7 +412,18 @@ export const config = {
 > `URL`생성자 안에 `nextUrl`을 추가해야 절대 경로를 만들어 지정한 경로로 이동할 수 있습니다.
 # 로그인
 - 모든 사용자가 서버액션으로 만들어둔 `login.ts`를 이용해 로그인하지는 않습니다. `/api/auth/`를 통해 로그인하는 사용자들도 있습니다. 
-- 로그인을 시도하는 모든 사용자가 앱에서 요구하는 올바른 정보를 줬는지 체크하려면 `provider`에 `Credentials`를 추가하여 LoginSchema를 체크해야합니다.
+- 로그인을 시도하는 모든 사용자가 앱에서 요구하는 올바른 정보를 줬는지 체크하려면 `providers`에 `next-auth/providers/credentials`를 추가하여 LoginSchema를 체크해야합니다.
+  이때 `authorize()`에 넘겨지는 `credentials` object에는 로인 시 사용자가 입력한 값들과 `callbackUrl`이 들어있습니다.
+
+```
+{              
+  email: 'test@example.com',
+  password: '1234567',      
+  callbackUrl: '/settings'  
+}                           
+```
+
+ 
 ```ts
 // auth.config.ts
 import type { NextAuthConfig } from "next-auth"
