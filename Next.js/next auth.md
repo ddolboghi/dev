@@ -679,4 +679,9 @@ declare module "next-auth/jwt" {
 }
 ```
 
-3:20:37
+# OAuth
+- Github, Google
+- 오직 클라이언트 컴포넌트에서 OAuth를 수행하기 위해 다음 코드가 필요합니다.
+```tsx
+import { signIn } from 'next-auth/react'
+```
