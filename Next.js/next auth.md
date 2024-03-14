@@ -3,7 +3,7 @@
 - [초기 설정](https://next-auth.js.org/configuration/initialization)
 - 리다이렉트 주소: `/api/auth/callback/:provider`
 # [공식문서](https://authjs.dev/guides/upgrade-to-v5)
-[애플로 로그인](https://developer.apple.com/kr/sign-in-with-apple/get-started/)
+[애플로 로그인](https://developer.apple.com/kr/sign-in-with-apple/get-started/) -> apple developer program 가입해야함 (129,000원/1년)
 # 로그인, 회원가입 폼 만들기
 ## zod를 이용한 validation
 - `index.ts`: `zod`를 이용해 검증 schema를 작성합니다. 
