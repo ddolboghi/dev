@@ -133,10 +133,10 @@ Pragma: no-cache
 > - 48 ~ 128 글자수를 가진 랜덤 문자열로, A-Z, a-z, 0-9, -, ., \_, ~ 로만 구성됩니다.
 
 > [!info] `code_challenge` 생성 규칙
-> - 선택한 Hash 알고리즘으로 `code_verifier`를 해싱한 후 Base64 인코딩을 한 값입니다.
+> - 선택한 Hash 알고리즘으로 `code_verifier`를 해싱한 후 **base64 인코딩**을 한 값입니다.
 > e.g. `Base64Encode(Sha256(Code Verifier))`
 ## PKCE flow
-1. Authorization Code Grant flow의 (A)단계에서 `code_challenge`와 `code_challenge_method`(hash 함수 종류)를 URL 쿼리 파라미터에 추가합니다.
+1. Authorization Code Grant flow의 2단계에서 `code_challenge`와 `code_challenge_method`(hash 함수 종류)를 URL 쿼리 파라미터에 추가합니다.
 ```
 https://authorization-server.com/authorize?
   client_id=CKw2bkLjI-6Bs3wwgl7OBUgz&
@@ -147,3 +147,22 @@ https://authorization-server.com/authorize?
   code_challenge=HVoKJYs8JruAxs7hKcG4oLpJXCP-z1jJQtXpQte6GyA&
   code_challenge_method=S256
   ```
+
+2. 7단계에서 제공자에게 `code_verifier`를 전달합니다.
+```
+POST /token HTTP/1.1 
+Host: authorization-server.com 
+Authorization: Basic [encoded_client_credentials] // 클라이언트 인증 
+Content-type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&
+code={authorization_code}&
+redirect_uri={redirect_uri}&
+client_id={client_id}&
+code_verifier={code_verifier}
+```
+
+3. 제공자가 7단계에서 받은 `chde_verifier`
+를 2단계에서 받은 `code_challenge_method` 해싱함수로 해싱 후 base64인코딩해서 `code_challenge`와 비교합니다.
+
+4. `code_verifier`를 변환한 값과 `code_challenge`값이 일치하면 access token을 발급합니다.
