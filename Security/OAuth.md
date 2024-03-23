@@ -1,5 +1,3 @@
-# OAuth2 PKCE
-- PKCE(Proof Key for Code Exchange)는 OAuth2에 좀 더 강화된 보안을 제공해주는 Authorization Code Grant flow의 확장 버전입니다.
 # Authorization Code Grant flow
 - OAuth2의 표준 인가 방식입니다.
 ![[authorization-code-grant-flow.png]]
@@ -99,8 +97,53 @@ client_id={client_id}
 > HTTP에 Authorization 헤더가 없고, 클라이언트 시크릿 파라미터를 함께 전달합니 다.
 
 8. 제공자가 클라이언트에게 access token을 전달합니다.
-- `access_token`: (필수) 인가 요청의 성공으로 얻은 access_token
-- `token_type`: 전달되는 토큰의 유형. 거의 bearer 토큰 유형.
-- `expires_in`: (선택) 토큰의 유효기(초 단위)
-- `refresh_token`: (선택) 액세스 토큰이 만료돼었을때 갱신을 위한 토큰
-- `scope`: (조건부 필수) 인가된 범위와 요청된 범위가 같다면 생략될 수 있음. 다르다면 인가된 범위가 전달된다.
+> [!tip] 응답은 제공자에 따라 json, XML, Key-Value 등 다른 포맷으로 보낼 수 있어 제공자의 문서에응답 포맷을 확인해야 합니다.
+- 응답 값
+	- `access_token`(**필수**):  인가 요청의 성공으로 얻은 access token
+	- `token_type`: 전달되는 토큰의 유형(거의 bearer 토큰 유형)
+	- `expires_in`: 토큰의 유효기간(초 단위, 숫자)
+	- `refresh_token`: 액세스 토큰이 만료되었을때 갱신을 위한 토큰
+	- `scope`(**조건부 필수**):  요청하는 사용자 정보 범위로, 인가된 범위와 같다면 생략할 수 있지만 다르`다면 인가된 범위의 정보만 전달됩니다.
+
+- 인가 요청이 거부되면 아래 파라미터를 포함해 HTTP 400을 반환합니다.
+	- `error`: (필수) 에러 코드로서 요청이 실패한 이유를 나타낸다.
+	- `invalid_request`: 요청 데이터가 잘못됨
+	- `invalid_client`: 클라이언트 인증 실패
+	- `invalid_grant`: 제공되 그랜트가 유효하지 않음
+	- `unauthorized_client`: 클라이언트 애플리케이션이 요청을 전달할 권한이 없음
+	- `unsupported_grant_type`: 지원하지 않는 그랜트 유형
+	- `invalid_scope`: 전달된 권한이 유효하지 않음
+	- `error_description`: (선택) 사람이 읽을 수 있는 형태의 에러 메시지
+	- `error_uri`: (선택) 에러에 대한 자세한 정보위 웹 문서 링크
+```
+# 에러 응답 형태 
+HTTP/1.1 400 Bad Request 
+Content-Type: application/json;charset=UTF-8 
+Cache-Control: no-store 
+Pragma: no-cache 
+{ 
+	"error":"invalid_client" 
+}
+```
+# OAuth 2.0 PKCE
+- PKCE(Proof Key for Code Exchange)는 OAuth 2.0에 좀 더 강화된 보안을 제공해주는 Authorization Code Grant flow의 확장 버전입니다.
+- Authorization Code Grant flow에 `code_challenge`와 `code_verifier`를 추가해 authorization code가 탈취 당했을때 access token을 발급하지 못하도록 막습니다. 
+
+> [!info] `code_verifier` 생성 규칙
+> - 48 ~ 128 글자수를 가진 랜덤 문자열로, A-Z, a-z, 0-9, -, ., \_, ~ 로만 구성됩니다.
+
+> [!info] `code_challenge` 생성 규칙
+> - 선택한 Hash 알고리즘으로 `code_verifier`를 해싱한 후 Base64 인코딩을 한 값입니다.
+> e.g. `Base64Encode(Sha256(Code Verifier))`
+## PKCE flow
+1. Authorization Code Grant flow의 (A)단계에서 `code_challenge`와 `code_challenge_method`(hash 함수 종류)를 URL 쿼리 파라미터에 추가합니다.
+```
+https://authorization-server.com/authorize?
+  client_id=CKw2bkLjI-6Bs3wwgl7OBUgz&
+  redirect_uri=http://localhost:3000/api/auth/callback/provider&
+  response_type=code&
+  scope=photo+offline_access&
+  state=w7pneFNa8aF2i5f_&
+  code_challenge=HVoKJYs8JruAxs7hKcG4oLpJXCP-z1jJQtXpQte6GyA&
+  code_challenge_method=S256
+  ```
