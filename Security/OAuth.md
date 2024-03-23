@@ -53,15 +53,47 @@ Location: {redirect_uri}?
 	error_uri={error_uri}&
 	state={state}
 ```
+- `error`(**필수**): 에러 코드
+	- `invalid_request`: 요청 데이터가 잘못됨
+	- `unauthorized_client`: 클라이언트 애플리케이션이 요청을 전달할 권한이 없음
+	- `access_denied`: 사용자가 거부함
+	- `unsupported_response_type`: 잘못된 응답 유형이 사용됨.(`response_type`을 잘못 지정함)
+	- `server_error`: 서버 내에서 에러 발생으로 인가 요청이 처리가 안됨
+	- `temporarily_unavailable`: 인가 서버가 일시적 장애 상태
+- `error_description`: 사람이 읽을 수 있는 에러 메시지
+- `error_uri`: 에러에 대한 자세한 정보가 있는 링크
+- `state`: 인가 요청 시 클라이언트에서 제공한 값
 
-(D, E) 
-- 클라이언트는 전달받은 `Authorization Code`로 OAuth2 서버에 `access token`을 요청합니다.
-```
-POST https://authorization-server.com/token
+6. 클라이언트가 웹 브라우저의 URL을 파싱해 인가 응답 값을 받습니다.
 
-grant_type=authorization_code
-&client_id=CKw2bkLjI-6Bs3wwgl7OBUgz
-&client_secret=F3n7fXMtVwGJ5lXqTmwUHoNUp6O0qN1YYjkRkrQ7ZD6Kbnvt
-&redirect_uri=https://www.oauth.com/playground/authorization-code-with-pkce.html
-&code=Uyz9EU-QeRfW4Kt-nUnq4s7NxMuFjJLhT3DVHD6VyLn8Mc5Q
+7. 클라이언트는 전달받은 `code`로 OAuth2 서버에 `access token`을 요청합니다.
 ```
+POST /token HTTP/1.1 
+Host: authorization-server.com 
+Authorization: Basic [encoded_client_credentials] // 클라이언트 인증 
+Content-type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&
+code={authorization_code}&
+redirect_uri={redirect_uri}&
+client_id={client_id}
+```
+- `grant_type`(**필수**):  access token으로 교환하고자 한다는 것을 나타내기 위해 `authorization_code`으로 셋팅해야 합니다.
+- `code`: (C)에서 받은 인가 코드 값입니다.
+- `redirect_uri`(**필수**): 인가 요청에 리다이렉션 엔드포인트가 포함되었다면 액세스 토큰 요청에도 리다이렉션 엔드포인트가 포함되어야 한다.
+- 클라이언트는 제공자에게 `client_id`, `client_secret`으로 인증합니다.
+
+> [!tip] OAuth 2.0을 지원하는 기업은 HTTP 요청의 Athorization 헤더로 클라이언를확인하지만, 지원하지 않는 기업은 요청 파라미터로 클라이언트를 확인하기도 합니다.
+> OAuth 2.0 이전의 클라이언트 인증 방식
+> ```
+> 	POST /token HTTP/1.1 
+> 	Host: [server.exmple.com](http://server.exmple.com/)
+> 	Content-type: application/x-www-form-urlencoded 
+> 	
+> 	grant_type=authorization_code&
+> 	code={authorization_code}& 
+> 	redirect_uri={redirect_uri}& 
+> 	client_id={client_id}& 
+> 	client_secret={client_secret}
+> ```
+> HTTP에 Authorization 헤더가 없고, 클라이언트 시크릿 파라미터를 함께 전달합니 다.
