@@ -1,7 +1,7 @@
 - next auth의 가장 중요한 목적은 OAuth입니다.
 - 로그인 후 리다이렉션되는 페이지를 만들어야합니다.
 - [초기 설정](https://next-auth.js.org/configuration/initialization)
-- 리다이렉트 주소: `/api/auth/callback/:provider`
+- OAuth 리다이렉트 주소: `/api/auth/callback/:provider`
 # [공식문서](https://authjs.dev/guides/upgrade-to-v5)
 [애플로 로그인](https://developer.apple.com/kr/sign-in-with-apple/get-started/) -> apple developer program 가입해야함 (129,000원/1년)
 # 로그인, 회원가입 폼 만들기
