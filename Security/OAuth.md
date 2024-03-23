@@ -12,27 +12,46 @@
 2. OAuth2 서버 인가 요청에 필요한 파라미터를 URL에 포함하여 전달합니다. 전달된 파라미터는 `application/x-www-form-urlencoded` 포맷으로 인코딩됩니다.
 ```
 https://authorization-server.com/authorize?
-  response_type=code
-  &client_id=CKw2bkLjI-6Bs3wwgl7OBUgz
-  &redirect_uri=http://localhost:3000/api/auth/callback/provider
-  &scope=photo+offline_access
-  &state=w7pneFNa8aF2i5f_
+  client_id=CKw2bkLjI-6Bs3wwgl7OBUgz&
+  redirect_uri=http://localhost:3000/api/auth/callback/provider&
+  response_type=code&
+  scope=photo+offline_access&
+  state=w7pneFNa8aF2i5f_
 ```
-- `client_id`: 클라이언트 애플리케이션이 OAuth2 제공자로부터 발급 받은 고유 id입니다.
-- `redirect_uri`: 제공자가 인가 요청에 대한 응답을 전달할 리다이렉션 엔드포인입니다.
+- `client_id`(**필수**): 클라이언트 애플리케이션이 OAuth2 제공자로부터 발급 받은 고유 id입니다.
+- `redirect_uri`(**필수**): 제공자가 인가 요청에 대한 응답을 전달할 리다이렉션 엔드포인트입니다.
+- `response_type`(**필수**): athorization code grant flow를 사용함을 명시하기 위해 `code`라고 작성합니다. 
 - `scope`: 클라이언트가 요청하는 사용자 정보에 대한 접근 범위입니다.
 - `state`
-: 클라이언트가 제공자에게 전달하면 제공자는 이 값을 다시 응답에 포함해서 전달합니다. CSRF(c.f. [[#쿠키의 `SameSite` 속성과 CSRF]])공격을 차단할 수 있습니다. 
+: 클라이언트가 제공자에게 `state`값을 전달하면 제공자는 이 값을 다시 응답에 포함해서 전달합니다. CSRF(c.f. [[#쿠키의 `SameSite` 속성과 CSRF]])공격을 차단할 수 있습니다. 
 
 3. OAuth2 제공자는 사용자에게 클라이언트 서버가 사용자의 리소스에 접근하도록 허용할지 직접 묻습니다.  
+
 4. 사용자가 OAuth2 서버에 인증(로그인)합니다.
 
-(C) 
-- 인증이 성공하면 OAuth2 서버는 (A)에서 제공한 웹브라우저의 리다이렉트 URL로 `Authorization Code`와 `state`를 전달합니다.
+5. 인증이 성공하면 OAuth2 서버는 (A)에서 제공한 웹브라우저의 리다이렉트 URL로 `code`와 `state`를 전달합니다.
 ```
 http://localhost:3000/api/auth/callback/provider?
 	state=w7pneFNa8aF2i5f_
     &code=Uyz9EU-QeRfW4Kt-nUnq4s7NxMuFjJLhT3DVHD6VyLn8Mc5Q
+```
+- `code`: access token과 교환하는데 사용할 athorization code입니다.
+- (A)에서 인가 요청 시 `state`를 같이 보냈다면 응답에도 같은 `state`가 존재합니다.
+
+> [!tip]
+> - athorization code는 1회용이므로 동일한 코드로 새로운 access token을 요청하면실패합니다.
+> - athorization code는 만료시간이 짧으므로 클라이언트 서버는 코드를 곧바로 사용해야 합니다.
+> - OAuth 2.0은 athorization code의 만료시간을 10분으로 제한하도록 권장합니다.
+
+- 인가 요청이 거부되면 access token은 전달되지 않습니다.
+- athorization code grant flow에서 인가 요청 시 에러 응답은 URL 쿼리 파라미터로 전달되지만, implicit grant flow는 URL fregment(/...#...)로 전달합니다.
+```
+HTTP/1.1 302 Found 
+Location: {redirect_uri}? 
+	error={error_code}&
+	error_description={error_description}&
+	error_uri={error_uri}&
+	state={state}
 ```
 
 (D, E) 
