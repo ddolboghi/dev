@@ -27,14 +27,16 @@
 
 - 하이브리드 렌더링: 서버 사이드 렌더링과 정적 사이트 생성 모두 지원해 특정 방식을 선택하거나 하나의 애플리케이션 내 두 기술을 결합할 수 있습니다.
 - hydration: 서버에서 렌더링한 DOM과 클라이언트가 렌더링한 DOM이 한데 섞여 싱글 페이지 애플리케이션처럼 보이게 합니다. 
+- 라우트 세그먼트 런타임을 `edge`(cf. [[Tip#Edge 런타임이란?]])와 
+`nodejs`중 하나로 설정할 수 있습니다.  설정되지 않은 경우 기본적으로 `nodejs` 런타임이 사용됩니다.
 - [Next.js 사용 시 직면할 수 있는 함정, 그리고 이를 극복하는 전략](https://reactnext-central.xyz/blog/nextjs-challenges)
 
 > [!warning] **컴포넌트는 익명함수로 만들 수 없습니다.**
 > \[ eslint ERROR ] Component definition is missing display nameeslintreact/display-name
 
 > [!tip] **클라이언트가 서버컴포넌트를 import하면 서버 컴포넌트가 클라이언트 컴포넌트가 됩니다.** 
-> 서버컴포넌트가 클라이언트컴포넌트를 임포트하는건 아무 영향 없습니다.
-> 서버컴포넌트를 import가 아니라 props로 전달하면 서버컴포넌트로 쓸 수 있습니다.
+> 서버컴포넌트가 클라이언트컴포넌트를 import하는건 아무 영향 없습니다.
+> **서버컴포넌트를 import가 아니라 props로 전달하면 서버컴포넌트로 쓸 수 있습니다.**
 ## 파일 규칙
 
 | 파일명                                                                                                                    | 설명                                                                                    |
