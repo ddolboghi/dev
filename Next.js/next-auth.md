@@ -198,33 +198,7 @@ import { db } from "@/lib/db"
   }
   
   await db.user.create({
-    data: {
-      name,
-      email,
-      password: hashedPassword,
-    },
-  })
-```
-# next auth 설치 및 설정
-1. next-auth v5 설치하기
-```
-yarn add next-auth@beta
-```
-
-2. 설정 파일 작성하기
-```ts
-// auth.ts
-import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
-  
-export const {
-  handlers: { GET, POST },
-  auth,
-} = NextAuth({
-  providers: [GitHub],
-})
-```
-- `auth`: 인증 요청에 대한 처리를 담당하는 객체입니다. `middleware`에서 `auth`를 사용하여 사용자가 인증 요청 시 로그인 여부에 따라 이동할 수 있는 라우트를 지정합니다. 
+    data의 인증 여부에 따라 이동할 수 있는 라우트를 지정합니다. 
 
 3. API 라우트 작성하기
 	- `app`라우트 안에 `api/auth/[...nextauth]/route.ts`를 생성합니다.
@@ -270,7 +244,7 @@ export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 ```
-- `auth()` 안에서는 인증 요청 시 사용자의 인증 완료 여부에따라 라우팅될 페이지를 정의합니다. 
+- `auth()` 안에서는 인증 요청 시 사용자의 인증 완료 여부에따라 접속가능한 라우트를 정의합니다. 
 
 > [!tip] `matcher`의 역할
 > - `matcher`에 private나 public 경로 중 하나를 넣는게 아닙니다. `matcher`는 이를 체크하지 않습니다. **단지 미들웨어를 호출하기 위해 사용됩니다.**
