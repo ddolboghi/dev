@@ -568,6 +568,21 @@ declare module "*.png" {
 - 서로 다른 라이브러리에서 동일한 이름의 앰비언트 타입 선언을 하면 충돌이 발생합니다.
 - 앱비언트 타입으로 선언된 변수는 명시적인 import나 export가 없이 **모든 파일에서 사용**될 수 있기때문에 코드의 의존성 관계가 명확하지 않아 나중에 변경이 어려울 수 있습니다.
 # 리액트 컴포넌트의 타입
+## 컴포넌트에 인라인 스타일 적용할때
+- 스타일 속성을 문자열이 아니라 객체 형태로 작성해야합니다.
+- CSS 속성을 key로, 해당하는 CSS 값들을 string값으로 작성합니다.
+- CSS 속성은 대시(`-`)스타일 대신 카멜케이스로 작성해야 합니다.
+```tsx
+<p
+  className="text-xs"
+  style={{
+    overflow: 'hidden', 
+    display: '-webkit-box', 
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+  }}
+> 2줄을 넘어가는 텍스트는 말줄임표로 대체되도록 설정했습니다.</p>
+```
 ## 함수 컴포넌트 타입
 - 리액트 v18부터는 `React.VFC`가 삭제되고 `React.FC`에서 `children`이 사라졌기 때문에 props 타입으로 `React.FC`을 사용하거나, 직접props 타입과 컴포넌트 반환 타입을 지정해야합니다.
 - props 타입과 반환 타입 직접 지정 예시
