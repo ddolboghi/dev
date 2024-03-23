@@ -228,7 +228,11 @@ export const {
 
 3. API 라우트 작성하기
 	- `app`라우트 안에 `api/auth/[...nextauth]/route.ts`를 생성합니다.
-	- prisma는 edge를 지원하지 않기 때문에 `export const runtime = "edge"`를 삭제합니다.
+
+> [!info] `route.ts`는 next-auth외 다른 라이브러리가 사용할 수 있도록 여러 라우 핸들러를 스캐폴딩할 수 있는 포괄적인 라우트입니다.
+
+> [!tip] prisma는 edge를 지원하지 않기 때문에 `export const runtime = "edge"`를 삭제합니다.
+
 ```ts
 // route.ts
 export { GET, POST } from "@/auth"
