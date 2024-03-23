@@ -97,3 +97,10 @@ client_id={client_id}
 > 	client_secret={client_secret}
 > ```
 > HTTP에 Authorization 헤더가 없고, 클라이언트 시크릿 파라미터를 함께 전달합니 다.
+
+8. 제공자가 클라이언트에게 access token을 전달합니다.
+- `access_token`: (필수) 인가 요청의 성공으로 얻은 access_token
+- `token_type`: 전달되는 토큰의 유형. 거의 bearer 토큰 유형.
+- `expires_in`: (선택) 토큰의 유효기(초 단위)
+- `refresh_token`: (선택) 액세스 토큰이 만료돼었을때 갱신을 위한 토큰
+- `scope`: (조건부 필수) 인가된 범위와 요청된 범위가 같다면 생략될 수 있음. 다르다면 인가된 범위가 전달된다.
