@@ -37,61 +37,7 @@ export const RegisterSchema = z.object({
 })
 ```
 
-- 회원가입 폼 컴포넌트를 작성합니다.
-```tsx
-// components/auth/registerForm.tsx
-"use client"
-  
-import * as z from "zod"
-import { CardWrapper } from "./cardWrapper"
-import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
-import { RegisterSchema } from "@/schemas"
-import { useForm } from "react-hook-form"
-import { Input } from "../ui/input"
-import { Button } from "../ui/button"
-import FormError from "../formError"
-import FormSuccess from "../formSuccess"
-import { register } from "@/actions/register"
-import { useState, useTransition } from "react"
-
-export function RegisterForm() {
-const [error, setError] = useState<string | undefined>("")
-  const [success, setSuccess] = useState<string | undefined>("")
-  const [isPending, startTransition] = useTransition() //대기상태인지 여부 설정
-  
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      name: "",
-    },
-  })
-  
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-    setError("")
-    setSuccess("")
-  
-    startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error)
-        setSuccess(data.success)
-      })
-    })
-  }
-  return (
-    //...
-  )
-}
-```
+- `react-hook-form`라이브러리를 사용하지 않는다면 `useFormState`를 사용해서 `<form>`의 `action`속성에 formAction을 넘겨줍니다.
 
 - `register.ts`: 사용자가 입력한 값을 받아 처리하는 곳입니다.
 ```ts
@@ -527,6 +473,8 @@ export const {
 ```
 
 ## `signIn()` callback
+> [!warning] credentials를 제외한 OAuth provider에는 `auth`의 `signIn()`이 아니라 `next-auth/react`의 `signIn()`을 사용해야합니다. (v5.0.0-)
+
 ```ts
 callbacks: {
   async signIn({ user, account, profile, email, credentials }) {
