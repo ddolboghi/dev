@@ -473,7 +473,7 @@ export const {
 ```
 
 ## `signIn()` callback
-> [!warning] credentials를 제외한 OAuth provider에는 `auth`의 `signIn()`이 아니라 `next-auth/react`의 `signIn()`을 사용해야합니다. (v5.0.0-)
+> [!warning] credentials를 제외한 OAuth provider에는 `auth`의 `signIn()`이 아니라 `next-auth/react`의 `signIn()`을 사용해야합니다. (v5.0.0-beta.16 문제)
 
 ```ts
 callbacks: {
