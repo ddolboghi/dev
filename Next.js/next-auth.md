@@ -550,7 +550,7 @@ callbacks: {
 > - JWT를 사용할 때는 세션 용 액세스 토큰이 생성되지 않으므로 로그인 시 직접 키를 생성해야 합니다.
 ## `jwt()` callback
 - JWT가 만들어질때마다 jwt 콜백이 호출됩니다.(e.g. 로그인 시, 클라이언트에서 세션 접근 시)
-- `jwt()` 콜백은 반드시 `token`을 반환해야 합니다. 반환값은 암호화되있으며, 쿠키에 저장됩니다.
+- `jwt()` 콜백은 반드시 `token`을 반환합니다. 반환값은 암호화되있으며, 쿠키에 `session-token`으로 저장됩니다.
 - 로그인 시 `token`은 다음과 같이 구성됩니다:
 	```
 	{
@@ -565,8 +565,9 @@ callbacks: {
 	  }
 	}
 	```
-	- `jwt({ token })`의 `token`은 `session({ token })`의 `token`과 완전히 동일합니다.
-	- `sub`는 **데이터베이스 세션**에 저장된 데이터의 id 값입니다.
+- `jwt()`의 파라미터:
+	- `token`: `session({ token })`의 `token`과 완전히 동일합니다.
+	- `sub`: **데이터베이스 세션**에 저장된 데이터의 id 값입니다. OAuth provider가 제공하는 고유 id입니다.
 	- `user` , `profile`, `isNewUser`는 provider와 데이터베이스 사용 여부에 따라 달라집니다.
 	- `user`, `account`, `profile`, `isNewUser`는 jwt 콜백이 처음 호출될 때(로그인 중일때)만 전달됩니다. **이후 호출에서는 `token`만 사용할 수 있습니다.**
 
