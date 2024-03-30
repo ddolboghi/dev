@@ -2,6 +2,8 @@
 - 로그인 후 리다이렉션되는 페이지를 만들어야합니다.
 - [초기 설정](https://next-auth.js.org/configuration/initialization)
 - OAuth 리다이렉트 주소: `/api/auth/callback/:provider`
+
+> [!warning] 아래 글들은 next-auth **v5** @beta 기준입니다.
 # [공식문서](https://authjs.dev/guides/upgrade-to-v5)
 [애플로 로그인](https://developer.apple.com/kr/sign-in-with-apple/get-started/) -> apple developer program 가입해야함 (129,000원/1년)
 # 설치
@@ -692,3 +694,5 @@ providers: [
 > [!NOTE]
 > - 인증 API의 실행은 이벤트 핸들러의 `await`에 의해 차단됩니다. 
 > - 이벤트 핸들러가 부담스러운 작업을 시작하는 경우, 해당 작업에 대한 promise를 차단해서는 안 됩니다.
+# 세션에 접근하는 방법(v4.xx)
+## getToken()
