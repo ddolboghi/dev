@@ -814,4 +814,4 @@ export default async (req, res) => {
 ```
 ## getSession()
 - session에 저장된 정보를 가져옵니다.
-- 
+- `NextAuth`에서 `callbacks` 흐름에 따라 세션에 저장된 정보들에 접근할 수 있습니다.
