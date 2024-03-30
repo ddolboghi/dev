@@ -789,7 +789,7 @@ providers: [
 # 세션에 접근하는 방법(v4.xx)
 ## getToken()
 - NextAuth.js 요청(`req`)을 받아 NextAuth.js에서 발급한 JWT의 페이로드 또는 원시 JWT 문자열을 반환합니다. 
-- 쿠키 또는 `Authorization` 헤더에서 JWT를 찾습니다.
+- **쿠키** 또는 **`Authorization` 헤더**에서 JWT를 찾습니다.
 - JWT를 사용하는 경우 `getToken()` 반환값인 속성(`emial`, `name`, `picture`, `sub`)에 접근할 수 있습니다. 이는 JWT를 해독한 값이며, `DefaultJWT`타입에 정의된 값들입니다.  
   이 방법은 **서버 사이드에서만 사용**할 수 있습니다.
 - `NEXTAUTH_URL`환경 변수를 설정하고 애플리케이션이 JWT 쿠키를 읽을 수 있는 경우(e.g. 동일한 도메인) 모든 애플리케이션에서 `getToken()`을 사용할 수 있습니다.
@@ -813,5 +813,21 @@ export default async (req, res) => {
 }
 ```
 ## getSession()
-- session에 저장된 정보를 가져옵니다.
+- **세션**에 저장된 정보를 가져옵니다.
+- `NextAuth`의 `session`콜백은 
 - `NextAuth`에서 `callbacks` 흐름에 따라 세션에 저장된 정보들에 접근할 수 있습니다.
+```js
+import { getSession } from "next-auth/client"
+
+export default async (req, res) => {
+  const session = await getSession({ req })
+  if (session) {
+    // Signed in
+    console.log("Session", JSON.stringify(session, null, 2))
+  } else {
+    // Not Signed in
+    res.status(401)
+  }
+  res.end()
+}
+```
