@@ -630,7 +630,6 @@ callbacks: {
 > - JWT를 사용할 때는 세션 용 액세스 토큰이 생성되지 않으므로 로그인 시 직접 키를 생성해야 합니다.
 
 ## `jwt()` callback
-
 - JWT가 만들어질때마다 jwt 콜백이 호출됩니다.(e.g. 로그인 시, 클라이언트에서 세션 접근 시)
 - `jwt()` 콜백은 반드시 `token`을 반환합니다. 반환값은 암호화되있으며, 쿠키에 `session-token`으로 저장됩니다.
 - 로그인 시 `token`은 다음과 같이 구성됩니다:
@@ -655,20 +654,17 @@ callbacks: {
   - `user`, `account`, `profile`, `isNewUser`는 jwt 콜백이 처음 호출될 때(로그인 중일때)만 전달됩니다. **이후 호출에서는 `token`만 사용할 수 있습니다.**
 
 - JWT 세션을 사용하고 있다면, `/api/auth/signin`, `/api/auth/session`로 요청하거나 `getSession()`, `getServerSession()`, `useSession()`를 호출할때 `jwt()` 콜백을 호출합니다. 데이터베이스 세션 사용 시 호출되지 않습니다.
-- 토큰 만료 시간은 세션이 활성화될때마다 연장됩니다.
+- **토큰 만료 시간은 세션이 활성화될때마다 연장됩니다.**
 - 이 토큰에 User ID, OAuth 액세스 토큰과 같은 데이터를 유지할 수 있습니다. 브라우저에서 사용할 수 있도록 하려면 `session()` 콜백도 확인해야합니다.
-
-> [!tip] `token`에 데이터를 추가하기 좋은 시점
->
-> 1. if문을 사용하여 `token`을 제외한 매개변수의 존재 여부를 확인합니다.
-> 2. 매개 변수가 존재하면(true) 콜백이 처음으로 호출되고 있음을 의미합니다.(즉, 사용자가 로그인 중입니다.)
-> 3. 이때 JWT의 `access_token`과 같은 데이터를 추가합니다.
-> 4. 이후 `jwt()`를 호출하면 `token` 값만 있고 나머지는 `undefined`입니다.
->
-> -> 실제로 시도해봤지만 데이터가 추가되지 않았습니다.
+### 백엔드에서 받은 accessToken을 세션에 추가하기
+- `authorize`에서 return한 `user`에 들어있는 accessToken을 session에 저장하기 위해 동일 선상에 추가해서 return합니다.
+```ts
+async jwt({ token, user }) {
+  return { ...token, ...user }
+},
+```
 
 ## token에 추가한 데이터의 타입 지정
-
 - token에 새로 추가된 데이터의 타입은 직접 지정해줘야 합니다.
 - User 모델에 `enum`타입인 `role`을 새로 만들었고, token에 `role`을 추가했을때 다음과 같이 타입을 지정했습니다.
 
