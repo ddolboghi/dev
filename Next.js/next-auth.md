@@ -601,14 +601,13 @@ callbacks: {
 ```
 
 ## `session()` callback
-
 - session 콜백은 session이 확인될때마다 호출됩니다.
 - `session()` 콜백은 반드시 `session`객체를 반환해야 합니다.
 - 보안을 위해 기본적으로 토큰의 하위 집합만 반환됩니다.
 - `jwt()` 콜백을 통해 토큰에 추가한 내용을 사용하려면 session 콜백에 명시적으로 전달해야 클라이언트(e.g. `getSession()`, `useSession()`, `/api/auth/session`)가 사용할 수 있습니다.
 - 데이터베이스 세션을 사용할때는 `User` 객체가 인자로 전달됩니다.
 - 세션에 JWT를 사용할때는 JWT payload가 전달됩니다.
-
+****
 ```ts
 callbacks: {
   async session({ session, token, user }) {
@@ -620,7 +619,7 @@ callbacks: {
 ```
 
 > [!tip]
-> JWT를 사용할때 `jwt()`콜백은 `session()`콜백 전에 호출되므로, JWT에 추가한 어떤 것이든 session 콜백에서 즉시 사용할 수 있습니다.
+> JWT를 사용할때 **`jwt()`콜백은 `session()`콜백 전에 호출**되므로, JWT에 추가한 어떤 것이든 session 콜백에서 즉시 사용할 수 있습니다.
 
 > [!warning]
 >
@@ -628,6 +627,15 @@ callbacks: {
 > - 세션 데이터를 서버 측에서 유지해야 하는 경우 세션에 대해 반환된 accessToken을 키로 사용하고 `session()` 콜백에서 데이터베이스에 연결하여 액세스할 수 있습니다. 세션 accessToken 값은 rotate하지 않으며 세션이 유효한 한 유효합니다???
 > - 데이터베이스 세션 대신 JWT를 사용한다면, 토큰에 저장된 User ID나 unique key를 사용해야합니다.
 > - JWT를 사용할 때는 세션 용 액세스 토큰이 생성되지 않으므로 로그인 시 직접 키를 생성해야 합니다.
+### jwt 콜백에서 추가한 accessToken을 세션에 저장하기
+* `session.user`에 jwt콜백에서 넘겨주는 `token`을 할당
+* `session`을 리턴하면 클라이언트 컴포넌트에서 `{data:session} = useSession()`으로 `session.user.accessToken` 접근 가능
+```ts
+async session({ session, token }) {
+	session.user = token
+	return session
+},
+```
 
 ## `jwt()` callback
 - JWT가 만들어질때마다 jwt 콜백이 호출됩니다.(e.g. 로그인 시, 클라이언트에서 세션 접근 시)
@@ -656,7 +664,7 @@ callbacks: {
 - JWT 세션을 사용하고 있다면, `/api/auth/signin`, `/api/auth/session`로 요청하거나 `getSession()`, `getServerSession()`, `useSession()`를 호출할때 `jwt()` 콜백을 호출합니다. 데이터베이스 세션 사용 시 호출되지 않습니다.
 - **토큰 만료 시간은 세션이 활성화될때마다 연장됩니다.**
 - 이 토큰에 User ID, OAuth 액세스 토큰과 같은 데이터를 유지할 수 있습니다. 브라우저에서 사용할 수 있도록 하려면 `session()` 콜백도 확인해야합니다.
-### 백엔드에서 받은 accessToken을 세션에 추가하기
+### 백엔드에서 받은 accessToken 추가하기
 - `authorize`에서 return한 `user`에 들어있는 accessToken을 session에 저장하기 위해 동일 선상에 추가해서 return합니다.
 ```ts
 async jwt({ token, user }) {
