@@ -8,6 +8,10 @@ context map: bounded context간의 관계
 aggregate: 데이터 변경 단위, 라이프 사이클이 같은 도메인들을 한데 모아 놓은 집합
 
 - aggregate는 이벤트스토밍을 여러번 수정하면서 도출
+## 대표적인 아키텍처 3가지
+- Layered
+- Clean
+- Hexagonal
 # Clean Architecture
 - 레이어트 아키텍처는 흐름 중심이고, 클린 아키텍처는 도메인 중심
 - 도메인을 소프트웨어 엔티티나 DB에 종속되지 않도록 함
