@@ -7,7 +7,7 @@ bounded context: 기능들을 하나의 도메인으로 묶어 각 도메인을 
 context map: bounded context간의 관계
 aggregate: 데이터 변경 단위, 라이프 사이클이 같은 도메인들을 한데 모아 놓은 집합
 - aggregate는 여러 개의 테이블과 연관있을 수 있음
-## 대표적인 아키텍처 3가지
+## 대표적인 아키텍처 3가지    
 - Layered: 비즈니스 로직이 거대해지면 어플리케이션 레이어가 오염됨
 - Clean
 - Hexagonal: 클린 아키텍처와 유사하지만 `port`라는 구현 개념 명시
