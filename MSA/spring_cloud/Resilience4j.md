@@ -15,7 +15,7 @@ Resilience4j 사용하는 이유: MSA에서 서비스의 장애가 전체 시스
 # 의존성
 - 스프링부트3.x부터는 `2.1.0`버전 이상을 써야함
 - 원하는 패턴을 제공하는 라이브러리들만 골라 사용할 수 있음
-- `resilience4j-reactor`sm
+- `resilience4j-reactor`는 spring webflux를 사용하는 Reactive 환경에서 Resilience4j를 사용 하기 위해 필요함
 ```gradle
 implementation 'org.springframework.boot:spring-boot-starter-webflux'
 implementation 'org.springframework.boot:spring-boot-starter-aop'
@@ -24,3 +24,5 @@ implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.1.0'
 implementation 'io.github.resilience4j:resilience4j-circuitbreaker:2.1.0'
 implementation 'io.github.resilience4j:resilience4j-timelimiter:2.1.0'
 ```
+# 구현
+254~280p
