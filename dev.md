@@ -7,6 +7,7 @@ _sort:
   field: rank
   asc: false
   group: false
+Created: 2023-10-19
 ---
 [[컴퓨터 구조]]
 [[운영체제]]

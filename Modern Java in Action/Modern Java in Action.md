@@ -1,3 +1,15 @@
+---
+_filters: []
+_contexts: []
+_links: []
+_sort:
+  field: rank
+  asc: false
+  group: false
+_template: ""
+_templateName: ""
+Created: 2023-10-31
+---
 # Java 8의 3가지 프로그래밍 개념
 ## stream processing
 - 스트림 : 한 번에 한 개씩 만들어지는 연속적인 데이터 항목들의 모임

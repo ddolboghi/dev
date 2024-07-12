@@ -1,3 +1,6 @@
+---
+Created: 2023-10-19
+---
 [참고1](https://developer.mozilla.org/ko/docs/Glossary/MVC)
 [참고2](https://ko.wikipedia.org/wiki/%EB%AA%A8%EB%8D%B8-%EB%B7%B0-%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC)
 # MVC(Model-View-Controller)
