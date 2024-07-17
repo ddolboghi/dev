@@ -40,7 +40,9 @@
   "showRibbon": true,
   "deleteFileOption": "trash",
   "expandedSpaces": [
-    "/"
+    "/",
+    "//MSA",
+    "//Docker"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
