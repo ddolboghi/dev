@@ -41,8 +41,7 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//MSA",
-    "//Docker"
+    "//MSA"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
