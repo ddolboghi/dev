@@ -18,8 +18,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "321d8df9cfba05cc",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.6.7"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -156,7 +167,7 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "0a1856ca6a358b38",
+  "active": "321d8df9cfba05cc",
   "lastOpenFiles": [
     "Docker/Docker.md",
     "MSA/DDD &amp; Clean Architecture.md",
