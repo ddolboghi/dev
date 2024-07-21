@@ -4,33 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "63af1eecd9cf86e9",
+        "id": "cdc50418812f127b",
         "type": "tabs",
         "children": [
           {
-            "id": "0a1856ca6a358b38",
+            "id": "8a4c476b100db00d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Docker/도커 개념.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "321d8df9cfba05cc",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.6.7"
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -105,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Docker/도커 개념.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +106,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Docker/도커 개념.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -144,9 +127,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Docker/도커 개념.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -167,8 +148,9 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "321d8df9cfba05cc",
+  "active": "8a4c476b100db00d",
   "lastOpenFiles": [
+    "Docker/도커 개념.md",
     "Docker/Docker.md",
     "MSA/DDD &amp; Clean Architecture.md",
     "Tip.md",
