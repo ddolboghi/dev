@@ -41,8 +41,7 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//MSA",
-    "//img"
+    "//springboot"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
