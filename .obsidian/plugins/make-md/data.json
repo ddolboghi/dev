@@ -41,7 +41,8 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//MSA"
+    "//MSA",
+    "//img"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

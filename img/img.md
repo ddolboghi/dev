@@ -6,7 +6,7 @@ _sort:
   field: rank
   asc: false
   group: false
-sticker: lucide//image
+sticker: lucide//folder-closed
 _template: ""
 _templateName: ""
 Created: 2024-02-26
