@@ -41,7 +41,8 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//네트워크"
+    "//네트워크",
+    "//Excalidraw"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

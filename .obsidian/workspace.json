@@ -21,9 +21,11 @@
             "id": "2d9e325f9fe86477",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/Drawing 2024-08-09 10.15.47.excalidraw.md"
+                "file": "네트워크/네트워크 기본.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -87,8 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -104,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Excalidraw/Drawing 2024-08-09 10.15.47.excalidraw.md",
+                "file": "네트워크/네트워크 기본.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -121,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Excalidraw/Drawing 2024-08-09 10.15.47.excalidraw.md",
+                "file": "네트워크/네트워크 기본.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -144,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/Drawing 2024-08-09 10.15.47.excalidraw.md"
+                "file": "네트워크/네트워크 기본.md"
               }
             }
           }
@@ -168,11 +169,11 @@
   },
   "active": "2d9e325f9fe86477",
   "lastOpenFiles": [
+    "img/네트워크 기본.md",
     "Excalidraw/Excalidraw.md",
-    "Excalidraw/Drawing 2024-08-09 10.15.47.excalidraw.md",
     "Excalidraw",
     "네트워크/네트워크.md",
-    "네트워크/Untitled.md",
+    "네트워크/네트워크 기본.md",
     "Docker/Docker.md",
     "Vault.md",
     "네트워크",
