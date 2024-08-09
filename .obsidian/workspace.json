@@ -11,9 +11,11 @@
             "id": "8a4c476b100db00d",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "네트워크"
+                "file": "네트워크/네트워크 기본.md",
+                "mode": "source",
+                "source": false
               }
             }
           },
@@ -23,14 +25,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/네트워크 기본.md",
+                "file": "Security/OAuth.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -167,13 +168,15 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "2d9e325f9fe86477",
+  "active": "8a4c476b100db00d",
   "lastOpenFiles": [
+    "Security/OAuth.md",
+    "Security/세션, 쿠키에 대해서.md",
+    "네트워크/네트워크 기본.md",
     "img/네트워크 기본.md",
     "Excalidraw/Excalidraw.md",
     "Excalidraw",
     "네트워크/네트워크.md",
-    "네트워크/네트워크 기본.md",
     "Docker/Docker.md",
     "Vault.md",
     "네트워크",
