@@ -150,12 +150,12 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -168,7 +168,7 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "8a4c476b100db00d",
+  "active": "b26fddbb9465bc5e",
   "lastOpenFiles": [
     "Security/OAuth.md",
     "Security/세션, 쿠키에 대해서.md",
