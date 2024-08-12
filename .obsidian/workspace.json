@@ -18,8 +18,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "2ac94ecb6509e9e0",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/네트워크 인터페이스 선택 원리.md"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "네트워크/네트워크 기본.md",
+                "file": "Excalidraw/네트워크 인터페이스 선택 원리.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "네트워크/네트워크 기본.md",
+                "file": "Excalidraw/네트워크 인터페이스 선택 원리.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/네트워크 기본.md"
+                "file": "Excalidraw/네트워크 인터페이스 선택 원리.md"
               }
             }
           }
@@ -156,13 +167,14 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "8a4c476b100db00d",
+  "active": "2ac94ecb6509e9e0",
   "lastOpenFiles": [
-    "Next.js/렌더링.md",
+    "Excalidraw/네트워크 인터페이스 선택 원리.md",
     "네트워크/네트워크 기본.md",
+    "img/네트워크 기본.md",
+    "Next.js/렌더링.md",
     "Security/OAuth.md",
     "Security/세션, 쿠키에 대해서.md",
-    "img/네트워크 기본.md",
     "Excalidraw/Excalidraw.md",
     "Excalidraw",
     "네트워크/네트워크.md",
