@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "네트워크/네트워크 핵심 개념.md",
                 "mode": "source",
                 "source": false
               }
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -95,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "네트워크/네트워크 핵심 개념.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "네트워크/네트워크 핵심 개념.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/computer networks and internet.md"
+                "file": "네트워크/네트워크 핵심 개념.md"
               }
             }
           }
@@ -144,8 +143,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -160,8 +158,8 @@
   },
   "active": "8a4c476b100db00d",
   "lastOpenFiles": [
-    "img/네트워크 인터페이스 선택 원리.md",
     "네트워크/computer networks and internet.md",
+    "img/네트워크 인터페이스 선택 원리.md",
     "네트워크/네트워크 핵심 개념.md",
     "img/네트워크 기본.md",
     "Next.js/렌더링.md",
