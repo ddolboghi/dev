@@ -6,14 +6,14 @@
 	2. 수신인, 주소, 봉투를 닫는다. == 정해진 형식에 맞게 데이터를 포장한다.
 	3. 우편함에 넣는다. == 통신 체계에 맞게 데이터를 보낸다.
 - 인터넷에서 두 개 이상의 원격 개체가 통신하는 모든 활동은 프로토콜이 적용된다.
-## network edge
+# network edge
 - **엔드 시스템은 host**라고 부른다. 왜냐하면 웹브라우저 같은 프로그램을 실행하는 주체이기 때문이다.
 - 데이터센터의 host를 blade라고 한다. 이 host들은 rack에 쌓여있고 각각의 rack은 20~40개의 blade를 가진다. rack들은 데이터센터 네트워크 설계를 사용해 상호 연결된다.
 - host는 client와 server로 나눠질 수 있다.
-## access network
+# access network
 - access network는 엔드 시스템에서 다른 엔드 시스템으로 가는 경로에서 _엔드 시스템을 첫 번째 라우터(edge router)에 물리적으로 연결하는 네트워크_ 다.
 - 가장 널리 사용되는 광대역 주거용 엑세스는 digital subscriber line(DSL)과 케이블이다.
-### DSL
+## DSL
 - 집은 통신사로부터 DSL 인터넷 액세스를 얻는다.
 - 이때 통신사는 ISP(Internet Service Provider)가 된다.
 - 집의 DSL 모뎀은 전화선을 사용해 데이터를 교환한다. 
@@ -23,7 +23,7 @@
 - DLS 표준 downstream, upstream 속도는 다양하게 정의되어있다.
 - downstream, upstream속도가 달라 엑세스가 비대칭적이다.
 - 최대 속도는 통신사 사무실 간의 거리, twisted-pair line의 게이지 및 전기 간섭에 따라 제한된다.
-### cable internet access
+## cable internet access
 - 케이블 인터넷 액세스는 케이블 텔레비전 회사의 기존 케이블 텔레비전 인프라를 활용한다.
 - 컴퓨터와 ethernet 포트로 연결된 케이블 모뎀이 필요하다.
 - 케이블 모뎀은 HFC 네트워크를 downstream과 upstream 채널로 나눈다.
@@ -33,10 +33,10 @@
 - **케이블 인터넷 엑세스는 broadcast 매체이므로 공유되있다.** 
 	- 여러 downstream 채널이 동시에 큰 데이터를 받으면 각 채널의 속도는 총 케이블 downstream 속도보다 매우 낮아진다.
 - upstream 채널도 공유되므로 전송을 조정하고 충돌을 피하기 위해 분산 다중 액세스 프로토콜이 필요하다.
-### Fiber To The Home(FTTP)
+## Fiber To The Home(FTTP)
 - 통신사 지역 중앙 사무소에서 각각의 집으로 광케이블을 직접 연결한다.
 - 인터넷 접근 속도가 GB/S 단위다.
-### ethernet과 wifi
+## ethernet과 wifi
 - LAN(Local Area Network)은 엔드 시스템을 엣지 라우터에 연결하는 데 사용된다.
 - ethernet은 가장 널리 사용되는 LAN 기술의 일종이다.
 ## 물리적 매체
@@ -56,4 +56,6 @@
 | ---------- | --------------------------------------------------------------------------------------- |
 | 지상파 라디오 채널 | - 환경적 요소에 영향을 많이 받는다.<br>- 무선 LAN 기술은 근거리 무선 채널을 사용한다.<br>- 셀룰러 액세스 기술은 광역 무선 채널을 사용한다. |
 | 위성 라디오 채널  | - 정지궤도 위성과 저궤도 위성으로 통신한다.<br>- 신호 지연이 크다.                                               |
-## network core
+# network core
+- 네트워크 코어는 인터넷의 최종 시스템을 상호 연결하는 패킷 스위치와 링크의 메쉬다.
+## packet switching
