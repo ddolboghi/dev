@@ -36,3 +36,6 @@
 ### Fiber To The Home(FTTP)
 - 통신사 지역 중앙 사무소에서 각각의 집으로 광케이블을 직접 연결한다.
 - 인터넷 접근 속도가 GB/S 단위다.
+### ethernet과 wifi
+- LAN(Local Area Network)은 엔드 시스템을 엣지 라우터에 연결하는 데 사용된다.
+- ethernet은 가장 널리 사용되는 LAN 기술의 일종이다.
