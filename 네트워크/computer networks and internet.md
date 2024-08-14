@@ -63,7 +63,7 @@
 - 패킷 스위치에는 **라우터**와 **링크 레이어 스위치**의 두 가지 주요 유형이 있다.
 - 패킷은 각 통신 링크를 통해 링크의 전체 전송 속도와 동일한 속도로 전송된다.
 - 패킷 스위치에는 여러 개의 링크가 연결되어 있다.
-- 소스•엔드 시스템 또는 패킷 스위치가 전송 속도 R bit/sec의 링크를 통해 L bit 패킷을 전송하는 경우, 패킷 전송 시간은 L/R sec다.
+- source end system 또는 패킷 스위치가 전송 속도 R bit/sec의 링크를 통해 L bit 패킷을 전송하는 경우, 패킷 전송 시간은 L/R sec다.
 	${패킷 크기}\div{패킷 스위치 전송 속도}={패킷 전송 시간}$
 ### Store-and-Forward Transmission
 - 대부분의 패킷 스위치가 링크 입력에 사용한다.
@@ -82,4 +82,7 @@
 - 큐 지연은 네트워크 혼잡도에 영향 받는다.
 - **buffer 공간이 가득 차면** 해당 buffer에 도착한 패킷 또는 대기 중인 패킷 중 하나가 삭제되어 **패킷 손실**이 발생한다.
 ### Forwarding Tables and Routing Protocols
-- 패킷이 
+- 라우터가 패킷이 가야할 링크를 정해주는 것을 패킷 포워딩이라고 한다.
+- source end system이 destination end system으로 패킷을 보낼때  destination의 IP 주소를 패킷 헤더에 포함시킨다.
+- 각 라우터에는 destination 주소(또는 일부)를 해당 라우터의 아웃바운드 링크에 매핑하는 forwarding table이 있다.
+- forwarding table에 따라 패킷을 dostination에 인접한 라우터로 보낸다.
