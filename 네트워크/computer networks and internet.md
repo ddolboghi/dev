@@ -58,6 +58,7 @@
 | 위성 라디오 채널  | - 정지궤도 위성과 저궤도 위성으로 통신한다.<br>- 신호 지연이 크다.                                               |
 # network core
 - 네트워크 코어는 인터넷의 최종 시스템을 상호 연결하는 패킷 스위치와 링크의 메쉬다.
+- 링크와 스위치 네트워크를 통해 데이터를 이동시킬때 circuit switching과 packet switching이라는 두 가지 기본 접근 방식이 있다.
 ## packet switching
 - 각 패킷은 통신 링크와 패킷 스위치를 통해 이동한다.
 - 패킷 스위치에는 **라우터**와 **링크 레이어 스위치**의 두 가지 주요 유형이 있다.
@@ -93,4 +94,6 @@
 3. 라우터는 forwarding table에서 dostination 주소에 인접한 라우터로 가는 아웃바운드 링크를 찾는다.
 4. 라우터는 패킷을 아웃바운드 링크로 라우팅한다.
 -  인터넷의 여러 특수 **routing protocol**로 forwarding table을 자동으로 설정한다.
-- 
+- routing protocol은 라우터에서 목적지까지 가장 짧은 경로를 결정하고 이 경로를 forwarding table을 구성하는데 사용한다.
+## circuit switching
+- circuit-switched 네트워크에서는 엔드 시스템 간의 통신을 제공하기 위해 경로(버퍼, 링크 전송 속도)를 따라 필요한 리소스가 엔드 시스템 간의 통신 세션 기간 동안 예약되어 있습니다.
