@@ -15,4 +15,6 @@
 - 가장 널리 사용되는 광대역 주거용 엑세스는 digital subscriber line(DSL)과 케이블이다.
 - 집은 통신사로부터 DSL 인터넷 액세스를 얻는다.
 - 이때 통신사는 ISP(Internet Service Provider)가 된다.
-- 
+- 집의 DSL 모뎀은 전화선을 사용해 데이터를 교환한다. 
+- 집에서 아날로그 신호를 고주파로 통신사의 지역 중앙 사무실로 보내면 DSLAM(Digital Subscriber Line Access Multiplexer)이 디지털 신호로 변환한다.
+- DSLAM은 데이터와 
