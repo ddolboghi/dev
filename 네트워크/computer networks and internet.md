@@ -11,4 +11,8 @@
 - 데이터센터의 host를 blade라고 한다. 이 host들은 rack에 쌓여있고 각각의 rack은 20~40개의 blade를 가진다. rack들은 데이터센터 네트워크 설계를 사용해 상호 연결된다.
 - host는 client와 server로 나눠질 수 있다.
 ## access network
-- 엔드 시스템에서 다른 엔드 시스템으로 가는 경로에서 엔드 시스템을 첫 번째 라우터(edge router)에 물리적으로 연결하는 네트워크인 액세스 네트워크를 고려해 보겠습니다.
+- access network는 엔드 시스템에서 다른 엔드 시스템으로 가는 경로에서 _엔드 시스템을 첫 번째 라우터(edge router)에 물리적으로 연결하는 네트워크_ 다.
+- 가장 널리 사용되는 광대역 주거용 엑세스는 digital subscriber line(DSL)과 케이블이다.
+- 집은 통신사로부터 DSL 인터넷 액세스를 얻는다.
+- 이때 통신사는 ISP(Internet Service Provider)가 된다.
+- 
