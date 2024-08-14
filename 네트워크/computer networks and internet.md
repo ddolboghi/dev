@@ -17,4 +17,9 @@
 - 이때 통신사는 ISP(Internet Service Provider)가 된다.
 - 집의 DSL 모뎀은 전화선을 사용해 데이터를 교환한다. 
 - 집에서 아날로그 신호를 고주파로 통신사의 지역 중앙 사무실로 보내면 DSLAM(Digital Subscriber Line Access Multiplexer)이 디지털 신호로 변환한다.
-- DSLAM은 데이터와 
+- DSLAM은 데이터와 전화 신호를 분리해서 데이터를 인터넷으로 보낸다.
+- 수백~수천 개의 집이 하나의 DSLAM과 연결되어있다.
+- DLS 표준 downstream, upstream 속도는 다양하게 정의되어있다.
+- downstream, upstream속도가 달라 엑세스가 비대칭적이다.
+- 최대 속도는 통신사 사무실 간의 거리, twisted-pair line의 게이지 및 전기 간섭에 따라 제한된다.
+- 
