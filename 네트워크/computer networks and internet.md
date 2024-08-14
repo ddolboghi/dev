@@ -62,14 +62,22 @@
 - 각 패킷은 통신 링크와 패킷 스위치를 통해 이동한다.
 - 패킷 스위치에는 **라우터**와 **링크 레이어 스위치**의 두 가지 주요 유형이 있다.
 - 패킷은 각 통신 링크를 통해 링크의 전체 전송 속도와 동일한 속도로 전송된다.
+- 패킷 스위치에는 여러 개의 링크가 연결되어 있다.
 - 소스•엔드 시스템 또는 패킷 스위치가 전송 속도 R bit/sec의 링크를 통해 L bit 패킷을 전송하는 경우, 패킷 전송 시간은 L/R sec다.
 	${패킷 크기}\div{패킷 스위치 전송 속도}={패킷 전송 시간}$
 ### Store-and-Forward Transmission
 - 대부분의 패킷 스위치가 링크 입력에 사용한다.
 - 패킷 스위치는 **패킷의 첫 번째 비트를 아웃바운드 링크로 전송하기 전에 전체 패킷을 수신**해야 합니다.
 - 라우터는 일반적으로 들어오는 패킷을 나가는 링크로 전환하는 역할을 하기 때문에 많은 링크가 있다.
-- 라우터는 패킷의 비트를 패킷의 모든 비트를 **받아** **저장**하고 **처리**한 뒤에 아웃바운드 링크로 전송할 수 있다.
-![[store-and-forward packet switching]]
-- Link는 end system과 packet swithc
+- 라우터는 패킷의 모든 비트를 **받아** **저장**하고 **처리**한 뒤에 아웃바운드 링크로 전송할 수 있다.
+	![[store-and-forward packet switching]]
+- Link는 end system과 packet switch, pecket switch와 pecket switch사이의 경로다.
+- n개의 Link가 있으면 n-1개의 라우터가 있다.
 - 전파 지연이 없고, source와 detination 사이에 n개의 링크가 있을때 패킷 1개의 전송 시간은 $n\frac{L}{R}$이다.
+### 대기열 지연과 패킷 손실
+- 패킷 스위치는 연결된 링크마다 output buffer(output queue)를 가진다.
+- output buffer에 해당 링크로 보내려는 패킷을 저장한다.
+- 다른 패킷을 전송하는데 링크가 사용되고 있다면 패킷은 output buffer에서 대기한다.
+- 패킷은 store-and-forward 지연에 output buffer 큐 지연도 겪는다.
+- 큐 지연은 네트워크 혼잡도에 영향 받는다.
 - 
