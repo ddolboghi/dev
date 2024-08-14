@@ -18,8 +18,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "75f82fd9b7795233",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/L2 스위치.md"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -95,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md",
+                "file": "Excalidraw/L2 스위치.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md",
+                "file": "Excalidraw/L2 스위치.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md"
+                "file": "Excalidraw/L2 스위치.md"
               }
             }
           }
@@ -158,11 +169,12 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "8a4c476b100db00d",
+  "active": "75f82fd9b7795233",
   "lastOpenFiles": [
+    "네트워크/네트워크 핵심 개념.md",
+    "Excalidraw/L2 스위치.md",
     "네트워크/computer networks and internet.md",
     "img/네트워크 인터페이스 선택 원리.md",
-    "네트워크/네트워크 핵심 개념.md",
     "img/네트워크 기본.md",
     "Next.js/렌더링.md",
     "Security/OAuth.md",
