@@ -84,8 +84,13 @@
 ### Forwarding Tables and Routing Protocols
 - 라우터가 패킷이 가야할 링크를 정해주는 것을 패킷 포워딩이라고 한다.
 - 각 라우터에는 destination 주소(또는 일부)를 해당 라우터의 아웃바운드 링크에 매핑하는 forwarding table이 있다.
-- 패킷이 라우터를 통해 dostination지도 없이 사람들에게 물어가면서 목적지에 도착하려는 운전자와 유사하다.
+- 패킷이 라우터를 통해 dostination end system에 도달하는 과정은 지도 없이 사람들에게 물어가면서 목적지에 도착하려는 운전자와 유사하다.
+	- 운전자 == 패킷
+	- 래우터 == 묻는 사람
+	- 사람들은 전체 경로의 일부 중 당장 가야할 가까운 경로를 알려준다.
 1. source end system이 destination end system으로 패킷을 보낼때  destination의 IP 주소를 패킷 헤더에 포함시킨다.
 2. 라우터는 패킷의 destination 주소를 검사한다.
 3. 라우터는 forwarding table에서 dostination 주소에 인접한 라우터로 가는 아웃바운드 링크를 찾는다.
 4. 라우터는 패킷을 아웃바운드 링크로 라우팅한다.
+-  인터넷의 여러 특수 **routing protocol**로 forwarding table을 자동으로 설정한다.
+- 
