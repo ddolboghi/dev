@@ -74,10 +74,12 @@
 - Link는 end system과 packet switch, pecket switch와 pecket switch사이의 경로다.
 - n개의 Link가 있으면 n-1개의 라우터가 있다.
 - 전파 지연이 없고, source와 detination 사이에 n개의 링크가 있을때 패킷 1개의 전송 시간은 $n\frac{L}{R}$이다.
-### 대기열 지연과 패킷 손실
+### 대기열 지연과 패킷 손실 (at store-and-forward transmission)
 - 패킷 스위치는 연결된 링크마다 output buffer(output queue)를 가진다.
 - output buffer에 해당 링크로 보내려는 패킷을 저장한다.
 - 다른 패킷을 전송하는데 링크가 사용되고 있다면 패킷은 output buffer에서 대기한다.
 - 패킷은 store-and-forward 지연에 output buffer 큐 지연도 겪는다.
 - 큐 지연은 네트워크 혼잡도에 영향 받는다.
-- 
+- **buffer 공간이 가득 차면** 해당 buffer에 도착한 패킷 또는 대기 중인 패킷 중 하나가 삭제되어 **패킷 손실**이 발생한다.
+### Forwarding Tables and Routing Protocols
+- 패킷이 
