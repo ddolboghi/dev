@@ -18,16 +18,6 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "a5419f07d5f7cbe5",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/store-and-forward packet switching.md"
-              }
-            }
           }
         ]
       }
@@ -168,11 +158,12 @@
   },
   "active": "8a4c476b100db00d",
   "lastOpenFiles": [
-    "Excalidraw/store-and-forward packet switching.md",
-    "네트워크/computer networks and internet.md",
     "네트워크/네트워크 핵심 개념.md",
+    "네트워크/computer networks and internet.md",
+    "img/Pasted image 20240814131731.png",
+    "Excalidraw/store-and-forward packet switching.md",
+    "img/Pasted image 20240815001131.png",
     "img/L2 스위치.md",
-    "Pasted image 20240814131731.png",
     "img/IPv4_Packet-en.svg",
     "img/네트워크 인터페이스 선택 원리.md",
     "img/네트워크 기본.md",
