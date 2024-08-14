@@ -13,6 +13,7 @@
 ## access network
 - access network는 엔드 시스템에서 다른 엔드 시스템으로 가는 경로에서 _엔드 시스템을 첫 번째 라우터(edge router)에 물리적으로 연결하는 네트워크_ 다.
 - 가장 널리 사용되는 광대역 주거용 엑세스는 digital subscriber line(DSL)과 케이블이다.
+### DSL
 - 집은 통신사로부터 DSL 인터넷 액세스를 얻는다.
 - 이때 통신사는 ISP(Internet Service Provider)가 된다.
 - 집의 DSL 모뎀은 전화선을 사용해 데이터를 교환한다. 
@@ -22,4 +23,8 @@
 - DLS 표준 downstream, upstream 속도는 다양하게 정의되어있다.
 - downstream, upstream속도가 달라 엑세스가 비대칭적이다.
 - 최대 속도는 통신사 사무실 간의 거리, twisted-pair line의 게이지 및 전기 간섭에 따라 제한된다.
-- 
+### cable internet access
+- 케이블 인터넷 액세스는 케이블 텔레비전 회사의 기존 케이블 텔레비전 인프라를 활용한다.
+- 컴퓨터와 ethernet 포트로 연결된 케이블 모뎀이 필요하다.
+- 케이블 모뎀은 HFC 네트워크를 downstream과 upstream 채널로 나눈다.
+- CMTS(Cable Modem Termination System)은 케이블 모뎀으로부터 받은 아날로그 신호를 디지털로 변환한다.
