@@ -109,3 +109,6 @@
 	- 예를 들어 인접 스위치 간의 각 링크의 전송 속도가 1Mbps인 경우, 각 end-to-end circuit 스위치 연결의 전송 속도는 250kbps이다.
 - packet switching은 링크를 통해 다른 패킷을 동시에 전송해야 하기 때문에 링크 중 하나가 혼잡한 경우 패킷은 버퍼에서 대기해야 하며 지연이 발생한다.
 ## Multiplexing in Circuit-Switched Networks
+- 링크의 회로는 주파수 분할 다중화(FDM; frequency-division multiplexing) 또는 시분할 다중화(TDM; time-division multiplexing)로 구현된다.
+- FDM을 사용하면 링크는 연결이 지속되는 동안 각 연결에 주파수 대역을 할당한다.
+- 
