@@ -111,4 +111,7 @@
 ## Multiplexing in Circuit-Switched Networks
 - 링크의 회로는 주파수 분할 다중화(FDM; frequency-division multiplexing) 또는 시분할 다중화(TDM; time-division multiplexing)로 구현된다.
 - FDM을 사용하면 링크는 연결이 지속되는 동안 각 연결에 주파수 대역을 할당한다.
-- 
+> [!tip]
+> 주파수 대역의 폭을 대역폭(bandwidth)라고 한다.
+- TDM은 고정된 기간의 프레임으로 시간을 나누고, 각 프레임은 고정된 수의 시간 슬롯으로 나뉜다.
+- 네트워크가 링크 연결을 설정하면 네트워크는 매 프레임마다 하나의 시간 슬롯을 이 연결에 할당합니다. 이 슬롯은 해당 연결 전용으로 사용되며, 연결 데이터를 전송하는 데 사용할 수 있는 시간 슬롯이 매 프레임마다 하나씩 있습니다.
