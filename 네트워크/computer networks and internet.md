@@ -30,7 +30,7 @@
 - CMTS(Cable Modem Termination System)은 케이블 모뎀으로부터 받은 아날로그 신호를 디지털로 변환한다.
 - CMTS는 DSL 처럼 upstream과 downstream 속도가 다르며, 보통 downstream 속도가 더빠르다.
 - CMTS는 DSL 처럼 계약한 속도나 최고 속도로 사용하지 못할 수도 있다.
-- **케이블 인터넷 엑세스는 broadcast 매체이므로 공유되있다.** 
+- **케이블 인터넷 엑세스는 broadcast 매체이므로 공유되어있다.** 
 	- 여러 downstream 채널이 동시에 큰 데이터를 받으면 각 채널의 속도는 총 케이블 downstream 속도보다 매우 낮아진다.
 - upstream 채널도 공유되므로 전송을 조정하고 충돌을 피하기 위해 분산 다중 액세스 프로토콜이 필요하다.
 ## Fiber To The Home(FTTP)
