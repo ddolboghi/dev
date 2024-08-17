@@ -42,7 +42,8 @@
   "expandedSpaces": [
     "/",
     "//네트워크",
-    "//Excalidraw"
+    "//Excalidraw",
+    "//MongoDB"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

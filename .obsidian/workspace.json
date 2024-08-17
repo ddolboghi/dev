@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "MongoDB/spring mongoTemplate.md",
                 "mode": "source",
                 "source": false
               }
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "MongoDB/spring mongoTemplate.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "MongoDB/spring mongoTemplate.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/computer networks and internet.md"
+                "file": "MongoDB/spring mongoTemplate.md"
               }
             }
           }
@@ -160,8 +160,10 @@
   },
   "active": "8a4c476b100db00d",
   "lastOpenFiles": [
-    "img/store-and-forward packet switching.md",
+    "MongoDB/설치 및 설정.md",
+    "MongoDB/spring mongoTemplate.md",
     "네트워크/computer networks and internet.md",
+    "img/store-and-forward packet switching.md",
     "img/FDM and TDM.png",
     "네트워크/네트워크 핵심 개념.md",
     "img/Pasted image 20240814131731.png",
