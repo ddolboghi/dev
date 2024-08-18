@@ -43,7 +43,8 @@
     "/",
     "//네트워크",
     "//Excalidraw",
-    "//MongoDB"
+    "//MongoDB",
+    "//Javascript"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
