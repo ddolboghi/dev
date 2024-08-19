@@ -22,10 +22,20 @@
 - JarLauncher로 실행 전반에 걸쳐 일관된 클래스 로딩 순서를 유지하며 추출된 파일들을 실행할 수 있다.
 # 컨테이너 이미지 만들기
 - maven, gradle 플러그인 내에 OCI(Open Container Initiative; 컨테이너 기술에 대한 표준화) 이미를 생성하는 기능이 있다.
-- 기본 설정은 다음 레이어를 생성한다.
-	- dependencies: 정기적 출시 버전(GA 버전 같은 의존성 포함)
-	- spring-boot-loader: org/springframework/boot/loader 아래에 있는 모든 파일 포함
-	- 
+- 기본 설정은 다음 레이어를 생성한다. 1 -> 4로 갈수록 변경이 잦다.
+	1. dependencies: 정기적 출시 버전(GA 버전 같은 의존성 포함)
+	2. spring-boot-loader: org/springframework/boot/loader 아래에 있는 모든 파일 포함
+	3. snapshot-dependencies: 아직 GA로 간주되지 않는 미래 지향적 출시 버전
+	4. application: 애플리케이션 클래스와 관련 리소스(템플릿, 속성 파일, 스크립트 등)
+- gradle에서 이미지 이름을 정의하고 `gradlew bootBulidImage`를 실행하면 OCI 이미지가 생성된다.
+	```gradle
+	//Image reference must be in the form '[domainHost:port/][path/]name[:tag][@digest]', with 'path' and 'name' containing only [a-z0-9][.][_][-]
+	bootBuildImage {  
+    imageName = "${project.name}-${project.version}"  
+	}
+	```
+	
+```
 # gradle 프로젝트를 springboot 프로젝트로 만들기
 1. build.gradle 파일 수정하기
 ```gradle
