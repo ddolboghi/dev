@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "spring cloud bus.md",
+                "file": "springboot/Tomcat vs Netty.md",
                 "mode": "source",
                 "source": false
               }
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 238.5,
+    "collapsed": true
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -94,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "spring cloud bus.md",
+                "file": "springboot/Tomcat vs Netty.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "spring cloud bus.md",
+                "file": "springboot/Tomcat vs Netty.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "spring cloud bus.md"
+                "file": "springboot/Tomcat vs Netty.md"
               }
             }
           }
@@ -143,7 +144,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -158,10 +160,12 @@
   },
   "active": "c62b8c9eb57b1851",
   "lastOpenFiles": [
-    "SpringCloudStream/사용법.md",
-    "img/spring cloud bus webhook.png",
-    "spring cloud bus.md",
+    "springboot/springboot 기초.md",
+    "springboot/Tomcat vs Netty.md",
+    "SpringCloudStream.md",
     "SpringCloudStream/SpringCloudStream.md",
+    "spring cloud bus.md",
+    "img/spring cloud bus webhook.png",
     "SpringCloudStream/무제 폴더.md",
     "SpringCloudStream",
     "Modern Java in Action/lambda.md",
@@ -192,7 +196,6 @@
     "네트워크",
     "springboot/JPA.md",
     "img/intercepting-route2.png",
-    "img/img.md",
     "Tags"
   ]
 }

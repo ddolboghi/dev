@@ -45,7 +45,7 @@
     "//MongoDB",
     "//Javascript",
     "/",
-    "//SpringCloudStream"
+    "//springboot"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
