@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SpringCloudStream/무제 파일.md",
+                "file": "spring cloud bus.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SpringCloudStream/무제 파일.md",
+                "file": "spring cloud bus.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SpringCloudStream/무제 파일.md",
+                "file": "spring cloud bus.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SpringCloudStream/무제 파일.md"
+                "file": "spring cloud bus.md"
               }
             }
           }
@@ -158,7 +158,9 @@
   },
   "active": "c62b8c9eb57b1851",
   "lastOpenFiles": [
-    "SpringCloudStream/무제 파일.md",
+    "SpringCloudStream/사용법.md",
+    "img/spring cloud bus webhook.png",
+    "spring cloud bus.md",
     "SpringCloudStream/SpringCloudStream.md",
     "SpringCloudStream/무제 폴더.md",
     "SpringCloudStream",
@@ -191,8 +193,6 @@
     "springboot/JPA.md",
     "img/intercepting-route2.png",
     "img/img.md",
-    "Docker/도커 개념.md",
-    "MSA/DDD &amp; Clean Architecture.md",
     "Tags"
   ]
 }
