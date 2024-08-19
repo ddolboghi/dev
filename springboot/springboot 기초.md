@@ -27,11 +27,11 @@
 	2. spring-boot-loader: org/springframework/boot/loader 아래에 있는 모든 파일 포함
 	3. snapshot-dependencies: 아직 GA로 간주되지 않는 미래 지향적 출시 버전
 	4. application: 애플리케이션 클래스와 관련 리소스(템플릿, 속성 파일, 스크립트 등)
-- gradle에서 이미지 이름을 정의하고 `gradlew bootBulidImage`를 실행하면 OCI 이미지가 생성된다.
+- gradle에서 이미지 이름을 정의하고 `gradlew bootBulidImage`를 실행하면 OCI 이미지가 생성된다.(**안됌**)
 	```gradle
 	//Image reference must be in the form '[domainHost:port/][path/]name[:tag][@digest]', with 'path' and 'name' containing only [a-z0-9][.][_][-]
 	bootBuildImage {  
-    imageName = "${project.name}-${project.version}"  
+	    imageName = "${project.name}-${project.version}"  
 	}
 	```
 	
