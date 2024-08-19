@@ -40,11 +40,12 @@
   "showRibbon": true,
   "deleteFileOption": "trash",
   "expandedSpaces": [
-    "/",
     "//네트워크",
     "//Excalidraw",
     "//MongoDB",
-    "//Javascript"
+    "//Javascript",
+    "/",
+    "//SpringCloudStream"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

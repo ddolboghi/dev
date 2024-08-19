@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "cdc50418812f127b",
+        "id": "8500858c2c51590d",
         "type": "tabs",
         "children": [
           {
-            "id": "8a4c476b100db00d",
+            "id": "c62b8c9eb57b1851",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "SpringCloudStream/무제 파일.md",
                 "mode": "source",
                 "source": false
               }
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -95,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "SpringCloudStream/무제 파일.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "SpringCloudStream/무제 파일.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md"
+                "file": "SpringCloudStream/무제 파일.md"
               }
             }
           }
@@ -157,8 +156,16 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "8a4c476b100db00d",
+  "active": "c62b8c9eb57b1851",
   "lastOpenFiles": [
+    "SpringCloudStream/무제 파일.md",
+    "SpringCloudStream/SpringCloudStream.md",
+    "SpringCloudStream/무제 폴더.md",
+    "SpringCloudStream",
+    "Modern Java in Action/lambda.md",
+    "Javascript/Javascript 고급 문법.md",
+    "Tags/SpringCloudStream/SpringCloudStream.md",
+    "Tags/SpringCloudStream",
     "Javascript/Javascript 기초.md",
     "MongoDB/spring mongoTemplate.md",
     "MongoDB/설치 및 설정.md",
@@ -186,9 +193,6 @@
     "img/img.md",
     "Docker/도커 개념.md",
     "MSA/DDD &amp; Clean Architecture.md",
-    "Tip.md",
-    "Security/Security.md",
-    "Tags/Tags.md",
     "Tags"
   ]
 }
