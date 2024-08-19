@@ -19,6 +19,13 @@
 	- 추출된 의존성은 쉽게 교체할 수 있는 개별 단위다.
 	- 변경된 파일만 재배포하면 되므로 앱 업데이트를 빠르고 낮은 대역폭으로 실행할 수 있다.
 - JAR은 `jar -xvf [스프링부트 애플리케이션.jar]`로 구성 요소 아티팩트를 추출한다.
+- JarLauncher로 실행 전반에 걸쳐 일관된 클래스 로딩 순서를 유지하며 추출된 파일들을 실행할 수 있다.
+# 컨테이너 이미지 만들기
+- maven, gradle 플러그인 내에 OCI(Open Container Initiative; 컨테이너 기술에 대한 표준화) 이미를 생성하는 기능이 있다.
+- 기본 설정은 다음 레이어를 생성한다.
+	- dependencies: 정기적 출시 버전(GA 버전 같은 의존성 포함)
+	- spring-boot-loader: org/springframework/boot/loader 아래에 있는 모든 파일 포함
+	- 
 # gradle 프로젝트를 springboot 프로젝트로 만들기
 1. build.gradle 파일 수정하기
 ```gradle
