@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "springboot/springboot 기초.md",
+                "file": "네트워크/computer networks and internet.md",
                 "mode": "source",
                 "source": false
               }
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "springboot/springboot 기초.md",
+                "file": "네트워크/computer networks and internet.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "springboot/springboot 기초.md",
+                "file": "네트워크/computer networks and internet.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "springboot/springboot 기초.md"
+                "file": "네트워크/computer networks and internet.md"
               }
             }
           }
@@ -160,8 +160,8 @@
   },
   "active": "c62b8c9eb57b1851",
   "lastOpenFiles": [
-    "springboot/Tomcat vs Netty.md",
     "springboot/springboot 기초.md",
+    "springboot/Tomcat vs Netty.md",
     "SpringCloudStream.md",
     "SpringCloudStream/SpringCloudStream.md",
     "spring cloud bus.md",
