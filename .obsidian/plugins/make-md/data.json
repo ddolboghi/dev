@@ -44,8 +44,7 @@
     "//Excalidraw",
     "//MongoDB",
     "//Javascript",
-    "/",
-    "//Next.js"
+    "/"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
