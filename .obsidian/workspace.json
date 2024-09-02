@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "Next.js/라우팅.md",
                 "mode": "source",
                 "source": false
               }
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "Next.js/라우팅.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +112,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "네트워크/computer networks and internet.md",
+                "file": "Next.js/라우팅.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +135,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/computer networks and internet.md"
+                "file": "Next.js/라우팅.md"
               }
             }
           }
@@ -144,8 +144,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -160,6 +159,7 @@
   },
   "active": "c62b8c9eb57b1851",
   "lastOpenFiles": [
+    "네트워크/computer networks and internet.md",
     "springboot/springboot 기초.md",
     "springboot/Tomcat vs Netty.md",
     "SpringCloudStream.md",
@@ -175,7 +175,6 @@
     "Javascript/Javascript 기초.md",
     "MongoDB/spring mongoTemplate.md",
     "MongoDB/설치 및 설정.md",
-    "네트워크/computer networks and internet.md",
     "img/store-and-forward packet switching.md",
     "img/FDM and TDM.png",
     "네트워크/네트워크 핵심 개념.md",
