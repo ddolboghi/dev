@@ -45,7 +45,8 @@
     "//MongoDB",
     "//Javascript",
     "/",
-    "//Next.js"
+    "//Next.js",
+    "//컴퓨터 구조"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

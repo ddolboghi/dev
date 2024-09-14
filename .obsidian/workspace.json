@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "8500858c2c51590d",
+        "id": "1e3c21547371609b",
         "type": "tabs",
         "children": [
           {
-            "id": "c62b8c9eb57b1851",
+            "id": "017699762fee7027",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Next.js/라우팅.md",
+                "file": "컴퓨터 구조/CPU.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Next.js/라우팅.md",
+                "file": "컴퓨터 구조/CPU.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Next.js/라우팅.md",
+                "file": "컴퓨터 구조/CPU.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Next.js/라우팅.md"
+                "file": "컴퓨터 구조/CPU.md"
               }
             }
           }
@@ -156,10 +156,12 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "c62b8c9eb57b1851",
+  "active": "017699762fee7027",
   "lastOpenFiles": [
-    "Javascript/Javascript 고급 문법.md",
+    "컴퓨터 구조/컴퓨터 구조.md",
+    "테스트/테스트.md",
     "Next.js/라우팅.md",
+    "Javascript/Javascript 고급 문법.md",
     "네트워크/computer networks and internet.md",
     "springboot/springboot 기초.md",
     "springboot/Tomcat vs Netty.md",
@@ -190,8 +192,6 @@
     "Excalidraw/Excalidraw.md",
     "Excalidraw",
     "네트워크/네트워크.md",
-    "Docker/Docker.md",
-    "Vault.md",
     "네트워크",
     "img/intercepting-route2.png",
     "Tags"
