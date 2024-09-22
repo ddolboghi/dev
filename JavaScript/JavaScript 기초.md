@@ -25,6 +25,8 @@ console.log(friend); //null
 console.log(criminal); //undefined
 ```
 
+> [!tip]
+> Object는 let으로 선언하는게 좋다. 왜냐하면 const로 선언해도 Object안의 property 값들은 수정할 수 있기 때문이다.
 # scope
 - 전역 스코프: 코드의 모든 범위에서 사용 가능
 - 함수 스코프: 함수 안에서만 사용 가능. `var`
