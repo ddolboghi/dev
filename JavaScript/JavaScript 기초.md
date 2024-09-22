@@ -72,11 +72,11 @@ const add = new Function('a', 'b', 'return a + b')
 - `||`: OR
 - 연산 순서: NOT -> AND -> OR
 ## 비교 연산자
-- `===`: 두 값과 타입이 모두 일치하는지 확인
-- `!==`: 두 값과 타입이 모두 불일치하는지 확인
-- `==`: 두 값이 일치하는지만 확인
-- `!=`: 두 값이 불일치하는지만 확인
-- `<`, `>`, `<=`, `>=`
+- `===`: 두 값과 타입이 모두 일치하는지 확인, **타입 강제변환을 허용하지 않음**
+- `!==`: 두 값과 타입이 모두 불일치하는지 확인, **타입 강제변환을 허용하지 않음**
+- `==`: 두 값이 일치하는지만 확인, **타입 강제변환을 허용하지 않음**
+- `!=`: 두 값이 불일치하는지만 확인, **타입 강제변환을 허용하지 않음**
+- `<`, `>`, `<=`, `>=` : 타입 강제변환을 허용함
 
 # 조건문
 - `if`, `if else`, `else`
@@ -84,7 +84,7 @@ const add = new Function('a', 'b', 'return a + b')
 
 # 템플릿 리터럴
 - `+`를 사용하지 않고 문자열을 묶는 방법
-- **작은 따옴표가 아니라 역따옴표임을 주의!!**
+- **작은 따옴표가 아니라 역따옴표(임을 주의!!**
 ```js
 function hello(name) {
     console.log(`hello, ${name}`);
@@ -191,6 +191,17 @@ const dog = {
 };
 
 dog.say();
+```
+
+```js
+var testObj = {
+    myName: "jjy",
+    greeting(name) {
+        console.log(`thank you, ${name} ${testObj.myName}`); //this.myName을 사용해도 된다.
+    }
+};
+testObj.greeting("jjy")
+// thank you, jjy jjy
 ```
 ## Getter & Setter
 ```js
