@@ -199,9 +199,10 @@ console.log(info.age);
 ```
 
 # spread
-- `...`연산자를 사용해 객체나 배열을 펼침
-- 파이썬의 `*`와 유사함
+- `...`연산자를 사용해 **iterator**를 펼침
+- `...`는 iterator를 소비하는 주체인 iterator consumer로, `for ...of`반복문과 마찬가지로 iterator 소비 프로토콜을 준수함
 - 배열에서 여러 번 사용가능
+- 배열안에 사용 시 iterator를 펼친 결과가 배열의 각 요소가 되도록 함
 ```js
 const arr = [1,2];
 const brr = [...arr, 3, ...arr];
