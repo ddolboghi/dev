@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Next.js/라우팅.md",
+                "file": "Javascript/Javascript 기초.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Next.js/라우팅.md",
+                "file": "Javascript/Javascript 기초.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Next.js/라우팅.md",
+                "file": "Javascript/Javascript 기초.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Next.js/라우팅.md"
+                "file": "Javascript/Javascript 기초.md"
               }
             }
           }
@@ -159,11 +159,11 @@
   "active": "017699762fee7027",
   "lastOpenFiles": [
     "Javascript/Javascript 고급 문법.md",
+    "Next.js/라우팅.md",
     "Javascript/Javascript 기초.md",
     "컴퓨터 구조/CPU.md",
     "컴퓨터 구조/컴퓨터 구조.md",
     "테스트/테스트.md",
-    "Next.js/라우팅.md",
     "네트워크/computer networks and internet.md",
     "springboot/springboot 기초.md",
     "springboot/Tomcat vs Netty.md",
