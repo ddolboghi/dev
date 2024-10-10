@@ -388,3 +388,22 @@ for (let key in dog) {
 
 # ES2022
 [참고](https://fe-developers.kakaoent.com/2022/220728-es2022/)
+
+# 클로저
+- 함수가 정의된 스코프가 아닌 다른 스코프에서 함수가 실행되더라도, 스코프 밖에 있는 변수를 기억하고 이 외부 변수에 계속 접근할 수 있는 경우를 의미한다.
+- 클로저는 함수의 타고난 특징이다.
+- 객체는 클로저가 되지 않지만, 함수는 클로저가 된다.
+- 클로저를 직접 보려면 함수를 해당 함수가 정의된 스코프가 아닌 다른 스코프에서 실행해야 한다.
+```js
+function greeting(msg) {
+	return function who(name) {
+		console.log(`${name}, ${msg}!`);
+	};
+}
+
+var hello = greeting("hello!");
+var howdy = greeting("how are you?");
+hello("bora"); // bora, hello!
+howdy("naen"); // naen, how are you?
+```
+1. `greeting()`이 실행되고 `who()`
