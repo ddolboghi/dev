@@ -16,10 +16,25 @@
                 "file": "Typescript/Typescript 요약.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Typescript 요약"
+            }
+          },
+          {
+            "id": "aef411eab2a10706",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.7.4"
+              },
+              "icon": "lucide-file",
+              "title": "Release Notes 1.7.4"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -39,7 +54,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
             }
           },
           {
@@ -54,7 +71,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "검색"
             }
           },
           {
@@ -62,15 +81,19 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           },
           {
-            "id": "ac542546f4e58183",
+            "id": "0a595a0499eae1ea",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
-              "state": {}
+              "state": {},
+              "icon": "layout-grid",
+              "title": "Spaces"
             }
           }
         ],
@@ -94,7 +117,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Typescript/Typescript 요약.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +124,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "백링크"
             }
           },
           {
@@ -111,10 +135,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Typescript/Typescript 요약.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "나가는 링크"
             }
           },
           {
@@ -125,7 +150,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -133,9 +160,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Typescript/Typescript 요약.md"
-              }
+              "state": {},
+              "icon": "lucide-list",
+              "title": "개요"
             }
           }
         ],
@@ -156,7 +183,7 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "017699762fee7027",
+  "active": "aef411eab2a10706",
   "lastOpenFiles": [
     "Javascript/Javascript 고급 문법.md",
     "Javascript/Javascript 기초.md",
