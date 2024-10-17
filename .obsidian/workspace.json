@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "Typescript/Typescript 요약.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "Typescript/Typescript 요약.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "Typescript/Typescript 요약.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md"
+                "file": "Typescript/Typescript 요약.md"
               }
             }
           }
@@ -143,8 +143,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -159,8 +158,8 @@
   },
   "active": "017699762fee7027",
   "lastOpenFiles": [
-    "Javascript/Javascript 기초.md",
     "Javascript/Javascript 고급 문법.md",
+    "Javascript/Javascript 기초.md",
     "Next.js/라우팅.md",
     "컴퓨터 구조/CPU.md",
     "컴퓨터 구조/컴퓨터 구조.md",

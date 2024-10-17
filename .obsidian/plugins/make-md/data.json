@@ -45,7 +45,8 @@
     "//MongoDB",
     "//Javascript",
     "/",
-    "//컴퓨터 구조"
+    "//컴퓨터 구조",
+    "//Typescript"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
