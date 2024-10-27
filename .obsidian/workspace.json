@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Typescript/Typescript 요약.md",
+                "file": "Javascript/Javascript 고급 문법.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Typescript 요약"
+              "title": "Javascript 고급 문법"
             }
           }
         ]
@@ -74,7 +74,7 @@
             }
           },
           {
-            "id": "1a6122fce0186dc4",
+            "id": "8ba9b07be47e5965",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -150,10 +150,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Typescript/Typescript 요약.md"
+                "file": "Javascript/Javascript 고급 문법.md"
               },
               "icon": "lucide-list",
-              "title": "Typescript 요약 개요"
+              "title": "Javascript 고급 문법 개요"
             }
           }
         ],
@@ -176,8 +176,8 @@
   },
   "active": "017699762fee7027",
   "lastOpenFiles": [
-    "Javascript/Javascript 고급 문법.md",
     "Typescript/Typescript 요약.md",
+    "Javascript/Javascript 고급 문법.md",
     "Javascript/Javascript 기초.md",
     "Next.js/라우팅.md",
     "컴퓨터 구조/CPU.md",
