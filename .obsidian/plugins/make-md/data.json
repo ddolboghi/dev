@@ -45,16 +45,12 @@
   "showRibbon": true,
   "deleteFileOption": "trash",
   "expandedSpaces": [
-    "//네트워크",
     "//Excalidraw",
-    "//MongoDB",
-    "//Javascript",
     "/",
     "//컴퓨터 구조",
-    "//Typescript",
     "//운영체제",
     "//테스트",
-    "//Security"
+    "//springboot"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

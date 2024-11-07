@@ -22,31 +22,27 @@
             }
           },
           {
-            "id": "8e6d3fa23802951b",
+            "id": "85ada633f0c612e0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "[컴퓨터 밑바닥의 비밀] 질문"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "그래프 뷰"
             }
           },
           {
-            "id": "cf3fbb41e993609e",
+            "id": "e781231d1687f238",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Security/OAuth.md",
+                "file": "MSA/인프라 구축.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "OAuth"
+              "title": "인프라 구축"
             }
           }
         ],
@@ -112,8 +108,7 @@
               "title": "Spaces"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -133,7 +128,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Security/OAuth.md",
+                "file": "MSA/인프라 구축.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,7 +138,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "OAuth의 백링크"
+              "title": "인프라 구축의 백링크"
             }
           },
           {
@@ -152,12 +147,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Security/OAuth.md",
+                "file": "MSA/인프라 구축.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "OAuth의 나가는 링크"
+              "title": "인프라 구축의 나가는 링크"
             }
           },
           {
@@ -179,10 +174,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Security/OAuth.md"
+                "file": "MSA/인프라 구축.md"
               },
               "icon": "lucide-list",
-              "title": "OAuth 개요"
+              "title": "인프라 구축 개요"
             }
           },
           {
@@ -214,10 +209,15 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "cf3fbb41e993609e",
+  "active": "ff0f8e4db58e2f67",
   "lastOpenFiles": [
+    "dev.md",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Security/OAuth.md",
+    "MSA/인프라 구축.md",
+    "spring/spring cloud bus.md",
+    "Next.js/Next.js.md",
+    "Security/브라우저의 세션, 쿠키에 대해서.md",
     "운영체제/운영체제 기본.md",
     "테스트/단위 테스트.md",
     "테스트/테스트.md",
@@ -233,19 +233,14 @@
     "Next.js/라우팅.md",
     "컴퓨터 구조/CPU.md",
     "컴퓨터 구조/컴퓨터 구조.md",
-    "springboot/springboot 기초.md",
+    "spring/springboot 기초.md",
     "springboot/Tomcat vs Netty.md",
-    "SpringCloudStream.md",
+    "spring/SpringCloudStream.md",
     "SpringCloudStream/SpringCloudStream.md",
-    "spring cloud bus.md",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream/무제 폴더.md",
     "SpringCloudStream",
-    "Modern Java in Action/lambda.md",
-    "Tags/SpringCloudStream/SpringCloudStream.md",
     "Tags/SpringCloudStream",
-    "MongoDB/spring mongoTemplate.md",
-    "MongoDB/설치 및 설정.md",
     "img/FDM and TDM.png",
     "img/Pasted image 20240814131731.png",
     "img/Pasted image 20240815001131.png",
