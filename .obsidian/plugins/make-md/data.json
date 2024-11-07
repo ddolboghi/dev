@@ -52,8 +52,7 @@
     "/",
     "//컴퓨터 구조",
     "//Typescript",
-    "//운영체제",
-    "//img"
+    "//운영체제"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
