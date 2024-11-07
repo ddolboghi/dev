@@ -20,6 +20,18 @@
               "icon": "lucide-file",
               "title": "운영체제 기본"
             }
+          },
+          {
+            "id": "33c94d3e4d6570bf",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "img/virtual memory.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "virtual memory"
+            }
           }
         ]
       }
@@ -155,6 +167,16 @@
               "icon": "lucide-list",
               "title": "운영체제 기본 개요"
             }
+          },
+          {
+            "id": "08c6ff63aff1b561",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
         "currentTab": 3
@@ -175,10 +197,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "bd6dbe60cb54aa84",
+  "active": "6e257cfb6f4711d8",
   "lastOpenFiles": [
-    "운영체제/컴퓨터 밑바닥의 비밀.md",
+    "img/virtual memory.md",
     "운영체제/운영체제 기본.md",
+    "운영체제/컴퓨터 밑바닥의 비밀.md",
     "Typescript/Typescript 요약.md",
     "Javascript/Javascript 기초.md",
     "Javascript/Javascript 고급 문법.md",
@@ -209,7 +232,6 @@
     "img/L2 스위치.md",
     "img/IPv4_Packet-en.svg",
     "img/네트워크 인터페이스 선택 원리.md",
-    "img/네트워크 기본.md",
     "Excalidraw",
     "네트워크",
     "img/intercepting-route2.png",
