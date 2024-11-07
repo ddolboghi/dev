@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "017699762fee7027",
+            "id": "bd6dbe60cb54aa84",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "운영체제/컴퓨터 밑바닥의 비밀.md",
+                "file": "운영체제/운영체제 기본.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "컴퓨터 밑바닥의 비밀"
+              "title": "운영체제 기본"
             }
           }
         ]
@@ -74,7 +74,7 @@
             }
           },
           {
-            "id": "3bdf824904452a52",
+            "id": "6e257cfb6f4711d8",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -104,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "운영체제/운영체제 기본.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Javascript 고급 문법의 백링크"
+              "title": "운영체제 기본의 백링크"
             }
           },
           {
@@ -123,12 +123,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript/Javascript 고급 문법.md",
+                "file": "운영체제/운영체제 기본.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Javascript 고급 문법의 나가는 링크"
+              "title": "운영체제 기본의 나가는 링크"
             }
           },
           {
@@ -150,10 +150,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "운영체제/컴퓨터 밑바닥의 비밀.md"
+                "file": "운영체제/운영체제 기본.md"
               },
               "icon": "lucide-list",
-              "title": "컴퓨터 밑바닥의 비밀 개요"
+              "title": "운영체제 기본 개요"
             }
           }
         ],
@@ -171,13 +171,14 @@
       "daily-notes:오늘의 데일리 노트 열기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "017699762fee7027",
+  "active": "bd6dbe60cb54aa84",
   "lastOpenFiles": [
-    "운영체제/운영체제 기본.md",
     "운영체제/컴퓨터 밑바닥의 비밀.md",
+    "운영체제/운영체제 기본.md",
     "Typescript/Typescript 요약.md",
     "Javascript/Javascript 기초.md",
     "Javascript/Javascript 고급 문법.md",
