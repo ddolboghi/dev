@@ -53,8 +53,8 @@
     "//컴퓨터 구조",
     "//Typescript",
     "//운영체제",
-    "//Next.js",
-    "//테스트"
+    "//테스트",
+    "//Security"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

@@ -27,16 +27,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "운영체제/컴퓨터 밑바닥의 비밀.md",
+                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "컴퓨터 밑바닥의 비밀"
+              "title": "[컴퓨터 밑바닥의 비밀] 질문"
+            }
+          },
+          {
+            "id": "cf3fbb41e993609e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Security/OAuth.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OAuth"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -119,7 +133,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "운영체제/컴퓨터 밑바닥의 비밀.md",
+                "file": "Security/OAuth.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +143,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "컴퓨터 밑바닥의 비밀의 백링크"
+              "title": "OAuth의 백링크"
             }
           },
           {
@@ -138,12 +152,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "운영체제/컴퓨터 밑바닥의 비밀.md",
+                "file": "Security/OAuth.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "컴퓨터 밑바닥의 비밀의 나가는 링크"
+              "title": "OAuth의 나가는 링크"
             }
           },
           {
@@ -165,10 +179,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "운영체제/컴퓨터 밑바닥의 비밀.md"
+                "file": "Security/OAuth.md"
               },
               "icon": "lucide-list",
-              "title": "컴퓨터 밑바닥의 비밀 개요"
+              "title": "OAuth 개요"
             }
           },
           {
@@ -200,10 +214,11 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "8e6d3fa23802951b",
+  "active": "cf3fbb41e993609e",
   "lastOpenFiles": [
+    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
+    "Security/OAuth.md",
     "운영체제/운영체제 기본.md",
-    "운영체제/컴퓨터 밑바닥의 비밀.md",
     "테스트/단위 테스트.md",
     "테스트/테스트.md",
     "Typescript/리액트-컴포넌트-타입.png",
@@ -231,7 +246,6 @@
     "Tags/SpringCloudStream",
     "MongoDB/spring mongoTemplate.md",
     "MongoDB/설치 및 설정.md",
-    "img/store-and-forward packet switching.md",
     "img/FDM and TDM.png",
     "img/Pasted image 20240814131731.png",
     "img/Pasted image 20240815001131.png",
