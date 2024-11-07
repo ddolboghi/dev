@@ -22,15 +22,15 @@
             }
           },
           {
-            "id": "33c94d3e4d6570bf",
+            "id": "6f5646d70f40de70",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "img/virtual memory.md"
+                "file": "img/virtual_memory.md"
               },
               "icon": "excalidraw-icon",
-              "title": "virtual memory"
+              "title": "virtual_memory"
             }
           }
         ]
@@ -197,9 +197,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6e257cfb6f4711d8",
+  "active": "bd6dbe60cb54aa84",
   "lastOpenFiles": [
-    "img/virtual memory.md",
+    "img/virtual_memory.md",
     "운영체제/운영체제 기본.md",
     "운영체제/컴퓨터 밑바닥의 비밀.md",
     "Typescript/Typescript 요약.md",
