@@ -20,18 +20,6 @@
               "icon": "lucide-file",
               "title": "운영체제 기본"
             }
-          },
-          {
-            "id": "6f5646d70f40de70",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "img/virtual_memory.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "virtual_memory"
-            }
           }
         ]
       }
@@ -199,8 +187,9 @@
   },
   "active": "bd6dbe60cb54aa84",
   "lastOpenFiles": [
-    "img/virtual_memory.md",
+    "Next.js/설치 및 프로젝트 구조.md",
     "운영체제/운영체제 기본.md",
+    "img/virtual_memory.md",
     "운영체제/컴퓨터 밑바닥의 비밀.md",
     "Typescript/Typescript 요약.md",
     "Javascript/Javascript 기초.md",
@@ -231,7 +220,6 @@
     "img/Pasted image 20240815001131.png",
     "img/L2 스위치.md",
     "img/IPv4_Packet-en.svg",
-    "img/네트워크 인터페이스 선택 원리.md",
     "Excalidraw",
     "네트워크",
     "img/intercepting-route2.png",
