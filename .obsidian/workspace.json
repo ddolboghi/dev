@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Typescript/Typescript 요약.md",
+                "file": "운영체제/컴퓨터 밑바닥의 비밀.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Typescript 요약"
+              "title": "컴퓨터 밑바닥의 비밀"
             }
           }
         ]
@@ -150,10 +150,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Typescript/Typescript 요약.md"
+                "file": "운영체제/컴퓨터 밑바닥의 비밀.md"
               },
               "icon": "lucide-list",
-              "title": "Typescript 요약 개요"
+              "title": "컴퓨터 밑바닥의 비밀 개요"
             }
           }
         ],
@@ -176,12 +176,14 @@
   },
   "active": "017699762fee7027",
   "lastOpenFiles": [
+    "운영체제/운영체제 기본.md",
+    "운영체제/컴퓨터 밑바닥의 비밀.md",
+    "Typescript/Typescript 요약.md",
     "Javascript/Javascript 기초.md",
     "Javascript/Javascript 고급 문법.md",
     "네트워크/computer networks and internet.md",
     "Javascript/비동기 처리.md",
     "네트워크/네트워크 핵심 개념.md",
-    "Typescript/Typescript 요약.md",
     "Next.js/라우팅.md",
     "컴퓨터 구조/CPU.md",
     "컴퓨터 구조/컴퓨터 구조.md",
@@ -207,8 +209,6 @@
     "img/IPv4_Packet-en.svg",
     "img/네트워크 인터페이스 선택 원리.md",
     "img/네트워크 기본.md",
-    "Next.js/렌더링.md",
-    "Security/OAuth.md",
     "Excalidraw",
     "네트워크",
     "img/intercepting-route2.png",

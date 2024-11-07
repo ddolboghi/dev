@@ -46,7 +46,8 @@
     "//Javascript",
     "/",
     "//컴퓨터 구조",
-    "//Typescript"
+    "//Typescript",
+    "//운영체제"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
