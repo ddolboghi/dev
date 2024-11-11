@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "1e3c21547371609b",
+        "id": "4fd0c3d73825d5e6",
         "type": "tabs",
         "children": [
           {
-            "id": "bd6dbe60cb54aa84",
+            "id": "9d159c31ac871227",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "그래프 뷰"
+              "type": "markdown",
+              "state": {
+                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "[컴퓨터 밑바닥의 비밀] 질문"
             }
           }
         ]
@@ -143,9 +147,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md"
+              },
               "icon": "lucide-list",
-              "title": "개요"
+              "title": "[컴퓨터 밑바닥의 비밀] 질문 개요"
             }
           },
           {
@@ -173,10 +179,11 @@
       "daily-notes:오늘의 데일리 노트 열기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "bd6dbe60cb54aa84",
+  "active": "9d159c31ac871227",
   "lastOpenFiles": [
     "운영체제/운영체제 기본.md",
     "네트워크/네트워크.md",
