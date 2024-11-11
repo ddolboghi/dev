@@ -11,42 +11,13 @@
             "id": "bd6dbe60cb54aa84",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "운영체제/운영체제 기본.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "운영체제 기본"
-            }
-          },
-          {
-            "id": "85ada633f0c612e0",
-            "type": "leaf",
-            "state": {
               "type": "graph",
               "state": {},
               "icon": "lucide-git-fork",
               "title": "그래프 뷰"
             }
-          },
-          {
-            "id": "e781231d1687f238",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "MSA/인프라 구축.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "인프라 구축"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -108,7 +79,8 @@
               "title": "Spaces"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -128,7 +100,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "MSA/인프라 구축.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +109,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "인프라 구축의 백링크"
+              "title": "백링크"
             }
           },
           {
@@ -147,12 +118,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "MSA/인프라 구축.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "인프라 구축의 나가는 링크"
+              "title": "나가는 링크"
             }
           },
           {
@@ -173,11 +143,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "MSA/인프라 구축.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "인프라 구축 개요"
+              "title": "개요"
             }
           },
           {
@@ -205,20 +173,23 @@
       "daily-notes:오늘의 데일리 노트 열기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ff0f8e4db58e2f67",
+  "active": "bd6dbe60cb54aa84",
   "lastOpenFiles": [
+    "운영체제/운영체제 기본.md",
+    "네트워크/네트워크.md",
+    "네트워크/네트워크 핵심 개념.md",
+    "MSA/인프라 구축.md",
+    "MSA/MSA.md",
+    "MSA/분산 시스템에서 데이터 전달하기.md",
     "dev.md",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Security/OAuth.md",
-    "MSA/인프라 구축.md",
     "spring/spring cloud bus.md",
     "Next.js/Next.js.md",
     "Security/브라우저의 세션, 쿠키에 대해서.md",
-    "운영체제/운영체제 기본.md",
     "테스트/단위 테스트.md",
     "테스트/테스트.md",
     "Typescript/리액트-컴포넌트-타입.png",
@@ -229,16 +200,12 @@
     "Javascript/Javascript 고급 문법.md",
     "네트워크/computer networks and internet.md",
     "Javascript/비동기 처리.md",
-    "네트워크/네트워크 핵심 개념.md",
     "Next.js/라우팅.md",
     "컴퓨터 구조/CPU.md",
     "컴퓨터 구조/컴퓨터 구조.md",
     "spring/springboot 기초.md",
     "springboot/Tomcat vs Netty.md",
-    "spring/SpringCloudStream.md",
-    "SpringCloudStream/SpringCloudStream.md",
     "img/spring cloud bus webhook.png",
-    "SpringCloudStream/무제 폴더.md",
     "SpringCloudStream",
     "Tags/SpringCloudStream",
     "img/FDM and TDM.png",

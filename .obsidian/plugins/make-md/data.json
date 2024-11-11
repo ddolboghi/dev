@@ -50,7 +50,9 @@
     "//컴퓨터 구조",
     "//운영체제",
     "//테스트",
-    "//springboot"
+    "//springboot",
+    "//MSA",
+    "//네트워크"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
