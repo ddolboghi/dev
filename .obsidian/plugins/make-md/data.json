@@ -52,7 +52,8 @@
     "//테스트",
     "//springboot",
     "//MSA",
-    "//네트워크"
+    "//네트워크",
+    "//Javascript"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
