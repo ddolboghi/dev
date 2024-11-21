@@ -10,7 +10,7 @@ _template: ""
 _templateName: ""
 Created: 2023-12-11
 ---
-[[dev/React/설치 관련]]
+[[설치 관련]]
 [[React 기초]]
 [[React로 UI 구현하기]]
 [[상호작용 추가하기]]
