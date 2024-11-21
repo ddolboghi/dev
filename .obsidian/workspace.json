@@ -22,29 +22,21 @@
             }
           },
           {
-            "id": "cc359b1895f1aa15",
+            "id": "42efe06b2698a415",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "그래프 뷰"
-            }
-          },
-          {
-            "id": "4e26124c036c5904",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "MongoDB"
+                "file": "Tip.md",
+                "mode": "source",
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "MongoDB"
+              "title": "Tip"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -171,10 +163,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "MongoDB/MongoDB.md"
+                "file": "Tip.md"
               },
               "icon": "lucide-list",
-              "title": "MongoDB 개요"
+              "title": "Tip 개요"
             }
           },
           {
@@ -206,15 +198,22 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "dd088bd27b6e66a4",
+  "active": "42efe06b2698a415",
   "lastOpenFiles": [
+    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
+    "Next.js/렌더링.md",
+    "MSA/spring cloud/spring cloud.md",
+    "MSA/spring cloud/설치 및 개념.md",
+    "spring/무제 파일.md",
+    "spring/SpringCloudStream.md",
+    "MSA/MSA.md",
+    "MongoDB/MongoDB.md",
     "MongoDB/설치 및 설정.md",
     "Next.js/Prisma.md",
     "Next.js/Next.js.md",
     "Next.js/next-auth.md",
     "spring/spring cloud bus.md",
     "spring/spring security.md",
-    "spring/SpringCloudStream.md",
     "Typescript요약.md",
     "Typescript/Typescript 요약.md",
     "Typescript/Typescript.md",
@@ -224,16 +223,9 @@
     "img/virtual_memory.md",
     "Next.js/Next.js 특징 및 기능.md",
     "Tip.md",
-    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Modern Java in Action/lambda.md",
     "dev.md",
     "Tags/SpringCloudStream/SpringCloudStream.md",
-    "Tags/Tags.md",
-    "React/React.md",
-    "spring/수정과 삭제.md",
-    "React/redux.md",
-    "React/설치 관련.md",
-    "운영체제/운영체제 기본.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",

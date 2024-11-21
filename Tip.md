@@ -244,3 +244,5 @@ String name = optional.orElse("anonymous"); // 값이 없다면 "anonymous" 를 
 - 엣지 런타임은 표준 웹 API의 하위 집합으로, 가장 많은 환경과의 호환성 및 상호 운용성을 제공합니다. 
 - Vercel, Cloudflare, Deno, Shopify 등의 커뮤니티 그룹인 WinterCG에서 개발한 표준을 준수하도록 설계되었습니다. 
 - 'Edge'라는 용어는 특정 위치가 아닌 인스턴트 서버리스 컴퓨팅 환경을 지향하는 것을 의미합니다.
+# C10K 문제
+- 동시에 클라이언트 연결 **1만개**를 처리하는 네트워크 소켓 최적화 문제

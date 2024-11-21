@@ -12,3 +12,4 @@ _templateName: ""
 Created: 2024-07-08
 ---
 [[spring mongoTemplate]]
+[[설치 및 설정]]
