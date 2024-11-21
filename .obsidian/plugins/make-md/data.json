@@ -53,7 +53,12 @@
     "//springboot",
     "//MSA",
     "//네트워크",
-    "//Javascript"
+    "//Javascript",
+    "//Tags",
+    "//Tags/Tags/SpringCloudStream",
+    "//Next.js",
+    "//Docker",
+    "//MongoDB"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

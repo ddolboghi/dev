@@ -10,3 +10,4 @@ _template: ""
 _templateName: ""
 Created: 2024-02-25
 ---
+[[Typescript 요약]]
