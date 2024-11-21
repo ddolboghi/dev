@@ -61,8 +61,7 @@
               "title": "Tip"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -189,10 +188,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "운영체제/운영체제 기본.md"
+                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md"
               },
               "icon": "lucide-list",
-              "title": "운영체제 기본 개요"
+              "title": "[컴퓨터 밑바닥의 비밀] 질문 개요"
             }
           },
           {
@@ -224,10 +223,10 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "6e257cfb6f4711d8",
+  "active": "9d159c31ac871227",
   "lastOpenFiles": [
-    "img/event_loop_and_IO.md",
     "운영체제/운영체제 기본.md",
+    "img/event_loop_and_IO.md",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Tip.md",
     "Next.js/렌더링.md",
