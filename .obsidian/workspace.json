@@ -41,10 +41,10 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Excalidraw/Drawing 2024-11-21 15.06.37.excalidraw.md"
+                "file": "img/event_loop_and_IO.md"
               },
               "icon": "excalidraw-icon",
-              "title": "Drawing 2024-11-21 15.06.37.excalidraw"
+              "title": "event_loop_and_IO"
             }
           },
           {
@@ -62,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -189,10 +189,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/Drawing 2024-11-21 15.06.37.excalidraw.md"
+                "file": "운영체제/운영체제 기본.md"
               },
               "icon": "lucide-list",
-              "title": "Drawing 2024-11-21 15.06.37.excalidraw 개요"
+              "title": "운영체제 기본 개요"
             }
           },
           {
@@ -224,10 +224,10 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "efe49f2097467e5e",
+  "active": "6e257cfb6f4711d8",
   "lastOpenFiles": [
+    "img/event_loop_and_IO.md",
     "운영체제/운영체제 기본.md",
-    "Excalidraw/Drawing 2024-11-21 15.06.37.excalidraw.md",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Tip.md",
     "Next.js/렌더링.md",
