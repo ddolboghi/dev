@@ -61,7 +61,8 @@
               "title": "Tip"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -188,10 +189,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md"
+                "file": "Tip.md"
               },
               "icon": "lucide-list",
-              "title": "[컴퓨터 밑바닥의 비밀] 질문 개요"
+              "title": "Tip 개요"
             }
           },
           {
@@ -219,15 +220,15 @@
       "daily-notes:오늘의 데일리 노트 열기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9d159c31ac871227",
+  "active": "42efe06b2698a415",
   "lastOpenFiles": [
+    "Tags",
+    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "운영체제/운영체제 기본.md",
     "img/event_loop_and_IO.md",
-    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Tip.md",
     "Next.js/렌더링.md",
     "MSA/spring cloud/spring cloud.md",
@@ -250,7 +251,6 @@
     "Docker/docker 설치.md",
     "img/virtual_memory.md",
     "Next.js/Next.js 특징 및 기능.md",
-    "Modern Java in Action/lambda.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
@@ -261,7 +261,6 @@
     "img/IPv4_Packet-en.svg",
     "Excalidraw",
     "네트워크",
-    "img/intercepting-route2.png",
-    "Tags"
+    "img/intercepting-route2.png"
   ]
 }
