@@ -27,10 +27,10 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Excalidraw/Drawing 2024-11-23 18.08.50.excalidraw.md"
+                "file": "Excalidraw/JVM_structure.md"
               },
               "icon": "excalidraw-icon",
-              "title": "Drawing 2024-11-23 18.08.50.excalidraw"
+              "title": "JVM_structure"
             }
           }
         ],
@@ -161,10 +161,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/Drawing 2024-11-23 18.08.50.excalidraw.md"
+                "file": "Excalidraw/JVM_structure.md"
               },
               "icon": "lucide-list",
-              "title": "Drawing 2024-11-23 18.08.50.excalidraw 개요"
+              "title": "JVM_structure 개요"
             }
           },
           {
@@ -198,8 +198,9 @@
   },
   "active": "4e27a140d997b219",
   "lastOpenFiles": [
+    "Excalidraw/JVM_structure.md",
+    "Excalidraw/JVM_structure.png",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
-    "Excalidraw/Drawing 2024-11-23 18.08.50.excalidraw.md",
     "운영체제/운영체제 기본.md",
     "img/event_loop_and_IO.md",
     "Tip.md",
@@ -224,7 +225,6 @@
     "Docker/docker 개념.md",
     "Docker/docker 설치.md",
     "img/virtual_memory.md",
-    "Next.js/Next.js 특징 및 기능.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
