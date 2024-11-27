@@ -51,13 +51,10 @@
     "//운영체제",
     "//테스트",
     "//springboot",
-    "//MSA",
     "//네트워크",
-    "//Javascript",
     "//Tags",
     "//Tags/Tags/SpringCloudStream",
     "//Docker",
-    "//MongoDB",
     "//MSA/MSA/spring cloud"
   ],
   "expandFolderOnClick": true,
