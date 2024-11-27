@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "4fd0c3d73825d5e6",
+        "id": "79ecd5d717ff5623",
         "type": "tabs",
         "children": [
           {
-            "id": "4e27a140d997b219",
+            "id": "ed244e660a62afe6",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/JVM_structure.md"
+                "file": "센텀 디지털위크.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "JVM_structure"
+              "icon": "lucide-file",
+              "title": "센텀 디지털위크"
             }
           }
         ]
@@ -86,7 +88,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 238.5,
+    "collapsed": true
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -146,10 +149,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/JVM_structure.md"
+                "file": "센텀 디지털위크.md"
               },
               "icon": "lucide-list",
-              "title": "JVM_structure 개요"
+              "title": "센텀 디지털위크 개요"
             }
           },
           {
@@ -181,10 +184,11 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "4e27a140d997b219",
+  "active": "ed244e660a62afe6",
   "lastOpenFiles": [
-    "Excalidraw/JVM_structure.png",
+    "센텀 디지털위크.md",
     "Excalidraw/JVM_structure.md",
+    "Excalidraw/JVM_structure.png",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "운영체제/운영체제 기본.md",
     "img/event_loop_and_IO.md",
