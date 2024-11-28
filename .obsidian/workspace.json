@@ -200,8 +200,9 @@
   },
   "active": "cb10648170b60d01",
   "lastOpenFiles": [
-    "네트워크/computer networks and internet.md",
+    "img/VLSM_example.png",
     "네트워크/네트워크 핵심 개념.md",
+    "네트워크/computer networks and internet.md",
     "센텀 디지털위크.md",
     "Excalidraw/JVM_structure.md",
     "Excalidraw/JVM_structure.png",
@@ -227,7 +228,6 @@
     "Typescript/Typescript 요약.md",
     "Typescript/Typescript.md",
     "Docker/Docker.md",
-    "Docker/docker 개념.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
