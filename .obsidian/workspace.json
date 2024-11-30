@@ -35,7 +35,8 @@
               "title": "computer networks and internet"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -162,10 +163,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md"
+                "file": "네트워크/computer networks and internet.md"
               },
               "icon": "lucide-list",
-              "title": "네트워크 핵심 개념 개요"
+              "title": "computer networks and internet 개요"
             }
           },
           {
@@ -197,10 +198,10 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "cb10648170b60d01",
+  "active": "452a5fcb2d1a9d3a",
   "lastOpenFiles": [
-    "img/VLSM_example.png",
     "네트워크/네트워크 핵심 개념.md",
+    "img/VLSM_example.png",
     "네트워크/computer networks and internet.md",
     "센텀 디지털위크.md",
     "Excalidraw/JVM_structure.md",
