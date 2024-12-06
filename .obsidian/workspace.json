@@ -8,31 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "cb10648170b60d01",
+            "id": "5fc249172f10c2fd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md",
+                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "네트워크 핵심 개념"
-            }
-          },
-          {
-            "id": "452a5fcb2d1a9d3a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "네트워크/computer networks and internet.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "computer networks and internet"
+              "title": "[컴퓨터 밑바닥의 비밀] 질문"
             }
           }
         ]
@@ -162,10 +148,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md"
+                "file": "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md"
               },
               "icon": "lucide-list",
-              "title": "네트워크 핵심 개념 개요"
+              "title": "sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러 개요"
             }
           },
           {
@@ -193,18 +179,20 @@
       "daily-notes:오늘의 데일리 노트 열기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "cb10648170b60d01",
+  "active": "6e257cfb6f4711d8",
   "lastOpenFiles": [
-    "네트워크/computer networks and internet.md",
+    "트러블슈팅/[Next-Auth] JWTSessionError.md",
+    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "네트워크/네트워크 핵심 개념.md",
+    "네트워크/computer networks and internet.md",
     "img/VLSM_example.png",
     "센텀 디지털위크.md",
     "Excalidraw/JVM_structure.md",
     "Excalidraw/JVM_structure.png",
-    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "운영체제/운영체제 기본.md",
     "img/event_loop_and_IO.md",
     "Tip.md",

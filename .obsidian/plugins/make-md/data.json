@@ -48,13 +48,13 @@
     "/",
     "//컴퓨터 구조",
     "//운영체제",
-    "//테스트",
     "//springboot",
     "//네트워크",
     "//Tags",
     "//Tags/Tags/SpringCloudStream",
     "//Docker",
-    "//MSA/MSA/spring cloud"
+    "//MSA/MSA/spring cloud",
+    "//트러블슈팅"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
