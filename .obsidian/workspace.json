@@ -35,8 +35,7 @@
               "title": "운영체제 기본"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -163,10 +162,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "운영체제/운영체제 기본.md"
+                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md"
               },
               "icon": "lucide-list",
-              "title": "운영체제 기본 개요"
+              "title": "[컴퓨터 밑바닥의 비밀] 질문 개요"
             }
           },
           {
@@ -198,10 +197,10 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "55ab093da15189c7",
+  "active": "5fc249172f10c2fd",
   "lastOpenFiles": [
-    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "운영체제/운영체제 기본.md",
+    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md",
     "트러블슈팅/[Next-Auth] JWTSessionError.md",
     "네트워크/네트워크 핵심 개념.md",
