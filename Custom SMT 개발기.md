@@ -24,4 +24,4 @@ postgresql의 timestamp without time zone 형식의 데이터를 ISO8601 형식�
 		]
 ```
 
-1970년 1월 1일 자정을 기준으로 ms로 나타낸 시각을 `yyyy-MM-dd'T'HH:mm:ss'Z'`형식으로 변환해야 한다.
+1970년 1월 1일 자정을 기준으로 ms로 나타낸 시각을 `yyyy-MM-dd'T'HH:mm:ss'Z'`형식으로 변환해야 한다. Z는 UTC 시간이라는 뜻이며, 서버는 모두 UTC 시간을 사용하고 있었기 때문에 TIME ZONE을 뺀 UTC 시간으로 변환한다.
