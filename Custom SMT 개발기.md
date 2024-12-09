@@ -40,5 +40,5 @@ transforms.insertuuid.uuid.field.name="uuid"
 ```
 
 위 설정은 [InsertUuid](https://github.com/confluentinc/kafka-connect-insert-uuid/blob/master/src/main/java/com/github/cjmatta/kafka/connect/smt/InsertUuid.java) 라는 예시 SMT의 설정입니다. InsertUuid.java과 API 문서를 참고해서 어떤  클래스와 메서드가 있는지 알아보겠습니다. 
-
+## transform 구성 클래스 및 메서드
 - `configure()`함수로 파라미터를 받을 수 있습니다.
