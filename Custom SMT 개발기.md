@@ -29,7 +29,16 @@ postgresql의 timestamp without time zone 형식의 데이터를 ISO8601 형식�
 1970년 1월 1일 자정을 기준으로 ms로 나타낸 시각을 `yyyy-MM-dd'T'HH:mm:ss'Z'`형식으로 변환해야 합니다. Z는 UTC 시간이라는 뜻이며, 서버는 모두 UTC 시간을 사용하고 있었기 때문에 TIME ZONE을 뺀 UTC 시간으로 변환합니다.
 
 ## Single Message Transforms 작동 원리
-- transformation들은 JAR로 컴파일되며 Connect worker의 속성 파일에 지정된 plugin.path를 통해 Kafka Connect에서 사용할 수 있습니다. 일단 설치되면 커넥터 속성에서 transform을 구성할 수 있습니다.
+- transformation들은 JAR로 컴파일되며 Connect 워커의 속성 파일에 지정된 plugin.path를 통해 Kafka Connect에서 사용할 수 있습니다. 일단 설치되면 커넥터 속성에서 transform을 구성할 수 있습니다.
 - transformation을 구성하고 배포하면, 소스 커넥터가 업스트림 시스템으로부터 레코드를 받아 ConnectRecord로 변환합니다. 그리고 transformation의 `apply()`함수에 레코드를 전달하고, 레코드를 반환 받으려고 합니다.
 - 싱크 커넥터에서는 이 과정이 반대로 진행됩니다. 소스 카프카 토픽의 각 메세지를 읽고 역직렬화한 다음, transformation의 `apply()`함수이 호출되고 이를 거친 레코드가 타겟 시스템으로 보내집니다.
+- JAR을 컴파일하여 Connect 워커의 plugin.path에 지정된 경로에 넣습니다. transform이 의존하는 모든 종속성을 경로에 패키징하거나 fat JAR로 컴파일해야 합니다. 그리고 커넥터 설정을 다음과 같이 작성합니다.
+```
+transforms=insertuuid # 설정파일에서 사용하는 SMT명
+transforms.insertuuid.type=com.github.cjmatta.kafka.connect.smt.InsertUuid$Value # 클래스 path와 레코드 타입
+transforms.insertuuid.uuid.field.name="uuid"
+```
+
+위 설정은 [InsertUuid](https://github.com/confluentinc/kafka-connect-insert-uuid/blob/master/src/main/java/com/github/cjmatta/kafka/connect/smt/InsertUuid.java) 라는 예시 SMT의 설정입니다. InsertUuid.java과 API 문서를 참고해서 어떤  클래스와 메서드가 있는지 알아보겠습니다. 
+
 - `configure()`함수로 파라미터를 받을 수 있습니다.
