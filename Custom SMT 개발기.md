@@ -56,3 +56,15 @@ transforms.insertuuid.uuid.field.name="uuid"
 - 설정의 종속 요소를 지정할 수 있습니다. 
 - 설정의 유효한 값과 표시 여부는 다른 설정의 값에 따라 변경될 수 있습니다. 
 - `ConfigDef.Recommender`를 오버라이드하여 유효한 값을 가져오고 현재 설정 값에 따라 설정의 가시성을 설정할 수 있습니다.
+
+```java
+public static final String FIELD_CONFIG = "field";  
+private static final String FIELD_DEFAULT = "";
+
+public static final ConfigDef CONFIG_DEF = new ConfigDef()  
+    .define(FIELD_CONFIG, ConfigDef.Type.STRING, FIELD_DEFAULT, ConfigDef.Importance.HIGH,  
+        "The field containing the timestamp");
+```
+이렇게 작성하면 커넥터를 등록할때 `"transforms.MyTransform.field": "created_at"`처럼 작성하면 됩니다.
+
+변환하고 싶은 필드가 여러 개있으므로 필드 리스트를 받겠습니다. 
