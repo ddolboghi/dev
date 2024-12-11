@@ -41,7 +41,6 @@ transforms.insertuuid.uuid.field.name="uuid"
 
 위 설정은 [InsertUuid](https://github.com/confluentinc/kafka-connect-insert-uuid/blob/master/src/main/java/com/github/cjmatta/kafka/connect/smt/InsertUuid.java) 라는 예시 SMT의 설정입니다. InsertUuid.java과 API 문서를 참고해서 어떤  클래스와 메서드가 있는지 알아보겠습니다. 
 ## SMT 구성 클래스 및 메서드
-- `configure()`함수로 파라미터를 받을 수 있습니다.
 ### ConfigDef
 - 이 클래스는 설정을 지정하는 데 사용됩니다. 설정은 커넥터를 등록할때 작성하는 json입니다.
 	```json
@@ -67,4 +66,6 @@ public static final ConfigDef CONFIG_DEF = new ConfigDef()
 ```
 이렇게 작성하면 커넥터를 등록할때 `"transforms.MyTransform.field": "created_at"`처럼 작성하면 됩니다.
 
-변환하고 싶은 필드가 여러 개있으므로 필드 리스트를 받겠습니다. 
+요구사항에서 변환하고 싶은 필드가 여러 개있으므로 필드 리스트를 받겠습니다.
+### configure()
+- 이 함수 내에서 ConfigDef에서 받은 설정 값들을 검증할 수 있습니다.
