@@ -7,6 +7,7 @@ Created: 2024-12-09
 - [How to Use Single Message Transforms in Kafka Connect](https://www.confluent.io/blog/kafka-connect-single-message-transformation-tutorial-with-examples/?session_ref=https://www.google.com/&_ga=2.238432201.896469771.1733720144-1465531381.1731048925&_gac=1.150693572.1732606365.CjwKCAiA3ZC6BhBaEiwAeqfvygiZ0aZ1sqUgRIlk-bJnwRg-psgtuGxVoD9KophieCYBwugSOM6bMBoCTvYQAvD_BwE&_gl=1*1ukfh6g*_gcl_aw*R0NMLjE3MzI2MDYzNjUuQ2p3S0NBaUEzWkM2QmhCYUVpd0FlcWZ2eWdpWjBhWjFzcVVnUklsay1iSm53UmctcHNndHVHeFZvRDlLb3BoaWVDWUJ3dWdTT002Yk1Cb0NUdllRQXZEX0J3RQ..*_gcl_au*Njk0MDcyNjEzLjE3MzEwNDg5MjQ.*_ga*MTQ2NTUzMTM4MS4xNzMxMDQ4OTI1*_ga_D2D3EGKSGD*MTczMzcyMDE0NC40LjEuMTczMzcyMDE1MC41NC4wLjA.)
 - [kafka connect transform github](https://github.com/apache/kafka/blob/trunk/connect/transforms/src/main/java/org/apache/kafka/connect/transforms/TimestampConverter.java)
 - [Interface Transformation docs](https://docs.confluent.io/platform/current/connect/javadocs/javadoc/org/apache/kafka/connect/transforms/Transformation.html)
+- [kafka connect 3.6.2 API javadoc](https://kafka.apache.org/36/javadoc/index.html?org/apache/kafka/connect)
 # 요구사항
 postgresql의 timestamp without time zone 형식의 데이터를 ISO8601 형식으로 변환해서 저장한다.
 
@@ -68,4 +69,6 @@ public static final ConfigDef CONFIG_DEF = new ConfigDef()
 
 요구사항에서 변환하고 싶은 필드가 여러 개있으므로 필드 리스트를 받겠습니다.
 ### configure()
+- `org.apache.kafka.connect.transforms.Transformation<R>`이 상속하는 `Configurable`인터페이스의 메서드입니다. 기본적으로 커스텀 SMT가 `Transformation`을 상속해야 하기 때문에 이 메서드를 구현해야 합니다.
+- 주어진 key-value 쌍으로 이 클래스를 구성합니다.
 - 이 함수 내에서 ConfigDef에서 받은 설정 값들을 검증할 수 있습니다.
