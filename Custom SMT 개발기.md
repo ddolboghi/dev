@@ -40,5 +40,19 @@ transforms.insertuuid.uuid.field.name="uuid"
 ```
 
 위 설정은 [InsertUuid](https://github.com/confluentinc/kafka-connect-insert-uuid/blob/master/src/main/java/com/github/cjmatta/kafka/connect/smt/InsertUuid.java) 라는 예시 SMT의 설정입니다. InsertUuid.java과 API 문서를 참고해서 어떤  클래스와 메서드가 있는지 알아보겠습니다. 
-## transform 구성 클래스 및 메서드
+## SMT 구성 클래스 및 메서드
 - `configure()`함수로 파라미터를 받을 수 있습니다.
+### ConfigDef
+- 이 클래스는 설정을 지정하는 데 사용됩니다. 설정은 커넥터를 등록할때 작성하는 json입니다.
+	```json
+	// 예시
+	"transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+	"transforms.TimestampConverter.field": "event_date_long",
+	"transforms.TimestampConverter.unix.precision": "microseconds",
+	"transforms.TimestampConverter.target.type": "Timestamp"
+	```
+- 각 설정에 대해 이름, 유형, 기본값, 문서, 그룹 정보, 그룹 내 순서, 구성 값의 너비 및 UI에 표시하기에 적합한 이름을 지정할 수 있습니다. 
+- `ConfigDef.Validator`를 오버라이드하여 단일 설정 유효성 검사에 사용되는 특수 유효성 검사 로직을 사용할 수 있습니다.
+- 설정의 종속 요소를 지정할 수 있습니다. 
+- 설정의 유효한 값과 표시 여부는 다른 설정의 값에 따라 변경될 수 있습니다. 
+- `ConfigDef.Recommender`를 오버라이드하여 유효한 값을 가져오고 현재 설정 값에 따라 설정의 가시성을 설정할 수 있습니다.
