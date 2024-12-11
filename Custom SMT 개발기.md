@@ -70,5 +70,8 @@ public static final ConfigDef CONFIG_DEF = new ConfigDef()
 요구사항에서 변환하고 싶은 필드가 여러 개있으므로 필드 리스트를 받겠습니다.
 ### configure()
 - `org.apache.kafka.connect.transforms.Transformation<R>`이 상속하는 `Configurable`인터페이스의 메서드입니다. 기본적으로 커스텀 SMT가 `Transformation`을 상속해야 하기 때문에 이 메서드를 구현해야 합니다.
-- 주어진 key-value 쌍으로 이 클래스를 구성합니다.
-- 이 함수 내에서 ConfigDef에서 받은 설정 값들을 검증할 수 있습니다.
+- `ConfigDef`에서 주어진 key-value 쌍으로 이 클래스를 구성합니다.
+- 이 함수 내에서 `ConfigDef`를 통해 받은 값들을 검증할 수 있습니다.
+- `ConfigDef`를 통해 받은 값들을 직접 인스턴스 변수에 할당하거나, `org.apache.kafka.common.config.Config`객체에 할당하여 객체에서 설정 값들을 꺼내 쓸 수 있습니다. 
+
+- [ ] git remote repository에서 .idea 제외시키기
