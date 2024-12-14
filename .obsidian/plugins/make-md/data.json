@@ -54,7 +54,8 @@
     "//Tags/Tags/SpringCloudStream",
     "//Docker",
     "//MSA/MSA/spring cloud",
-    "//트러블슈팅"
+    "//트러블슈팅",
+    "//Excalidraw"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

@@ -36,7 +36,7 @@
             }
           },
           {
-            "id": "f7feac7442e91f47",
+            "id": "d282ef1192c56f14",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -48,9 +48,23 @@
               "icon": "lucide-file",
               "title": "네트워크 핵심 개념"
             }
+          },
+          {
+            "id": "48ea555d5bb83c9b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "네트워크/TCP&IP.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TCP&IP"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -177,10 +191,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/네트워크 핵심 개념.md"
+                "file": "네트워크/TCP&IP.md"
               },
               "icon": "lucide-list",
-              "title": "네트워크 핵심 개념 개요"
+              "title": "TCP&IP 개요"
             }
           },
           {
@@ -212,20 +226,24 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f7feac7442e91f47",
+  "active": "48ea555d5bb83c9b",
   "lastOpenFiles": [
+    "네트워크/네트워크 핵심 개념.md",
+    "네트워크/네트워크.md",
+    "네트워크/TCP&IP.md",
+    "img/tcpip_protocol_stack.md",
+    "img/JVM_structure.png",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
+    "Modern Java in Action/lambda.md",
     "Custom SMT 개발기.md",
     "운영체제/운영체제 기본.md",
     ".md",
     "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md",
     "트러블슈팅/[Next-Auth] JWTSessionError.md",
-    "네트워크/네트워크 핵심 개념.md",
     "네트워크/computer networks and internet.md",
     "img/VLSM_example.png",
     "센텀 디지털위크.md",
     "Excalidraw/JVM_structure.md",
-    "Excalidraw/JVM_structure.png",
     "img/event_loop_and_IO.md",
     "Tip.md",
     "Tags",
@@ -239,11 +257,6 @@
     "MongoDB/설치 및 설정.md",
     "Next.js/Prisma.md",
     "Next.js/Next.js.md",
-    "Next.js/next-auth.md",
-    "spring/spring cloud bus.md",
-    "spring/spring security.md",
-    "Typescript요약.md",
-    "Typescript/Typescript 요약.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
