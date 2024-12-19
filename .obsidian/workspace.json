@@ -22,17 +22,17 @@
             }
           },
           {
-            "id": "179d257722b5d6e3",
+            "id": "48ea555d5bb83c9b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
+                "file": "네트워크/TCP&IP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "[컴퓨터 밑바닥의 비밀] 질문"
+              "title": "TCP&IP"
             }
           },
           {
@@ -48,23 +48,8 @@
               "icon": "lucide-file",
               "title": "네트워크 핵심 개념"
             }
-          },
-          {
-            "id": "48ea555d5bb83c9b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "네트워크/TCP&IP.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "TCP&IP"
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -191,10 +176,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/TCP&IP.md"
+                "file": "Custom SMT 개발기.md"
               },
               "icon": "lucide-list",
-              "title": "TCP&IP 개요"
+              "title": "Custom SMT 개발기 개요"
             }
           },
           {
@@ -226,16 +211,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "48ea555d5bb83c9b",
+  "active": "e15b1028eedc8abe",
   "lastOpenFiles": [
-    "네트워크/네트워크 핵심 개념.md",
     "네트워크/TCP&IP.md",
+    "Custom SMT 개발기.md",
+    "네트워크/네트워크 핵심 개념.md",
     "img/tcpip_protocol_stack.md",
     "네트워크/네트워크.md",
     "img/JVM_structure.png",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Modern Java in Action/lambda.md",
-    "Custom SMT 개발기.md",
     "운영체제/운영체제 기본.md",
     ".md",
     "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md",

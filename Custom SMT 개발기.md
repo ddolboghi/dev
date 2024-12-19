@@ -6,13 +6,12 @@ Created: 2024-12-09
 - [Replacing Confluent’s Kafka Connect Filter SMT with a Custom SMT in Java: A Step-by-Step Guide](https://medium.com/@maheshbhatm/replacing-confluents-kafka-connect-filter-smt-with-a-custom-smt-in-java-a-step-by-step-guide-e1882a93f132)
 - [How to Use Single Message Transforms in Kafka Connect](https://www.confluent.io/blog/kafka-connect-single-message-transformation-tutorial-with-examples/?session_ref=https://www.google.com/&_ga=2.238432201.896469771.1733720144-1465531381.1731048925&_gac=1.150693572.1732606365.CjwKCAiA3ZC6BhBaEiwAeqfvygiZ0aZ1sqUgRIlk-bJnwRg-psgtuGxVoD9KophieCYBwugSOM6bMBoCTvYQAvD_BwE&_gl=1*1ukfh6g*_gcl_aw*R0NMLjE3MzI2MDYzNjUuQ2p3S0NBaUEzWkM2QmhCYUVpd0FlcWZ2eWdpWjBhWjFzcVVnUklsay1iSm53UmctcHNndHVHeFZvRDlLb3BoaWVDWUJ3dWdTT002Yk1Cb0NUdllRQXZEX0J3RQ..*_gcl_au*Njk0MDcyNjEzLjE3MzEwNDg5MjQ.*_ga*MTQ2NTUzMTM4MS4xNzMxMDQ4OTI1*_ga_D2D3EGKSGD*MTczMzcyMDE0NC40LjEuMTczMzcyMDE1MC41NC4wLjA.)
 - [kafka connect transform github](https://github.com/apache/kafka/blob/trunk/connect/transforms/src/main/java/org/apache/kafka/connect/transforms/TimestampConverter.java)
-- [Interface Transformation docs](https://docs.confluent.io/platform/current/connect/javadocs/javadoc/org/apache/kafka/connect/transforms/Transformation.html)
 - [kafka connect 3.6.2 API javadoc](https://kafka.apache.org/36/javadoc/index.html?org/apache/kafka/connect)
 # 요구사항
 postgresql의 timestamp without time zone 형식의 데이터를 ISO8601 형식으로 변환해서 저장한다.
 
 # 개발 환경
-- kafka 3.6.x 가정
+- kafka 3.6.x
 - gradle build
 - jdk 17
 
@@ -74,4 +73,4 @@ public static final ConfigDef CONFIG_DEF = new ConfigDef()
 - 이 함수 내에서 `ConfigDef`를 통해 받은 값들을 검증할 수 있습니다.
 - `ConfigDef`를 통해 받은 값들을 직접 인스턴스 변수에 할당하거나, `org.apache.kafka.common.config.Config`객체에 할당하여 객체에서 설정 값들을 꺼내 쓸 수 있습니다. 
 
-- [ ] git remote repository에서 .idea 제외시키기
+
