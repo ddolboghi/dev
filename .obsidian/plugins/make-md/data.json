@@ -55,7 +55,8 @@
     "//Docker",
     "//MSA/MSA/spring cloud",
     "//트러블슈팅",
-    "//Excalidraw"
+    "//Excalidraw",
+    "//MSA"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

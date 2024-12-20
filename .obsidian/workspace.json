@@ -11,14 +11,40 @@
             "id": "e15b1028eedc8abe",
             "type": "leaf",
             "state": {
+              "type": "mk-space",
+              "state": {
+                "path": "MSA"
+              },
+              "icon": "lucide-file",
+              "title": "MSA"
+            }
+          },
+          {
+            "id": "e320736db2127ca0",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "Custom SMT 개발기.md",
+                "file": "MSA/인프라 구축.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Custom SMT 개발기"
+              "title": "인프라 구축"
+            }
+          },
+          {
+            "id": "02fedaabfb96a271",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MSA/대규모 트랜잭션.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "대규모 트랜잭션"
             }
           },
           {
@@ -49,7 +75,8 @@
               "title": "네트워크 핵심 개념"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -176,10 +203,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Custom SMT 개발기.md"
+                "file": "MSA/인프라 구축.md"
               },
               "icon": "lucide-list",
-              "title": "Custom SMT 개발기 개요"
+              "title": "인프라 구축 개요"
             }
           },
           {
@@ -197,7 +224,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -211,10 +239,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e15b1028eedc8abe",
+  "active": "e320736db2127ca0",
   "lastOpenFiles": [
-    "네트워크/TCP&IP.md",
+    "MSA/대규모 트랜잭션.md",
+    "MSA/인프라 구축.md",
+    "MSA/DDD &amp; Clean Architecture.md",
+    "img/보상트랜잭션_실패.png",
+    "img/보상트랜잭션.png",
+    "MSA/MSA.md",
     "Custom SMT 개발기.md",
+    "네트워크/TCP&IP.md",
     "네트워크/네트워크 핵심 개념.md",
     "img/tcpip_protocol_stack.md",
     "네트워크/네트워크.md",
@@ -237,11 +271,8 @@
     "MSA/spring cloud/설치 및 개념.md",
     "spring/무제 파일.md",
     "spring/SpringCloudStream.md",
-    "MSA/MSA.md",
     "MongoDB/MongoDB.md",
     "MongoDB/설치 및 설정.md",
-    "Next.js/Prisma.md",
-    "Next.js/Next.js.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
@@ -251,7 +282,6 @@
     "img/Pasted image 20240815001131.png",
     "img/IPv4_Packet-en.svg",
     "Excalidraw",
-    "네트워크",
-    "img/intercepting-route2.png"
+    "네트워크"
   ]
 }
