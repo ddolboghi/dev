@@ -76,7 +76,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -239,10 +239,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e320736db2127ca0",
+  "active": "02fedaabfb96a271",
   "lastOpenFiles": [
-    "MSA/대규모 트랜잭션.md",
     "MSA/인프라 구축.md",
+    "MSA/대규모 트랜잭션.md",
     "MSA/DDD &amp; Clean Architecture.md",
     "img/보상트랜잭션_실패.png",
     "img/보상트랜잭션.png",
