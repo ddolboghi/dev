@@ -56,7 +56,8 @@
     "//MSA/MSA/spring cloud",
     "//트러블슈팅",
     "//Excalidraw",
-    "//MSA"
+    "//MSA",
+    "//Javascript"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",
