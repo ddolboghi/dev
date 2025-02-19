@@ -55,7 +55,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "파일 탐색기"
@@ -202,7 +203,7 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "6749faba3889d99d",
+  "active": "3d1c4bc3bc92dde6",
   "lastOpenFiles": [
     "네트워크/computer networks and internet.md",
     "네트워크/네트워크 핵심 개념.md",
