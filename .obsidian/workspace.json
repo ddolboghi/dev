@@ -85,17 +85,17 @@
               "type": "bookmarks",
               "state": {},
               "icon": "lucide-bookmark",
-              "title": "Bookmarks"
+              "title": "북마크"
             }
           },
           {
-            "id": "6e257cfb6f4711d8",
+            "id": "3d1c4bc3bc92dde6",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
               "state": {},
               "icon": "layout-grid",
-              "title": "Spaces"
+              "title": "Navigator"
             }
           }
         ],
@@ -198,11 +198,13 @@
       "canvas:새 캔버스 만들기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
   "active": "6749faba3889d99d",
   "lastOpenFiles": [
+    "네트워크/computer networks and internet.md",
     "네트워크/네트워크 핵심 개념.md",
     "MSA/인프라 구축.md",
     "MSA/대규모 트랜잭션.md",
@@ -222,7 +224,6 @@
     ".md",
     "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md",
     "트러블슈팅/[Next-Auth] JWTSessionError.md",
-    "네트워크/computer networks and internet.md",
     "img/VLSM_example.png",
     "센텀 디지털위크.md",
     "Excalidraw/JVM_structure.md",

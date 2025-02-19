@@ -171,3 +171,19 @@ chp 4의 4단계 중 마지막 두 단계만 실제로 필요하다.
 # 보안
 ## 방화벽(firewall)
 - 방화벽은 하드웨어와 소프트웨어의 조합으로, 조직의 내부 네트워크를 인터넷 전체로부터 격리하여 일부 패킷은 통과시키고 다른 패킷은 차단한다.
+### 방화벽의 3가지 목표
+1. 들어오고 나가는 모든 트래픽은 방화벽을 통과한다.
+	- 네트워크의 단일 지점에 방화벽을 위치시키면 보안 접근 정책을 관리하고 시행하기 쉽다.
+2. 로컬 보안 정책에 의해서 정의됨으로써 인가된 트래픽만 방화벽을 통과한다.
+3. 방화벽 자체는 침투에 영향을 받지 않는다. 
+	- 방화벽 자체는 네트워크에 연결된 장치다.
+- 현재 방화벽은 라우터 안에 구현되며, SDN들을 사용해서 원격 컨트롤이 가능하다.
+- 방화벽은 traditional packet filters
+### Traditional packet filters
+
+### Statefull packet filters
+
+### Application gateway
+
+
+[Access Control List](https://eveningdev.tistory.com/65)
