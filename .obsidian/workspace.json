@@ -90,7 +90,7 @@
             }
           },
           {
-            "id": "3d1c4bc3bc92dde6",
+            "id": "3969a3f930efd390",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -194,7 +194,6 @@
     "hiddenItems": {
       "switcher:빠른 전환기 열기": false,
       "daily-notes:오늘의 일일 노트 열기": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false,
       "graph:그래프 뷰 열기": false,
       "canvas:새 캔버스 만들기": false,
       "templates:템플릿 삽입": false,
@@ -203,7 +202,7 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "3d1c4bc3bc92dde6",
+  "active": "3969a3f930efd390",
   "lastOpenFiles": [
     "네트워크/computer networks and internet.md",
     "네트워크/네트워크 핵심 개념.md",
