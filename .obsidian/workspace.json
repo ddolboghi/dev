@@ -48,18 +48,6 @@
               "icon": "lucide-file",
               "title": "Javascript 고급 문법"
             }
-          },
-          {
-            "id": "199df5b9d3a877da",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.9"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.9"
-            }
           }
         ],
         "currentTab": 2
