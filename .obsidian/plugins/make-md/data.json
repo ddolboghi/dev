@@ -45,12 +45,11 @@
     "//네트워크",
     "//Tags",
     "//Tags/Tags/SpringCloudStream",
-    "//Docker",
     "//MSA/MSA/spring cloud",
     "//트러블슈팅",
-    "//Excalidraw",
-    "//MSA",
-    "//Javascript"
+    "//Javascript",
+    "//Modern Java in Action",
+    "//Java deep dive"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
