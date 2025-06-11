@@ -6,5 +6,22 @@
 
 # 동작 과정
 ![WebSocket protocol chart](../img/WebSocket-protocol-chart.jpg)
-
-1. 접속 요청은 HTTP GET Method로 해서 
+기본적으로 HTTP 기반으로 handshake를 시작한 후, TCP 기반의 지속 연결을 유지하여 실시간 통신이 가능하도록 한다.
+## 1. 
+클라이언트가 HTTP GET Method로 해서 websocket 프로토콜로 변경된다.
+다음은 websocket 프로토콜로 변경되기 위한 HTTP 헤더다.
+```
+GET /chat HTTP/1.1
+Host: localhost:8080 
+Upgrade: websocket 
+Connection: Upgrade 
+Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw== 
+Sec-WebSocket-Protocol: chat, superchat 
+Sec-WebSocket-Version: 13 
+Origin: http://localhost:9000
+```
+### GET /chat HTTP/1.1
+websocket 통신 요청을 위해서는 HTTP 1.1 이상, GET Method를 사용해야 한다.
+### Upgrade
+프로토콜을 전환하기 위해 사용하는 헤더다.
+websocket 접속 요청시 'websocket'이라는 값을 가
