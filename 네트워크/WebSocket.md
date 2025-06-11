@@ -12,26 +12,26 @@ sequenceDiagram
     participant Client
     participant Server
 
-    Note over Client, Server: ① TCP Handshake
+    Note over Client, Server: ① TCP 3-way Handshake
     Client->>Server: SYN
     Server->>Client: SYN-ACK
     Client->>Server: ACK
 
     Note over Client, Server: ② WebSocket 핸드셰이크 (HTTP Upgrade)
-    Client->>Server: HTTP GET Upgrade\n(Sec-WebSocket-Key)
-    Server->>Client: HTTP 101 Switching Protocols\n(Sec-WebSocket-Accept)
+    Client->>Server: HTTP GET Upgrade (Sec-WebSocket-Key)
+    Server->>Client: HTTP 101 Switching Protocols (Sec-WebSocket-Accept)
 
     Note over Client, Server: ③ WebSocket 연결 수립 완료
 
     Note over Client, Server: ④ 데이터 송수신 (Frame)
-    Client->>Server: WebSocket Message\n(Opcode 0x1, Masked Payload)
-    Server->>Client: WebSocket Message\n(Opcode 0x1 or 0x2)
+    Client->>Server: WebSocket Message (Opcode 0x1, Masked Payload)
+    Server->>Client: WebSocket Message (Opcode 0x1 or 0x2)
 
     Note over Client, Server: ⑤ 연결 종료
-    Client->>Server: WebSocket Close Frame\n(Opcode 0x8)
-    Server->>Client: WebSocket Close Frame\n(Opcode 0x8)
+    Client->>Server: WebSocket Close Frame (Opcode 0x8)
+    Server->>Client: WebSocket Close Frame (Opcode 0x8)
     
-    Note over Client, Server: ⑥ TCP 연결 종료
+    Note over Client, Server: ⑥ TCP 4-way Handshake
     Client->>Server: FIN
     Server->>Client: ACK
     Server->>Client: FIN
@@ -84,10 +84,63 @@ WebSocket 연결이 개시되었음을 알린다.
 데이터는 메시지라는 단위로 전달된다.
 메시지는 여러 프레임으로 구성된다.
 이 프레임은 데이터 링크계층(ethernet)에서 주고 받는 가장 작은 단위를 의미한다.
-### 데이터 프레임 구조(단순화):
-- Opcode: 프레임의 목적(텍스트, 바이너리, 종료 등)
-- Payload Length: 데이터 길이
-- Payload Data: 실제 메시지(json, 텍스트, 바이너리)
+### 데이터 프레임 구조:
+
+```mermaid
+classDiagram
+    class WebSocketFrame {
+        +1 bit FIN
+        +3 bits RSV1~RSV3
+        +4 bits Opcode
+        +1 bit MASK
+        +7~64 bits PayloadLength
+        +0 or 32 bits MaskingKey
+        +Variable PayloadData
+    }
+
+    class FIN {
+        +boolean isFinalFrame
+    }
+
+    class Opcode {
+        +0x0 Continuation
+        +0x1 Text
+        +0x2 Binary
+        +0x8 Close
+        +0x9 Ping
+        +0xA Pong
+    }
+
+    class PayloadLength {
+        +7 bits: if length <= 125
+        +16 bits: if length == 126
+        +64 bits: if length == 127
+    }
+
+    class MaskingKey {
+        +Required if sent by Client
+    }
+
+    class PayloadData {
+        +UTF-8 Text or Binary
+    }
+
+    WebSocketFrame --> FIN
+    WebSocketFrame --> Opcode
+    WebSocketFrame --> PayloadLength
+    WebSocketFrame --> MaskingKey
+    WebSocketFrame --> PayloadData
+
+```
+
+| 필드                 | 설명                        |
+| ------------------ | ------------------------- |
+| **FIN**            | 마지막 프레임 여부 (1이면 메시지 종료)   |
+| **Opcode**         | 프레임 타입 지정 (텍스트, 종료 등)     |
+| **MASK**           | 클라이언트 → 서버는 항상 1 (마스킹 필수) |
+| **Payload Length** | 데이터 길이 (동적 크기)            |
+| **Masking Key**    | 4바이트 키 (클라이언트 전송 시 필수)    |
+| **Payload Data**   | 실제 메시지 (텍스트 또는 바이너리)      |
 ## 3. 연결 종료
 ### 정상 종료
 1. 한쪽에서 Close 프레임을 전송한다. 이때 Opcode는 `0x8`이다.
