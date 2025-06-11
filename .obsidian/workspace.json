@@ -90,13 +90,13 @@
             }
           },
           {
-            "id": "58095d4bd8560f51",
+            "id": "bb6b758c64b6e822",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "플러그인이 더 이상 활성화돼있지 않음"
+              "icon": "layout-grid",
+              "title": "Navigator"
             }
           }
         ],
@@ -104,8 +104,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5,
-    "collapsed": true
+    "width": 238.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",

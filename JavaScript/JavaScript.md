@@ -8,7 +8,7 @@ _sort:
   group: false
 _template: ""
 _templateName: ""
-Created: 2023-12-11
+Created: 2025-06-08
 ---
 [[Javascript 기초]]
 [[Javascript 고급 문법]]
