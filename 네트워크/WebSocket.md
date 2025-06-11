@@ -7,7 +7,38 @@
 # 동작 과정
 ![WebSocket protocol chart](../img/WebSocket-protocol-chart.jpg)
 기본적으로 HTTP 기반으로 handshake를 시작한 후, TCP 기반의 지속 연결을 유지하여 실시간 통신이 가능하도록 한다.
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Server
+
+    Note over Client, Server: ① TCP Handshake
+    Client->>Server: SYN
+    Server->>Client: SYN-ACK
+    Client->>Server: ACK
+
+    Note over Client, Server: ② WebSocket 핸드셰이크 (HTTP Upgrade)
+    Client->>Server: HTTP GET Upgrade\n(Sec-WebSocket-Key)
+    Server->>Client: HTTP 101 Switching Protocols\n(Sec-WebSocket-Accept)
+
+    Note over Client, Server: ③ WebSocket 연결 수립 완료
+
+    Note over Client, Server: ④ 데이터 송수신 (Frame)
+    Client->>Server: WebSocket Message\n(Opcode 0x1, Masked Payload)
+    Server->>Client: WebSocket Message\n(Opcode 0x1 or 0x2)
+
+    Note over Client, Server: ⑤ 연결 종료
+    Client->>Server: WebSocket Close Frame\n(Opcode 0x8)
+    Server->>Client: WebSocket Close Frame\n(Opcode 0x8)
+    
+    Note over Client, Server: ⑥ TCP 연결 종료
+    Client->>Server: FIN
+    Server->>Client: ACK
+    Server->>Client: FIN
+    Client->>Server: ACK
+```
 ## 1. 클라이언트에서 서버로 WebSocket 연결
+먼저 TCP 3-way handshake를 수행한 뒤, 
 클라이언트가 HTTP GET 요청을 WebSocket 전환 요청으로 보낸다.
 ### 요청 헤더:
 ```
@@ -47,4 +78,19 @@ Sec-WebSocket-Protocol: chat
 101은 HTTP에서 WS로 프로토콜 전환이 승인되었다는 응답 코드다.
 #### Sec-WebSocket-Accept
 요청 헤더의 Sec-WebSocket-Key에 고유 아이디를 더해서 sha-1로 해싱한 후, base64로 인코딩한 값이다.
-WebSocket 연결이 개시되었음을 
+WebSocket 연결이 개시되었음을 알린다.
+
+## 2. 데이터 이동
+데이터는 메시지라는 단위로 전달된다.
+메시지는 여러 프레임으로 구성된다.
+이 프레임은 데이터 링크계층(ethernet)에서 주고 받는 가장 작은 단위를 의미한다.
+### 데이터 프레임 구조(단순화):
+- Opcode: 프레임의 목적(텍스트, 바이너리, 종료 등)
+- Payload Length: 데이터 길이
+- Payload Data: 실제 메시지(json, 텍스트, 바이너리)
+## 3. 연결 종료
+### 정상 종료
+1. 한쪽에서 Close 프레임을 전송한다. 이때 Opcode는 `0x8`이다.
+2. 상대방은 이를 수신하고 응답 프레임으로 종료를 승인한다.
+### 비정상 종료
+네트워크 문제, 서버 다운 등으로 연결이 비정상적으로 끊어질 수 있는데, 이때 클라이언트는 `onclose`또는 `onerror`이벤트로 감지할 수 있다.
