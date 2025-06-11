@@ -46,5 +46,56 @@ File[] hiddenFiles = new File(".").listFiles(File::isHidden);
 - 한두번만 사용할 메서드를 따로 정의하지 않고 람다를 사용할 수 있다.
 - 람다가 복잡한 동작을 수행한다면 메서드를 따로 정의하고 메서드 참조를 활용하는 것이 좋다.
 - 람다 문법 형식으로 구현된 프로그래밍을 함수형 프로그래밍(함수를 일급값으로 넘겨주는 것)이라고 한다.
+## java streams
+[streams 총정리](https://futurecreator.github.io/2018/08/26/java-8-streams/)
 
-## 스트림
+# predicate
+- 인수로 값을 받아 true나 false를 반환하는 함수
+```java
+public interface Predicate<T> {
+	boolean test(T t);
+}
+```
+
+# java.util.Optional
+[참고](https://mangkyu.tistory.com/70)
+- Java8에서는 `Optional<T>` 클래스를 사용해 NullPointerException를 방지할 수 있음 
+- `Optional<T>`는 null이 올 수 있는 값을 감싸는 Wrapper 클래스로, 참조하더라도 NPE가 발생하지 않도록 함 
+- Optional 클래스는 아래와 같은 value에 값을 저장하기 때문에 값이 null이더라도 바로 NPE가 발생하지 않으며, 클래스이기 때문에 각종 메소드를 제공함
+- Optional은 값을 Wrapping하고 다시 풀고, null 일 경우에는 대체하는 함수를 호출하는 등의 오버헤드가 있으므로 잘못 사용하면 시스템 성능이 저하됨. 메소드의 반환 값이 절대 null이 아니라면 Optional을 사용하지 않는 것이 좋음
+- ==Optional은 메소드의 결과가 null이 될 수 있으며, null에 의해 오류가 발생할 가능성이 매우 높을 때 반환값으로만 사용되어야 한다.== 
+- Optional은 파라미터로 넘어가는 등이 아니라 반환 타입으로써 제한적으로 사용되도록 설계됨
+```java
+List<String> names = getNames(); names.sort(); // names가 null이라면 NPE 발생
+
+List<String> names = getNames(); // NPE를 방지하기 위해 null 검사를 해야함 
+if(names != null){ 
+	names.sort(); 
+}
+```
+
+```java
+// Java8 이전 
+List<String> names = getNames(); List<String> tempNames = list != null 
+	? list 
+	: new ArrayList<>(); 
+
+// Java8 이후 
+List<String> nameList = Optional.ofNullable(getNames()) 
+	.orElseGet(() -> new ArrayList<>());
+```
+- `Optional.ofNullbale()` 
+	- 값이 Null일수도, 아닐수도 있는 경우
+	- orElse 또는 orElseGet 메소드를 이용해서 값이 없는 경우라도 안전하게 값을 가져올 수 있음
+```java
+// Optional의 value는 값이 있을 수도 있고 null 일 수도 있다. 
+Optional<String> optional = Optional.ofNullable(getName()); 
+String name = optional.orElse("anonymous"); // 값이 없다면 "anonymous" 를 리턴
+```
+- `orElse()`
+	- 파라미터로 값을 받음
+	- 값이 미리 존재하는 경우에 사용
+	- orElse는 값을 생성하여 orElseGet보다 비용이 크므로 최대한 사용을 피해야 함
+- `orElseGet()`
+	- 파라미터로 함수형 인터페이스(함수)를 받음
+	- 값이 미리 존재하지 않는 거의 대부분의 경우에 orElseGet을 사용하면 됨
