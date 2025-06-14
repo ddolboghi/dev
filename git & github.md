@@ -29,10 +29,11 @@ Created: 2023-10-19
 9. ssh-agent에 계정별 ssh-key 추가
 	```bash
 	eval "$(ssh-agent -s)"
-	ssh-add ~/id_rsa_user1
+	ssh-add ~/id_rsa_user1.pub
 	```
-10. `vi ~/id_rsa_us`
-11. 
+10. `vi ~/id_rsa_user1.pub`으로 공개키 복사
+11. github 사이트 > Settings > SSH and GPG keys > New SSH key 로 계정마다 공개키 추가
+12. 
 
 # git commit convention
 ---
