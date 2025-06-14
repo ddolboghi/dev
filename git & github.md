@@ -20,10 +20,19 @@ Created: 2023-10-19
 		path = C:/working/2/.gitconfig-2
 	```
 	- includeIf의 gitdir 경로는 `/`로 끝나야 한다.
-	- 적용할 폴더의 git bash 
+	- 적용할 폴더의 git bash 스타일 경로는 `git rev-parse --show-toplevel`로 알 수 있다.
 	- path는 gitdir에 해당하는 폴더에 적용될 git 설정 파일 경로다.
-5. 
-6. 
+5. 각 폴더로 가서 git init 하거나 git clone 레포지토리
+6. `git config list`로 user.name, user.email 확인
+7. git bash에서 `ssh-keygen -t rsa -C "user1@example.com" -f "id_rsa_user1"`로 각 계정별 이메일로 ssh 키 생성
+8. 현재 폴더에 개인키(id_rsa_user1), 공개키(id_rsa_user1.pub) 생성 확인
+9. ssh-agent에 계정별 ssh-key 추가
+	```bash
+	eval "$(ssh-agent -s)"
+	ssh-add ~/id_rsa_user1
+	```
+10. `vi ~/id_rsa_us`
+11. 
 
 # git commit convention
 ---
