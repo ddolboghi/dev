@@ -24,16 +24,29 @@ Created: 2023-10-19
 	- path는 gitdir에 해당하는 폴더에 적용될 git 설정 파일 경로다.
 5. 각 폴더로 가서 git init 하거나 git clone 레포지토리
 6. `git config list`로 user.name, user.email 확인
-7. git bash에서 `ssh-keygen -t rsa -C "user1@example.com" -f "id_rsa_user1"`로 각 계정별 이메일로 ssh 키 생성
-8. 현재 폴더에 개인키(id_rsa_user1), 공개키(id_rsa_user1.pub) 생성 확인
-9. ssh-agent에 계정별 ssh-key 추가
+7. `mkdir .ssh`
+8. git bash에서 `ssh-keygen -t rsa -C "user1@example.com" -f "id_rsa_user1"`로 각 계정별 이메일로 ssh 키 생성
+9. 현재 폴더에 개인키(id_rsa_user1), 공개키(id_rsa_user1.pub) 생성 확인
+10. ssh-agent에 계정별 ssh-key 추가
 	```bash
 	eval "$(ssh-agent -s)"
 	ssh-add ~/id_rsa_user1.pub
 	```
-10. `vi ~/id_rsa_user1.pub`으로 공개키 복사
-11. github 사이트 > Settings > SSH and GPG keys > New SSH key 로 계정마다 공개키 추가
-12. 
+11. `vi ~/id_rsa_user1.pub`으로 공개키 복사
+12. github 사이트 > Settings > SSH and GPG keys > New SSH key 로 계정마다 공개키 추가
+13. `vi ~/.ssh/config` 실행하여 계정마다 아래 내용 작성
+	```
+	Host github.com-user1
+		HostName github.com
+		User user1
+		IdentityFile ~/.ssh/id_rsa_user1
+	
+	Host github.com-user2
+		HostName github.com
+		User user2
+		IdentityFile ~/.ssh/id_rsa_user2
+	```
+14. ssh 연결 테스트: `ssh -T git@github.com-user1`
 
 # git commit convention
 ---
