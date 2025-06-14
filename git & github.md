@@ -2,6 +2,29 @@
 sticker: lucide//github
 Created: 2023-10-19
 ---
+# 폴더별 git 계정 설정
+---
+1. git bash 실행
+2. `git config --list --show-origin` 으로 .gitconfig파일 위치 확인
+3. `vi .gitconfig`로 파일 열기
+4. 다음과 같이 편집
+	```
+	[user]
+		name = 글로벌 유저 네임
+		email = 글로벌 유저 이메일
+
+	[includeIf "gitdir:C:/working/1/"]
+		path = C:/working/1/.gitconfig-1
+	
+	[includeIf "gitdir:C:/working-dir/2/"]
+		path = C:/working/2/.gitconfig-2
+	```
+	- includeIf의 gitdir 경로는 `/`로 끝나야 한다.
+	- 적용할 폴더의 git bash 
+	- path는 gitdir에 해당하는 폴더에 적용될 git 설정 파일 경로다.
+5. 
+6. 
+
 # git commit convention
 ---
 제목은 코드 변경 사항에 대한 짧은 요약을 나타냅니다. 제목은 다음의 규칙을 지킵니다.
