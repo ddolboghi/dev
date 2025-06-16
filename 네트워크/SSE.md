@@ -6,7 +6,7 @@
 - 서버는 특정 이벤트 유형을 지정하여 데이터를 전송할 수 있다.
 - HTTP/1.1에서 최대 6개의 브라우저
 - 클라이언트는 JavaScript의 EventSource API로 SSE를 구현할 수 있다.
-- EventSource.addEventListener(event, )
+- `EventSource.addEventListener('event 이름', callback)`으로 서버에서 정의한 이벤트를 받아 처리할 수 있다.
 # 동작 과정
 ```mermaid
 sequenceDiagram
@@ -35,4 +35,61 @@ sequenceDiagram
     Note right of Client: 클라이언트가 연결 종료
     Server-->>Client: (연결 종료)
     Note left of Server: 서버 측 연결 종료
+```
+# 예시 코드
+> [!NOTE]
+    > SSE는 단순한 텍스트 포로토콜을 사용하며, 브라우저에 의해 각 필드는 `\n`으로 구분되고 메시지는 `\n\n`로 구분된다.
+
+FastAPI 서버
+```python
+from fastapi import FastAPI, Request
+from fastapi.responses import StreamingResponse
+import time
+
+app = FastAPI()
+
+def event_stream():
+    count = 0
+    while True:
+        time.sleep(2)
+        count += 1
+        # 커스텀 이벤트 이름: my_custom_event
+        yield f"event: my_custom_event\ndata: {{\"message\": \"Hello {count}\"}}\n\n"
+
+@app.get("/sse")
+async def sse_endpoint(request: Request):
+    return StreamingResponse(event_stream(), media_type="text/event-stream")
+```
+
+
+React
+```jsx
+import React, { useEffect } from 'react';
+
+export default function App() {
+  useEffect(() => {
+    const eventSource = new EventSource("http://localhost:8000/sse");
+
+    eventSource.addEventListener("my_custom_event", (event) => {
+      const data = JSON.parse(event.data);
+      console.log("Received custom event:", data);
+    });
+
+    eventSource.onerror = (err) => {
+      console.error("SSE connection error:", err);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close(); // clean up
+    };
+  }, []);
+
+  return (
+    <div>
+      <h1>SSE Custom Event Test</h1>
+      <p>Check the console for incoming events.</p>
+    </div>
+  );
+}
 ```
