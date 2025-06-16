@@ -39,6 +39,10 @@ sequenceDiagram
 # 예시 코드
 > [!NOTE]
     > SSE는 단순한 텍스트 포로토콜을 사용하며, 브라우저에 의해 각 필드는 `\n`으로 구분되고 메시지는 `\n\n`로 구분된다.
+    > `event`: 이벤트 이름. 생략 시 "message"라는 기본 이벤트 이름이 사용된다.
+    > `data`: 이벤트 데이터. 여러 줄일 경우 자동으로 합쳐짐
+    > `id`: Last-Event-ID
+    > `retry: <ms>` 자동 재연결 간격
 
 FastAPI 서버
 ```python
@@ -61,6 +65,12 @@ async def sse_endpoint(request: Request):
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 ```
 
+브라우저는 내부적으로 JS 이벤트 객체를 생성한다.
+```js
+new MessageEvent("my_custom_event", {
+  data: '{"foo": "bar"}'
+});
+```
 
 React
 ```jsx
@@ -70,6 +80,7 @@ export default function App() {
   useEffect(() => {
     const eventSource = new EventSource("http://localhost:8000/sse");
 
+	// 이벤트 리스너에 이벤트 전달됨
     eventSource.addEventListener("my_custom_event", (event) => {
       const data = JSON.parse(event.data);
       console.log("Received custom event:", data);
