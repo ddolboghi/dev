@@ -47,6 +47,7 @@ Created: 2023-10-19
 		IdentityFile ~/.ssh/id_rsa_user2
 	```
 14. ssh 연결 테스트: `ssh -T git@github.com-user1`
+15. 레포지토리 clone할때 SSH 주소에서 @뒷부분을 이 레포지토리 계정의 Host로 수정해야함
 
 # git commit convention
 ---
