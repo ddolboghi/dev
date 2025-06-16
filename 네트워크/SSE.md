@@ -5,7 +5,8 @@
 - 네트워크 오류로 연결이 끊기면 클라이언트가 자동으로 재연결을 시도하는 표준 메커니즘이 내장되있다.
 - 서버는 특정 이벤트 유형을 지정하여 데이터를 전송할 수 있다.
 - HTTP/1.1에서 최대 6개의 브라우저
-- JavaScript의 EventSource API로 구현할 수 있다.
+- 클라이언트는 JavaScript의 EventSource API로 SSE를 구현할 수 있다.
+- EventSource.addEventListener(event, )
 # 동작 과정
 ```mermaid
 sequenceDiagram
