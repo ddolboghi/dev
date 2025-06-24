@@ -98,10 +98,10 @@ aliases:
 ### 대기열 지연과 패킷 손실 (at store-and-forward transmission)
 - 패킷 스위치는 연결된 링크마다 output buffer(output queue)를 가진다.
 - output buffer에 해당 링크로 보내려는 패킷을 저장한다.
-- 다른 패킷을 전송하는데 링크가 사용되고 있다면 패킷은 output buffer에서 대기한다.
-- 패킷은 store-and-forward 지연에 output buffer 큐 지연도 겪는다.
-- 큐 지연은 네트워크 혼잡도에 영향 받는다.
+- 다른 패킷을 전송하는데 링크가 사용되고 있다면 패킷은 output buffer에서 대기한다. 그래서 패킷은 store-and-forward 지연뿐만 아니라, **output buffer에서 queuing 지연**도 겪는다.
+- queuing 지연은 가변적이고 네트워크 혼잡도에 영향을 받는다.
 - **buffer 공간이 가득 차면** 해당 buffer에 도착한 패킷 또는 대기 중인 패킷 중 하나가 삭제되어 **패킷 손실**이 발생한다.
+- 라우터에 도착하는 패킷의 전송률이 라우터의 송신률보다 크면 output buffer에서 queuing 지연이 발생한다.
 ### Forwarding Tables and Routing Protocols
 - 라우터가 패킷이 가야할 링크를 정해주는 것을 패킷 포워딩이라고 한다.
 - 각 라우터에는 destination 주소(또는 일부)를 해당 라우터의 아웃바운드 링크에 매핑하는 forwarding table이 있다.
