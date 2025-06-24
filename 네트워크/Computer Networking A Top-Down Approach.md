@@ -58,7 +58,8 @@ aliases:
 - 인터넷 접근 속도가 GB/S 단위다.
 ## ethernet과 wifi
 - LAN(Local Area Network)은 엔드 시스템을 엣지 라우터에 연결하는 데 사용된다.
-- ethernet은 가장 널리 사용되는 LAN 기술의 일종이다.
+- ethernet은 가장 널리 사용되는 LAN 기술이다.
+- ethernet은 ethernet switch에 연결하기 위해 꼬임쌍선을 이용한다.
 ## 물리적 매체
 - 비트(데이터)는 라우터를 통해 이동한다.
 - 각 송신기-수신기 라우터 쌍에 대해 비트는 전자기파 또는 광학 펄스 형태로 물리적 매체를 통해 전송된다.
