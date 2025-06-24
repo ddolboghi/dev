@@ -104,19 +104,20 @@ aliases:
 - 라우터에 도착하는 패킷의 전송률이 라우터의 송신률보다 크면 output buffer에서 queuing 지연이 발생한다.
 ### Forwarding Tables and Routing Protocols
 - 라우터가 패킷이 가야할 링크를 정해주는 것을 패킷 포워딩이라고 한다.
-- 각 라우터에는 destination 주소(또는 일부)를 해당 라우터의 아웃바운드 링크에 매핑하는 forwarding table이 있다.
-- 패킷이 라우터를 통해 dostination end system에 도달하는 과정은 지도 없이 사람들에게 물어가면서 목적지에 도착하려는 운전자와 유사하다.
+- 각 라우터에는 목적지 주소(또는 일부)를 해당 라우터의 출력 링크로 매핑하는 forwarding table이 있다.
+- 인터넷의 여러 **routing protocol로 forwarding table을 자동으로 설정**한다.
+	- 예를 들어, routing protocol은 라우터에서 목적지까지 최단 경로를 결정하고 이 결과를 forwarding table을 구성하는데 사용한다.
+- 패킷이 라우터를 통해 목적지에 도달하는 과정은 지도 없이 사람들에게 물어가면서 목적지에 도착하려는 운전자와 유사하다.
 	- 운전자 == 패킷
 	- 래우터 == 묻는 사람
 	- 사람들은 전체 경로의 일부 중 당장 가야할 가까운 경로를 알려준다.
-1. source end system이 destination end system으로 패킷을 보낼때  destination의 IP 주소를 패킷 헤더에 포함시킨다.
-2. 라우터는 패킷의 destination 주소를 검사한다.
-3. 라우터는 forwarding table에서 dostination 주소에 인접한 라우터로 가는 아웃바운드 링크를 찾는다.
-4. 라우터는 패킷을 아웃바운드 링크로 라우팅한다.
--  인터넷의 여러 특수 **routing protocol**로 forwarding table을 자동으로 설정한다.
-- routing protocol은 라우터에서 목적지까지 가장 짧은 경로를 결정하고 이 경로를 forwarding table을 구성하는데 사용한다.
-## circuit switching
-- circuit-switched 네트워크에서는 엔드 시스템 간의 통신을 제공하기 위해 경로(버퍼, 링크 전송 속도)를 따라 필요한 **리소스**가 엔드 시스템 간의 통신 세션 기간 동안 **예약**되어 있다.
+1. 출발지 end system이 목적지 end system으로 패킷을 보낼때  목적지의 IP 주소를 패킷 헤더에 포함시킨다.
+2. 라우터는 패킷의 목적지 주소를 검사한다.
+3. 라우터는 forwarding table에서 목적지 주소에 인접한 라우터로 가는 출력 링크를 찾는다.
+4. 라우터는 패킷을 출력 링크로 라우팅한다.
+
+## Circuit switching
+- 회선 교환 네트워크에서는 엔드 시스템 간의 통신을 제공하기 위해 경로(버퍼, 링크 전송 속도)를 따라 필요한 **리소스**가 엔드 시스템 간의 통신 세션 기간 동안 **예약**되어 있다.
 - packet-switched 네트워크에서는 이러한 리소스가 에약되어있지 않다.
 - 엔드 시스템간 데이터가 전송되기 전에 먼저 연결해야하고, 이러한 연결을 회로(circuit)라고 한다.
 - 네트워크는 회로를 설정할 때 연결 기간 동안 네트워크 링크에 일정한 전송 속도(각 링크의 전송 용량의 일부를 나타냄)를 예약한다.
