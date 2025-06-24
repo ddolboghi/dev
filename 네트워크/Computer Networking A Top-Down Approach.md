@@ -89,12 +89,12 @@ aliases:
 - packet switching은 링크를 통해 다른 패킷을 동시에 전송해야 하기 때문에 링크 중 하나가 혼잡한 경우 패킷은 버퍼에서 대기해야 하며 지연이 발생한다.
 ### Store-and-Forward Transmission
 - 대부분의 패킷 스위치는 저장-후-전달 전송 방식을 사용한다.
-- 패킷 스위치는 **한 패킷의 모든 비트를 수신한 후에 출력 링크로 전송**하기 시작한다.
-- 라우터는 패킷의 모든 비트를 **받아** **저장**하고 **처리**한 뒤에 출력 링크로 전송할 수 있다.
-	![[store-and-forward packet switching]]
-- Link는 end system과 packet switch, pecket switch와 pecket switch사이의 경로다.
-- n개의 Link가 있으면 n-1개의 라우터가 있다.
-- 전파 지연이 없고, source와 detination 사이에 n개의 링크가 있을때 패킷 1개의 전송 시간은 $n\frac{L}{R}$이다.
+- 패킷 스위치(라우터)는 **한 패킷의 모든 비트를 수신한 후에만 출력 링크로 그 패킷을 전송**하기 시작한다. 즉, 라우터는 패킷의 모든 비트를 **수신**, **저장**, **처리**한 뒤에 출력 링크로 전송할 수 있다.
+	![[store-and-forward packet switching | 600]]
+- 링크는 end system과 패킷 스위치, 패킷 스위치와 패킷 스위치사이의 경로다.
+- n개의 링크가 있으면 n-1개의 라우터가 있다.
+- end system 또는 패킷 스위치가 R bit/sec 의 속도로 링크에서 L비트의 패킷을 보낸다면, 그 패킷을 전송하는데 걸리는 시간은 $\frac{L}{R}$ 초다.
+- 전파 지연이 없고, 출발지와 목적지 사이에 n개의 링크가 있을때 패킷 1개의 전송 시간은 $n\frac{L}{R}$이다.
 ### 대기열 지연과 패킷 손실 (at store-and-forward transmission)
 - 패킷 스위치는 연결된 링크마다 output buffer(output queue)를 가진다.
 - output buffer에 해당 링크로 보내려는 패킷을 저장한다.
