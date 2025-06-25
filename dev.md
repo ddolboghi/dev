@@ -25,7 +25,7 @@ Created: 2023-10-19
 [[MSA]]
 [[MongoDB]]
 [[테스트]]
-[[Security]]
+[[Security/Security]]
 [[git & github]]
 [[Java 스타일 가이드 요약]]
 [[Tip]]

@@ -4,11 +4,23 @@
     "type": "split",
     "children": [
       {
-        "id": "ece3dea52a604f40",
+        "id": "fce4018bb4cbf413",
         "type": "tabs",
         "children": [
           {
-            "id": "51631e0028466a0e",
+            "id": "eaa2c885e464f4d4",
+            "type": "leaf",
+            "state": {
+              "type": "mk-space",
+              "state": {
+                "path": "네트워크/Computer Networking A Top-Down Approach"
+              },
+              "icon": "lucide-file",
+              "title": "Computer Networking A Top-Down Approach"
+            }
+          },
+          {
+            "id": "8a8e13d3eccba655",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,8 +32,37 @@
               "icon": "lucide-file",
               "title": "Computer Networking A Top-Down Approach"
             }
+          },
+          {
+            "id": "7d235843573c5113",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data Plane).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Network Layer(Data Plane)"
+            }
+          },
+          {
+            "id": "b9e24643e8f5ad31",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Application Layer"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -187,11 +228,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "51631e0028466a0e",
+  "active": "8a8e13d3eccba655",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data Plane).md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Security.md",
+    "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
+    "네트워크/Computer Networking A Top-Down Approach.md",
+    "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet.md",
+    "네트워크/네트워크.md",
+    "네트워크/Computer Networking A Top-Down Approach",
+    "네트워크/Untitled.canvas",
     "img/packet_switching1.png",
     "Pasted image 20250625221728.png",
-    "네트워크/Computer Networking A Top-Down Approach.md",
     "img/store-and-forward packet switching.md",
     "네트워크/SSE.md",
     "네트워크/네트워크 핵심 개념.md",
@@ -199,7 +248,6 @@
     "git & github.md",
     "Tip.md",
     "운영체제/운영체제 기본.md",
-    "네트워크/네트워크.md",
     "img/WebSocket-protocol-chart.jpg",
     "img/Tutorial-WebSocket-protocol-chart.jpg",
     "img/Tutorial-WebSocket-protocol-chart.jpg.crdownload",
@@ -218,18 +266,13 @@
     "img/보상트랜잭션_실패.png",
     "img/보상트랜잭션.png",
     "MSA/MSA.md",
-    "Custom SMT 개발기.md",
-    "img/tcpip_protocol_stack.md",
     "img/JVM_structure.png",
-    "Java deep dive/lambda.md",
     ".md",
-    "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md",
     "img/VLSM_example.png",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
     "Tags/SpringCloudStream",
-    "img/FDM and TDM.png",
     "Excalidraw",
     "네트워크"
   ]
