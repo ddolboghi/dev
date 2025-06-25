@@ -122,7 +122,7 @@ aliases:
 - 엔드 시스템간 데이터가 전송되기 전에 먼저 연결해야하고, 이러한 연결을 회로(circuit)라고 한다.
 - 네트워크는 회로를 설정할 때 연결 기간 동안 네트워크 링크에 일정한 전송 속도(각 링크의 전송 용량의 일부를 나타냄)를 예약한다.
 - 전송 속도가 예약되있기 때문에 보장된 일정 속도로 데이터를 보낼 수 있다.
-![[Pasted image 20240815001131.png]]
+![[Pasted image 20240815001131.png | 300]]
 - 각 링크는 회로를 4개씩 가지고 있다.
 - 각 회로는 4개의 동시 연결을 지원할 수 있다.
 - 두 호스트가 연결되길 원할때 네트워크는 전용 end-to-end 연결을 설정한다.
@@ -130,7 +130,7 @@ aliases:
 	- 예를 들어 인접 스위치 간의 각 링크의 전송 속도가 1Mbps인 경우, 각 end-to-end circuit 스위치 연결의 전송 속도는 250kbps이다.
 - circuit switching은 전용 회로가 유휴 시간 동안 유휴 상태이기 때문에 낭비가 발생한다.
 - 회로를 설정하고 전송 용량을 예약하는 것이 복잡하고 경로를 따라 스위치의 작동을 조정하는 복잡한 시그널링 소프트웨어가 필요하다.
-## Multiplexing in Circuit-Switched Networks
+### Multiplexing in Circuit-Switched Networks
 ![[FDM and TDM.png]]
 - 링크의 회로는 주파수 분할 다중화(FDM; frequency-division multiplexing) 또는 시분할 다중화(TDM; time-division multiplexing)로 구현된다.
 - FDM을 사용하면 링크는 연결이 지속되는 동안 각 연결에 주파수 대역을 할당한다.
@@ -149,8 +149,7 @@ aliases:
 	- 파일 전송 속도는 (640,000 bits) / (64 kbps) + 500ms = 10.5sec
 > [!NOTE]
 > 전송 시간은 링크 개수와 상관없다.
-## packet switching vs circuit switching
-
+## Packet switching vs Circuit switching
 사용자가 10명인데 한 사용자가 갑자기 1,000 bits 패킷 1,000개를 생성하고 다른 사용자는 대기 상태로 패킷을 생성하지 않는다고 가정해 보자. 
 circuit switching은 프레임당 10개의 슬롯이 있고 각 슬롯이 1,000비트로 구성된 TDM을 사용한다.
 활성 사용자는 프레임당 하나의 시간 슬롯만 사용하여 데이터를 전송할 수 있고 각 프레임의 나머지 9개 시간 슬롯은 유휴 상태로 유지된다. 
@@ -158,7 +157,7 @@ circuit switching은 프레임당 10개의 슬롯이 있고 각 슬롯이 1,000�
 packet switching의 경우 활성 사용자의 패킷과 다중화해야 하는 패킷을 생성하는 다른 사용자가 없기 때문에 활성 사용자는 전체 링크 속도인 1Mbps로 패킷을 계속 보낼 수 있다. 
 이 경우 활성 사용자의 모든 데이터는 1초 이내에 전송된다.
 
-## network의 network
+## 네트워크의 네트워크
 - access ISP들은 **네트워크의 네트워크**로 상호연결되있고, 이로써 엔드 시스템들간 패킷을 보낼 수 있다. 
 
 # Application layer
