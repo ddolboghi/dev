@@ -89,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 265.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -189,8 +189,11 @@
   },
   "active": "51631e0028466a0e",
   "lastOpenFiles": [
-    "네트워크/SSE.md",
+    "img/packet_switching1.png",
+    "Pasted image 20250625221728.png",
     "네트워크/Computer Networking A Top-Down Approach.md",
+    "img/store-and-forward packet switching.md",
+    "네트워크/SSE.md",
     "네트워크/네트워크 핵심 개념.md",
     "네트워크/WebSocket.md",
     "git & github.md",
@@ -221,15 +224,12 @@
     "Java deep dive/lambda.md",
     ".md",
     "트러블슈팅/sprintboot mysql 연결시 Unable to determine Dialect without JDBC metadata 에러.md",
-    "트러블슈팅/[Next-Auth] JWTSessionError.md",
     "img/VLSM_example.png",
-    "센텀 디지털위크.md",
     "Typescript/리액트-컴포넌트-타입.png",
     "img/spring cloud bus webhook.png",
     "SpringCloudStream",
     "Tags/SpringCloudStream",
     "img/FDM and TDM.png",
-    "img/Pasted image 20240814131731.png",
     "Excalidraw",
     "네트워크"
   ]
