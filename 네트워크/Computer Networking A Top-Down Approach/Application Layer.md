@@ -1,3 +1,6 @@
+---
+chapter: "2"
+---
 ## DNS
 - 로컬 DNS 서버는 서버의 계층 구조에 강하게 속하지 않지만 DNS 아키텍처의 중심이다.
 - 각 ISP는 로컬 DNS 서버를 가지며, 이는 default name server 라고도 불린다.
