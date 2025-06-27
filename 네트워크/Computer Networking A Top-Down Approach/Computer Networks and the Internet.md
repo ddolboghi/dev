@@ -181,5 +181,12 @@ packet switching의 경우 활성 사용자의 패킷과 다중화해야 하는 
 - Tier-1 ISP: 최상위 ISP로, 누구에게도 비용을 지불하지 않는다.
 - 실제 네트워크는 더 복잡하다. 예를 들어, 소규모 Regional ISP들이 국가 단위의 더 큰 Regional ISP에 연결되고, 이 국가 ISP가 다시 Tier-1 ISP에 연결되는 형태도 존재한다.
 
-# 패킷 스위치 네트워크의 지연, 손실, 처리량
-chapter 1.4
+# ## Packet-Switched Networks의 지연, 손실, 처리량
+## Packet-Switched Networks의 지연
+### Processing Delay
+- 패킷 헤더를 검사하고 패킷을 적절한 출력 링크로 전달하는데 필요한 시간이다.
+- 다른 요인도 포함될 수 있다. 예: upstream 노드에서 라우터 A로 패킷 비트를 전송하는 동안 발생한 비트 수준 오류를 확인하는데 필요한 시간
+- 고속 라우터의 경우 일반적으로 마이크로초 단위 이하다.
+- 라우터의 **최대 처리량**에 큰 영향을 미친다.
+### Queuing Delay
+- 패킷이 전송을 기다리며 큐(버퍼)에서 
