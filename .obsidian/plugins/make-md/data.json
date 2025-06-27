@@ -42,7 +42,6 @@
     "//컴퓨터 구조",
     "//운영체제",
     "//springboot",
-    "//Tags",
     "//Tags/Tags/SpringCloudStream",
     "//MSA/MSA/spring cloud",
     "//트러블슈팅",
@@ -50,7 +49,9 @@
     "//Modern Java in Action",
     "//Java deep dive",
     "//네트워크",
-    "//네트워크/네트워크/Computer Networking A Top-Down Approach"
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach",
+    "//Tags",
+    "//img"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
