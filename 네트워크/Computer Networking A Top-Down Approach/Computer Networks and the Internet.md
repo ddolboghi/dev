@@ -235,6 +235,6 @@ packet switching의 경우 활성 사용자의 패킷과 다중화해야 하는 
 
 chapter 1.4.3부터
 프롬프트: 
-다음 chapter들의 내용을 요약하지 말고 각 chapter 별로 그대로 설명해줘. :
+다음 chapter들의 내용을 요약하지 말고 각 chapter 별로 그대로 설명해줘. 설명 중에 참고할 Fiqure가 있다면 'Fiqure 1.18'처럼 몇번 Fiqure인지 알려줘.:
 chapter 1.4.3
 chapter 1.4.4
