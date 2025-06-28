@@ -250,7 +250,18 @@ packet switching의 경우 활성 사용자의 패킷과 다중화해야 하는 
 
 # 프로토콜 계층과 그것의 서비스 모델
 ## Layered Architecture
-- 
+- 컴퓨터 네트워크는 계층으로 나눠지며 각 계층은 그 아래 계층과 결합하여 어떤 기능, 즉 서비스를 구현한다.
+- 다양한 계층의 프로토콜들을 **프로토콜 스택**이라고 한다.
+- 인터넷 프로토콜 스택은 5개의 계층으로 구성된다: Physical, Link, Network, Transport, Application
+### Application Layer
+- 애플리케이션에 의해 생성된 메시지를 교환하기 위한 네트워크 애플리케이션과 해당 애플리케이션 프로토콜이 있는 곳이다.
+- HTTP, SMTP, FTP 등이 있다.
+- 이 계층의 패킷을 **메시지(message)** 라고 한다.
+### Transport Layer
+- 애플리케이션 계층 메시지를 애플리케이션 엔드포인트 간에 전송하는 서비스를 제공한다.
+- 인터넷에는 TCP와 UDP라는 두 가지 주요 전송 계층 프로토콜이 있다.
+- TCP (Transmission Control Protocol): 연결 지향 서비스, 신뢰할 수 있는 데이터 전송, 흐름 제어, 혼잡 제어를 제공한다. 긴 메시지를 세그먼트로 나눈다.
+- UDP (User Datagram Protocol): 연결 없는 서비스를 제공하며, 신뢰성
 
 
 프롬프트: 
