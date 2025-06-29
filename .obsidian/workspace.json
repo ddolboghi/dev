@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Computer Networks and the Internet"
+              "title": "Application Layer"
             }
           }
         ]
@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "51d3b6506f29685f",
+            "id": "8c27ccda01dc4541",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -149,13 +149,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Computer Networks and the Internet"
+              "title": "Outline of Application Layer"
             }
           },
           {
@@ -189,13 +189,13 @@
   },
   "active": "6187f6ea98c022a7",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
     "img/concept_of_encapsulation.png",
     "img/average_queuing_delay_graph.png",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
     "네트워크/네트워크.md",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data Plane).md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
     "네트워크/Computer Networking A Top-Down Approach.md",
     "네트워크/Computer Networking A Top-Down Approach/Security.md",
     "네트워크/Computer Networking A Top-Down Approach",
@@ -229,7 +229,6 @@
     "img/JVM_structure.png",
     ".md",
     "img/VLSM_example.png",
-    "Typescript/리액트-컴포넌트-타입.png",
     "SpringCloudStream",
     "Tags/SpringCloudStream",
     "Excalidraw",
