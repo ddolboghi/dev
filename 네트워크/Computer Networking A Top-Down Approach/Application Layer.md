@@ -68,7 +68,7 @@ chapter: "2"
 ## UDP (User Datagram Protocol)
 - 최소한의 서비스를 제공하는 간결하고 가벼운 전송 프로토콜이다.
 - 신뢰성, 흐름 제어, 혼잡 제어를 제공하지 않는다.
-- 많은 방화벽이 UDP 트래픽을 
+- 인터넷 전화 같은 애플리케이션은 많은 방화벽들이 UDP 트래픽을 차단하기 때문에 UDP 통신이 실패 시 TCP를 사용하도록 한다.
 ### 비연결형 서비스
 - handshaking이 없다.
 ### 비신뢰적 데이터 전송 서비스
@@ -77,11 +77,15 @@ chapter: "2"
 
 
 프롬프트: 
-다음 chapter들마다 내용을 요약하지 말고 그대로 설명해줘. 설명 중에 참고할 Fiqure가 있다면 'Fiqure 1.18'처럼 몇번 Fiqure인지 알려줘.:
-chapter 2.1.1
-chapter 2.1.2
-chapter 2.1.3
-chapter 2.1.4
+```
+다음 chapter들마다 내용을 요약하지 말고 그대로 설명해줘. 이때 가장 큰 단위 chapter에 속하지 않는 다른 chapter 내용을 함께 설명하지마. 예를 들어, chapter 2.x.x 내용을 설명할때 chapter 3.x.x 같이 다른 chapter의 내용이 섞이면 안돼. 설명 중에 참고할 Fiqure가 있다면 'Fiqure 1.18'처럼 몇번 Fiqure인지 알려줘.
+---
+### 설명할 chapter들:
+chapter 2.1.5
+chapter 2.1.6
+chapter 2.2.1
+chapter 2.2.2
+```
 
 ## DNS
 - 로컬 DNS 서버는 서버의 계층 구조에 강하게 속하지 않지만 DNS 아키텍처의 중심이다.
