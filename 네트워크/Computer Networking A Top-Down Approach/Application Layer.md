@@ -75,10 +75,14 @@ chapter: "2"
 - 수신 프로세스에 대한 데이터 전달을 보장하지 않으며, 데이터의 순서도 보장하지 않는다.
 
 > [!tip]
-    > - TLS (Transport Layer Security)는 TCP, UDP와 같은 전송 계층에 해당하며, 암호화, 데이터 무결성, 종단 인증을 제공한다.
+>  ### TLS (Transport Layer Security)
+    > - TLS 는 TCP, UDP와 같은 전송 계층에 해당하며, 암호화, 데이터 무결성, 종단 인증을 제공한다.
     > - 애플리케이션은 라이브러리 등에서 제공하는 TLS 코드로 TLS 서비스를 사용할 수 있다.
     > - TLS는 TCP socket API와 비슷한 socket API를 가진다.
-    > 애플리케이션이 TLS를 사용하면, 프로세스가 TLS socket으로 평문 데이터를 보내면 TLS는 데이터를 암호화하여 TCP socket에 전달한다. 이렇게 암호화된 데이터는 인터넷을 지나 수신 프로세스의 TCP socket으로 향한다.
+    > 1. 송신 프로세스가 TLS socket으로 평문 데이터를 보내면 TLS는 데이터를 암호화하여 TCP socket에 전달한다.
+    > 2. 암호화된 데이터는 인터넷을 지나 수신 프로세스의 TCP socket으로 향한다.
+    > 3. 수신 socket은 암호화된 데이터를 TLS에 전달하여 복호화한다.
+    > 4. TLS는 TLS socket을 통해 평문 데이터를 수신 프로세스에 전달한다.
 
 
 프롬프트: 
@@ -123,7 +127,6 @@ chapter: "2"
 - Chapter 2.1.5
 - Chapter 2.1.6
 - Chapter 2.2.1
-- Chapter 2.2.2
 ```
 
 ## DNS
