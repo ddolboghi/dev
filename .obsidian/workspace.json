@@ -189,6 +189,7 @@
   },
   "active": "6187f6ea98c022a7",
   "lastOpenFiles": [
+    "img/http_round_trip_time_example.png",
     "img/socket_interface.png",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
@@ -229,7 +230,6 @@
     "img/보상트랜잭션.png",
     "img/JVM_structure.png",
     ".md",
-    "img/VLSM_example.png",
     "SpringCloudStream",
     "Tags/SpringCloudStream",
     "Excalidraw",
