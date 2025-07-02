@@ -96,7 +96,16 @@ chapter: "2"
 
 # Web과 HTTP
 - HTTP는 브라우저와 웹 서버 간에 교환되는 메시지의 형식과 순서를 정의한다.
-chapter 2.2.1부터
+- 웹 페이지는 객체(objects)로 구성된다.
+- 객체는 단일 URL로 주소 지정이 가능한 파일을 의미하며, HTML파일, JPEG 이미지, JavaScript 파일, CSS 파일 또는 비디오 클립 등이 있다.
+- 대부분의 웹 페이지는 기본 HTML 파일과 여러 참조된 객체로 구성된다.
+## URL 구성 요소
+- 기본 HTML 파일은 해당 객체들의 URL을 통해 페이지 내 다른 객체들을 참조한다.
+- **URL은 객체를 소유한 서버의 호스트 이름과 객체의 경로명으로 구성**된다.
+	- 예를 들어, http://www.someSchool.edu/someDepartment/picture.gif라는 URL에서 www.someSchool.edu는 호스트 이름이고, /someDepartment/picture.gif는 경로명
+- 웹 브라우저는 HTTP의 클라이언트 측을 구현한다.
+- 웹 서버는 HTTP의 서버 측을 구현하며, URL로 주소 지정이 가능한 웹 객체들을 저장한다.
+##
 
 ## DNS
 - 로컬 DNS 서버는 서버의 계층 구조에 강하게 속하지 않지만 DNS 아키텍처의 중심이다.
