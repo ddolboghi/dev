@@ -189,6 +189,7 @@
   },
   "active": "6187f6ea98c022a7",
   "lastOpenFiles": [
+    "img/http_response_message.png",
     "img/http_request_message.png",
     "img/http_round_trip_time_example.png",
     "img/socket_interface.png",
@@ -228,7 +229,6 @@
     "MSA/대규모 트랜잭션.md",
     "MSA/DDD &amp; Clean Architecture.md",
     "img/보상트랜잭션_실패.png",
-    "img/보상트랜잭션.png",
     ".md",
     "SpringCloudStream",
     "Tags/SpringCloudStream",

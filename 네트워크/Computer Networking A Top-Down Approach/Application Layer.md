@@ -149,11 +149,7 @@ chapter: "2"
 ## HTTP 요청 메시지
 - 요청 메시지는 ASCII텍스트로 작성되어 사람이 읽을 수 있다.
 - 첫번째 줄은 **request line**이라고 불리며, **메서드(GET, POST 등)**, **URL**, **HTTP 버전**가 있다.
-- 그 뒤의 줄들은 **header line**이라고 불린다.
-	- **Host**: 객체가 존재하는 호스트를 지정한다. 이 정보는 web proxy caches에 필요하다.
-	- **Connection**: "close"는 클라이언트가 영구 연결을 원하지 않으며, 요청된 객체를 보낸 후 서버가 연결을 닫도록 요청하는 것임을 서버에게 알린다.
-	- **User-agent**: 서버에 요청을 보내는 클라이언트 유형이다. 서버가 동일한 객체의 다른 버전을 다른 유형의 클라이언트에게 보낼때 유용하다.
-	- **Accept-language**: 사용자가 선호하는 버전의 객체다. 서버에 해당 객체가 없으면 기본 버전을 보내야 한다.
+- 그 뒤의 줄들은 **header line**이라고 불린다:
 	```
 	# 예시
 	GET /somedir/page.html HTTP/1.1
@@ -162,14 +158,38 @@ chapter: "2"
 	User-agent: Mozilla/5.0
 	Accept-language: fr
 	```
+- **Host**: 객체가 존재하는 호스트를 지정한다. 이 정보는 web proxy caches에 필요하다.
+- **Connection**: "close"는 클라이언트가 영구 연결을 원하지 않으며, 요청된 객체를 보낸 후 서버가 연결을 닫도록 요청하는 것임을 서버에게 알린다.
+- **User-agent**: 서버에 요청을 보내는 클라이언트 유형이다. 서버가 동일한 객체의 다른 버전을 다른 유형의 클라이언트에게 보낼때 유용하다.
+- **Accept-language**: 사용자가 선호하는 버전의 객체다. 서버에 해당 객체가 없으면 기본 버전을 보내야 한다.
+	
 - header line 뒤에는 빈 줄과 entity body가 있을 수 있다.
 	![[http_request_message.png]]
 ## HTTP 응답 메시지
 - 일반적으로 status line, 여러 header line, entity body로 구성된다.
 - 첫번째 줄인 **status line**은 **프로토콜 버전**(HTTP/1.1), **HTTP Status**(200), **해당 상태 메시지**(OK)로 구성된다.
-- header line:
-	- **Connection**: "close"값은 서버가 메시지를 보낸 후 TCP 연결을 닫을 것임을 클라이언트에 알린다.
-	- Data: HTTP 응답이 서버에 의해 생성 및 전송된 시간과 날짜를 나타낸다.
+- header line 예시:
+	```
+		HTTP/1.1 200 OK
+		Connection: close
+		Date: Tue, 18 Aug 2015 15:44:04 GMT
+		Server: Apache/2.2.3 (CentOS)
+		Last-Modified: Tue, 18 Aug 2015 15:11:03 GMT
+		Content-Length: 6821
+		Content-Type: text/html
+		(data data data data data ...)
+	```
+- **Connection**: "close"값은 서버가 메시지를 보낸 후 TCP 연결을 닫을 것임을 클라이언트에 알린다.
+- **Date**: 응답이 서버에 의해 생성 및 전송된 시간과 날짜를 나타낸다.
+- **Server**: 응답이 생성된 서버 유형을 나타낸다.
+- **Last-Modified**: 객체가 생성되거나 마지막으로 수정된 시간과 날짜를 나타낸다. 객체 캐싱에 중요하다.
+- **Content-Length**: 객체의 바이트 수를 나타낸다.
+- **Content-Type**: 객체의 타입을 나타낸다.
+
+![[http_response_message.png]]
+
+> [!NOTE]
+    > HTTP header line은 브라우저, 웹 서버, 네트워크 캐시 서버 등에 의해서 더 많이 추가될 수 있다.
 
 ## DNS
 - 로컬 DNS 서버는 서버의 계층 구조에 강하게 속하지 않지만 DNS 아키텍처의 중심이다.
