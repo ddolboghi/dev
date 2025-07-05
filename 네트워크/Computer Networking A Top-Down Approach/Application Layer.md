@@ -228,7 +228,18 @@ chapter: "2"
 - 웹 캐시가 최신 객체를 보유하고 있는지 확인하기 위해 조건부 GET 요청을 사용한다.
 - 조건부 GET 요청은 HTTP 요청 메시지에 **If-Modified-Since** 헤더를 추가한다.
 - 이 헤더에는 캐시가 객체의 복사본을 마지막으로 수정한 날짜가 포함된다.
+	```
+	GET /fruit/kiwi.gif HTTP/1.1
+	Host: www.exotiquecuisine.com
+	If-modified-since: Wed, 9 Sep 2015 09:23:24
+	```
 - 웹 서버는 조건부 GET 요청을 받으면, 요청된 객체가 If-Modified-Since 헤더에 명시된 날짜 이후로 수정되지 않았다면 HTTP 응답 메시지에 객체를 포함하지 않고 **304 Not Modified** 응답을 보낸다.
+	```
+	HTTP/1.1 304 Not Modified
+	Date: Sat, 10 Oct 2015 15:39:29
+	Server: Apache/1.3.0 (Unix)
+	(empty entity body)
+	```
 - 웹 캐시가 304 응답을 받으면, 로컬에 저장된 객체를 클라이언트로 보낸다.
 - 객체가 수정된 경우, 서버는 200 OK 응답과 함께 수정된 객체를 보낸다.
 
