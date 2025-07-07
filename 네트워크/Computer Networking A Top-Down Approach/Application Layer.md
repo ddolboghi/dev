@@ -271,7 +271,7 @@ chapter: "2"
 - HTTP/3는 QUIC를 통해 작동한다.
 
 # SMTP (Simple Mail Transfer Protocol)
-146p부터
+### 인터넷 메일 시스템은 
 
 # DNS
 - 로컬 DNS 서버는 서버의 계층 구조에 강하게 속하지 않지만 DNS 아키텍처의 중심이다.
@@ -320,9 +320,6 @@ chapter: "2"
 ---
 
 ### 설명할 chapter들 목록:
-- Chapter 2.3.1
-- Chapter 2.3.2
-- Chapter 2.3.3
 - Chapter 2.4.1
 ```
 
