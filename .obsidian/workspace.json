@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "5969ff332c8ba664",
+            "id": "5f9640320668573d",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -89,7 +89,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 265.5
+    "width": 265.5,
+    "collapsed": true
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -173,7 +174,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,7 +189,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5969ff332c8ba664",
+  "active": "5e1f0064fa01f1a9",
   "lastOpenFiles": [
     "spring/SpringCloudStream.md",
     "spring/spring security.md",

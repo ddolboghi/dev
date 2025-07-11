@@ -334,4 +334,3 @@ chapter: "2"
 ### 설명할 chapter들 목록:
 - Chapter 2.4.1
 ```
-
