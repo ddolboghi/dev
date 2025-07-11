@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "파일 탐색기"
+              "title": "Files"
             }
           },
           {
@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "eb62d1e7adee258b",
+            "id": "5969ff332c8ba664",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -85,12 +85,11 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 265.5,
-    "collapsed": true
+    "width": 265.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -174,8 +173,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -189,7 +187,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5e1f0064fa01f1a9",
+  "active": "5969ff332c8ba664",
   "lastOpenFiles": [
     "spring/SpringCloudStream.md",
     "spring/spring security.md",
