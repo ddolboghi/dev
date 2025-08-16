@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "5f9640320668573d",
+            "id": "66002eaaf92ba624",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -89,8 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 265.5,
-    "collapsed": true
+    "width": 265.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -189,7 +188,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5e1f0064fa01f1a9",
+  "active": "66002eaaf92ba624",
   "lastOpenFiles": [
     "spring/SpringCloudStream.md",
     "spring/spring security.md",
