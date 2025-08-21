@@ -373,31 +373,45 @@ DNS 서버가 DNS 응답을 받으면 그 매핑 정보를 **로컬 메모리에
 DNS 분산 데이터베이스를 구현하는 DNS 서버들은 호스트 이름과 IP 주소 간의 매핑을 제공하는 **리소스 레코드(Resource Records, RR)** 를 저장한다. 각 DNS 응답 메시지는 하나 이상의 리소스 레코드를 담고 있다.
 
 리소스 레코드는 `(Name, Value, Type, TTL)`의 네 가지 필드로 구성된 튜플이다.
-- **TTL**: 리소스 레코드의 유효 기간으로, 캐시에서 언제 제거되어야 하는지를 결정합니다.
+- **TTL**: 리소스 레코드의 유효 기간으로, 캐시에서 언제 제거되어야 하는지를 결정한다.
+- **Name, Value**: 이 필드들의 의미는 `Type`에 따라 달라진다.
+    - **Type=A**: `Name`은 호스트 이름이고 `Value`는 해당 호스트의 IP 주소다. 이는 표준적인 호스트 이름-IP 주소 매핑을 제공한다.
+	    - e.g. `(relay1.bar.foo.com, 145.37.93.126, A)`
+    - **Type=NS**: `Name`은 도메인(예: `foo.com`)이고 `Value`는 해당 도메인 내 호스트들의 IP 주소를 얻는 방법을 아는 권한 DNS 서버의 호스트 이름이다. 이 레코드는 DNS 쿼리를 계층의 다음 단계로 전달하는 데 사용된다.
+        - e.g. `(foo.com, dns.foo.com, NS)`
+    - **Type=CNAME**: `Value`는 별칭 호스트 이름인 `Name`에 대한 정식 호스트 이름(canonical hostname)이다.
+        - e.g. `(foo.com, relay1.bar.foo.com, CNAME)`
+    - **Type=MX**: `Value`는 별칭 호스트 이름 `Name`을 가진 메일 서버의 정식 이름이다. MX 레코드를 사용하면 회사의 메일 서버와 웹 서버가 동일한 별칭 이름을 가질 수 있다. 메일 서버의 정식 이름을 얻으려면 MX 레코드를, 다른 서버의 정식 이름을 얻으려면 CNAME 레코드를 쿼리해야 한다.
+        - e.g. `(foo.com, mail.bar.foo.com, MX)`
+
+만약 DNS 서버가 특정 호스트 이름에 대한 권한을 가지고 있다면, 해당 호스트 이름에 대한 **Type A** 레코드를 포함한다. 권한이 없는 서버라도 캐시에 Type A 레코드를 가질 수 있다. 권한이 없는 서버는 해당 호스트 이름을 포함하는 도메인에 대한 **Type NS** 레코드를 가지며, 이 NS 레코드의 `Value` 필드에 있는 DNS 서버의 IP 주소를 제공하는 Type A 레코드도 함께 가진다.
+### DNS 메시지
+DNS 메시지에는 **쿼리 메시지**와 **응답 메시지** 두 종류만 있으며, 두 메시지는 동일한 형식을 가진다.
+![[dns_message_format.png | 600]]
+- **헤더 섹션(Header Section)**: 처음 12바이트로, 쿼리를 식별하는 16비트 **식별자(Identification)** 필드와 여러 플래그 필드가 있다. 쿼리/응답 플래그는 메시지가 쿼리인지 응답인지를 나타내고, 권한 플래그는 DNS 서버가 쿼리된 이름에 대한 권한 서버임을 나타낸다. 헤더에는 또한 질문, 응답, 권한, 추가 정보 섹션의 레코드 수를 나타내는 필드들이 있다.
+- **질문 섹션(Question Section)**: 쿼리 중인 이름과 질문의 유형(예: Type A 또는 Type MX)이 있다.
+- **응답 섹션(Answer Section)**: 쿼리된 이름에 대한 리소스 레코드가 있다. 하나의 호스트 이름이 여러 IP 주소를 가질 수 있으므로, 응답은 여러 RR을 포함할 수 있다.
+- **권한 섹션(Authority Section)**: 다른 권한 서버의 레코드가 있다.
+- **추가 정보 섹션(Additional Section)**: 도움이 될 만한 추가 레코드가 있다. 예를 들어, MX 쿼리에 대한 응답에는 메일 서버의 정식 호스트 이름에 대한 Type A 레코드가 포함될 수 있다.
+
+`nslookup` 프로그램을 사용하면 사용자가 직접 DNS 쿼리 메시지를 보내고 응답 메시지를 확인할 수 있습니다.
+
+### Inserting Records into the DNS Database
+
+DNS 데이터베이스에 레코드를 삽입하려면, 먼저 **등록기관(registrar)**에 도메인 이름을 등록해야 합니다. 등록기관은 도메인 이름의 고유성을 확인하고 DNS 데이터베이스에 이름을 입력하며 수수료를 받습니다. ICANN(Internet Corporation for Assigned Names and Numbers)이 다양한 등록기관을 인증합니다.
+
+도메인 이름을 등록할 때, 주 DNS 서버와 보조 DNS 서버의 이름 및 IP 주소를 등록기관에 제공해야 합니다. 예를 들어,
+
+`networkutopia.com`을 등록하고 주 DNS 서버가 `dns1.networkutopia.com`(IP: `212.212.212.1`)이라면, 등록기관은 TLD `.com` 서버에 다음 두 개의 리소스 레코드를 삽입합니다:
+
+- `(networkutopia.com, dns1.networkutopia.com, NS)`
     
-- **Name, Value**: 이 필드들의 의미는 `Type`에 따라 달라집니다.
+- `(dns1.networkutopia.com, 212.212.212.1, A)`
     
-    - **Type=A**: `Name`은 호스트 이름이고 `Value`는 해당 호스트의 IP 주소입니다. 이는 표준적인 호스트 이름-IP 주소 매핑을 제공합니다. 예:
-        
-        `(relay1.bar.foo.com, 145.37.93.126, A)`.
-        
-    - **Type=NS**: `Name`은 도메인(예: `foo.com`)이고 `Value`는 해당 도메인 내 호스트들의 IP 주소를 얻는 방법을 아는 권한 DNS 서버의 호스트 이름입니다. 이 레코드는 DNS 쿼리를 계층의 다음 단계로 전달하는 데 사용됩니다. 예:
-        
-        `(foo.com, dns.foo.com, NS)`.
-        
-    - **Type=CNAME**: `Value`는 별칭 호스트 이름인 `Name`에 대한 정식 호스트 이름(canonical hostname)입니다. 예:
-        
-        `(foo.com, relay1.bar.foo.com, CNAME)`.
-        
-    - **Type=MX**: `Value`는 별칭 호스트 이름 `Name`을 가진 메일 서버의 정식 이름입니다. MX 레코드를 사용하면 회사의 메일 서버와 웹 서버가 동일한 별칭 이름을 가질 수 있습니다. 메일 서버의 정식 이름을 얻으려면 MX 레코드를, 다른 서버의 정식 이름을 얻으려면 CNAME 레코드를 쿼리합니다. 예:
-        
-        `(foo.com, mail.bar.foo.com, MX)`.
-        
 
-만약 DNS 서버가 특정 호스트 이름에 대한 권한을 가지고 있다면, 해당 호스트 이름에 대한 **Type A** 레코드를 포함합니다. 권한이 없는 서버라도 캐시에 Type A 레코드를 가질 수 있습니다. 권한이 없는 서버는 해당 호스트 이름을 포함하는 도메인에 대한
+또한, 자신의 권한 DNS 서버에 웹 서버(
 
-**Type NS** 레코드를 가지며, 이 NS 레코드의 `Value` 필드에 있는 DNS 서버의 IP 주소를 제공하는 Type A 레코드도 함께 가집니다.
-
+`www.networkutopia.com`)에 대한 Type A 레코드와 메일 서버(`mail.networkutopia.com`)에 대한 Type MX 레코드를 입력해야 합니다. 이 모든 절차가 완료되면 전 세계 사용자가 당신의 웹사이트를 방문하고 이메일을 보낼 수 있게 됩니다.
 
 
 
