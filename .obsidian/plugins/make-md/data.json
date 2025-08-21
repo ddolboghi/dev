@@ -99,6 +99,7 @@
   "notesPreview": false,
   "editStickerInSidebar": true,
   "overrideNativeMenu": false,
+  "onboardingCompleted": false,
   "dataviewInlineContext": false,
   "searchWorker": true,
   "flowMenuEnabled": true,

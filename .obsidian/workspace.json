@@ -35,8 +35,7 @@
               "title": "[컴퓨터 밑바닥의 비밀] 질문"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -90,7 +89,7 @@
             }
           },
           {
-            "id": "d5ea9b675cf61039",
+            "id": "0e6d00579f526fe2",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -164,13 +163,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of [컴퓨터 밑바닥의 비밀] 질문"
+              "title": "Outline of Application Layer"
             }
           },
           {
@@ -192,6 +191,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -202,8 +202,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4a10bdfc69ac42d6",
+  "active": "5e1f0064fa01f1a9",
   "lastOpenFiles": [
+    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer.md",
     "JavaScript/JavaScript 고급 문법.md",
     "spring/SpringCloudStream.md",
@@ -236,7 +237,6 @@
     "img/Tutorial-WebSocket-protocol-chart.jpg",
     "img/Tutorial-WebSocket-protocol-chart.jpg.crdownload",
     "네트워크/TCP&IP.md",
-    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "Data Structure & Algorithm.md",
     "Java deep dive/Java deep dive.md",
     "컴퓨터 구조/CPU.md",
