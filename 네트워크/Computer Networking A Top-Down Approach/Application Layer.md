@@ -314,32 +314,30 @@ chapter: "2"
 
 2. 설명 시 반드시 다음 형식을 지켜 주세요:
 
-   - 각 chapter마다 "**Chapter X.X.X**" 형태의 대제목(Heading)을 먼저 적으세요.
-   - 그 chapter 내에 포함된 소제목(Section Title)과 하위 개념별로 "**소제목 이름**" 형태의 소제목 Heading을 만들어 구분하세요.
+   - 각 chapter마다 "## Chapter X.X.X" 형태의 대제목을 먼저 적으세요.
+   - chapter의 하위 제목들을 "소제목 이름" 형태의 소제목을 만들어 구분하세요.
    - 하위 개념(절 또는 항목)마다 명확히 구분해서 서술하세요. 절대 내용을 한 덩어리로 합쳐서 설명하지 마세요.
-   - 예시 형식:  
-
-   ## Chapter 2.2.1  
-   ### <Web Objects>  
+   - 예시 형식:
+   ## Chapter x.y.z
+   ### <Web Objects>
    (내용)  
    ### <URL Components>  
    (내용)  
    ### <Round-Trip Time and Object Retrieval>
    (내용)
 
-3. 설명 중에는 지정된 chapter 범위를 절대 넘기지 마세요.  
-   - 예: "chapter 2.1.5"를 설명할 때 "chapter 2.1.6" 또는 "chapter 3.x.x" 내용 포함 금지.  
+3. 반드시 지정된 chapter 범위 내에서만 내용을 찾아 설명하세요. 예를들어, "chapter 2.1.5"를 설명할 때 "chapter 2.1.6" 또는 "chapter 3.x.x" 내용 포함 금지. 
    - cross-reference (다른 chapter 내용 인용 및 설명) 금지.  
-   - 단, 필요에 따라 관련성이 높은 다른 chapter를 언급할 수는 있지만, 그 경우에도 **그 chapter 번호만 짧게 언급**하고 절대 내용을 풀어서 설명하지 마세요.  
+4. 단, 필요에 따라 관련성이 높은 다른 chapter는 **그 chapter 번호만 명시**하세요.
    - 예시: "이 내용과 관련된 추가 설명은 chapter 3.2.1에 있습니다."
-
-4. 만약 해당 chapter에서 특정 Figure를 참고하거나 설명하고 있다면, 반드시 그 Figure 번호를 명시하세요.  
+5. 만약 해당 chapter에서 특정 Figure를 참고하거나 설명하고 있다면, 반드시 그 Figure 번호를 명시하세요.  
    - 예시: "이 내용은 Figure 1.18에 나와 있습니다."
-
-5. 각 chapter의 설명이 끝날 때마다 반드시 다음 chapter의 설명으로 넘어가기 전에 **줄바꿈 및 제목 구분**을 명확히 하세요.
+3. 각 chapter의 설명이 끝날 때마다 반드시 다음 chapter의 설명으로 넘어가기 전에 **줄바꿈 및 제목 구분**을 명확히 하세요.
 
 ---
 
-### 설명할 chapter들 목록:
-- Chapter 2.4.1
+### 설명할 chapter 목록:
+- Chapter 2.3.1
+- Chapter 2.3.2
+- Chapter 2.3.3
 ```
