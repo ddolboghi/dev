@@ -310,17 +310,9 @@ chapter: "2"
 ![[email_protocol.png]]
 - 메일 서버가 사용자 에이전트에 메시지를 전송할때는 pull 동작을 할 수 있는 HTTP나 IMAP 프로토콜을 사용한다.
 - 사용자 에이전트가 메일 서버에 메시지를 전송할때는 push 동작을 할 수 있는 HTTP나 SMTP를 사용한다.
+- 메일 서버는 다른 메일 서버로부터 메시지를 주고받기 위해 여전히 SMTP를 사용한다.
+- **IMAP (Internet Mail Access Protocol)** 와 HTTP 둘다 메일 서버에 있는 메시지를 조작할 수 있다.
 
-
-두 가지 주요 메일 액세스 프로토콜은 다음과 같습니다:
-
-• **POP3 (Post Office Protocol—Version 3)**
-
-• **IMAP (Internet Mail Access Protocol)**
-
-<HTTP를 통한 메일 액세스>
-
-많은 사용자가 표준 웹 브라우저(예: Gmail, Yahoo! Mail)를 사용하여 자신의 메일함에 접속합니다. 이 경우, 사용자 브라우저와 메일 서버 간에는 **HTTP**가 사용됩니다. 이 시나리오에서도 메일 서버는 다른 메일 서버로부터 메시지를 주고받기 위해 여전히 SMTP를 사용합니다.
 # DNS
 - 로컬 DNS 서버는 서버의 계층 구조에 강하게 속하지 않지만 DNS 아키텍처의 중심이다.
 - 각 ISP는 로컬 DNS 서버를 가지며, 이는 default name server 라고도 불린다.
@@ -332,39 +324,36 @@ chapter: "2"
 
 프롬프트: 
 ```
-다음 지침을 반드시 따르세요:
+다음 챕터들을 찾아 내용을 설명해라.
+설명할 chapter 목록:
+- Chapter 2.3.1
+- Chapter 2.3.2
+- Chapter 2.3.3
 
-1. 아래에 나열된 각 chapter에 대해서, 해당 chapter 내용만 그대로 설명하세요.  
-   - 요약하거나 간략화하지 마세요.  
-   - 반드시 원문 흐름과 논리 전개를 최대한 충실하게 설명하세요.  
-   - 단, 문장 구조나 표현은 독자가 이해하기 쉽도록 자연스럽게 풀어서 설명해도 됩니다.
+그리고 설명할때 다음 지침을 반드시 따르세요:
 
-2. 설명 시 반드시 다음 형식을 지켜 주세요:
-
+- 각 chapter에 대해서, 해당 chapter 내용만 그대로 설명하세요.
+- 요약하거나 간략화하지 마세요.  
+- 반드시 원문 흐름과 논리 전개를 최대한 충실하게 설명하세요.  
+- 단, 문장 구조나 표현은 독자가 이해하기 쉽도록 자연스럽게 풀어서 설명해도 됩니다.
+- 설명 시 반드시 다음 형식을 지켜 주세요:
    - 각 chapter마다 "## Chapter X.X.X" 형태의 대제목을 먼저 적으세요.
    - chapter의 하위 제목들을 "소제목 이름" 형태의 소제목을 만들어 구분하세요.
    - 하위 개념(절 또는 항목)마다 명확히 구분해서 서술하세요. 절대 내용을 한 덩어리로 합쳐서 설명하지 마세요.
    - 예시 형식:
-   ## Chapter x.y.z
-   ### <Web Objects>
-   (내용)  
-   ### <URL Components>  
-   (내용)  
-   ### <Round-Trip Time and Object Retrieval>
-   (내용)
+   <Chapter x.y.z>
+     <Web Objects>
+     (내용)  
+     <URL Components>  
+     (내용)  
+     <Round-Trip Time and Object Retrieval>
+     (내용)
 
-3. 반드시 지정된 chapter 범위 내에서만 내용을 찾아 설명하세요. 예를들어, "chapter 2.1.5"를 설명할 때 "chapter 2.1.6" 또는 "chapter 3.x.x" 내용 포함 금지. 
+- 반드시 지정된 chapter 범위 내에서만 내용을 찾아 설명하세요. 예를들어, "chapter 2.1.5"를 설명할 때 "chapter 2.1.6" 또는 "chapter 3.x.x" 내용 포함 금지. 
    - cross-reference (다른 chapter 내용 인용 및 설명) 금지.  
-4. 단, 필요에 따라 관련성이 높은 다른 chapter는 **그 chapter 번호만 명시**하세요.
+- 단, 필요에 따라 관련성이 높은 다른 chapter는 **그 chapter 번호만 명시**하세요.
    - 예시: "이 내용과 관련된 추가 설명은 chapter 3.2.1에 있습니다."
-5. 만약 해당 chapter에서 특정 Figure를 참고하거나 설명하고 있다면, 반드시 그 Figure 번호를 명시하세요.  
+- 만약 해당 chapter에서 특정 Figure를 참고하거나 설명하고 있다면, 반드시 그 Figure 번호를 명시하세요.  
    - 예시: "이 내용은 Figure 1.18에 나와 있습니다."
-3. 각 chapter의 설명이 끝날 때마다 반드시 다음 chapter의 설명으로 넘어가기 전에 **줄바꿈 및 제목 구분**을 명확히 하세요.
-
----
-
-### 설명할 chapter 목록:
-- Chapter 2.3.1
-- Chapter 2.3.2
-- Chapter 2.3.3
+- 각 chapter의 설명이 끝날 때마다 반드시 다음 chapter의 설명으로 넘어가기 전에 **줄바꿈 및 제목 구분**을 명확히 하세요.
 ```
