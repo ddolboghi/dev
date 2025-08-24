@@ -89,7 +89,7 @@
             }
           },
           {
-            "id": "72e7af769faa10c9",
+            "id": "7ff458037df15d81",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -99,12 +99,11 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 265.5,
-    "collapsed": true
+    "width": 265.5
   },
   "right": {
     "id": "ac92d27f11cb5ff3",
@@ -204,7 +203,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5e1f0064fa01f1a9",
+  "active": "7ff458037df15d81",
   "lastOpenFiles": [
     "Pasted image 20250821223455.png",
     "img/dns_message_format.png",
