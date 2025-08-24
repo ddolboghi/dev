@@ -1,14 +1,13 @@
 ---
 chapter: "4"
 ---
-## IP
-### DHCP (Dynamic Host Configuration Protocol)
+## DHCP (Dynamic Host Configuration Protocol)
 - 네트워크에 연결된 장치에 IP 주소와 기타 네트워크 설정 정보를 자동으로 할당하는 프로토콜
 - DHCP를 이용하면 연결된 장치마다 수동으로 IP 주소를 할당하지 않아도 된다.
 - DHCP는 기본 게이트웨이의 IP 주소도 제공한다.
 - DHCP 서버는 엣지 라우터에 있다.
 - DHCP 서버는 장치가 네트워크에 연결되면 IP 주소를 할당하고, 네트워크 연결이 끊기면 IP 주소를 회수한다.
-### DHCP 프로토콜 과정(6.7.1)
+## DHCP 프로토콜 과정(6.7.1)
 chp 4의 4단계 중 마지막 두 단계만 실제로 필요하다.
 1. 운영체제가 DHCP 요청 메시지를 UDP 세그먼트에 넣는다. 이때 destination 포트는 DHCP 서버 포트인 67이고, 소스 포트는 DHCP 클라이언트 포트인 68이다. UDP 세그먼트는 브로드캐스트 IP destination 주소와 0.0.0.0의 소스 IP 주소를 가지고 IP 데이터그램안에 위치한다.
 2. IP 데이터그램은 이더넷프레임 내에 배치된다. 이더넷프레임은 destination MAC 주소를 가지고 스위치에 연결된 모든 장치들에 전파된다. 이때 이더넷프레임의 소스 MAC 주소는 내 컴퓨터의 MAC 주소다.

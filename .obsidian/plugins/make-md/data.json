@@ -51,7 +51,11 @@
     "//네트워크",
     "//네트워크/네트워크/Computer Networking A Top-Down Approach",
     "//Tags",
-    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Application"
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Application",
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Computer Netowk",
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)",
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Application Layer"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
