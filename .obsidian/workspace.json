@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f9be76f21e6479e2",
+            "id": "3eea94f85eed6106",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer/Video Streaming and Content Distribution Networks.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Peer-to-Peer File Distribution"
+              "title": "Video Streaming and Content Distribution Networks"
             }
           }
         ]
@@ -159,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Application Layer/Video Streaming and Content Distribution Networks.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Peer-to-Peer File Distribution"
+              "title": "Outline of Video Streaming and Content Distribution Networks"
             }
           },
           {
@@ -198,13 +198,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f9be76f21e6479e2",
+  "active": "3eea94f85eed6106",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Video Streaming and Content Distribution Networks.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/.md",
     "img/distribution_time_graph.png",
     "Pasted image 20250824144313.png",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Packet-Switched Networks의 지연, 손실, 처리량.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/SMTP(Simple Mail Transfer Protocol).md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
     "img/p2p_example.png",
@@ -216,7 +218,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Access network.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet/Computer Networks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
-    "네트워크/Computer Networking A Top-Down Approach/Untitled.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Networks Under Attack.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/프로토콜 계층과 그것의 서비스 모델.md",
@@ -237,7 +238,6 @@
     "Pasted image 20250821221931.png",
     "img/dns_server_query.png",
     "Pasted image 20250821211552.png",
-    "img/email_protocol.png",
     "JavaScript/JavaScript 고급 문법.md",
     "spring/SpringCloudStream.md",
     "spring/spring security.md",
