@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1057951b31c608bc",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "네트워크/Computer Networking A Top-Down Approach"
-              },
-              "icon": "lucide-file",
-              "title": "Computer Networking A Top-Down Approach"
-            }
-          },
-          {
             "id": "f9be76f21e6479e2",
             "type": "leaf",
             "state": {
@@ -43,8 +31,7 @@
               "title": "Peer-to-Peer File Distribution"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -213,32 +200,33 @@
   },
   "active": "f9be76f21e6479e2",
   "lastOpenFiles": [
-    "네트워크/Computer Networking A Top-Down Approach/Security.md",
+    "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Packet-Switched Networks의 지연, 손실, 처리량.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Application Layer/SMTP(Simple Mail Transfer Protocol).md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
+    "img/p2p_example.png",
+    "네트워크/Computer Networking A Top-Down Approach/Security.md",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)/Network Layer(Data plane).md",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)/IP.md",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Computer Netowks and the Internet.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Access network.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet/Computer Networks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Untitled.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Packet-Switched Networks의 지연, 손실, 처리량.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Networks Under Attack.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/프로토콜 계층과 그것의 서비스 모델.md",
     "Untitled.canvas",
     "Untitled.base",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Packet switching vs Circuit switching.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/HTTP.md",
     "Custom SMT 개발기.md",
     "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Basic.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/DNS(Domain Name System).md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/SMTP(Simple Mail Transfer Protocol).md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
     "Pasted image 20250821223455.png",
     "img/dns_message_format.png",
@@ -253,12 +241,10 @@
     "spring/SpringCloudStream.md",
     "spring/spring security.md",
     "spring/spring secutiry - SecurityFilterChain.canvas",
-    "img/http_response_message.png",
     "네트워크/네트워크.md",
     "네트워크/Computer Networking A Top-Down Approach.md",
     "네트워크/Computer Networking A Top-Down Approach",
     "네트워크/Untitled.canvas",
-    "img/store-and-forward packet switching.md",
     "img/Tutorial-WebSocket-protocol-chart.jpg.crdownload",
     "Tags",
     ".md"
