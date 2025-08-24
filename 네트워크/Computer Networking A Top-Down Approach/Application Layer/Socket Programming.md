@@ -85,6 +85,5 @@ while True:
 - `serverSocket=socket(AF_INET,SOCK_STREAM)`: 서버는 TCP 소켓을 생성한다.
 - `serverSocket.bind(('',serverPort))`: 서버 포트 번호를 이 소켓과 연결한다. TCP에서 `serverSocket`은 웰컴 소켓이 된다.
 - `serverSocket.listen(1)`: 이 줄은 서버가 클라이언트로부터 TCP 연결 요청을 수신 대기하도록 한다. 매개변수는 대기 중인 연결의 최대 수를 지정한다(최소 1).
-- `connectionSocket, addr = serverSocket.accept()`: 클라이언트가 이 환영 소켓에 "노크"하면, 프로그램은 `serverSocket`의 `accept()` 메서드를 호출한다. 이 메서드는 이 특정 클라이언트 전용의 새로운 소켓인 `connectionSocket`을 서버에 생성한다. 클라이언트와 서버는 핸드셰이킹을 완료하여 클라이언트의 `clientSocket`과 서버의 `connectionSocket` 간에 TCP 연결을 설정한다.
-    
+- `connectionSocket, addr = serverSocket.accept()`: 클라이언트가 이 웰컴 소켓에 "노크"하면, 프로그램은 `serverSocket`의 `accept()` 메서드를 호출한다. 이 메서드는 이 **특정 클라이언트 전용의 새로운 소켓인 `connectionSocket`을 서버에 생성**한다. 클라이언트와 서버는 핸드셰이킹을 완료하여 클라이언트의 `clientSocket`과 서버의 `connectionSocket` 간에 TCP 연결을 설정한다.
 - `connectionSocket.close()`: 이 프로그램에서는 수정된 문장을 클라이언트로 보낸 후, 연결 소켓을 닫는다. 그러나 `serverSocket`은 계속 열려 있으므로 다른 클라이언트가 접속하여 서버에 문장을 보낼 수 있다.

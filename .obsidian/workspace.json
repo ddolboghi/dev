@@ -211,8 +211,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7280cf36ac718e1b",
+  "active": "4b799fb42a0b5668",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer",
     "Pasted image 20250824164056.png",
     "img/TCPServer_process_has_tow_sockets.png",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
@@ -252,7 +254,6 @@
     "img/dns_message_format.png",
     "Pasted image 20250821222342.png",
     "dns_recursive_query.png",
-    "Pasted image 20250821221931.png",
     "JavaScript/JavaScript 고급 문법.md",
     "spring/SpringCloudStream.md",
     "spring/spring security.md",
@@ -260,7 +261,6 @@
     "네트워크/Computer Networking A Top-Down Approach",
     "네트워크/Untitled.canvas",
     "img/Tutorial-WebSocket-protocol-chart.jpg.crdownload",
-    "Tags",
-    ".md"
+    "Tags"
   ]
 }
