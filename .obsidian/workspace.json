@@ -11,48 +11,12 @@
             "id": "3eea94f85eed6106",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "path": "네트워크/Computer Networking A Top-Down Approach/Transport Layer"
               },
               "icon": "lucide-file",
-              "title": "Multiplexing & Demultiplexing"
-            }
-          },
-          {
-            "id": "a50778ccbe2d77b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Transport Layer 소개"
+              "title": "Transport Layer"
             }
           }
         ]
@@ -112,6 +76,18 @@
             "id": "a50fbf22a6359d61",
             "type": "leaf",
             "state": {
+              "type": "mk-space",
+              "state": {
+                "path": "네트워크/Computer Networking A Top-Down Approach/Transport Layer"
+              },
+              "icon": "lucide-file",
+              "title": "Transport Layer"
+            }
+          },
+          {
+            "id": "91ba5d9efc3b1a84",
+            "type": "leaf",
+            "state": {
               "type": "mk-path-view",
               "state": {},
               "icon": "layout-grid",
@@ -119,7 +95,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -183,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Multiplexing & Demultiplexing"
+              "title": "Outline of Transport Layer"
             }
           },
           {
@@ -222,12 +198,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3eea94f85eed6106",
+  "active": "2057ad251d4b70b9",
   "lastOpenFiles": [
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
+    "img/tcp_multiplexing_and_demultiplexing_example.png",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
     "Excalidraw/JVM_structure.md",
     "Security/브라우저의 세션, 쿠키에 대해서.md",
@@ -256,7 +233,6 @@
     "img/TCPServer_process_has_tow_sockets.png",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Video Streaming and Content Distribution Networks.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
-    "img/DNS_redirect_example.png",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Packet-Switched Networks의 지연, 손실, 처리량.md",
     "네트워크/Computer Networking A Top-Down Approach/Security.md",
@@ -265,7 +241,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Computer Netowks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Access network.md",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet/Computer Networks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
