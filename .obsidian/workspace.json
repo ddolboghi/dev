@@ -11,10 +11,24 @@
             "id": "3eea94f85eed6106",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Multiplexing & Demultiplexing"
             }
           },
           {
@@ -41,8 +55,7 @@
               "title": "Transport Layer 소개"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -170,13 +183,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Transport Layer 소개"
+              "title": "Outline of Multiplexing & Demultiplexing"
             }
           },
           {
@@ -209,8 +222,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a50778ccbe2d77b9",
+  "active": "3eea94f85eed6106",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
     "Excalidraw/JVM_structure.md",
     "Security/브라우저의 세션, 쿠키에 대해서.md",
@@ -221,8 +238,6 @@
     "Next.js/Next.js 특징 및 기능.md",
     "Next.js/Next.js.md",
     "Tip.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
     "Pasted image 20250824164056.png",
     "Pasted image 20250824144313.png",
     "Pasted image 20250821223455.png",
@@ -253,8 +268,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet/Computer Networks and the Internet.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Networks Under Attack.md",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/프로토콜 계층과 그것의 서비스 모델.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
     "spring/spring secutiry - SecurityFilterChain.canvas",
