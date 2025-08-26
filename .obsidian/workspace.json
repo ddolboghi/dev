@@ -23,7 +23,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer와 Network Layer의 관계.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -38,7 +38,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Transport Layer와 Network Layer의 관계"
+              "title": "Transport Layer 소개"
             }
           }
         ],
@@ -170,13 +170,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer와 Network Layer의 관계.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Transport Layer와 Network Layer의 관계"
+              "title": "Outline of Transport Layer 소개"
             }
           },
           {
@@ -222,7 +222,7 @@
     "Next.js/Next.js.md",
     "Tip.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer와 Network Layer의 관계.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
     "Pasted image 20250824164056.png",
     "Pasted image 20250824144313.png",
     "Pasted image 20250821223455.png",
