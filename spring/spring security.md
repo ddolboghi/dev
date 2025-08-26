@@ -32,7 +32,7 @@ SecurityContext : 접근 주체와 인증에 대한 정보를 담고 있는 객�
 7. 입력 정보와 UserDetails의 정보를 비교해 실제 인증 처리
 8~10까지 인증이 완료되면 SecutiryContextHolder에 Authentication을 저장
 인증 성공 여부에 따라 성공하면 AuthenticationSuccessHandler, 실패하면 AuthenticationFailureHandler를 실행
-[폼 로그인 인증 절차 다이어그램](obsidian://open?vault=Obsidian%20Vault&file=spring%20secutiry%20-%20%ED%8F%BC%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.canvas)
+![[spring secutiry - 폼 로그인.canvas|spring secutiry - 폼 로그인]]
 # spring boot에서 인증, 인가 기능 구현
 ## 의존성 추가
 ```gradle

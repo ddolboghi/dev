@@ -18,18 +18,31 @@
             }
           },
           {
-            "id": "5790e230fb5c96b9",
+            "id": "a50778ccbe2d77b9",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
+              "type": "markdown",
               "state": {
-                "path": "Next.js"
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer와 Network Layer의 관계.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "Next.js"
+              "title": "Transport Layer와 Network Layer의 관계"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -157,12 +170,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer와 Network Layer의 관계.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Transport Layer와 Network Layer의 관계"
             }
           },
           {
@@ -195,8 +209,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3eea94f85eed6106",
+  "active": "a50778ccbe2d77b9",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
+    "Excalidraw/JVM_structure.md",
+    "Security/브라우저의 세션, 쿠키에 대해서.md",
+    "spring/리프레시 토큰 요청&응답.canvas",
+    "spring/spring security.md",
+    "운영체제/운영체제.md",
+    "spring/spring secutiry - 폼 로그인.canvas",
     "Next.js/Next.js 특징 및 기능.md",
     "Next.js/Next.js.md",
     "Tip.md",
@@ -219,7 +240,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer",
     "img/TCPServer_process_has_tow_sockets.png",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Video Streaming and Content Distribution Networks.md",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Networking A Top-Down Approach.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
     "img/DNS_redirect_example.png",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/.md",
@@ -235,11 +255,7 @@
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Networks Under Attack.md",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/프로토콜 계층과 그것의 서비스 모델.md",
-    "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet/Packet switching vs Circuit switching.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/HTTP.md",
-    "Custom SMT 개발기.md",
-    "운영체제/[컴퓨터 밑바닥의 비밀] 질문.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
     "spring/spring secutiry - SecurityFilterChain.canvas",
     "네트워크/Computer Networking A Top-Down Approach",
