@@ -11,21 +11,9 @@
             "id": "3eea94f85eed6106",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "네트워크/Computer Networking A Top-Down Approach/Transport Layer"
-              },
-              "icon": "lucide-file",
-              "title": "Transport Layer"
-            }
-          },
-          {
-            "id": "ed8002d8b4d8532b",
-            "type": "leaf",
-            "state": {
               "type": "markdown",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Connectionless Trnasport - UDP.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰할 수 있는 데이터 전송 원칙.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -40,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Connectionless Trnasport - UDP"
+              "title": "신뢰할 수 있는 데이터 전송 원칙"
             }
           }
         ]
@@ -109,7 +97,7 @@
             }
           },
           {
-            "id": "91ba5d9efc3b1a84",
+            "id": "110deebb112fff17",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -183,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰할 수 있는 데이터 전송 원칙.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Transport Layer"
+              "title": "Outline of 신뢰할 수 있는 데이터 전송 원칙"
             }
           },
           {
@@ -222,11 +210,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7802ea88dc68ed5d",
+  "active": "3eea94f85eed6106",
   "lastOpenFiles": [
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰할 수 있는 데이터 전송 원칙.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Connectionless Trnasport - UDP.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰할 수 있는 데이터 전송 원칙.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
     "img/udp_segment_structure.png",
     "Pasted image 20250826221931.png",
