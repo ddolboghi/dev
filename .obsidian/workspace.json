@@ -11,18 +11,6 @@
             "id": "3eea94f85eed6106",
             "type": "leaf",
             "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "네트워크/Computer Networking A Top-Down Approach/Transport Layer"
-              },
-              "icon": "lucide-file",
-              "title": "Transport Layer"
-            }
-          },
-          {
-            "id": "6a6ad5908ade387e",
-            "type": "leaf",
-            "state": {
               "type": "markdown",
               "state": {
                 "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
@@ -42,9 +30,32 @@
               "icon": "lucide-file",
               "title": "신뢰성 있는 데이터 전송의 원칙"
             }
+          },
+          {
+            "id": "6a6ad5908ade387e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/연결 지향 전송 - TCP.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "연결 지향 전송 - TCP"
+            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -185,13 +196,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 신뢰성 있는 데이터 전송의 원칙"
+              "title": "Outline"
             }
           },
           {
@@ -225,22 +235,22 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6a6ad5908ade387e",
+  "active": "38cc8360b41ca561",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/연결 지향 전송 - TCP.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "img/SR_operation.png",
     "img/rdt3d.png",
     "img/rdt3c.png",
     "img/rdt3b.png",
     "img/rdt3a.png",
     "img/rdt2.1_sender.png",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
     "base.base",
     "img/rdt2.2_receiver.png",
     "img/rdt2.2_sender.png",
     "img/rdt2.1_receiver.png",
     "img/rdt2.0_receiver.png",
-    "img/rdt2.0_sender.png",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Connectionless Trnasport - UDP.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
