@@ -47,14 +47,15 @@
     "//트러블슈팅",
     "//Javascript",
     "//Modern Java in Action",
-    "//Java deep dive",
     "//네트워크",
     "//네트워크/네트워크/Computer Networking A Top-Down Approach",
     "//Tags",
     "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Application",
     "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
     "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Computer Netowk",
-    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Transport Layer"
+    "//네트워크/네트워크/Computer Networking A Top-Down Approach/네트워크/Computer Networking A Top-Down Approach/Transport Layer",
+    "//Java deep dive",
+    "//python deep dive"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
