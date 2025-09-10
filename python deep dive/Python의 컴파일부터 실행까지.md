@@ -24,7 +24,7 @@ graph TD
 ```
 컴파일러는 .py 소스 코드를 읽어 어휘 분석, 구문 분석, AST(추상 구문 트리) 생성을 거쳐 PVM이 이해할 수 있는 바이트코드를 생성한다. compile.c에 구현되있다. .py 파일의 Python 코드가 컴파일된 바이트코드는 __pycache__ 디렉터리 안에 .pyc 파일로 저장된다.
 
-PVM은 스택 기반의 인터프리터다. PVM의 evaluation loop는 컴파일된 바이트코드를 한 줄씩 읽어들이고, 각 명령어(co_code)에 해당하는 C함수를 실행하여 프로그램을 구동시킨다. 바이트코드를 한 줄씩 실행하기 때문에 pipelining, optimazation이 줄 별로만 가능하다.
+**PVM은 스택 기반의 인터프리터**다. PVM의 evaluation loop는 컴파일된 바이트코드를 한 줄씩 읽어들이고, 각 명령어(co_code)에 해당하는 C함수를 실행하여 프로그램을 구동시킨다. 바이트코드를 한 줄씩 실행하기 때문에 pipelining, optimazation이 줄 별로만 가능하다.
 
 evaluation loop, 즉 바이트코드 인터프리터는 ceval.c에 구현되있는 거대한 switch문이다. switch문의 각 case는 바이트코드 명령어이며, 이 명령어로 어떤 동작을 수행하는지 적혀있다.
 
