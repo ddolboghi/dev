@@ -121,63 +121,47 @@ CPython은 일종의 선점형 멀티태스킹을 구현한다. `ceval` 루프�
 	- 만약 이 GIL 해제가 다른 스레드의 양보 요청(`_PY_GIL_DROP_REQUEST_BIT`) 때문에 발생했다면, 이 스레드는 자신이 GIL을 놓자마자 바로 다시 획득하는 불공정한 상황을 막아야 한다.
 	- 이를 위해 `gil->last_holder`가 자신에서 다른 스레드로 바뀔 때까지, 즉 다른 스레드가 GIL을 성공적으로 획득한 것을 확인할 때까지 `COND_WAIT(gil->switch_cond, gil->switch_mutex)`를 통해 잠시 대기한다.
 	- 다른 스레드가 `take_gil()`에 성공하면 `switch_cond`에 신호를 보내 대기 중인 이 스레드를 깨워준다.
-## GIL의 동시성 병목 현상
+# GIL의 동시성 병목 현상
 GIL이 멀티코어 CPU 환경에서 문제가 되는 이유는 명확하다. 한 번에 하나의 스레드만 파이썬 바이트코드를 실행할 수 있으므로, 듀얼 코어 머신에서 두 개의 CPU 집약적 스레드를 실행하더라도 특정 순간에는 오직 하나의 코어만이 파이썬 코드를 처리할 수 있다. 다른 코어는 파이썬 실행 관점에서는 유휴 상태로 남게 되며, 스레드들은 GIL을 얻기 위해 문맥 교환(context switching)을 반복하게 된다. 이로 인한 오버헤드 때문에 오히려 단일 스레드 버전보다 성능이 저하되는 경우가 많다.  
 
 이러한 GIL의 동작 방식은 파이썬 개발자가 동시성을 단일 개념이 아닌 두 개의 근본적으로 다른 모델로 생각하게 만든다. 첫 번째는 'I/O 집약적 동시성'으로, 대기 중에 GIL이 협조적으로 해제되므로 `threading` 모듈과 잘 작동한다. 두 번째는 'CPU 집약적 병렬성'으로, `threading` 모듈에 의해 오히려 방해받으며 `multiprocessing`과 같은 완전히 다른 아키텍처를 필요로 한다.
 
 CPython의 표준 라이브러리는 잠재적으로 블로킹(blocking)될 수 있는 시스템 콜을 호출하기 직전에 GIL을 해제하도록 설계되었다.
-
-### socket 모듈
-
+## socket 모듈
 이 원리를 가장 잘 보여주는 예는 `socket` 모듈의 C 구현이다.
 
-- 파이썬의 `socket` 메서드(예: `sock_connect`, `sock_send`, `sock_recv`)를 구현하는 C 함수들은 실제 블로킹 시스템 콜을 `sock_call_ex()`함수에서 소켓이 준비되면, `sock_func()`를 `Py_BEGIN_ALLOW_THREADS`와 `Py_END_ALLOW_THREADS` 매크로 쌍으로 감싸서 호출한다.
-
+파이썬의 `socket` 메서드(예: `sock_connect`, `sock_send`, `sock_recv`)를 구현하는 C 함수들은 실제 블로킹 시스템 콜을 `sock_call_ex()`함수에서 소켓이 준비되면, `sock_func()`를 `Py_BEGIN_ALLOW_THREADS`와 `Py_END_ALLOW_THREADS` 매크로 쌍으로 감싸서 호출한다.
 ```C
 while (1) {
     Py_BEGIN_ALLOW_THREADS
     res = sock_func(s, data);
     Py_END_ALLOW_THREADS
 ```
-
 - `Py_BEGIN_ALLOW_THREADS` 매크로는 `PyEval_SaveThread()` 함수로 확장된다. 이 함수는 현재 스레드의 상태를 저장하고 `drop_gil()`을 호출하여 GIL을 해제한다. 이를 통해 다른 파이썬 스레드가 깨어나 GIL을 획득하고 CPU에서 실행될 수 있다.
 - `Py_END_ALLOW_THREADS` 매크로는 `PyEval_RestoreThread()` 함수로 확장되며, 이 함수는 `take_gil()`을 호출하여 잠금을 다시 획득한 후 파이썬 코드로 복귀한다.
 
 이 메커니즘 덕분에 여러 I/O 집약적 스레드가 동시에 "대기" 상태에 있을 수 있다. 총 대기 시간이 중첩되므로 상당한 성능 향상을 가져온다. 비록 특정 순간에는 단 하나의 스레드만이 파이썬 코드를 실행하지만, 프로그램은 마치 병렬로 실행되는 것처럼 보인다.
 
 ### 스레드가 blocking되는 상황
-
 스레드가 블로킹되는 경우는 소켓에 타임아웃이 설정되어 있지 않을 때 (`socket.settimeout(None)` 또는 `socket.setblocking(True)`) 다.
-
 `sock_call()` 함수는 내부적으로 `sock_call_ex()`를 호출한다. 이때 넘겨준 timeout 값이 음수이므로 `internal_select()`를 통한 사전 상태 확인 없이 바로 I/O 시스템 콜(예: `recv()`, `send()`, `accept()`)을 실행한다.
 
 동작 원리:
-
 1. `sock_call()`이 호출되면, GIL을 해제하는 `Py_BEGIN_ALLOW_THREADS` 매크로가 실행된다.
 2. 이후 운영체제의 `recv()`나 `send()` 같은 블로킹 함수가 직접 호출된다.
 3. 이 시스템 콜은 데이터를 모두 받거나 보낼 때까지, 또는 연결이 끊어지는 등의 이벤트가 발생할 때까지 반환되지 않는다. 이 시간 동안 해당 스레드는 운영체제에 의해 대기(sleep) 상태가 된다.
 4. 작업이 완료되면 시스템 콜이 반환되고, `Py_END_ALLOW_THREADS` 매크로를 통해 스레드는 다시 GIL을 획득하여 작업을 이어간다.
-
 ### 스레드가 Non-blocking되는 상황
-
 스레드가 논블로킹되는 경우는 소켓에 타임아웃이 0 또는 양수로 설정되었을 때다. 이 경우 소켓의 파일 디스크립터(FD)는 `internal_setblocking(s, 0)`을 통해 논블로킹 모드로 설정된다.
 
-  
-
-상황 1: `socket.settimeout(0)` 또는 `socket.setblocking(False)`
-
+#### 상황 1: `socket.settimeout(0)` 또는 `socket.setblocking(False)`
 - 동작 원리: I/O 함수가 호출되면, 데이터를 즉시 처리할 수 있는지 딱 한 번만 확인한다.
 - 만약 읽을 데이터가 없거나, 보낼 버퍼가 꽉 차 있다면, 시스템 콜은 대기하지 않고 즉시 `-1`을 반환하며 에러 코드(주로 `EWOULDBLOCK` 또는 `EAGAIN`)를 설정한다.
 - CPython은 이 에러를 `BlockingIOError` 예외로 변환하여 발생시킨다. 스레드는 전혀 대기하지 않는다.
 
-  
-
-상황 2: `socket.settimeout(float > 0)`
-
-- `sock_call_ex()` 함수가 핵심적인 역할을 한다.
+#### 상황 2: `socket.settimeout(float > 0)`
+`sock_call_ex()` 함수가 핵심적인 역할을 한다.
 - 동작 원리:
-
 1. `sock_call_ex()`는 실제 I/O를 시도하기 전에 먼저 `internal_select()` 함수를 호출한다. (`internal_select`는 내부적으로 `poll()` 또는 `select()` 시스템 콜을 사용한다.)
 2. `internal_select()`는 지정된 타임아웃 시간 동안 소켓이 읽기 또는 쓰기 가능한 상태가 될 때까지 스레드를 블로킹한다. 즉, 대기는 I/O 작업 자체가 아닌 `select()`/`poll()`에서 발생한다.
 3. 만약 타임아웃 시간 내에 소켓이 준비되면, `internal_select()`가 반환되고 실제 I/O 시스템 콜 (`recv()`, `send()`)이 호출된다. 이때는 이미 데이터가 준비된 상태이므로 작업이 즉시 완료될 가능성이 높다.
@@ -186,11 +170,10 @@ while (1) {
 요약하자면, 타임아웃이 설정된 소켓은 논블로킹 모드로 동작하지만, `select()`나 `poll()`을 통해 제한된 시간 동안만 블로킹되며, 이를 통해 타임아웃 기능을 구현하고 스레드가 무한정 대기하는 것을 방지한다.
 
   
-
+### CPython socket 모듈의 기본 동작
 CPython의 소켓은 기본적으로 블로킹(blocking) 네트워크 I/O 방식으로 동작한다.
 
 `socket` 모듈이 처음 임포트될 때 실행되는 `socket_exec` 함수에서 모듈 전체에 적용될 기본 타임아웃(`defaulttimeout`)을 -1로 설정한다.
-
 ```C
 // in socket_exec()
 static int
@@ -205,10 +188,7 @@ socket_exec(PyObject *m)
 }
 ```
 
-  
-
 `socket()`을 호출하여 새 객체를 만들면 `init_sockobject` 함수가 호출된다. 이 함수는 위에서 설정한 모듈의 기본 타임아웃 값을 새로 만든 객체의 `sock_timeout` 멤버 변수에 복사한다.
-
 ```C
 // in init_sockobject()
 static int
@@ -237,6 +217,5 @@ init_sockobject(socket_state *state, PySocketSockObject *s,
 ```
 
 따라서 Non-blocking 방식으로 동작시키려면 개발자가 `settimeout()`이나 `setblocking()` 같은 메서드로 따로 설정을 변경해야 한다.
-
 - Blocking I/O: 스레드는 개별 I/O 작업(`recv()`, `send()`) 에서 블로킹된다. 소켓 하나를 기다리는 동안 다른 일은 전혀 할 수 없다.
 - Non-blocking I/O (+ Multiplexing): 스레드는 여러 I/O 이벤트를 기다리는 단일 지점(`select()`, `poll()`) 에서만 블로킹된다. 이를 통해 단일 스레드로 수많은 소켓의 I/O를 효율적으로 동시에 처리할 수 있다. `asyncio`와 같은 비동기 라이브러리들이 바로 이 원리를 사용한다.

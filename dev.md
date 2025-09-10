@@ -21,6 +21,8 @@ Created: 2023-10-19
 [[Typescript]]
 [[React]]
 [[Next.js]]
+[[Java deep dive]]
+[[python deep dive]]
 [[Docker]]
 [[MSA]]
 [[MongoDB]]

@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "6a6ad5908ade387e",
+            "id": "0810eee1cd1393cd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "python deep dive/Global Interpreter Lock.md",
+                "file": "python deep dive/Async.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Global Interpreter Lock"
+              "title": "Async"
             }
           }
         ]
@@ -97,7 +97,7 @@
             }
           },
           {
-            "id": "91ddc7bb86228aad",
+            "id": "825f25fc9bb1fd7d",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -171,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "python deep dive/Global Interpreter Lock.md",
+                "file": "python deep dive/Async.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Global Interpreter Lock"
+              "title": "Outline of Async"
             }
           },
           {
@@ -210,11 +210,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6a6ad5908ade387e",
+  "active": "0810eee1cd1393cd",
   "lastOpenFiles": [
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
-    "python deep dive/Global Interpreter Lock.md",
     "python deep dive/python deep dive.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
+    "python deep dive/Async.md",
+    "dev.md",
+    "python deep dive/Global Interpreter Lock.md",
     "python deep dive/Python의 컴파일부터 실행까지.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/연결 지향 전송 - TCP.md",
     "python deep dive",
@@ -252,8 +254,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Socket Programming.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Video Streaming and Content Distribution Networks.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Peer-to-Peer File Distribution.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/.md",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
     "네트워크/Computer Networking A Top-Down Approach/Computer Networks and the Internet",
