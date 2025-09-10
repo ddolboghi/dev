@@ -1,8 +1,8 @@
-python 3.13,  asyncio 기준 설명
-
-`asyncio`의 이벤트 루프, 태스크(Task), 퓨처(Future)와 같은 핵심 구성 요소들이 내부적으로 어떻게 상호작용하여 협력적 멀티태스킹(Cooperative Multitasking)을 구현하는지 설명한다.
+---
+aliases:
+  - async/await
+---
 단순한 제너레이터(Generator)에서 시작하여, 양방향 통신 채널로의 발전, 그리고 `yield from`을 통한 위임(Delegation) 메커니즘의 도입 과정을 추적한다. 이를 통해 `await` 키워드가 완전히 새로운 개념이 아니라, 제너레이터 기반 코루틴의 실행 모델을 계승하고 구문적으로 명확화한 결과물임을 바이트코드 수준에서 증명한다.
-나아가 `asyncio`의 이벤트 루프가 운영체제의 I/O 멀티플렉싱 기능을 어떻게 활용하는지, 그리고 `Task`와 `Future` 객체가 콜백 체인을 통해 어떻게 코루틴의 실행을 조율하는지를 `Lib/asyncio` 디렉터리의 소스 코드를 중심으로 상세히 해부한다.
 # Python 코루틴의 기원: 제너레이터와 위임
 함수 정의 내에 `yield` 키워드가 포함되면, 그 함수는 더 이상 일반적인 서브루틴(Subroutine)이 아니라 제너레이터 함수(Generator Function)로 취급된다. 제너레이터 함수를 호출하면 함수 본문이 즉시 실행되지 않고, 대신 제너레이터 객체(Generator Object)라는 특별한 종류의 이터레이터를 반환한다.
 ## Generator
