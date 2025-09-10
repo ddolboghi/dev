@@ -32,31 +32,7 @@
             }
           },
           {
-            "id": "7af3547c3b492dcd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "python deep dive/Global Interpreter Lock.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Global Interpreter Lock"
-            }
-          },
-          {
-            "id": "7469f7b90026e5ed",
+            "id": "36e04d04b8e0d20d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -79,8 +55,7 @@
               "title": "Python의 컴파일부터 실행까지"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -220,13 +195,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "python deep dive/Python의 컴파일부터 실행까지.md",
+                "file": "python deep dive/Async.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Python의 컴파일부터 실행까지"
+              "title": "Outline of Async"
             }
           },
           {
@@ -259,11 +234,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7469f7b90026e5ed",
+  "active": "0810eee1cd1393cd",
   "lastOpenFiles": [
-    "python deep dive/Global Interpreter Lock.md",
     "python deep dive/Python의 컴파일부터 실행까지.md",
     "python deep dive/Async.md",
+    "python deep dive/Global Interpreter Lock.md",
     "python deep dive/python deep dive.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "dev.md",

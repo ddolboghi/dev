@@ -114,6 +114,7 @@ if __name__ == "__main__":
 
 `Python/ceval.c` 파일의 `PyEval_EvalFrameEx` 함수는 파이썬 바이트코드를 하나씩 해석하고 실행하는 역할을 한다.
 `yield from` 표현식은 `YIELD_FROM`이라는 바이트코드 옵코드(opcode)로 컴파일된다.
+바이트코드는 스택 기반 인터프리터인 PVM에서 실행된다.
 `PyEval_EvalFrameEx` 내의 `YIELD_FROM` 옵코드 처리 로직을 분석하면 다음과 같은 동작을 확인할 수 있다:
 1. 스택의 최상단(TOS, Top of Stack)에서 위임할 이터레이터(하위 제너레이터)를 가져온다.
 2. 스택의 두 번째 값(TOS1)을 가져와 하위 제너레이터의 `.send()` 메서드로 전달한다. (첫 시작 시에는 `None`이 전달된다.)
@@ -126,12 +127,17 @@ if __name__ == "__main__":
 
 `yield`는 중단점을 제공했고, `.send()`는 양방향 통신을 가능하게 했으며, `yield from`은 조합과 위임을 통해 복잡성을 해결했다.
 
-## async/await
-
+# async/await
 제너레이터 기반 코루틴과 `yield from`은 Python에서 비동기 프로그래밍을 가능하게 했지만, 동일한 `yield` 키워드가 이터레이션을 위한 데이터 생성과 비동기 제어 흐름을 위한 중단 신호라는 두 가지 상이한 목적으로 사용되어 코드의 가독성을 해치고 초보자에게 혼란을 야기했다.
-
-### Generator와 Coroutine 분리
-
+## Generator와 Coroutine 분리
 `async def`로 선언된 함수는 '네이티브 코루틴 함수'로 정의된다. 이 함수는 호출 시 항상 코루틴 객체를 반환하며, 내부에 `await` 표현식이 없더라도 코루틴으로 취급된다.
 
 `async def` 함수 내에서 `yield`나 `yield from`을 사용하면 `SyntaxError`가 발생한다. 이로써 개발자는 함수의 시그니처만 보고도 이 함수가 데이터를 생성하는 제너레이터인지, 아니면 비동기 작업을 수행하는 코루틴인지를 명확하게 구분할 수 있게 되었다.
+## `await`는 특화된 `yield from`이다
+`async`/`await`는 기존 제너레이터 실행 모델 위에 구축된 정교한 문법적 추상화 계층이다.
+
+| 제너레이터 기반 코루틴 (`yield from`)                                                                                                                      | 네이티브 코루틴 (`await`)                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `python import types @types.coroutine def old_coro(awaitable): val = yield from awaitable return val`                                            | `python async def new_coro(awaitable): val = await awaitable return val`                                                                   |
+| **`dis.dis(old_coro)` 출력 (Python 3.7 기준)**                                                                                                       | **`dis.dis(new_coro)` 출력 (Python 3.7 기준)**                                                                                                 |
+| 4 0 LOAD_FAST 0 (awaitable) 2 GET_YIELD_FROM_ITER 4 LOAD_CONST 0 (None) 6 YIELD_FROM 8 STORE_FAST 1 (val) 5 10 LOAD_FAST 1 (val) 12 RETURN_VALUE | 4 0 LOAD_FAST 0 (awaitable) 2 GET_AWAITABLE 4 LOAD_CONST 0 (None) 6 YIELD_FROM 8 STORE_FAST 1 (val) 5 10 LOAD_FAST 1 (val) 12 RETURN_VALUE |
