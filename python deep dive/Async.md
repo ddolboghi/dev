@@ -136,8 +136,18 @@ if __name__ == "__main__":
 ## `await`는 특화된 `yield from`이다
 `async`/`await`는 기존 제너레이터 실행 모델 위에 구축된 정교한 문법적 추상화 계층이다.
 
-| 제너레이터 기반 코루틴 (`yield from`)                                                                                                                      | 네이티브 코루틴 (`await`)                                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `python import types @types.coroutine def old_coro(awaitable): val = yield from awaitable return val`                                            | `python async def new_coro(awaitable): val = await awaitable return val`                                                                   |
-| **`dis.dis(old_coro)` 출력 (Python 3.7 기준)**                                                                                                       | **`dis.dis(new_coro)` 출력 (Python 3.7 기준)**                                                                                                 |
-| 4 0 LOAD_FAST 0 (awaitable) 2 GET_YIELD_FROM_ITER 4 LOAD_CONST 0 (None) 6 YIELD_FROM 8 STORE_FAST 1 (val) 5 10 LOAD_FAST 1 (val) 12 RETURN_VALUE | 4 0 LOAD_FAST 0 (awaitable) 2 GET_AWAITABLE 4 LOAD_CONST 0 (None) 6 YIELD_FROM 8 STORE_FAST 1 (val) 5 10 LOAD_FAST 1 (val) 12 RETURN_VALUE |
+| 제너레이터 기반 코루틴 (`yield from`)                                                                                                                                        | 네이티브 코루틴 (`await`)                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `python import types @types.coroutine def old_coro(awaitable): val = yield from awaitable return val`                                                              | `python async def new_coro(awaitable): val = await awaitable return val`                                                                                     |
+| `dis.dis(old_coro)` 출력 (Python 3.7 기준)                                                                                                                             | `dis.dis(new_coro)` 출력 (Python 3.7 기준)                                                                                                                       |
+| 4 0 LOAD_FAST 0 (awaitable)<br>2 GET_YIELD_FROM_ITER<br>4 LOAD_CONST 0 (None)<br>6 YIELD_FROM<br>8 STORE_FAST 1 (val) 5<br>10 LOAD_FAST 1 (val)<br>12 RETURN_VALUE | 4 0 LOAD_FAST 0 (awaitable)<br>2 GET_AWAITABLE<br>4 LOAD_CONST 0 (None)<br>6 YIELD_FROM<br>8 STORE_FAST 1 (val) 5<br>10 LOAD_FAST 1 (val)<br>12 RETURN_VALUE |
+|                                                                                                                                                                    |                                                                                                                                                              |
+- 두 버전 모두 **코루틴의 실행을 중단하고 제어권을 위임하기 위해 `YIELD_FROM` 옵코드를 사용**한다. 이는 `await`가 `yield from`과 동일한 저수준 위임 메커니즘에 의존하고 있음을 보여준다.
+- 네이티브 코루틴의 바이트코드에는 `GET_AWAITABLE`이라는 옵코드를 사용하여 Awaitable 객체에만 `await`를 사용할 수 있도록 제한한다.
+## op_code: `GET_AWAITABLE`
+GET_AWAITABLE 옵코드는 스택 최상단에 있는 객체(피연산자)가 'Awaitable'인지 확인하고, 만약 그렇다면 `__await__` 메서드를 호출하여 반환된 이터레이터를 스택에 다시 푸시한다.
+
+PEP 492에 따르면, 객체가 어웨이터블이 되기 위한 조건은 다음 중 하나이다.
+- 네이티브 코루틴 객체일 경우
+- `@types.coroutine`으로 데코레이팅된 제너레이터 기반 코루틴 객체일 경우
+- 이터레이터를 반환하는 `__await__` 매직 메서드를 가진 객체일 경우
