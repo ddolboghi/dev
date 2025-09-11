@@ -17,7 +17,7 @@
 - `call_later(delay, callback, *args)`: 지정된 `delay` 초 후에 실행될 콜백을 스케줄링한다.  
 - `create_task(coro)`: 코루틴을 `Task` 객체로 감싸고 실행을 스케줄링한다.
 
-이러한 추상 메서드들은 `asyncio`의 고수준 API가 특정 이벤트 루프 구현(예: 유닉스의 `SelectorEventLoop` 또는 윈도우의 `ProactorEventLoop`)에 종속되지 않도록 보장한다.
+`BaseEventLoop 클래스는 AbstractEventLoop` 추상 클래스를 상속받고, 특정 이벤트 루프 구현(예: 유닉스의 `SelectorEventLoop` 또는 윈도우의 `ProactorEventLoop`)들은 `BaseEventLoop`를 상속받아, `asyncio`의 고수준 API가 이런 특정 이벤트 루프 구현에 종속되지 않도록 보장한다.
 ## 구체적인 구현: SelectorEventLoop
 유닉스 계열 운영체제(리눅스, macOS 등)에서 `asyncio`의 기본 이벤트 루프는 `Lib/asyncio/selector_events.py`에 구현된 `SelectorEventLoop`이다. 이 클래스의 이름에서 알 수 있듯이, Python의 표준 라이브러리인 `selectors` 모듈을 사용한다.
 
