@@ -42,9 +42,33 @@
               "icon": "lucide-file",
               "title": "asyncio"
             }
+          },
+          {
+            "id": "4799c681c81a097e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "python deep dive/CPython ceval.c 분석.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "CPython ceval.c 분석"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -184,13 +208,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "python deep dive/asyncio.md",
+                "file": "python deep dive/CPython ceval.c 분석.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of asyncio"
+              "title": "Outline of CPython ceval.c 분석"
             }
           },
           {
@@ -223,11 +247,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e42dc24b7d386970",
+  "active": "4799c681c81a097e",
   "lastOpenFiles": [
+    "python deep dive/asyncio.md",
     "python deep dive/python deep dive.md",
     "python deep dive/Python Coroutine.md",
-    "python deep dive/asyncio.md",
     "python deep dive/Python의 컴파일부터 실행까지.md",
     "python deep dive/Global Interpreter Lock.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
