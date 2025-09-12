@@ -43,6 +43,7 @@ def run_forever(self):
 ```
 
 실질적인 모든 작업은 `_run_once()` 메서드 안에서 이루어진다. 이 메서드는 이벤트 루프의 한 '틱(tick)' 또는 '반복(iteration)'에 해당한다.
+
 1. 타임아웃 계산
 ```Python
 timeout = None
@@ -56,25 +57,19 @@ elif self._scheduled:
     elif timeout < 0:
         timeout = 0
 ```
-
 먼저 스케줄링된 작업들 중 가장 가까운 미래에 실행될 작업의 시간을 확인하여 `select()` 호출의 `timeout` 값을 계산한다. 만약 즉시 실행해야 할 작업(`_ready` 큐)이 있거나 I/O 대기 작업이 없다면 `timeout`은 0이 된다.
 
-1. I/O 이벤트 대기 (블로킹)
-
+2. I/O 이벤트 대기 (블로킹)
 ```Python
 event_list = self._selector.select(timeout)
 self._process_events(event_list)
 ```
-
 `event_list = self._selector.select(timeout)`를 호출한다. 이것이 이벤트 루프 전체에서 유일하게 블로킹될 수 있는 지점이다. 이 호출은 운영체제 커널에 제어권을 넘긴다. 프로세스는 다음 두 가지 조건 중 하나가 충족될 때까지 휴면 상태(sleep)에 들어간다:
-
 - 지정된 `timeout`이 만료될 때
 - 셀렉터에 등록된 파일 디스크립터 중 하나에서 I/O 이벤트(예: 소켓에 데이터 도착)가 발생할 때
-
 이 대기 시간 동안 Python 프로세스는 CPU를 전혀 소모하지 않는다.
 
-1. 준비된 콜백 처리
-
+3. 준비된 콜백 처리
 ```Python
 end_time = self.time() + self._clock_resolution # 시스템이 정한 고정 기준점부터 경과된 시간 + 최소 단위(정밀도)
 while self._scheduled:
@@ -85,11 +80,9 @@ while self._scheduled:
     handle._scheduled = False
     self._ready.append(handle)
 ```
-
 `select()`가 반환되면, `event_list`에는 I/O 준비가 완료된 파일 디스크립터와 해당 이벤트 정보가 담겨 있다. 이 리스트를 순회하며, 각 파일 디스크립터에 연결된 핸들을 `self._ready` 큐로 옮긴다.
 
-1. 콜백 실행:
-
+4. 콜백 실행:
 ```Python
 ntodo = len(self._ready)
 for i in range(ntodo):
@@ -111,41 +104,29 @@ for i in range(ntodo):
         handle._run()
 handle = None  # Needed to break cycles when an exception occurs.
 ```
-
 `_ready` 큐에 있는 모든 핸들(I/O 이벤트로 인해 준비된 것, `call_soon`으로 예약된 것, 타이머 만료로 준비된 것 모두 포함)을 순회하며 하나씩 실행한다. 이 콜백들이 바로 코루틴의 실행을 한 단계 진행시키거나(`Task.__step`), 중단된 태스크를 깨우는(`Task.__wakeup`) 역할을 한다.
 
 이 구조는 이벤트 루프가 코루틴이나 `await`의 존재를 직접 알지 못하는, 상대적으로 수동적인 I/O 멀티플렉서이자 콜백 실행기임을 보여준다. 루프의 역할은 운영체제로부터 I/O 이벤트나 타이머 이벤트를 기다렸다가, 그 이벤트에 등록된 콜백을 실행시켜주는 것뿐이다.
 
-이러한 아키텍처는 `asyncio`가 I/O 바운드 작업에 왜 그토록 효율적인지를 설명해준다. 애플리케이션은 대부분의 시간을 OS 커널의 `select` 또는 `epoll` 호출 내부에서 CPU를 전혀 사용하지 않고 대기 상태로 보낸다. 실제 처리할 작업(I/O 준비 완료)이 있을 때만 깨어나 필요한 만큼만 작업을 수행하고 다시 대기 상태로 돌아간다. 이는 유휴 상태의 스레드조차도 컨텍스트 스위칭 오버헤드를 유발하는 스레딩 모델과 극명한 대조를 이룬다.
+애플리케이션은 대부분의 시간을 OS 커널의 `select` 또는 `epoll` 호출 내부에서 CPU를 전혀 사용하지 않고 대기 상태로 보낸다. 실제 처리할 작업(I/O 준비 완료)이 있을 때만 깨어나 필요한 만큼만 작업을 수행하고 다시 대기 상태로 돌아간다. 따라서 `asyncio`는 I/O 바운드 작업을 효율적으로 수행할 수 있다. 이는 유휴 상태의 스레드조차도 컨텍스트 스위칭 오버헤드를 유발하는 스레딩 모델과 극명한 대조를 이룬다.
 
-## 동시성 조율: `Future`& `Task`
-
+# 동시성 조율: `Future`& `Task`
 이 두 객체는 `asyncio`에서 협력적 멀티태스킹을 구현하는 가장 핵심적인 메커니즘이다.
-
 코루틴을 중단하고 재개하는 로직은 이벤트 루프 자체가 아니라, `Task` 객체에 내장되어 있다.
-
-### `Future`
-
-`Lib/asyncio/futures.py`에 정의된 `Future` 클래스는 `asyncio`의 가장 기본적인 어웨이터블 프리미티브이다.
-
+## `Future`
+Lib/asyncio/futures.py에 정의된 `Future` 클래스는 `asyncio`의 가장 기본적인 어웨이터블 프리미티브이다.
 `Future`는 아직 사용할 수 없는 미래의 결과값을 나타내는 'placeholder' 객체다. 이는 콜백 기반의 저수준 코드(예: 네트워크 프로토콜 구현)와 `async`/`await`를 사용하는 고수준 코드를 연결하는 다리 역할을 한다.
-
 `Future` 객체는 내부적으로 간단한 상태 멤버 변수인 `_state`를 가지고 있으며, 주요 상태는 다음과 같다:
-
 - `PENDING`: 아직 결과가 설정되지 않은 초기 상태.
 - `CANCELLED`: `cancel()` 메서드에 의해 작업이 취소된 상태.
 - `FINISHED`: 결과 또는 예외가 설정되어 작업이 완료된 상태.
 
 `Future`의 동작을 이해하기 위해 핵심 메서드들은 다음과 같다:
-
 - `set_result(result)`: 이 메서드는 `Future`의 상태를 `PENDING`에서 `FINISHED`로 바꾸고, 주어진 `result`를 내부적으로 저장한다.
-
-가장 중요한 동작은 `__schedule_callbacks()`를 호출하여 `Future`에 등록된 모든 '완료 콜백'을 순회하며 `loop.call_soon(callback, ...)`을 통해 이벤트 루프에서 실행되도록 스케줄링하는 것이다. 이것이 바로 비동기 작업의 완료를 기다리는 다른 부분에 알림을 보내는 메커니즘이다.
-
+  가장 중요한 동작은 `__schedule_callbacks()`를 호출하여 `Future`에 등록된 모든 '완료 콜백'을 순회하며 `loop.call_soon(callback, ...)`을 통해 이벤트 루프에서 실행되도록 스케줄링하는 것이다. 이것이 바로 비동기 작업의 완료를 기다리는 다른 부분에 알림을 보내는 메커니즘이다.
 - `set_exception(exception)`: `set_result()`와 유사하지만, 정상적인 결과 대신 예외를 설정한다.
 - `add_done_callback(callback)`: `Future`가 완료되었을 때 호출될 콜백 함수를 내부 리스트에 추가한다. 이는 `Future`의 완료 이벤트를 구독하는 방법이다. `Future` 상태가 `PENDING`이면 `loop.call_soon(callback, ...)`으로 콜백이 이벤트 루프에서 실행되도록 스케줄링 한다.
 - `__await__()`
-
 ```Python
 def __await__(self):
     if not self.done():
@@ -158,5 +139,5 @@ def __await__(self):
 
 __iter__ = __await__  # make compatible with 'yield from'.
 ```
-
 이 매직 메서드는 `Future`를 awaitable 객체로 만든다. 코루틴이 `Future`를 `await`할 때, 이 메서드가 호출된다. 만약 `Future`가 이미 `FINISHED` 상태라면 즉시 결과나 예외를 반환한다. 만약 아직 `PENDING` 상태라면, `Future` 객체 자신을 `yield`하여 `await`하는 코루틴의 실행을 중단시킨다.
+## `Task`
