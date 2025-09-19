@@ -249,6 +249,8 @@
   },
   "active": "4799c681c81a097e",
   "lastOpenFiles": [
+    "img/cpython_ceval.png",
+    "img/cpython_ceval.png.crdownload",
     "python deep dive/Python의 컴파일부터 실행까지.md",
     "python deep dive/Evaluation loop.md",
     "python deep dive/python deep dive.md",
@@ -289,7 +291,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/DNS(Domain Name System).md",
     "Untitled.canvas",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/SMTP(Simple Mail Transfer Protocol).md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
@@ -298,7 +299,6 @@
     "네트워크/Computer Networking A Top-Down Approach/Application Layer",
     "spring/spring secutiry - SecurityFilterChain.canvas",
     "네트워크/Computer Networking A Top-Down Approach",
-    "네트워크/Untitled.canvas",
-    "img/Tutorial-WebSocket-protocol-chart.jpg.crdownload"
+    "네트워크/Untitled.canvas"
   ]
 }
