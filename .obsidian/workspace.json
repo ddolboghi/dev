@@ -20,12 +20,12 @@
             }
           },
           {
-            "id": "e42dc24b7d386970",
+            "id": "0d1e70444b56a2a2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "python deep dive/asyncio.md",
+                "file": "python deep dive/Python의 컴파일부터 실행까지.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -40,7 +40,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "asyncio"
+              "title": "Python의 컴파일부터 실행까지"
             }
           },
           {
@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "python deep dive/CPython ceval.c 분석.md",
+                "file": "python deep dive/Evaluation loop.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -64,7 +64,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "CPython ceval.c 분석"
+              "title": "Evaluation loop"
             }
           }
         ],
@@ -208,13 +208,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "python deep dive/CPython ceval.c 분석.md",
+                "file": "python deep dive/Evaluation loop.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of CPython ceval.c 분석"
+              "title": "Outline of Evaluation loop"
             }
           },
           {
@@ -249,10 +249,11 @@
   },
   "active": "4799c681c81a097e",
   "lastOpenFiles": [
-    "python deep dive/asyncio.md",
-    "python deep dive/python deep dive.md",
-    "python deep dive/Python Coroutine.md",
     "python deep dive/Python의 컴파일부터 실행까지.md",
+    "python deep dive/Evaluation loop.md",
+    "python deep dive/python deep dive.md",
+    "python deep dive/asyncio.md",
+    "python deep dive/Python Coroutine.md",
     "python deep dive/Global Interpreter Lock.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "dev.md",
@@ -289,7 +290,6 @@
     "Untitled.canvas",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/Application Layer.md",
     "네트워크/Computer Networking A Top-Down Approach/Application Layer/SMTP(Simple Mail Transfer Protocol).md",
-    "네트워크/Computer Networking A Top-Down Approach/Application Layer/Socket Programming.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer",
     "네트워크/Computer Networking A Top-Down Approach/Network Layer(Data plane)",
     "네트워크/Computer Networking A Top-Down Approach/Computer Netowks and the Internet",
