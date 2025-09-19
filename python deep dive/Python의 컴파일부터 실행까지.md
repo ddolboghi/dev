@@ -31,7 +31,7 @@ evaluation loop, 즉 바이트코드 인터프리터는 ceval.c에 구현되있�
 # Evaluation loop 동작
 [[Evaluation loop]]
 
-### Pythonic 코드와 바이트코드 최적화
+# Pythonic 코드와 바이트코드 최적화
 코드를 Pythonic하게 작성하면 컴파일러는 전용 바이트코드 명령어로 컴파일하기 때문에 더 빠르고 효율적인 바이트코드를 생성하여 PVM의 실행 부담을 크게 줄일 수 있다.
 
 #### List Comprehension

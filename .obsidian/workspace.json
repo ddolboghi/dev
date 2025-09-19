@@ -20,30 +20,6 @@
             }
           },
           {
-            "id": "0d1e70444b56a2a2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "python deep dive/Python의 컴파일부터 실행까지.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Python의 컴파일부터 실행까지"
-            }
-          },
-          {
             "id": "4799c681c81a097e",
             "type": "leaf",
             "state": {
@@ -65,6 +41,30 @@
               },
               "icon": "lucide-file",
               "title": "Evaluation loop"
+            }
+          },
+          {
+            "id": "e3832aa314ad7f91",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "python deep dive/asyncio.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "asyncio"
             }
           }
         ],
@@ -208,13 +208,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "python deep dive/Evaluation loop.md",
+                "file": "python deep dive/asyncio.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Evaluation loop"
+              "title": "Outline of asyncio"
             }
           },
           {
@@ -247,13 +247,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4799c681c81a097e",
+  "active": "e3832aa314ad7f91",
   "lastOpenFiles": [
+    "python deep dive/python deep dive.md",
+    "python deep dive/Evaluation loop.md",
+    "python deep dive/Python의 컴파일부터 실행까지.md",
     "img/cpython_ceval.png",
     "img/cpython_ceval.png.crdownload",
-    "python deep dive/Python의 컴파일부터 실행까지.md",
-    "python deep dive/Evaluation loop.md",
-    "python deep dive/python deep dive.md",
     "python deep dive/asyncio.md",
     "python deep dive/Python Coroutine.md",
     "python deep dive/Global Interpreter Lock.md",
@@ -273,7 +273,6 @@
     "img/rdt2.2_receiver.png",
     "img/rdt2.2_sender.png",
     "img/rdt2.1_receiver.png",
-    "img/rdt2.0_receiver.png",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Connectionless Trnasport - UDP.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Multiplexing & Demultiplexing.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer 소개.md",
