@@ -20,12 +20,24 @@
             }
           },
           {
-            "id": "e3832aa314ad7f91",
+            "id": "356fe38843888bb8",
+            "type": "leaf",
+            "state": {
+              "type": "mk-space",
+              "state": {
+                "path": "네트워크/Computer Networking A Top-Down Approach/Transport Layer"
+              },
+              "icon": "lucide-file",
+              "title": "Transport Layer"
+            }
+          },
+          {
+            "id": "5800acd1909ef88c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "python deep dive/asyncio.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -40,11 +52,35 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "asyncio"
+              "title": "신뢰성 있는 데이터 전송의 원칙"
+            }
+          },
+          {
+            "id": "37dbe268350e8cd0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/연결 지향 전송 - TCP.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "연결 지향 전송 - TCP"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -184,13 +220,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "python deep dive/asyncio.md",
+                "file": "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of asyncio"
+              "title": "Outline of 신뢰성 있는 데이터 전송의 원칙"
             }
           },
           {
@@ -223,8 +259,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e3832aa314ad7f91",
+  "active": "5800acd1909ef88c",
   "lastOpenFiles": [
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/연결 지향 전송 - TCP.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
+    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "python deep dive/python deep dive.md",
     "python deep dive/asyncio.md",
     "python deep dive/Evaluation loop.md",
@@ -233,12 +272,9 @@
     "img/cpython_ceval.png.crdownload",
     "python deep dive/Python Coroutine.md",
     "python deep dive/Global Interpreter Lock.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",
     "dev.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/연결 지향 전송 - TCP.md",
     "python deep dive",
     "Untitled.md",
-    "네트워크/Computer Networking A Top-Down Approach/Transport Layer/신뢰성 있는 데이터 전송의 원칙.md",
     "img/SR_operation.png",
     "img/rdt3d.png",
     "img/rdt3c.png",
