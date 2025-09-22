@@ -20,30 +20,6 @@
             }
           },
           {
-            "id": "4799c681c81a097e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "python deep dive/Evaluation loop.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "Evaluation loop"
-            }
-          },
-          {
             "id": "e3832aa314ad7f91",
             "type": "leaf",
             "state": {
@@ -68,7 +44,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -134,7 +110,7 @@
             }
           },
           {
-            "id": "c52e0c9bde526323",
+            "id": "7a92ea2cce6e2009",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -250,11 +226,11 @@
   "active": "e3832aa314ad7f91",
   "lastOpenFiles": [
     "python deep dive/python deep dive.md",
+    "python deep dive/asyncio.md",
     "python deep dive/Evaluation loop.md",
     "python deep dive/Python의 컴파일부터 실행까지.md",
     "img/cpython_ceval.png",
     "img/cpython_ceval.png.crdownload",
-    "python deep dive/asyncio.md",
     "python deep dive/Python Coroutine.md",
     "python deep dive/Global Interpreter Lock.md",
     "네트워크/Computer Networking A Top-Down Approach/Transport Layer/Transport Layer.md",

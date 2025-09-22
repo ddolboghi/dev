@@ -141,6 +141,9 @@ __iter__ = __await__  # make compatible with 'yield from'.
 ```
 이 매직 메서드는 `Future`를 awaitable 객체로 만든다. 코루틴이 `Future`를 `await`할 때, 이 메서드가 호출된다. 만약 `Future`가 이미 `FINISHED` 상태라면 즉시 결과나 예외를 반환한다. 만약 아직 `PENDING` 상태라면, `Future` 객체 자신을 `yield`하여 `await`하는 코루틴의 실행을 중단시킨다.
 ## `Task`
+
+**여기서부턴 검증 필요**
+
 `Lib/asyncio/tasks.py`에 정의된 `Task` 클래스는 `Future`를 상속받는 특별한 하위 클래스다.
 
 `Task`의 목적은 단 하나의 코루틴을 감싸고, 그 코루틴의 실행을 시작부터 끝까지 책임지고 관리하는 것이다.
