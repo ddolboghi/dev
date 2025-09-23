@@ -2,4 +2,4 @@
 [[Multiplexing & Demultiplexing]]
 [[Connectionless Trnasport - UDP]]
 [[신뢰성 있는 데이터 전송의 원칙]]
-[[연결 지향 전송 - TCP]]
+[[TCP의 연결 지향 전송]]
