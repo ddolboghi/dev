@@ -25,9 +25,12 @@ TCP는 데이터를 구조화되지 않은 순서있는 **바이트 스트림**�
 위 그림에서 500000byte 파일을 MSS 1000byte로 전송할때, 첫 번째 세그먼트의 sequence number는 0, 두 번째는 1000, 세 번째는 2000이 된다.
 
 **ACK number(확인 응답 번호)는 수신을 기대하는 다음 바이트의 sequence number**다.
-호스트 A가 호스트 B로부터 데이터를 수신할때, A가 B에게 보내는 세그먼트의 ACK number(확인 응답 번호)는 A가 B로부터 수신을 기대하는 다음 바이트의 sequence number다.
 예를 들어, A가 B로부터 0부터 535번 바이트까지 모두 수신했다면, A는 B에게 보내는 세그먼트의 ACK number에 536을 넣는다.
-
+![[simple_telnet_TCP.png | 500]]
+위 그림은 Telnet의 TCP 동작이다. ACK number가 어떻게 다음 sequence number 값이 되는지만 살펴보면 된다.
+1. A의 초기 sequence number는 42고, 서버로부터 받은 데이터가 없으므로 sequence number는 42, ACK number는 79로 보낸다.
+2. B는 A에게 다음에 받을 sequence number값을 ACK number에 넣고, sequence number는 초기 값인 79를 넣어 보낸다.
+3. A는 sequence number 79를 받고 다음에 받은 sequence number인 80을 ACK number에 넣는다.
 세그먼트에 데이터와 함께 확인 응답을 함께 보내는 것을 piggybacked이라고 한다.
 ### 누적 확인 응답
 TCP는 스트림에서 **첫 번째로 누락된 바이트까지만 확인 응답**한다.
