@@ -20,5 +20,7 @@
 TCP의 타임아웃 간격은 다음 공식으로 설정된다.
 >$TimeoutInterval = EstimatedRTT + 4 \cdot DevRTT$
 
-타임아웃 값은 EstimatedRTT 값보다 크거나 같아야 한다. 
-- SampleRTT 값의 변동이 클수록 
+- 타임아웃 값은 EstimatedRTT 값보다 크거나 같아야 한다. 하지만 너무 크면 세그먼트가 손실됐을때 빠르게 재전송하지 못한다. 그래서 약간의 여분을 더해준다.
+- SampleRTT 값의 변동이 클수록 DevRTT 값도 커지므로 이 여분 값도 증가한다.
+- 권장 초기 TimeoutInterval 값은 1초다.
+- 타임아웃이 발생하면 다음 세그먼트에 대한 조급한 타임아웃을 피하기 위해 TimeoutInterval 값은 두 배가 된다. 그러나 새로운 세그먼트가 수신되고 EstimatedRTT가 갱신되면 위 공식을 사용하여 다시 계산된다.
