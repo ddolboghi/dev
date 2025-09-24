@@ -7,5 +7,11 @@
 ## **EstimatedRTT**
 - EstimatedRTT는 SampleRTT 값들의 평균이다.
 - SampleRTT 값은 네트워크 혼잡 등으로 인해 변동이 심할 수 있으므로 평균값을 사용한다.
-- $EstimatedRTT = (1 - \alpha) \cdot EstimatedRTT + \alpha \cdot SampleRTT$
-- 위 공식은 지수 가중 이동 평균 방식으로, 최근 샘플에 더 큰 가중치를 둔다. ㄱ
+>$EstimatedRTT = (1 - \alpha) \cdot EstimatedRTT + \alpha \cdot SampleRTT$
+- 위 공식은 지수 가중 이동 평균 방식으로, **최근 샘플에 더 큰 가중치**를 둔다. 권장 $\alpha$ 값은 0.125다.
+## **DevRTT**
+- DevRTT는 SampleRTT가 EstimatedRTT로부터 얼마나 벗어나는지를 추정한 값이다. RTT의 변동성을 측정하기 위해 사용한다.
+>$DevRTT = (1 - \beta) \cdot DevRTT + \beta \cdot | SampleRTT - EstimatedRTT |$
+- 위 공식에서 권장되는 $\beta$ 값은 0.25다.
+- SampleRTT 값의 변동이 작으면 DevRTT는 작아지고, 변동이 크면 DevRTT는 커진다.
+# 재전송 타임아웃 간격 설정 및 관리
