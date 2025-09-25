@@ -5,3 +5,5 @@
 [[TCP 연결의 특징]]
 [[TCP 세그먼트 구조]]
 [[TCP의 Round-Trip 시간 추정과 타임아웃]]
+[[TCP의 Flow Control]]
+[[TCP의 연결 관리]]
