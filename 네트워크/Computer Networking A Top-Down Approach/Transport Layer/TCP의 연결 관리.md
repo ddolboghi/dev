@@ -32,6 +32,4 @@ SYN 플러드 공격과 같은 많은 네트워크 공격이 TCP 연결 관리�
 # TCP 상태 전이
 TCP 연결이 지속되는 동안, 각 호스트의 TCP 프로토콜은 여러 TCP 상태를 거친다.
 ## 클라이언트 측 상태 전이
-1. `CLOSED`
-2. `SYN_SENT`: SYN 전송 후
-3. `ES`
+![[client_TCP_state.png | 600]]
