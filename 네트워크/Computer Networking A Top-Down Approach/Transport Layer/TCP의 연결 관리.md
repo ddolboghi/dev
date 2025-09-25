@@ -43,4 +43,9 @@ TCP 연결이 지속되는 동안, 각 호스트의 TCP 프로토콜은 여러 T
 ![[server_TCP_state.png | 600]]
 위 그림은 클라이언트가 TCP 연결을 해제한다고 가정한다.
 
-`CLOSED` --연결 대기--> `SYN_RCVD`
+`CLOSED` --연결 대기--> `LISTEN` --SYN 수신 후 SYNACK 전송--> `SYN_RCVD` --ACK 수신--> `ESTABLISHED` --연결 성공 / 연결 해제: FIN 수신 후 ACK 전송--> `CLOSE_WAIT` --FIN 전송--> `LAST_ACK` --ACK 수신--> `CLOSED`
+
+# 비정상적인 상황 처리
+만약 한 호스트가 진행 중인 소켓과 일치하지 않는 포트 번호나 IP 주소를 가진 TCP 세그먼트를 수신하면, 그 호스트는 송신자에게 **RST 세그먼트(리셋 세그먼트)** 를 보낸다. 
+RST 세그먼트는 **RST 플래그 비트가 1**로 설정되어 있으며, "해당 세그먼트에 대한 소켓이 없으니 재전송하지 말라"는 의미를 전달한다.
+# SYN Flood attack
