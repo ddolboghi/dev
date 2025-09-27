@@ -395,19 +395,16 @@ INTERPRETER_EXIT 명령어는 다음 순서로 동작한다.
 참고: [The Design & Implementation of the CPython Virtual Machine](https://blog.codingconfessions.com/i/143567425/the-loop-macros)
 
 ## Pythonic 코드와 바이트코드 최적화
-
 코드를 Pythonic하게 작성하면 컴파일러는 전용 바이트코드 명령어로 컴파일하기 때문에 더 빠르고 효율적인 바이트코드를 생성하여 PVM의 실행 부담을 크게 줄일 수 있다.
 
 ### List Comprehension
-
 ```Python
 squares = []
 for i in range(10):
     squares.append(i * i)
 ```
 
-이 코드는 다음과 같은 바이트코드(개념적으로) 생성한다.
-
+이 코드는 다음과 같은 바이트코드(개념적으로) 생성한다:
 1. 빈 리스트 squares를 만든다.
 2. 루프를 시작한다.
 3. 매 반복마다:
@@ -419,14 +416,10 @@ for i in range(10):
 
 매번 반복할때마다 squares와 .append를 다시 찾아야 하므로 PVM 입장에서 비효율적인 작업이다.
 
-  
-
 리스트 컴프리핸션 사용 시:
-
 ```Python
 squares = [i * i for i in range(10)]
 ```
-
 1. 내부적으로 빈 리스트를 만든다.
 2. 루프를 시작한다.
 3. 매 반복마다:
@@ -437,13 +430,9 @@ squares = [i * i for i in range(10)]
 LIST_APPEND라는 전용 바이트코드 명령어는 C언어 수준에서 매우 빠르게 동작하도록 구현되어 있다. 변수나 속성을 일일이 다시 찾는 과정이 완전히 생략되므로 훨씬 효율적이다.
 
 ### Constant Folding
-
 코드에 직접 쓰인 상수 계산은 컴파일 단계에서 미리 계산하여 결과값을 바이트코드로 변환한다. 이 때문에 런타임에 계산할 필요가 없어 더 빠르다.
 
-  
-
 상수를 변수에 할당했을때:
-
 ```Python
 def slow_week():
   seconds_per_day = 86400
@@ -451,7 +440,6 @@ def slow_week():
 ```
 
 위 함수가 바이트코드로 변환되면 다음과 같다:
-
 ```PlainText
 0 LOAD_CONST    1 (86400)
 2 STORE_FAST    0 (seconds_per_day)
@@ -464,28 +452,21 @@ def slow_week():
 
 6개의 바이트코드 명령어가 있다.
 
-  
-
 상수를 코드에 직접 사용했을때:
-
 ```Python
 def fast_week():
   return 7 * 86400
 ```
 
 위 함수가 바이트코드로 변환되면 다음과 같다:
-
 ```PlainText
 0 LOAD_CONST    1 (604800)
 2 RETURN_VALUE
 ```
-
 변수를 저장하지 않아 2개의 바이트코드 명령어로 줄었다.
-
 이렇게 1.5배 성능 향상을 이룰 수 있다.
 
 ### Small Integer Caching
-
 CPython은 -5부터 256까지의 정수를 미리 만들어놓고 재사용한다(캐싱). 그래서 a=100, b=100일때 a is b는 True지만, a=1000, b=1000일때 a is b는 False가 된다.
 
 참고로 None을 비교할때는 is를 사용하는 것이 관례다.
