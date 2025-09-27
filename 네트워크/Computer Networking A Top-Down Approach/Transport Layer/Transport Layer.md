@@ -7,4 +7,5 @@
 [[TCP의 Round-Trip 시간 추정과 타임아웃]]
 [[TCP의 Flow Control]]
 [[TCP의 연결 관리]]
-[[TCP의 Congestion Control]]
+[[네트워크 혼잡의 원인과 비용]]
+[[네트워크 혼잡 제어 방식]]
