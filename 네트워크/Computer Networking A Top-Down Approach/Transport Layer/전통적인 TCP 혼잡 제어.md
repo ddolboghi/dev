@@ -28,3 +28,7 @@ TCP는 발신지가 자신에게 트래픽을 보내는 속도를 제한하는 �
 ### 혼잡 회피(Congestion Avoidance)
 - 혼잡 회피 상태에 들어가면 TCP는 `cwnd`를 매 RTT마다 1MSS씩만 증가시킨다. -> **선형적인 증가**
 - 타임아웃이 발생하면 `cwnd`는 1MSS로, `ssthresh`는 혼잡 발생 시 `cwnd`의 절반 값으로 설정된다.
+- 3개의 중복 ACK를 받으면 TCP는 `cwnd`값을 절반으로 줄이고, `ssthresh`를 `cwnd`의 절반 값으로 기록한 후 빠른 회복 상태로 들어간다.
+### 빠른 회복(Fast Recovery)
+- 빠른 회복은 3개의 중복 ACK 수신 시 진입하며, TCP Reno 버전에서 도입되었다.
+	- 중복 ACK를 받을 때마다 `cwnd`를 1MSS 씩 증가시킨다.
