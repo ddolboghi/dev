@@ -12,6 +12,7 @@ TCP는 발신지가 자신에게 트래픽을 보내는 속도를 제한하는 �
 - 이전에 확인응답되지 않은 세그먼트의 ACK가 도착하면 네트워크가 혼잡하지 않다는 신호로 간주된다. TCP는 이를 이용해 `cwnd` 크기를 늘린다.
 - ACK가 도착하는 속도에 따라 `cwnd` 증가 속도가 조절되므로, TCP는 **자체 클럭킹(self-clocking)** 특성을 갖는다.
 # 혼잡 제어 알고리즘
+TCP 혼잡 제어는 `cwnd`를 RTT마다 1 MSS씩 선형적으로 증가시키고(**부가적 증가, Additive-Increase**), 3개의 중복 ACK 이벤트 시 `cwnd`를 절반으로 줄이는(**승법적 감소, Multiplicative-Decrease**) 방식으로 동작한다. 이를 **AIMD** 혼잡 제어라고 한다.
 ## TCP의 전송 속도 결정 원칙
 1. **손실된 세그먼트는 혼잡**을 의미: 세그먼트가 손실되면 TCP 발신지의 전송 속도는 감소해야 한다.
 2. **확인응답된 세그먼트는 혼잡하지 않음**을 의미: ACK가 도착하면 발신지의 전송 속도는 증가할 수 있다.
@@ -31,14 +32,14 @@ TCP는 발신지가 자신에게 트래픽을 보내는 속도를 제한하는 �
 - 3개의 중복 ACK를 받으면 TCP는 `cwnd`값을 절반으로 줄이고, `ssthresh`를 `cwnd`의 절반 값으로 기록한 후 빠른 회복 상태로 들어간다.
 ### 빠른 회복(Fast Recovery)
 - 빠른 회복은 3개의 중복 ACK 수신 시 진입한다.
-- 중복 ACK를 받을 때마다 `cwnd`를 1MSS씩 증가시킨다.
 - 손실된 세그먼트에 대한 새로운 ACK가 도착하면 `cwnd`를 줄인 후 혼잡 회피 상태로 전환된다.
+  이때 `cwnd`를 절반으로 줄이고, 3개의 중복 ACK를 측정하기 위해 +3MSS한다.
+- 중복 ACK를 받을 때마다 `cwnd`를 1MSS씩 증가시킨다.
 - 타임아웃이 발생하면 느린 시작 상태로 전환된다.
-- Fast recovery는 필수가 아니다.
-#### TCP Tahoe vs TCP Reno
-초기 버전의 TCP인 TCP Tahoe와 새 버전인 TCP Reno의 fast recovery 동작은 다르다.
-- TCP Tahoe는 타임아웃이건 3개의 중복 ACK건, `cwnd`를 1로 설정하고 slow start로 진입한다.
-- TCP Reno는 통합적인 fast recovery를 통합했다.
+- Fast recovery는 TCP 구현에 권장되지만, 필수는 아니다.
+## TCP Tahoe vs TCP Reno
+- TCP Tahoe는 타임아웃이건 3개의 중복 ACK건, `cwnd`를 1로 설정하고 빠른 회복 없이 slow start로 진입한다.
+- TCP Reno는 빠른 회복을 포함한다.
 ![[TCP_congestion_window_graph.png | 500]]
 위 그래프에서 초기 `ssthresh`는 8MSS다.
 처음 8번의 전송까지는 Tahoe와 Reno는 동일한 동작을 한다.
@@ -47,4 +48,4 @@ TCP는 발신지가 자신에게 트래픽을 보내는 속도를 제한하는 �
 이때 `cwnd`는 12MSS다.
 3개의 중복 ACK를 받으면, `ssthresh`는 `cwnd`의 절반인 6MSS가 된다.
 - TCP Tahoe의 `cwnd`는 1MSS가 되고 `ssthresh`까지 지수적으로 증가한 후 `ssthresh`에 도달하면 선형적으로 증가한다.
-- TCP Reno의 `cwnd`는 9MSS가 되고 선형적으로 증가한다.
+- TCP Reno의 `cwnd`는 12의 절반인 6에다가 중복 ACK 측정을 위한 3을 더하여 9MSS가 되고 선형적으로 증가한다.
