@@ -49,3 +49,11 @@ TCP 혼잡 제어는 `cwnd`를 RTT마다 1 MSS씩 선형적으로 증가시키�
 3개의 중복 ACK를 받으면, `ssthresh`는 `cwnd`의 절반인 6MSS가 된다.
 - TCP Tahoe의 `cwnd`는 1MSS가 되고 `ssthresh`까지 지수적으로 증가한 후 `ssthresh`에 도달하면 선형적으로 증가한다.
 - TCP Reno의 `cwnd`는 12의 절반인 6에다가 중복 ACK 측정을 위한 3을 더하여 9MSS가 되고 선형적으로 증가한다.
+> [!NOTE]
+    > TCP Reno의 평균 처리율 = (0.75 * W) / RTT
+    > W: 손실 발생 시의 윈도우 크기
+## TCP Cubic
+- TCP Reno의 AIMD 방식은 손실 발생 시 전송률을 절반으로 줄인 후 천천히 증가시킨다.
+- TCP CUBIC은 손실이 마지막으로 감지되었을 때의 윈도우 크기($W_{max}$)에 도달할 때까지 전송률을 더 빠르게 높인 후, 그 지점에 가까워지면 조심스럽게 대역폭을 탐색한다.
+- CUBIC은 현재 `t`와 $W_{max}$에 다시 도달할 미래 시점 `K` 사이의 거리의 **세제곱 함수**에 따라 `cwnd`를 증가시킨다. 이를 통해 손실 발생 후 $W_{max}$에 빠르게 근접하여 전체적인 처리율을 높인다.
+  ![[TCP_Reno_CUBIC_congestion_avoidance_graph.png | 500]]
