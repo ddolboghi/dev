@@ -30,15 +30,16 @@ TCP는 발신지가 자신에게 트래픽을 보내는 속도를 제한하는 �
 - 타임아웃이 발생하면 `cwnd`는 1MSS로, `ssthresh`는 혼잡 발생 시 `cwnd`의 절반 값으로 설정된다.
 - 3개의 중복 ACK를 받으면 TCP는 `cwnd`값을 절반으로 줄이고, `ssthresh`를 `cwnd`의 절반 값으로 기록한 후 빠른 회복 상태로 들어간다.
 ### 빠른 회복(Fast Recovery)
-- 빠른 회복은 3개의 중복 ACK 수신 시 진입하며, TCP Reno 버전에서 도입되었다.
+- 빠른 회복은 3개의 중복 ACK 수신 시 진입한다.
 - 중복 ACK를 받을 때마다 `cwnd`를 1MSS씩 증가시킨다.
 - 손실된 세그먼트에 대한 새로운 ACK가 도착하면 `cwnd`를 줄인 후 혼잡 회피 상태로 전환된다.
 - 타임아웃이 발생하면 느린 시작 상태로 전환된다.
-## TCP Tahoe vs TCP Reno
+#### TCP Tahoe vs TCP Reno
 ![[TCP_congestion_window_graph.png | 500]]
 위 그래프에서 초기 `ssthresh`는 8MSS다.
 처음 8번의 전송까지는 Tahoe와 Reno는 동일한 동작을 한다.
 4번째 전송까지는 느린 전송 구간으로, `cwnd`가 지수적으로 증가한다.
 8번째 전송까지는 선형적으로 증가하다가 3개의 중복 ACK를 받는 상황이다.
 이때 `cwnd`는 12MSS다.
-Tehoe의 `ssthresh`는 `cwnd`의 절반인 6MSS
+3개의 중복 ACK르 ㄹ`ssthresh`는 `cwnd`의 절반인 6MSS가 된다.
+- 
