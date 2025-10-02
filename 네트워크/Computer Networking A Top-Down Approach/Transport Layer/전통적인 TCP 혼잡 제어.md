@@ -49,7 +49,7 @@ TCP 혼잡 제어는 `cwnd`를 RTT마다 1 MSS씩 선형적으로 증가시키�
 3개의 중복 ACK를 받으면, `ssthresh`는 `cwnd`의 절반인 6MSS가 된다.
 - TCP Tahoe의 `cwnd`는 1MSS가 되고 `ssthresh`까지 지수적으로 증가한 후 `ssthresh`에 도달하면 선형적으로 증가한다.
 - TCP Reno의 `cwnd`는 12의 절반인 6에다가 중복 ACK 측정을 위한 3을 더하여 9MSS가 되고 선형적으로 증가한다.
-> [!NOTE]
+> [!TIP]
     > TCP Reno의 평균 처리율 = (0.75 * W) / RTT
     > W: 손실 발생 시의 윈도우 크기
 ## TCP Cubic
