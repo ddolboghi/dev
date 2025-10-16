@@ -1,6 +1,7 @@
 ---
 chapter: "4"
 ---
+chapter 4.3
 ## DHCP (Dynamic Host Configuration Protocol)
 - 네트워크에 연결된 장치에 IP 주소와 기타 네트워크 설정 정보를 자동으로 할당하는 프로토콜
 - DHCP를 이용하면 연결된 장치마다 수동으로 IP 주소를 할당하지 않아도 된다.
