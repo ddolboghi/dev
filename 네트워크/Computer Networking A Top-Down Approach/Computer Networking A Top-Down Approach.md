@@ -1,8 +1,8 @@
 [Access Control List1](https://eveningdev.tistory.com/65)
 [Access Control List2](https://jdcyber.tistory.com/17)
-Chapter 1[[Computer Netowks and the Internet]]
-Chapter 2[[Application Layer]]
-Chapter 3 [[Transport Layer]]
-Chapter 4[[Network Layer(Data plane)]]
-Chapter 5 [[Network Layer(Control plane)]]
-Chapter 8 [[네트워크/Computer Networking A Top-Down Approach/Security|Security]]
+[[1. Computer Netowks and the Internet]]
+[[2. Application Layer]]
+[[3. Transport Layer]]
+[[4. Network Layer(Data plane)]]
+[[5. Network Layer(Control plane)]]
+[[8. Security|8. Security]]
