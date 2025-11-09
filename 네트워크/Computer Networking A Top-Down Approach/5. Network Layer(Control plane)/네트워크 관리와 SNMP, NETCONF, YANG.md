@@ -12,4 +12,9 @@
 - SNMPv3은 관리 서버와 에이전트 간에 네트워크 관리 메시지를 전달하는 애플리케이션 계층 프로토콜이다.
 - 주로 요청-응답 모드(Get/Set)나 예외 상황을 알리는 트랩(Trap) 메시지 모드로 동작한다.
 - MIB는 SMI(Structure of Management Information)라는 데이터 기술 언어를 사용하여 관리 대상 디바이스의 데이터 객체(e.g. 카운터, 상태 정보)를 정의한다.
-- MIB 객체들은 관련 기능별로 MIB 모듈(e.g. IP용 RFC 4293, TCP용 RFC 4022)로 그룹화된다. SNMP PDU(Protocol Data Unit)는 일반적으로 UDP를 통해 전송되며, SNMPv3는 이전 버전에 비해 보안 및 관리 기능이 크게 강화되었다.
+- MIB 객체들은 관련 기능별로 MIB 모듈(e.g. IP용 RFC 4293, TCP용 RFC 4022)을 통해 수집된다. SNMP PDU(Protocol Data Unit)는 일반적으로 UDP를 통해 전송되며, SNMPv3는 이전 버전에 비해 보안 및 관리 기능이 크게 강화되었다.
+# NETCONF & YANG
+- NETCONF는 관리 서버와 장치 간에 작동하는 프로토콜로, 장치의 구성 데이터와 운영 데이터를 검색, 설정, 수정하는 데 사용된다.
+- NETCONF 프로토콜은 RPC를 사용하며, 모든 메시지는 XML로 인코딩되어 TLS 같은 보안 세션을 통해 전송된다. 
+- NETCONF는 `<get-config>`, `<edit-config>`, `<lock>` 등 구성 관리에 중점을 둔 강력한 작업들을 제공하며, 여러 장치에 걸친 원자적 트랜잭션을 지원한다.
+- YANG은 NETCONF가 사용하는 데이터 모델링 언어로, SMI가 SNMP의 MIB를 정의하는 것과 유사하게 네트워크 관리 데이터의 구조, 구문, 의미 및 제약 조건을 명시한다.
