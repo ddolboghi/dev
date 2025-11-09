@@ -11,4 +11,5 @@
 # SNMP & MIB
 - SNMPv3은 관리 서버와 에이전트 간에 네트워크 관리 메시지를 전달하는 애플리케이션 계층 프로토콜이다.
 - 주로 요청-응답 모드(Get/Set)나 예외 상황을 알리는 트랩(Trap) 메시지 모드로 동작한다.
-- MIB는 SMI라는 데이터 기술 언어를 사용하여 관리 대상 디바이스의 데이터 객체(e.g. 카운터, 상태 정보)를 정의한다. MIB 객체들은 관련 기능별로 MIB 모듈(예: IP용 RFC 4293, TCP용 RFC 4022)로 그룹화된다. SNMP PDU는 일반적으로 비신뢰성 UDP를 통해 전송되며, SNMPv3는 이전 버전에 비해 보안 및 관리 기능이 크게 강화되었다.
+- MIB는 SMI(Structure of Management Information)라는 데이터 기술 언어를 사용하여 관리 대상 디바이스의 데이터 객체(e.g. 카운터, 상태 정보)를 정의한다.
+- MIB 객체들은 관련 기능별로 MIB 모듈(e.g. IP용 RFC 4293, TCP용 RFC 4022)로 그룹화된다. SNMP PDU(Protocol Data Unit)는 일반적으로 UDP를 통해 전송되며, SNMPv3는 이전 버전에 비해 보안 및 관리 기능이 크게 강화되었다.
