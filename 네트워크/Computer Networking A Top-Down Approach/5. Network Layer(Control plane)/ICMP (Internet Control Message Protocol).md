@@ -5,4 +5,24 @@
 - 호스트가 ICMP를 상위 계층 프로토콜(프로토콜 번호 1)로 지정하는 IP 데이터그램을 수신하면, 데이터그램의 내용을 ICMP로 역다중화한다.
 # ICMP 메시지 형식
 - ICMP 메시지에는 타입(type)과 코드(code) 필드가 있다.
-- 원본 IP 데이터그램의 헤더와 처음 8바이트를 포함한다.
+- 메시지에는 원본 IP 데이터그램의 헤더와 처음 8바이트가 있는데, 이는 송신자가 오류를 일으킨 데이터그램을 판별할 수 있게 한다.
+### ICMP 메시지 타입
+
+| ICMP 타입 | 코드  | 설명                                                      |
+| ------- | --- | ------------------------------------------------------- |
+| 0       | 0   | echo 응답(ping)                                           |
+| 3       | 0   | destination network unreachable(라우터가 목적지로 가는 경로를 찾지 못함) |
+| 3       | 1   | destination host unreachable                            |
+| 3       | 2   | destination protocol unreachable                        |
+| 3       | 3   | destination port unreachable                            |
+| 3       | 6   | destination network unknown                             |
+| 3       | 7   | destination host unknown                                |
+| 4       | 0   | source quench(congestion control)                       |
+| 8       | 0   | echo request                                            |
+| 9       | 0   | router advertisement                                    |
+| 10      | 0   | router discovery                                        |
+| 11      | 0   | TTL expired                                             |
+| 12      | 0   | IP haeder bad                                           |
+# ping과 ICMP
+- ping 프로그램은 목적지 호스트에 ICMP 타입 8, 코드 0 메시지를 보낸다.
+- 목적지 호스트는 이 요청을 받으
