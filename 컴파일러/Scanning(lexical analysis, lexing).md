@@ -28,8 +28,12 @@ var language = "lox";
 - 렉심마다 정규식을 정의하여 문자 시퀀스를 매치하면 어떤 종류의 렉심인지 쉽게 구별할 수 있다.
 - **lexical grammar**: 어떤 언어에서 문자를 렉심으로 묶는 규칙
 - 관련 이론: Chomsky hierarchy, finite-state machine
-# 정규 언어(regular language, rational language)
+# 정규 언어(regular language, rational language)와 정규 문법(regular grammer)
 [위키백과](https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%EC%96%B8%EC%96%B4)
-- 정규 언어는 이론 전산학, 형식 언어 이론에서 정규 표현식을 이용하여 표현할 수 있는 형식 언어다.
-- 정규 언어는 유한 상태 기계(finite-state machine)가 인지하는 언어로 정의할 수도 있다.
+- 정규 언어는 정규 표현식으로 표현할 수 있거나 유한 상태 기계(finite-state machine)가 인지하는 언어다.
 - 촘스키 위계(Chomsky hierarchy)에서 정규 언어는 3형 문법(정규 문법)에 의해 생성되는 언어로 정의된다.
+- 정규 문법은 오른쪽 선형(right-linear) 또는 왼쪽 선형(left-linear) 규칙만 허용된다.
+- 정규 문법은 중첩 구조나 재귀를 표현할 수 없는 문법만을 다룰 수 있다.
+- Python과 Haskell은 정규 문법이 아니다.
+	- python은 블록의 시작과 끝이 들여쓰기로 결정되므로 중첩 가능하여 스택 기반 파싱이 필요하다. 즉, 들여쓰기는 이후 코드 블록 전체에 영향을 주기 때문에 정규 표현식으로 처리할 수 없다.
+	- python과 Haskell의 문법은 중첩 구조, 재귀적 규칙, 문맥 민감, 
