@@ -36,4 +36,31 @@ var language = "lox";
 - 정규 문법은 중첩 구조나 재귀를 표현할 수 없는 문법만을 다룰 수 있다.
 - Python과 Haskell은 정규 문법이 아니다.
 	- python은 블록의 시작과 끝이 들여쓰기로 결정되므로 중첩 가능하여 스택 기반 파싱이 필요하다. 즉, 들여쓰기는 이후 코드 블록 전체에 영향을 주기 때문에 정규 표현식으로 처리할 수 없다.
-	- python과 Haskell의 문법은 중첩 구조, 재귀적 규칙, 문맥 민감, 
+	- python과 Haskell의 문법은 중첩 구조, 재귀적 규칙, 문맥 민감 요소가 있으며, LALR, LL, PEG 기반 파서가 필요하므로 정규 언어로 표현할 수 없다.
+### Python의 중첩 구조 예시
+Python은 중첩된 수식이나 중첩된 if/함수 호출 같은 구조 등이 가능하므로 정규 문법으로는 표현할 수 없다.
+
+```py
+def evaluate(expr):
+    """
+    expr: 숫자 또는 리스트 형태의 중첩 수식
+    예: [1, '+', [2, '+', 3]] -> 1 + (2 + 3)
+    """
+    if isinstance(expr, int):
+        return expr
+    elif isinstance(expr, list):
+        # 재귀 호출: 리스트 안의 표현식을 평가
+        left = evaluate(expr[0])
+        op = expr[1]
+        right = evaluate(expr[2])
+        if op == '+':
+            return left + right
+        else:
+            raise ValueError("지원하지 않는 연산")
+    else:
+        raise TypeError("잘못된 표현식")
+
+nested_expr = [1, '+', [2, '+', 3]]  # 1 + (2 + 3)
+print(evaluate(nested_expr))  # 출력: 6
+
+```
