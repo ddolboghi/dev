@@ -1,5 +1,6 @@
 ---
 Created: 2025-09-09
+sticker: emoji//1f40d
 ---
 CPython 소스코드: [GitHub - python/cpython: The Python programming language](https://github.com/python/cpython)
 

@@ -9,6 +9,7 @@ _sort:
 _template: ""
 _templateName: ""
 Created: 2023-10-31
+sticker: emoji//2615
 ---
 # Java 8의 3가지 프로그래밍 개념
 ## stream processing
