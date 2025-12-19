@@ -16,4 +16,10 @@
 - 기밀성은 VPN과 IPsec 애플리케이션에서 필수적이므로 ESP 프로토콜이 널리 사용된다.
 # Security Association
 - IPsec이 데이터그램을 전송하기 전에 송신 개체와 수신 개체 간에 논리적 연결, Security Association(SA)가 설정되어야 한다.
-- SA는 두 개체 간의 단방향(simplex) 논리적 연결이다.
+- SA는 두 개체 간의 단방향(simplex) 연결이다.
+- 두 개체가 양방향으로 안전하게 데이터를 주고 받으려면 2개의 SA가 필요하다.
+### SA 식별자
+- **SPI (Security Parameter Index)**: 32비트 식별자로, 수신 측에서 해당 SA를 찾을 때 사용한다.
+- **목적지 IP 주소**: SA의 수신 개체 IP 주소다.
+- **보안 프로토콜 식별자**: 사용된 보안 프로토콜(e.g. AH, ESP)을 나타낸다.
+- 
