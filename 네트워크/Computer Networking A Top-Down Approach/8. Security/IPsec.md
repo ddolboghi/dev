@@ -9,4 +9,8 @@
 - IPsec은 수신 개체가 데이터그램의 변조를 확인할 수 있도록 **데이터 무결성**을 제공한다.
 - IPsec은 수신 개체가 공격자가 삽입할 수 있는 중복 데이터그램을 감지할 수 있도록 하여 **재생 공격 방지(replay-attack prevention)** 기능을 제공한다.
 # AH와 ESP 프로토콜
-- IPsec 프로토콜 중 주요 프로토콜로 인증 헤더(Authentication Header, AH) 프로토콜과 캡슐화 보안
+- IPsec 프로토콜 중 주요 프로토콜로 인증 헤더(Authentication Header, AH) 프로토콜과 캡슐화 보안 페로드(Encapsulation Security Payload, ESP) 프로콜이 있다.
+- 출발지 IPsec 개제가 목적지 개체로 보안 데이터그램을 보낼 때, AH 또는 ESP 프로토콜 중 하나를 사용한다.
+- AH 프로토콜은 소스 인증과 데이터 무결성을 제공하지만 기밀성은 제공하지 않는다.
+- ESP 프로토콜은 소스인증, 데이터 무결성, 기밀성을 제공한다.
+- 기밀성은 VPN과 IPsec 애플리케이션에서 필수적이므로 ESP 프로토콜이 널리 사용된다.
